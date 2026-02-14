@@ -68,6 +68,35 @@
     }
   }
 
+  // Render experiences timeline from experiences.js
+  if (typeof experiences !== 'undefined') {
+    const timeline = document.getElementById('experiences-timeline');
+    if (timeline) {
+      timeline.innerHTML = experiences
+        .map(function (exp) {
+          var bulletsHtml = (exp.bullets || [])
+            .map(function (b) {
+              return '<li>' + escapeHtml(b) + '</li>';
+            })
+            .join('');
+          var typeLabel = exp.type === 'work' ? 'Experience' : 'Education';
+          return (
+            '<article class="timeline-item timeline-item--' + escapeAttr(exp.type) + '">' +
+            '<div class="timeline-marker"></div>' +
+            '<div class="timeline-content">' +
+            '<span class="timeline-type">' + escapeHtml(typeLabel) + '</span>' +
+            '<h3 class="timeline-title">' + escapeHtml(exp.title) + '</h3>' +
+            '<p class="timeline-org">' + escapeHtml(exp.org) + '</p>' +
+            '<p class="timeline-meta">' + escapeHtml(exp.period) + ' · ' + escapeHtml(exp.location) + '</p>' +
+            '<ul class="timeline-bullets">' + bulletsHtml + '</ul>' +
+            '</div>' +
+            '</article>'
+          );
+        })
+        .join('');
+    }
+  }
+
   function escapeHtml(text) {
     var div = document.createElement('div');
     div.textContent = text;
