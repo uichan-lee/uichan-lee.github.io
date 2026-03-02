@@ -21,6 +21,20 @@ const projects = [
     tags: ["Python", "Pandas", "statsmodels", "Scikit-learn", "Matplotlib"],
   },
   {
+    title: "Housing Price Predictor — Cook County",
+    description: "Linear regression model for property valuation on 200K+ Cook County records. Pipeline-based feature engineering (log transforms, one-hot encoding, interaction terms), k-fold cross-validation, and residual analysis. Delivers RMSE on log sale price with interpretable coefficients.",
+    link: "#",
+    codeLink: "https://github.com/uichan-lee/housing-price-predictor",
+    tags: ["Python", "Pandas", "Scikit-learn", "Linear Regression", "Feature Engineering"],
+  },
+  {
+    title: "Spam Mail Classifier",
+    description: "Logistic regression classifier for spam/ham email categorization on 8K+ labeled emails. Regex-based feature extraction (HTML ratio, punctuation, reply/forward flags), word-presence features, and GridSearchCV (5-fold) for L1/L2 regularization tuning. Achieved 91.2% cross-validation accuracy.",
+    link: "#",
+    codeLink: "https://github.com/uichan-lee/spam-mail-classifier",
+    tags: ["Python", "Pandas", "Scikit-learn", "Logistic Regression", "Regex", "GridSearchCV"],
+  },
+  {
     title: "Dungeon Escape with Chaser AI",
     description: "Java-based roguelike dungeon game built for UC Berkeley CS61B BYOW. Implements procedural room-and-corridor dungeon generation, a BFS pathfinding chaser enemy, interactive HUD, and a text-based save/load system.",
     link: "#",
