@@ -45,6 +45,7 @@ const projects = [
     title: "Gradient Calendar",
     description: "Collaborative scheduling platform with real-time synchronization. Engineered using Firebase Realtime Database for instant event syncing across clients. Designed a color-gradient overlap algorithm to visualize group availability. Integrated Firebase Auth (OAuth) for secure session management.",
     link: "https://ricky-calendar.web.app",
+    linkLabel: "Visit Website",
     codeLink: "https://github.com/uichan-lee/gradient-calendar",
     tags: ["React", "Firebase", "Firebase Auth", "MUI"],
   },
