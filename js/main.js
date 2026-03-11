@@ -35,6 +35,7 @@
     if (section) {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       setActiveNav(sectionId);
+      hideTOC();
     }
   }
 
@@ -48,6 +49,14 @@
       }
     });
     setActiveNav(current);
+
+    var detail = document.getElementById('writing-detail');
+    var detailVisible = detail && detail.style.display !== 'none';
+    if (current === 'writings' && detailVisible && tocEl && tocEl.innerHTML) {
+      showTOC();
+    } else {
+      hideTOC();
+    }
   }
 
   navLinks.forEach(function (link) {
@@ -237,6 +246,9 @@
   var tocEl = document.getElementById('writing-toc');
   var tocScrollHandler = null;
 
+  function showTOC() { if (tocEl) tocEl.classList.add('visible'); }
+  function hideTOC() { if (tocEl) tocEl.classList.remove('visible'); }
+
   function buildTOC(body) {
     if (!tocEl || !body) return;
     var headings = body.querySelectorAll('h1, h2, h3, h4');
@@ -278,9 +290,11 @@
     };
     window.addEventListener('scroll', tocScrollHandler, { passive: true });
     tocScrollHandler();
+    showTOC();
   }
 
   function clearTOC() {
+    hideTOC();
     if (tocEl) tocEl.innerHTML = '';
     if (tocScrollHandler) {
       window.removeEventListener('scroll', tocScrollHandler);
