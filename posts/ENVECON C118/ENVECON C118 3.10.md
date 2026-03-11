@@ -68,7 +68,7 @@ $$
 - $SSR_{ur}$: SSR from the *full* model (unrestricted model)
 - $q$: number of restrictions (variables dropped)
 - $n-k-1$: degrees of freedom in the full model
-- F is *always negative* (since $SSR_r \le SSR_{ur}$)
+- F is *always non-negative* (since $SSR_r \ge SSR_{ur}$)
 
 The *numerator* measures how much explanatory power we *lose* by dropping the performance variables, scaled by the number of restrictions.
 The *denominator* is the unexplained variance per degree of freedom in the unrestricted model. 
@@ -97,7 +97,7 @@ If at least one dropped variable matters, $SSR_r$ should increase substantially 
 $$
 F = \frac{(R^2_{ur}-R^2_r)/q}{(1-R_{ur}^2)/(n-k-1)}
 $$
-- Often more convenient because $R^2$ is always between 0 and 1 (wherease SSR can be very large depending on units)
+- Often more convenient because $R^2$ is always between 0 and 1 (whereas SSR can be very large depending on units)
 - Both formulas give identical results
 	- *Numerator*: How much $R^2$ improves when we add the performance variables, per restriction
 	- *Denominator*: How much variation is still unexplained in the full model, per degree of freedom
@@ -125,7 +125,7 @@ We **reject** $H_0$ when $F > c$, where $c$ is the critical value from the $F_{q
 
 The rejection rule is simple, we reject if $F > c$.
 - If rejected, we say that $x_{k-q+1}, \dots, x_k$ are <u>jointly statistically significant</u>.
-- If $H_0$ not rejected say that the varaibles are *jointly insignificant* which often justifies dropping them for the model.
+- If $H_0$ not rejected say that the variables are *jointly insignificant* which often justifies dropping them for the model.
 
 
 With a 5% significance level, q = 3 and n - k - 1 = 60, the critical value is c = 2.76. We would reject $H_0$ at 5% level if the computed value of the F statistic exceeds 2.76. 
@@ -166,7 +166,7 @@ If anything, the true relationship between performance and salary may be *strong
 
 > Jointly Significant $\neq$ Individually Significant
 > The t-test is always the *best* test for a <u>single coefficient</u>
-> The F-test is desinged for testing multiple restrictions simultaneously
+> The F-test is designed for testing multiple restrictions simultaneously
 
 # Hedonic Regression
 
@@ -175,19 +175,19 @@ If anything, the true relationship between performance and salary may be *strong
 	- *neighborhood*: school quality, crime rate, distance to downtown
 	- *environment*: air quality, noise, proximity to parks...
 - The price reflects what buyers are willing to pay for *each* attribute
-- We can use <u>regression</u> to attemp to "unbundle" these values
+- We can use <u>regression</u> to attempt to "unbundle" these values
 
 $$
 Price_i = \beta_0 +\beta_1 \cdot Sqft_i + \beta_2 \cdot Bedrooms_i + \beta_3 \cdot Pollution_i + \dots + u_i
 $$
 
-- Each $\hat\beta_j$ estimated the *marginal willingness to pay* for one more unit of that attribute, holding else equal.
+- Each $\hat\beta_j$ estimates the *marginal willingness to pay* for one more unit of that attribute, holding else equal.
 - $\hat\beta_1 = 150$ means buyers pay $150 more per additional square foot, all else equal
 - $\hat\beta_3 < 0$ buyers pay *less* for homes in more polluted areas tells us the *cost of pollution* as revealed by market behavior
 
 ![[image-145.png]]
 
-## The Identification Challange
+## The Identification Challenge
 
 A simple regression of house prices on pollution has a problem: *pollution is not randomly assigned*
 - Polluted areas may also be poorer, have worse schools, or less investment all of which lower house prices independently
@@ -197,13 +197,13 @@ Their solution: **Clean Air Act of 1970** as a natural experiment
 - The Act set a federal ceiling for total suspended particulates (TSP)
 - Counties *above* the ceiling were designated "nonattainment" and faced strict regulations
 - Counties *just below* the ceiling faced no new regulations
-- This created sharp, *quasi-random* variation in pollution changes across otherwies similar counties. 
+- This created sharp, *quasi-random* variation in pollution changes across otherwise similar counties. 
 
 They estimate a *hedonic regression* at the county level:
 $$
 ln(HousePrice)_c = \beta_0 +\beta_1 \cdot TSP_c + X'_c\gamma + u_c
 $$
-- where TSP = total suspended particualtes $(\micro g / m^3)$
+- where TSP = total suspended particulates $(\micro g / m^3)$
 - $X_c$ includes county-level controls (income, population, taxes, etc.)
 - $\beta_1$ is the key parameter: the elasticity of house prices with respect to pollution
 - They use the nonattainment designation as an instrument for changes in TSP (*instrumental variable*) - so the variation in pollution they're using is driven by the regulation, not by other confounders. 

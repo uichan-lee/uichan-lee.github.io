@@ -1,7 +1,7 @@
 # Matrices
 ![[image-11.png]]
 
-We can transform a vector in an **n-dimensional array** by giving it a dimensions attribute `dim`.
+We can transform a vector into an **n-dimensional array** by assigning it a dimensions attribute via `dim()`.
 ```r
 # positive: from 1 to 8
 x <- 1:8
@@ -15,10 +15,11 @@ x
 ## [2,]    2    4    6    8
 ```
 
-- a vector can be given a `dim` attribute
-- a `dim` attribute is a numeric vector of length *n*
-- R will reorganize the elements of the vector into *n* dimensions
-- each dimension will have as many rows (or columns, etc.) as the *n*-th value of the `dim` vector.
+- A vector can be given a `dim` attribute
+- The `dim` attribute is a numeric vector of length *n* (one value per dimension)
+- R reorganizes the elements of the vector into *n* dimensions
+- Each dimension will have as many rows (or columns, etc.) as the corresponding value in the `dim` vector
+- **Important**: R fills dimensions in **column-major** order (fills down columns first)
 
 ```r
 # dim attribute with 3 dimensions
@@ -50,8 +51,8 @@ class(A)
 ## [1] "matrix" "array"
 ```
 
-When using `dim()`, R always fills up each matrix by columns
-To have more control about how a matrix is filled, (by rows or columns) we use the `matrix()` function:
+When using `dim()`, R always fills by columns (column-major order).
+To control how a matrix is filled (by rows or by columns), use the `matrix()` function with the `byrow` argument:
 
 ```r
 # vector to matrix
@@ -62,12 +63,11 @@ matrix(A, nrow = 2, ncol = 4)
 # [1,]    1    3    5    7
 # [2,]    2    4    6    8
 ```
-- An R matrix provides a *rectangular* data object; i.e. to handle data in a two-dimensional array
-- To create a matrix, give a vector to `matrix()` and specify number of rows and columns
-- You can also assign row and column names to a matrix
-- R internally stores matrices as vectors.
-- Which means that matrices are also atomic.
-- Matrices in R are stored **column-major** (i.e. by columns).
+- An R matrix is a *rectangular* 2D data structure
+- Create one by passing a vector to `matrix()` with `nrow` and `ncol` arguments
+- Row and column names can be assigned for readability
+- Internally, matrices are stored as vectors — so they are also **atomic** (all elements must be the same type)
+- Storage order is **column-major** (elements fill down each column before moving to the next)
 
 ## Creating a Matrix
 ```r
@@ -173,7 +173,9 @@ mat_lgl <- matrix(NA, nrow = 4, ncol = 3)
 ![[image-15.png]]
 ![[image-16.png]]
 
-### `apply()` function
+### `apply()` Function
+
+The `apply()` function lets you apply a function across rows or columns of a matrix without writing explicit loops.
 
 ```r
 X = matrix(rep(1:3, each = 5), nrow = 5, ncol = 3)
@@ -186,13 +188,13 @@ X
 # [5,]    1    2    3
 ```
 
-Sum of elements in each row `MARGIN = 1`
+`MARGIN = 1` applies the function across each **row**:
 ```r
 apply(X, MARGIN = 1, FUN = sum)
 # [1] 6 6 6 6 6
 ```
 
-Sum of elements in each column `MARGIN = 2`
+`MARGIN = 2` applies the function across each **column**:
 ```r
 apply(X, MARGIN = 2, FUN = sum)
 # [1]  5 10 15
@@ -228,7 +230,7 @@ apply(Y, MARGIN = 1, FUN = summary)
 
 ![[image-17.png]]
 
-> Make sure the dimensions of matrices are conformable when using an operator or some calculation on them. 
+> **Key rule**: Make sure the dimensions of matrices are *conformable* (compatible) when performing matrix operations. For example, matrix multiplication `A %*% B` requires that `ncol(A) == nrow(B)`.
 
 ![[image-18.png]]
 
@@ -237,10 +239,10 @@ apply(Y, MARGIN = 1, FUN = summary)
 
 ![[image-19.png]]
 
-- A `list` is the most general data structure in R
-- Recall that an R list is a generic (non-atomic) vector
-- `List`s can contain any other type of data structure
-- `List`s can even contain other lists
+- A `list` is the most general and flexible data structure in R
+- It is a **generic (non-atomic) vector** — unlike atomic vectors, elements can be of different types
+- Lists can contain any other data structure: vectors, matrices, data frames, functions, and even other lists
+- This flexibility makes lists ideal for storing complex, heterogeneous data
 
 > [! EXAMPLE] Creating a `list` of `vector`s
 > To create a list we use the function `list()`

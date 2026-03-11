@@ -6,7 +6,7 @@ where $y$ = hours spent in criminal activity, $x_1$ = police enforcement, $x_2$ 
 We turn this economic model into an **econometric model** by assigning a functional form (linear):
 $$ crime = \beta_0 + \beta_1\text{ enforcement} +\beta_2\text{ wage} +\dots + \beta_{12}\text{ age} + u$$
 
-- $u$ (also written as $\epsilon$, noise) is **error term** or **disturbance**, containing all the unobserved variables (e.g., family background, earnings from crime) that we cannot explicitly control for in the model. 
+- $u$ (also written as $\epsilon$, noise) is the **error term** or **disturbance**, containing all the unobserved variables (e.g., family background, earnings from crime) that we cannot explicitly control for in the model.
 
 ![[image-48.png]]
 
@@ -42,7 +42,7 @@ $$\min_{\hat{\beta}_0,\ \hat{\beta}_1} \sum_i{(y_i-\hat{y_i})^2}$$
 
 > [! EXAMPLE] Linear Marginal Effects
 > ![[image-53.png]]
-> A one cigarette increase in daily consumption by mother is associated with 0.514 unit decrease of baby weight.
+> A one-cigarette increase in daily consumption by the mother is associated with a 0.514-unit decrease in baby weight.
 
 
 > [! EXAMPLE] Linear-Log Marginal Effects
@@ -54,9 +54,9 @@ $$\min_{\hat{\beta}_0,\ \hat{\beta}_1} \sum_i{(y_i-\hat{y_i})^2}$$
 > ![[image-56.png]]
 > $\Delta x$ in 1 unit  $\rightarrow 100\cdot \beta_1 \% \Delta y$
 > $100 \cdot (-0.21) = -21$
-> Gas consumption increase by 1 gallon is related to $21/gallon drop on gas prices.
+> A 1-gallon increase in gas consumption is associated with a 21% drop in gas prices.
 
 > [! EXAMPLE] Log-Log Marginal Effects
 > ![[image-57.png]]
-> `starprice` increase in 2% gives $0.491 \times 2 = 0.982\%$ increase of basketshare.
+> A 2% increase in `starprice` gives a $0.491 \times 2 = 0.982\%$ increase in `basketshare`.
 

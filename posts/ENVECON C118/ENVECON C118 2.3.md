@@ -32,8 +32,8 @@
 
 ### Potential Outcomes Framework
 For each individual $i$ we imagine two potential outcomes:
-- $Y_i(1)$ = outcome if treated (e.g., earning if attended college)
-- $Y_i(0)$ = outcome if not treated (e.g., earning if didn't attend)
+- $Y_i(1)$ = outcome if treated (e.g., earnings if attended college)
+- $Y_i(0)$ = outcome if not treated (e.g., earnings if didn't attend)
 
 **The fundamental problem of causal inference**: We only observe one!
 $$Y_i = D_i \cdot Y_i(1) + (1 - D_i) \cdot Y_i (0) $$
@@ -88,7 +88,7 @@ The idea of **regression** is to formalize the process of estimating the *condit
 Suppose $X_i$ is a scalar and the CEF is linear:
 $$ E[Y_i|X_i = x] = \alpha + x\beta $$
 
-A useful fact that we will exploit is that when this is true $\alpha$ and $\beta$ solve the "least squares" problem:
+A useful fact: when the CEF is linear, $\alpha$ and $\beta$ solve the "least squares" problem:
 $$(\alpha, \beta) = \min \limits_{a, b} E[(Y_i - (a+bX_i))^2] $$
 
 

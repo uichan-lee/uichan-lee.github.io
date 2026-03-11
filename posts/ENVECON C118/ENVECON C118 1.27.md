@@ -28,7 +28,7 @@
 Many interesting economic questions involve features of the **joint distribution** of two or more random variables.
 
 - The **joint CDF** is $F_{X, Y}(x, y) = P(X\le x, Y \le y)$
-- Joint PMF (**discrete** variables) $p_{X, Y}(x, y) = (X=x, Y=y)$
+- Joint PMF (**discrete** variables) $p_{X, Y}(x, y) = P(X=x, Y=y)$
 - Joint PDF (**continuous** variables) $f_{X, Y}(x,y)=\frac{\partial^2}{\partial x \partial y}F_{X, Y}(x, y)$
 
 ## Conditional Distributions
@@ -57,7 +57,7 @@ Update beliefs about $Y$ after observing $X$
 	- $Y$ is related to $Z$ (sunlight drives ozone formation)
 	- $Y$ is independent of $X$ conditioning on $Z$
 - What does this suggest about the relationship between $X$ and $Z$? 
-- When a third variables explains away an $X - Y$ relationship, $X$ and $Z$ are often correlated (hotter days tend to be sunnier). 
+- When a third variable explains away an $X - Y$ relationship, $X$ and $Z$ are often correlated (hotter days tend to be sunnier).
 
 > [! Example] Netflix and Conditional Independence
 > ![[image-36.png]]
@@ -221,7 +221,7 @@ flights |>
 #> # ℹ 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>, …
 ```
 
-There's a useful shortcut for `in` operator of Python: `%in%`. It keeps rows where the variable equals one of the values on the right: 
+There's a useful shortcut similar to Python's `in` operator: `%in%`. It keeps rows where the variable equals one of the values on the right:
 ```r
 # A shorter way to select flights that departed in January or February
 flights |> 
@@ -250,7 +250,7 @@ jan1 <- flights |>
 
 #### `arrange()`
 
-`arange()` changes the order of the rows based on the value of the columns.
+`arrange()` changes the order of the rows based on the value of the columns.
 
 ```r
 flights |> 
@@ -319,7 +319,7 @@ flights |>
 #> # ℹ 218 more rows
 
 
-# Find all unqiue origin and destination pairs,
+# Find all unique origin and destination pairs,
 #    while keeping all other columns too
 flights |> 
   distinct(origin, dest, .keep_all = TRUE)

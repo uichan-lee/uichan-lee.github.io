@@ -29,17 +29,17 @@ where:
 > 2. Need to assume that $u$ is mean independent of $x$.
 > 	- in math: $E[u|x] = E[u] = 0$
 > 	- in English: knowing $x$ doesn't give us any information about $u$
-> 	- stronger than $u$ independent of $x$ $\rightarrow Cov(x,y)=0$ 
+> 	- stronger than just $Cov(x, u) = 0$ (mean independence implies zero covariance, but not vice versa)
 
 > [!EXAMPLE] Crop Yields and Fertilizer
  > Suppose crop yield is determined by the model
-> - $yield = \beta_0 + \beta_1 \cdot fetilizer + u$
+> - $yield = \beta_0 + \beta_1 \cdot fertilizer + u$
 > 
 > What term captures the effect of fertilizer on yield? (holding all other factors fixed)
 > - coefficient $\beta_1$ measures the effect of fertilizer on yield
 > - key assumption is ceteris paribus (all else equal)
 > 
-> What term contains these other factors? (e.g. lan quality, rainfall, etc)
+> What term contains these other factors? (e.g. land quality, rainfall, etc.)
 > - error term $u$ contains other factors such as land quality, etc.
 
 ![[image-75.png]]
@@ -53,7 +53,7 @@ Solving parameters:
 ![[image-78.png]]
 OLS chooses $\hat{\beta_0}$ and $\hat{\beta_1}$ to minimize the **sum of squared residuals**
 $$\min_{\beta_0, \beta_1}\sum_{i=1}^N{(y_i-\beta_0-\beta_1x_i)^2} $$
-Residual is the difference between the actual $y_i$ and the fitted value $\hat{y_i}$
+The **residual** is the difference between the actual $y_i$ and the fitted value $\hat{y_i}$:
 $$\hat{u_i} = y_i - \hat{y_i}=y_i-\hat{\beta_0}-\hat{\beta_1}x_i $$
 
 

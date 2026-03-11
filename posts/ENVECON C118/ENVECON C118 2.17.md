@@ -68,7 +68,7 @@ If the sample mean of income in our data is $50,000 is it reasonable to think th
 > 
 > Why this is amazing:
 > - We don't need to know the distribution of $Y_i$
-> - Works for any population with five variance
+> - Works for any population with finite variance
 > - Subtract population mean and divide population variance then $~N(0,1)$
 > - Lets us do hypothesis tests even when errors aren't normal
 > 
@@ -83,7 +83,7 @@ $$
 $$
 "How likely is our observed $\hat\mu$ under this distribution?"
 
-To make thing simple, we **standardize**:
+To make things simple, we **standardize**:
 $$
 \hat{t} = \frac{\hat\mu - \mu_0}{\hat\sigma / \sqrt n}
 $$

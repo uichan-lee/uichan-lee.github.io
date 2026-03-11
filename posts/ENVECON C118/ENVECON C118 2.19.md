@@ -35,7 +35,7 @@ An *upper bound* can be useful when you want to argue a policy isn't too <u>cost
 > - The true benefit is at least this big
 > - The program likely works even better than our estimates suggest
 
-The bounds fail when the *bias* and the *estimate* point is the same direction.
+The bounds fail when the *bias* and the *estimate* point in the same direction.
 - **Example**: We estimate the pollution **lowers** `birth weight` by 0.03kg
 	- `income` has positive correlation with `birth weight`, and negative correlation with `pollution`
 	- bias is negative and our estimate is negative
@@ -50,7 +50,7 @@ $$\hat{\sigma} = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}}$$
 **Standard Error**
 $$SE = \frac{\hat{\sigma}}{\sqrt{n}}$$
 
-By CLT, $\hat\mu$ is approximately normal distributed for large $n$
+By CLT, $\hat\mu$ is approximately normally distributed for large $n$:
 - $\hat\mu \sim N(\mu, \sigma^2/n)$
 
 We can rescale so that $\frac{\hat\mu - \mu}{\sigma / \sqrt n} \sim N(0,1)$
@@ -70,7 +70,7 @@ Recall we defined our 95% CI in terms of **population** standard deviation ($\si
 But we don't know $\sigma$! We only have the **sample** standard deviation $\hat\sigma$.
 
 ## The t-distribution
-When we replace $sigma$ with $\hat\sigma$:
+When we replace $\sigma$ with $\hat\sigma$:
 $$
 \frac{\hat\mu - \mu}{\hat\sigma / \sqrt n} \sim t_{n-1}
 $$
@@ -86,7 +86,7 @@ $$
 \frac{\hat\mu - \mu}{\hat\sigma / \sqrt n} \sim t_{n-1}
 $$
 
-The $n-1$ is called the "degrees of freedom" this affects how wide the t-distribution is (fewer observations $\rightarrow$ more uncertainty $\rightarrow$ wider distribution)
+The $n-1$ is called the "degrees of freedom" — this affects how wide the t-distribution is (fewer observations $\rightarrow$ more uncertainty $\rightarrow$ wider distribution)
 
 The critical value $t^*$ such that $P(-t^* \leq t_{n-1} \leq t^*) = 0.95$ <u>NOT</u> 1.96. It is always **greater** than 1.96 for finite $n$, and depends on **degrees of freedom** (n - 1).
 
@@ -159,9 +159,9 @@ A very common question: **Do two groups have the same mean?**
 
 We have two populations:
 - Population 1 (e.g., treatment): mean $\mu_1$, observed $\hat\mu_1$ from $n_1$ observations
-- Population 2 (e.g., treatment): mean $\mu_2$, observed $\hat\mu_2$ from $n_2$ observations
+- Population 2 (e.g., control): mean $\mu_2$, observed $\hat\mu_2$ from $n_2$ observations
 
-**Null hypothesis**: $H_0: \mu_1 = mu_2$ or equivalently $H_0: \mu_1 - \mu_2 = 0$
+**Null hypothesis**: $H_0: \mu_1 = \mu_2$ or equivalently $H_0: \mu_1 - \mu_2 = 0$
 
 Our estimate of the difference: $\hat\mu_1 - \hat\mu_2$
 

@@ -37,16 +37,8 @@ const writings = [
     "category": "econometrics"
   },
   {
-    "slug": "envecon-c118-discussion-1",
-    "title": "Economic Model",
-    "date": "2026-01-28",
-    "summary": "An economic model is an equation that describes relationships. For example, we can try to model participation in crime:",
-    "file": "posts/ENVECON C118/ENVECON C118 Discussion 1.md",
-    "category": "econometrics"
-  },
-  {
     "slug": "envecon-c118-1-29",
-    "title": "Parameters Estimands and Estimators",
+    "title": "Parameters, Estimands, and Estimators",
     "date": "2026-01-29",
     "summary": "In econometrics we often separate the process of learning about the estimand from the estimator (statistical inference) from the process of learnin...",
     "file": "posts/ENVECON C118/ENVECON C118 1.29.md",
@@ -80,7 +72,7 @@ const writings = [
     "slug": "stat-33b-2-9",
     "title": "Matrices | Lists",
     "date": "2026-02-09",
-    "summary": "We can transform a vector in an n-dimensional array by giving it a dimensions attribute dim.",
+    "summary": "We can transform a vector into an n-dimensional array by assigning it a dimensions attribute via dim().",
     "file": "posts/STAT 33B/STAT 33B 2.9.md",
     "category": "r-programming"
   },
@@ -120,7 +112,7 @@ const writings = [
     "slug": "stat-33b-2-23",
     "title": "Importing Tables | Data Frames",
     "date": "2026-02-23",
-    "summary": "There are two subtypes of plain text format, depending on how the separated values are identified in a row",
+    "summary": "There are two subtypes of plain text tabular formats, depending on how values within a row are separated:",
     "file": "posts/STAT 33B/STAT 33B 2.23.md",
     "category": "r-programming"
   },
@@ -128,7 +120,7 @@ const writings = [
     "slug": "envecon-c118-2-24",
     "title": "RCT | Sample Means | Hypothesis Testing | Sampling Distributions of \\hat\\beta",
     "date": "2026-02-24",
-    "summary": "Recall out potential outcomes framework:",
+    "summary": "Recall our potential outcomes framework:",
     "file": "posts/ENVECON C118/ENVECON C118 2.24.md",
     "category": "econometrics"
   },
@@ -136,7 +128,7 @@ const writings = [
     "slug": "envecon-c118-2-26",
     "title": "Inference",
     "date": "2026-02-26",
-    "summary": "Estimate itself doesn't tell us much.",
+    "summary": "An estimate by itself doesn't tell us much.",
     "file": "posts/ENVECON C118/ENVECON C118 2.26.md",
     "category": "econometrics"
   },
@@ -144,7 +136,7 @@ const writings = [
     "slug": "stat-33b-3-3",
     "title": "`tidyverse`",
     "date": "2026-03-03",
-    "summary": "Enhanced data frame in tidyverse",
+    "summary": "A tibble is an enhanced version of the data frame, provided by the tibble package in tidyverse.",
     "file": "posts/STAT 33B/STAT 33B 3.3.md",
     "category": "r-programming"
   },
@@ -152,7 +144,7 @@ const writings = [
     "slug": "stat-33b-3-9",
     "title": "`ggplot2`",
     "date": "2026-03-09",
-    "summary": "The starting point is the Data that we want to visualize. The convention is to have data in a table object (e.g. data.frame, tibble) in which varia...",
+    "summary": "name = c('Leia', 'Luke', 'Han'),",
     "file": "posts/STAT 33B/STAT 33B 3.9.md",
     "category": "r-programming"
   },
@@ -165,9 +157,17 @@ const writings = [
     "category": "econometrics"
   },
   {
+    "slug": "envecon-c118-discussion-1",
+    "title": "Economic Model",
+    "date": "2026-03-11",
+    "summary": "An economic model is an equation that describes relationships. For example, we can try to model participation in crime:",
+    "file": "posts/ENVECON C118/ENVECON C118 Discussion 1.md",
+    "category": "econometrics"
+  },
+  {
     "slug": "stat33b-midterm",
     "title": "Atomic vs. Non-Atomic Objects",
-    "date": "2026-03-10",
+    "date": "2026-03-11",
     "summary": "All elements are the same data type.",
     "file": "posts/STAT 33B/STAT33B Midterm.md",
     "category": "r-programming"

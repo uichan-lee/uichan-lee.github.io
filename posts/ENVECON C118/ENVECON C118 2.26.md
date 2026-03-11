@@ -1,6 +1,6 @@
 # Inference
 
-Estimate itself doesn't tell us much. 
+An estimate by itself doesn't tell us much.
 **Statistical inference** is the process of using *sample* data to draw conclusions about *population parameters*
 
 Tools: *t-statistics*, *p-values*, and *confidence intervals*
@@ -13,14 +13,14 @@ Tools: *t-statistics*, *p-values*, and *confidence intervals*
 
 - Most of our tools for inference start from *one formula*
 $$
-\hat t = \frac{\hat\beta_j - beta_{j, 0}}{SE(\hat\beta_j)}
+\hat t = \frac{\hat\beta_j - \beta_{j, 0}}{SE(\hat\beta_j)}
 $$
 
 ## z- and t- Statistics
 
 ![[image-139.png]]
 
-- We lmost never know $\sigma$, so in practice we use the *t-statistic*
+- We almost never know $\sigma$, so in practice we use the *t-statistic*
 - The t-distribution has <u>heavier tails</u> than $N(0,1)$
 	- accounts for extra uncertainty from estimating $\sigma$
 - But for large $n$, $\hat\sigma \approx \sigma$ and the two are nearly identical
@@ -39,7 +39,7 @@ $$
 	- our estimate is far from the null we hypothesized
 	- evidence against $H_0$
 
-You can think t-statistic as the <u>number of standard errors from the null</u>
+You can think of the t-statistic as the <u>number of standard errors away from the null</u>
 
 
 

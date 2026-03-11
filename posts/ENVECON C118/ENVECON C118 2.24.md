@@ -2,7 +2,7 @@
 
 ## Why does an RCT solve the OVB problem? 
 
-Recall out potential outcomes framework:
+Recall our potential outcomes framework:
 - For each individual $i$, define two **potential outcomes**:
 	- $Y_i(1)$ = outcome if individual $i$ receives treatment
 	- $Y_i(0)$ = outcome if individual $i$ does *not* receive treatment
@@ -30,9 +30,9 @@ In practice, not everyone follows their **assignment** (treatment/control)
 - Example: Oregon Health Insurance Experiment
 	- most who won the lottery (treatment) did *not* enroll in Medicaid
 	- people who didn't win the lottery found other health insurance
-	- what does this mean for the authors estimated? 
+	- what does this mean for the authors' estimates? 
 
-Assignment Treament! 
+Assignment ≠ Treatment! 
 
 ### ITT: Intent-to-Treat
 
@@ -50,15 +50,15 @@ The ITT compares outcomes by **assignment** regardless of whether people actuall
 - but might be *different* in systematic ways correlated with outcomes
 - how could this bias the results of the Oregon Health Insurance Experiment? 
 
-**Local Average Treament Effect (LATE)**
+**Local Average Treatment Effect (LATE)**
 - Effect on **compliers** (those who take treatment if and only if assigned)
 - ITT too small because of non-compliers: LATE = ITT / share who comply
-- But hwo to estimate compliance? 
+- But how to estimate compliance? 
 
 > [! Question] Who Are the Compliers? 
 > The LATE tells us the effect on **compliers**... but who are they? 
 > 
-> We can't identify individual complier only see what each person did under their *actual* assigment.
+> We can't identify individual compliers — we only see what each person did under their *actual* assignment.
 > 
 > - Example: a student was offered tutoring and went
 > 	- are they a complier (would skip if not offered)
@@ -69,7 +69,7 @@ The ITT compares outcomes by **assignment** regardless of whether people actuall
 
 > [! INFO] When Does This All Simplify? If Everyone Complies
 > $$ ITT = ATT = LATE = ATE $$
-> *When does this happen?* treatment applied without choice by subject
+> *When does this happen?* When treatment is applied without choice by the subject
 > - Examples:
 > 	- Audit studies: Researcher puts name/characteristics on resume employer can't opt out of seeing it
 > 	- Ad pricing experiments: platform randomly shows different prices
@@ -100,7 +100,7 @@ $$
 \hat t = \frac{\bar{Y}-\mu_0}{\hat{SE}(\bar Y)} \sim t_{n-1}
 $$
 
-- t-distribution has *heavier tails* than the standard normal distributions
+- t-distribution has *heavier tails* than the standard normal distribution
 - Accounts for extra uncertainty for estimating $\sigma$
 - For large $n$ (say $n > 200$) nearly identical, so using $z^* = 1.96$ is fine
 

@@ -4,7 +4,7 @@ A **random variable** is a numerical summary of a random process.
 
 <br>
 
-- **Outcomes** are mutually exclusive results of a random processes
+- **Outcomes** are mutually exclusive results of a random process
 - The **probability** of an outcome captures its likelihood of occurring
 - The **sample space** is the set of all possible outcomes
 - An **event** is a subset of the sample space (e.g. event = roll of a die will be less than 3, event = {roll = 1, roll = 2})
@@ -20,8 +20,8 @@ A **random variable** is a numerical summary of a random process.
 ---
 A random variable is characterized by its **cumulative distribution function** (CDF).
 $$F(x) = P(X \le x)$$
-which tells us the probability that $X$ is some value $x$ or below
-- $P(X\le 5)$ = probability that we see 5 of lower $X$. 
+which tells us the probability that $X$ takes a value of $x$ or below.
+- $P(X\le 5)$ = probability that we see $X$ equal to 5 or lower.
 
 If our random variable $X$ is discrete we define the **probability mass function** (PMF) as the probability that $X$ takes on each value in the support:
 - $p(x) = P(X=x)$
@@ -51,7 +51,7 @@ You can read the **median** from the CDF chart where y = 0.50.
 ### Joint Distribution
 
 - Many interesting economic questions involve features of the **joint distribution** of two or more random variables
-	- e.g. how do earning Y and schooling levels X vary together?
+	- e.g. how do earnings $Y$ and schooling levels $X$ vary together?
 	- e.g. how do pollutants such as NO and Ozone vary together?
 - The CDF for the joint distribution is defined by:
   $$F(x, y)= P(X\le x, Y\le y)$$
@@ -114,10 +114,10 @@ $$y=\beta_0 + \beta_1x+\beta_2x^2 $$
 
 Approximating of the slope:
 $$\text{slope} = \frac{\Delta y}{\Delta x} \approx \beta_1 + 2\beta_2 x,$$
-for a <u>small</u> changes in x. (RHS is the derivative of function above.)
+for <u>small</u> changes in $x$. (The RHS is the derivative of the function above.)
 
 #### Natural Logarithm
-We often refer simply as the **log function**, as
+We often refer to it simply as the **log function**, defined as:
 $$ y = log(x) $$
 It's the most important non-linear function in econometrics.
 

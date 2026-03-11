@@ -1,19 +1,19 @@
 
 ## Important Terminology
 
-The starting point is the **Data** that we want to visualize. The convention is to have data in a table object (e.g. `data.frame`, `tibble`) in which variables are stored as columns. 
+- **Data**: The starting point for any visualization. By convention, data should be in a table object (e.g., `data.frame`, `tibble`) with variables stored as columns.
 
-Then we have so-called **Geoms**, short for geometric objects; these are basically things such as bars, lines, points, polygons, and other kind of marks that are drawn to represent the data. 
+- **Geoms** (geometric objects): The visual marks drawn to represent data — such as points, lines, bars, polygons, etc.
 
-Geoms have **visual properties**, formally known as aesthetic attributes, and colloquially referred to as *aesthetics*; these are things such as x and y positions, line color, fill color, point shapes, etc.
+- **Aesthetics**: The visual properties of geoms, such as x/y position, color, fill, shape, size, and transparency. Formally called *aesthetic attributes*.
 
-The use of a variable (from the data) to encode a visual property of a geom is called a **mapping**. 
+- **Mapping**: Using a *variable* from the data to control an aesthetic (e.g., `aes(color = sex)` — color varies by the `sex` column).
 
-The use of a constant (or a value outside the data) to encode a visual property of a geom is called a **setting**. 
+- **Setting**: Using a *constant* value to control an aesthetic (e.g., `color = "blue"` — all points are blue, regardless of data).
 
-**Scales** are used to handle the mapping from the values in the data space to values in the aesthetic space. 
+- **Scales**: Control how data values are translated into aesthetic values (e.g., which colors represent which categories, or how numeric ranges map to axis positions).
 
-**Guides** are those auxiliary elements that allow the viewer to decode the mapping of the visual properties back to the data space. Perhaps the most typical guides are the tick marks, the labels on an axis, and legends (when applicable)
+- **Guides**: Auxiliary elements (tick marks, axis labels, legends) that help the viewer decode the visual mapping back to the data space.
 
 # `ggplot2`
 ```r
@@ -52,9 +52,9 @@ ggplot(data = sw_dat,
 ```
 
 
-## Saving
+## Saving Plots
 
-Use `ggsave()` to save the most recent plot you created:
+Use `ggsave()` to save the most recent plot to a file. The file format is inferred from the extension (e.g., `.png`, `.pdf`, `.svg`):
 ```r
 ggsave("scatterplot.png")
 ```

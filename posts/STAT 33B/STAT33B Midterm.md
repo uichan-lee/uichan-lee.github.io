@@ -17,7 +17,7 @@ is.atomic(c(1, 2, 3))      # TRUE
 is.atomic("hello")          # TRUE
 ```
 
-> If you mix types, R coerces everythign to the most flexible type:
+> If you mix types, R coerces everything to the most flexible type:
 > ```r
 > c(1, TRUE, "a")   # → c("1", "TRUE", "a")  — all become character
 > c(1, TRUE)        # → c(1, 1)              — logical becomes double
@@ -27,7 +27,7 @@ is.atomic("hello")          # TRUE
 ```r
 v <- c(10, 20, 30)
 
-length(v)     # 5
+length(v)     # 3
 is.atomic(v)  # TRUE
 
 v[2]          # 20
@@ -48,7 +48,7 @@ m[2, 3]       # 8
 ```
 
 **Non-Atomic Objects**
-Containers that can hold multiple types at once. 
+Containers that can hold elements of multiple types at once (heterogeneous).
 ```r
 my_list <- list(1, "hello", TRUE, c(1,2,3)) # Data frame — list of equal-length vectors 
 df <- data.frame(
@@ -146,7 +146,7 @@ scores[scores >= 85]
 
 
 > [! IMPORTANT] Recycling
-> If a vector operation doesn't match the length, R automatically does *recylcing*.
+> If a vector operation involves vectors of different lengths, R automatically does *recycling* — the shorter vector is repeated to match the length of the longer one.
 > 
 > ```r
 > # Arithmetic operation:
@@ -176,9 +176,9 @@ scores[scores >= 85]
 
 ## Factors
 
-Can set `level = c("Large", "Medium", "Small")` to indicate the set of possible categorical variables. With `ordered = TRUE`, it can also denote the hierarchy. 
+Use `levels = c(...)` to define the set of possible categories. Adding `ordered = TRUE` creates an **ordered factor** that preserves the hierarchy between levels.
 
-Factors contain values as integer index, and prints the values at the index of the level. Chaning the level changes the output. 
+Under the hood, factors store values as integer indices that map to the levels vector. Changing the levels changes how values are displayed.
 
 ```r
 f1 <- factor(c("C", "B", "C", "A"), level=c("A", "B", "C"), ordered=TRUE)
@@ -209,7 +209,7 @@ mat3[1, 2] # 2
 
 ## Lists
 
-**Lists** can contain multiple types of data. 
+**Lists** can contain elements of multiple types and different lengths.
 ```r
 lst1 <- list(
     Name = "Mike",
@@ -231,19 +231,20 @@ typeof(lst1["Age"])
 
 lst1[["Age"]]
 # [1] 31
-typeof(lst1["Age"])
-# [1] "double
-
+typeof(lst1[["Age"]])
+# [1] "double"
 ```
 
-3 ways to access data:
-1. `lst_name$col_name`: returns a vector of `col_name`
-2. `lst_name["col_name"]`: returns a list of `col_name`
-3. `lst_name[["col_name"]]`: returns a vector of `col_name` (same as `$`)
+3 ways to access list elements:
+1. `lst$name` — returns the element directly (a vector)
+2. `lst["name"]` — returns a **sub-list** containing the element
+3. `lst[["name"]]` — returns the element directly, same as `$`
+
+> **Key distinction**: `[` returns a list (like a train car), while `[[` and `$` extract the contents (like opening the car).
 
 ## Data Frame
 
-`data.frame` is a **list** with same length `vector`s. Each column is a single vector. 
+A `data.frame` is essentially a **list of equal-length vectors**. Each column is a single vector, and all columns must have the same number of rows.
 
 ```r
 mydf <- data.frame(
@@ -255,11 +256,13 @@ mydf <- data.frame(
 
 ### Subsetting Operators
 
-1. `df[, "col_name"]`: returns a vector of single column.
-2. `df[, c("col1", "col2", "col3")]`: returns a data frame with specified columns and all rows.
-3. `df["col_name"]`: returns a data frame with single specified column with all rows.
-4. `df[c("col1", "col2")]`: returns a data frame with specified columns and all rows.
-5. `df[["col_name"]]`: returns a vector of single column.
-6. `df$col_name`: returns a vector of single column.
+| Syntax | Returns | Type |
+|--------|---------|------|
+| `df[, "col"]` | Single column | vector |
+| `df[, c("a", "b")]` | Multiple columns, all rows | data.frame |
+| `df["col"]` | Single column, all rows | data.frame |
+| `df[c("a", "b")]` | Multiple columns, all rows | data.frame |
+| `df[["col"]]` | Single column | vector |
+| `df$col` | Single column | vector |
 
-> You can also put row indexing, like `df[c(1, 2), "col"]`
+> Row indexing can be combined: e.g., `df[c(1, 2), "col"]` returns rows 1 and 2 of the specified column.

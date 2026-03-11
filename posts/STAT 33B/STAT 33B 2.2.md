@@ -1,13 +1,12 @@
 
-
 ![[image.png]]
 
-There are many data structures in R:
+R provides several data structures, each suited for different kinds of data:
 - `vector`s and `factor`s
-- `matrices` (2-D array)
-- `array`s (n-dim in general)
-- `list`s
-- `data frame`s
+- `matrix` (2-D array)
+- `array` (n-dimensional generalization of a matrix)
+- `list` (can hold mixed types)
+- `data.frame` (tabular data, like a spreadsheet)
 
 ---
 # Vectors
@@ -27,7 +26,7 @@ b
 ```
 
 ## Atomic Vectors
-The most simple type of atomic vectors are single values.
+The simplest atomic vectors are single values (also called *scalars*, though R treats them as length-1 vectors).
 ```r
 # logical
 a <- TRUE
@@ -42,7 +41,7 @@ y <- 5
 b <- "yosemite"
 ```
 
-Atomic vector with more than one element can be created with function `c()`, short for **catenate** or **combine**:
+An atomic vector with more than one element can be created with the function `c()`, short for **catenate** (or **combine**):
 ```r
 x <- c(1, 2, 3, 4, 5)
 
@@ -63,11 +62,11 @@ Other than the four types above (logical, integer, double, and character), there
 > - A **raw** vector holds raw bytes (not in course material)
 
 
-Atomic vectors are contiguous cells containing data.
-It can be of any length (including zero): `length()`
-They have a specific data type: `typeof()`
-Optionally, you can name their elements: `names()`
-Likewise, you can give them additional attributes with `attributes()`
+Atomic vectors are contiguous cells of data with the following properties:
+- Can be of any length (including zero) — check with `length()`
+- Have a single, specific data type — check with `typeof()`
+- Optionally, elements can be named — get/set with `names()`
+- Can carry additional metadata — inspect with `attributes()`
 
 Use `typeof()` to find the data-type of an atomic vector:
 ```r
@@ -135,19 +134,19 @@ Among R users, it is common to refer to the **mode** of a vector, and to use the
 > # [1] 1.0+0i -0.5+0i 3.0+5i
 > ```
 
-There is a hierarchy of data-types used by R to apply its implicit coercion rules:
-$$logical<integer<double<character $$
+R follows a hierarchy of data types when applying implicit coercion — values are always promoted to the *most general* type present:
+$$logical < integer < double < character$$
 
 
 ### Explicit Coercion Functions
-R provides a set of **explicit** coercion functions that allow us to "convert" one type of data into another
-- `as.character()`
-- `as.integer()`
-- `as.double()`
-- `as.numeric()`
-- `as.logical()`
+R provides a set of **explicit** coercion functions that allow us to manually convert one type of data into another:
+- `as.character()` — convert to character strings
+- `as.integer()` — convert to integers
+- `as.double()` — convert to double-precision numbers
+- `as.numeric()` — convert to numeric (equivalent to `as.double()`)
+- `as.logical()` — convert to logical values
 
-Depending on the vector and the type, sometimes the explicit coercion may fail.
+Note: Depending on the input, explicit coercion may produce warnings or `NA` values if the conversion is not meaningful.
 
 ```r
 x <- c(1L, -0.5, 3 + 5i)
@@ -232,7 +231,7 @@ This is an example of **recycling** and vectorization. The value 3 gets <u>recyc
 > We can get the result as expected, but with a warning message. 
 
 ## General Functions
-- `typeof(x)
+- `typeof(x)`
 - `str(x)`
 - `class(x)`
 - `length(x)`
@@ -292,7 +291,7 @@ summary(ages)
 ```
 
 ### `seq()`
-More vectors of numeric sequences (not just one-unit step sequences) can be created with the function `seq()`
+For more flexible numeric sequences (with custom step sizes), use the function `seq()`:
 
 ```r
 # sequences
@@ -302,8 +301,8 @@ seq(from = -3, to = 9, by = 0.5)
 seq(from = 1, to = 20, length.out = 5)
 ```
 
-- `seq_along()` returns a sequence of integers of the same length as its argument
-- `seq_len()` generates a sequence from 1 to the valid provided 
+- `seq_along()` returns a sequence of integers of the same length as its argument (useful for safe loop indexing)
+- `seq_len()` generates a sequence from 1 to the specified length
 
 ```r
 # some flavors
@@ -357,11 +356,11 @@ sample(values, size = 20, replace = TRUE)
 ### Basic Vector Functions
 
 - `length()`: number of elements in a vector
-- `sort()`: arranges elements
-- `rev()`: reverses elements
-- `order()`: index of arranged vector
-- `unique()`: gives unique elements
-- `duplicated()`: indicates which elements are duplicated
+- `sort()`: returns elements in sorted order (does *not* modify the original)
+- `rev()`: reverses the order of elements
+- `order()`: returns the *indices* that would sort the vector
+- `unique()`: returns only the distinct elements
+- `duplicated()`: returns a logical vector indicating which elements are duplicates
 
 ```r
 num <- c(9, 4, 5, 1, 4, 1, 4, 7)
@@ -438,7 +437,7 @@ c(1, 2, 3, 4, 5) < 2
 # And more (e.g., <=, ==, !=)
 ```
 
-When comparing vectors of different types, one is coerced to the type of the other, the (decreasing) order of precedence being character, complex, numeric, integer, logical
+When comparing vectors of different types, R coerces one to the type of the other. The order of precedence (from highest to lowest) is: character > complex > numeric > integer > logical.
 ```r
 '5' == 5
 # [1] TRUE
@@ -488,9 +487,9 @@ sum(x)
 
 ## `which()` functions
 
-- `which()`: which indices are `TRUE`
-- `which.min()`: location of first minimum
-- `which.max()`: location of first maximum
+- `which()`: returns the indices where a logical condition is `TRUE`
+- `which.min()`: returns the index of the first minimum value
+- `which.max()`: returns the index of the first maximum value
 
 ```r
 (values <- -3:3)
@@ -579,7 +578,7 @@ x[c(1, 3)]
 # a c
 # 2 6
 
-x[c(3, 2, 4 1)]
+x[c(3, 2, 4, 1)]
 # c b d a
 # 6 4 8 2
 
@@ -627,10 +626,10 @@ x[rep("a", 4)]
 
 ```
 
-### Double Brackets
+### Double Brackets `[[ ]]`
 ![[image-9.png]]
 
-You can also use double brackets `[[]]` but in this case only extract a **single element**
+You can also use double brackets `[[ ]]` to extract a **single element**. Unlike single brackets, double brackets strip the name and return just the value:
 
 ```r
 x <- c(a = 2, b = 4, c = 6, d = 8)
@@ -661,7 +660,7 @@ One of the nicest features about R is that it provides a data structure exclusiv
 - `length()`: gives the number of elements
 - `is.factor()`: tells if an object is of class "factor"
 - `as.factor()`: coerces an object into a factor
-- `is.oredered()`: checks if an object is an *ordered* factor
+- `is.ordered()`: checks if an object is an *ordered* factor
 
 ```r
 # numeric vector
@@ -733,9 +732,9 @@ attributes(first_factor)
 ```
 
 
-Factors can be used to encode **ordinal** variables. Qualitative data can be classified into nominal and ordinal variables. Nominal variables could be easily handled with character vectors. A different case is when we have <u>ordinal variables</u>, like sizes "small", "medium", "large" or college years "freshman", "sophomore", "junior", "senior". In these cases we are still using names of categories, but they can be arranged in increasing or decreasing order.
+Factors can also encode **ordinal** variables — categorical data with a meaningful order. While nominal variables (e.g., colors, countries) work fine as character vectors, <u>ordinal variables</u> like sizes ("small", "medium", "large") or college years ("freshman", "sophomore", "junior", "senior") have an inherent ranking that character vectors cannot represent.
 
-We can use a character vector to store the values. But a character vector doesn't allow us to store the ranking of categories. The solution in R comes via factors. We can use factors to define ordinal variables, like the following example:
+R's solution is to use **ordered factors**, which preserve both the categories and their ordering:
 ```r
 sizes <- factor(
 	x = c('sm', 'md', 'lg', 'sm', 'md'),

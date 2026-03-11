@@ -1,23 +1,22 @@
 # `tidyverse`
 
-`tidyverse` is a set of packages in R for Data Science
-It includes:
-- `readr`: read file
-- `dplyr`, `tidyr`, `tibble`: data frame manipulation
-- `ggplot2`: visaulization
-- `stringr`: String manipulation
-- `forcats`: factor manipulation
-- `purrr`: functional programming
+`tidyverse` is a collection of R packages designed for data science workflows. The core packages include:
+- `readr`: fast and friendly file reading (CSV, TSV, etc.)
+- `dplyr`, `tidyr`, `tibble`: data frame manipulation and reshaping
+- `ggplot2`: data visualization based on the Grammar of Graphics
+- `stringr`: string manipulation
+- `forcats`: tools for working with factors
+- `purrr`: functional programming utilities (e.g., `map()` family)
 
 ## Tibble
 
-Enhanced data frame in `tidyverse`
+A **tibble** is an enhanced version of the data frame, provided by the `tibble` package in `tidyverse`.
 
-Compared to an ordinary data frame, a tibble:
-- prints differently
-- default to `drop = FALSE` for the subset operator `[`
-	- returns a single column `tibble` if subsetted a single column with `[`
-- Don't allow partial matching for the dollar opeartor `$`
+Compared to an ordinary `data.frame`, a tibble:
+- Prints more informatively (shows data types, limits output to first 10 rows)
+- Defaults to `drop = FALSE` for the subset operator `[`
+	- Subsetting a single column with `[` returns a tibble, not a vector
+- Does **not** allow partial matching for the `$` operator (stricter, safer behavior)
 
 ```r
 tbl <- tibble(
@@ -27,8 +26,7 @@ tbl <- tibble(
 )
 ```
 
-Conversion: 
-Functions `as.data.frame()` and `as_tibble()` are used to convert. 
+**Conversion**: Use `as.data.frame()` to convert a tibble to a regular data frame, and `as_tibble()` to convert a data frame to a tibble.
 
 ## `dplyr` main verbs
 
@@ -40,11 +38,11 @@ Functions `as.data.frame()` and `as_tibble()` are used to convert.
 - `group_by()`
 - `summarise()`
 
-Structure of verbs:
-- First argument is a data frame (or tibble)
-- Subsequent arguments say what to do with data frame
-- Always return a data frame (or tibble)
-- Never modify in place
+All `dplyr` verbs share a consistent structure:
+- First argument is always a data frame (or tibble)
+- Subsequent arguments describe *what* to do with the data
+- Always return a new data frame (or tibble) — **never modify in place**
+- Can be chained together using the pipe operator `|>` or `%>%`
 
 ### Primary Verbs Detailed
 

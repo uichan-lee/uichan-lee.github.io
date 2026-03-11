@@ -34,7 +34,7 @@ This approach will let us:
 > [! EXAMPLE] Example: Air Pollution and Infant Health
 > ![[image-98.png]]
 > Key concept: **dose response function**
-> Why infants? Because they are more fragile; easy to observe the effects. Possibility of longitudinal research. California have rich data at birth (not so much after birth).
+> Why infants? Because they are more fragile; easy to observe the effects. Possibility of longitudinal research. California has rich data at birth (not so much after birth).
 > 
 > Janet Currie and Matthew Niedell studied this using California birth records and individual level data. 
 > - **Outcome ($Y$)**: Infant mortality, birth weight
@@ -54,7 +54,7 @@ This approach will let us:
 ![[image-99.png]]
 
 The researchers estimated models like:
-$$\text{birth\_weight}_{izt} = \beta_0 + \beta_1 \cdot CO_{zt} + \beta_2 \cdot X_i + \gamma_z + \delta+t + u_{izt} $$
+$$\text{birth\_weight}_{izt} = \beta_0 + \beta_1 \cdot CO_{zt} + \beta_2 \cdot X_i + \gamma_z + \delta_t + u_{izt} $$
 where:
 - $i$ = individual infant, $z$ = zip code, $t$ = time
 - $CO_{zt}$ = carbon monoxide in zip code $z$ at time $t$
@@ -120,7 +120,7 @@ $$ y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \dots + \beta_kx_k + u$$
 If we assume $E[u|x_1, x_2, \dots, x_k] = 0$ , we can write the conditional expectation function:
 $$E[y|x_1, x_2, \dots, x_k] = \beta_0 + \beta_1x_1 + \beta_2x_2 + \dots + \beta_kx_k$$
 
-Now $\beta_1$ measures the partial effect of increase $x_1$ on $E[y]$ holding $x_2, x_3, \dots, x_k$ constant (i.e. we are controlling for $x_2, \dots x_k$)
+Now $\beta_1$ measures the partial effect of increasing $x_1$ on $E[y]$, holding $x_2, x_3, \dots, x_k$ constant (i.e. we are controlling for $x_2, \dots x_k$)
 
 > Ex. "holding experience and industry fixed, a one year increase in education leads to a 11.7% increase in income"
 
@@ -153,7 +153,7 @@ With these assumptions, we can prove $E[\hat\beta_j]=\beta_j$
 
 Adding assumption 5 can also show $Var(\hat\beta_j) = \frac{\sigma_u^2}{SST_j(1-R_j^2)}$
 - $SST = \sum(x_{i, j} - \bar{x_j})$ is the total sample variation in $x_j$
-- $R_j^2$ from regressing $x_j$ on all other independent variable[^2]
+- $R_j^2$ from regressing $x_j$ on all other independent variables[^2]
 - $\hat\sigma_u^2 = \sum \frac{\hat{u_i^2}}{N-k-1} = \frac{SSR}{N - k - 1}$ 
 - where $N - k - 1 =$ *degrees of freedom* for the OLS problem with $N$ observations and $k$ independent variables.
 
@@ -183,7 +183,7 @@ Adding assumption 5 can also show $Var(\hat\beta_j) = \frac{\sigma_u^2}{SST_j(1-
 	- $SST_j \uparrow$  more observations $\rightarrow \sum(X_{ji} -\bar{X_j})^2$ has more terms
 	- $\sigma_u^2 \downarrow$, changes $N - k - 1$
 4. Consider $x$ with a larger variance
-	- $SST_j \uparrow$ More spread in $X_j \rightarrow$ each $(X_{ji} - bar{X_j})^2$ is larger
+	- $SST_j \uparrow$ More spread in $X_j \rightarrow$ each $(X_{ji} - \bar{X_j})^2$ is larger
 
 ---
 # Choosing what goes into the regression

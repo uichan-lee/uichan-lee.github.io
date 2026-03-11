@@ -29,7 +29,7 @@ The **causal inference** tools we'll learn are useful for avoiding blind spots.
 
 ## Steps in Economic Analysis
 1. Formulate the question of interest
-2. Develop an economic and econometric model of the phenomenon you are interested
+2. Develop an economic and econometric model of the phenomenon you are interested in
 3. Collect data
 4. Estimate the model using econometric techniques
 5. Test hypotheses
@@ -37,10 +37,10 @@ The **causal inference** tools we'll learn are useful for avoiding blind spots.
 > [!Example] Example Econometric Analysis
 > 1. What is the impact of tariffs on the price of consumer goods?
 > 2. Model: price$_i=f$ (production costs$_i$, tariff$_i$)
-> 	- econometric model: price$_i = \beta_0 + \beta_1$ tarrif$_i$ + $\epsilon_i$
+> 	- econometric model: price$_i = \beta_0 + \beta_1$ tariff$_i$ + $\epsilon_i$
 > 3. What data do I need to answer this question?
 >    
->    The gold standard for learning about casual effects is a **randomized controlled trial (RCT)** aka an experiment
+>    The gold standard for learning about causal effects is a **randomized controlled trial (RCT)**, aka an experiment
 
 ## Taxonomy of Common Economic Data Types
 1. Cross sectional data
@@ -52,9 +52,9 @@ The **causal inference** tools we'll learn are useful for avoiding blind spots.
 	- e.g. stock prices, money supply, GDP, annual homicide rates, and automobile sales figures
 	- the chronological ordering of observations in a time series conveys potentially important information
 	- data frequency (hourly, daily, weekly, monthly, annual) also important feature of time series
-3. Pooled cross-section (stacked snapshots; no unit tracking used)
-	- data set with both cross-sectional and time series features
-	- stack multiple cross-sections from different dates
+3. Pooled cross-section (stacked snapshots; no unit tracking)
+	- combines cross-sectional and time series features
+	- stacks multiple independent cross-sections from different dates
 	- e.g. two cross sectional household surveys from 2020 and 2025 on the goods households buy
 		- *new* random sample in each year
 		- often how we study how key relationships change over time
