@@ -521,7 +521,7 @@ ul, ol {
   display: inline;
 }
 
-.writing-body code {
+.writing-body :not(pre) > code {
   font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
   font-size: 0.88em;
   padding: 0.15em 0.4em;
@@ -533,7 +533,6 @@ ul, ol {
 .writing-body pre {
   margin: 1.25rem 0;
   padding: 0;
-  background: #f6f8fa;
   border: 1px solid #e1e4e8;
   border-radius: 10px;
   overflow-x: auto;
@@ -543,9 +542,9 @@ ul, ol {
 .writing-body pre code {
   display: block;
   padding: 1.25rem;
-  background: none;
+  font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
   font-size: 0.875rem;
-  border-radius: 0;
+  border-radius: 10px;
 }
 
 .writing-body a {
@@ -1024,19 +1023,13 @@ html[data-theme="dark"] .writing-body mark {
   color: #f8fafc;
 }
 
-html[data-theme="dark"] .writing-body code {
+html[data-theme="dark"] .writing-body :not(pre) > code {
   background: rgba(51, 65, 85, 0.8);
   color: #e2e8f0;
 }
 
 html[data-theme="dark"] .writing-body pre {
-  background: #0d1117;
   border-color: rgba(255, 255, 255, 0.08);
-}
-
-html[data-theme="dark"] .writing-body pre code {
-  background: none;
-  color: #e2e8f0;
 }
 
 html[data-theme="dark"] .writing-body a {

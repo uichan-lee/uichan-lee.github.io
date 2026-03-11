@@ -1,7 +1,7 @@
 (function () {
   // --- Dark mode toggle ---
-  var HLJS_LIGHT = 'https://cdn.jsdelivr.net/npm/highlight.js@11/styles/github.min.css';
-  var HLJS_DARK  = 'https://cdn.jsdelivr.net/npm/highlight.js@11/styles/github-dark.min.css';
+  var HLJS_LIGHT = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css';
+  var HLJS_DARK  = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css';
 
   function applyTheme(dark) {
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
