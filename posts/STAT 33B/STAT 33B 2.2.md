@@ -102,7 +102,7 @@ Among R users, it is common to refer to the **mode** of a vector, and to use the
 ---
 ## Coercion
 
-> [! Question] 
+> [!Question] 
 > What happens if you mix different data types in a vector?
 > ```r
 > x <- c(1, 2, 3, "four", "five")
@@ -212,7 +212,7 @@ This is an example of **recycling** and vectorization. The value 3 gets <u>recyc
 ![[image-4.png]]
 
 
-> [! QUESTION] Recycling
+> [!QUESTION] Recycling
 > What happens if you operate on two vectors (of length > 1) that have different lengths?
 > ```r
 > c(1, 3, 5, 7) + c(2, 4)
@@ -746,7 +746,7 @@ sizes
 # Levels: sm < md < lg
 ```
 
-> [! NOTE] Function `factor()`
+> [!NOTE] Function `factor()`
 > The usage of the function `factor()` is:
 > ```r
 > factor(x, levels, labels = levels, exclude = NA,
@@ -760,7 +760,7 @@ sizes
 > - `ordered` logical value to indicate if the levels should be regarded as ordered
 > - `nmax` an upper bound on the number of levels
 
-> [! NOTE] Merging Levels
+> [!NOTE] Merging Levels
 > Sometimes we may need to **merge** or collapse two or more different levels into one single level. We can achieve this with `levels()` by assigning a new vector of levels containing repeated values for those categories that we wish to merge.
 > 
 > ```r

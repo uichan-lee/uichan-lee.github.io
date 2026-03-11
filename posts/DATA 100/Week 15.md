@@ -64,7 +64,7 @@ Algorithm:
 
 No better algorithm has been found (NP-hard problem).
 
-> [! Question] Which clustering result do you like better? 
+> [!Question] Which clustering result do you like better? 
 > ![[image-56.png]]
 > 
 > It turns out that $Inertia_A$ = 94.41 and $Inertia_B$ = 87.28.
@@ -155,7 +155,7 @@ To pick K:
 - We have **features** but **no labels**.
 	- Sometimes we may have labels, but we choose to ignore them. 
 
-> [! Question] How many dimensions can you visualize on a 2-dimensional screen?
+> [!Question] How many dimensions can you visualize on a 2-dimensional screen?
 > Physically, we can only plot up to 3-dimensional plots. 
 > However, we can add more geometries in the plots to express higher dimensional data. (e.g., color of a point, shape of a point, size of a point, transparency of a point, etc. ) So we can actually plot unlimited dimensional data, although it will look very ugly with high dimension. 
 > 
@@ -206,7 +206,7 @@ This is often achieved through **matrix factorization**.
 
 ## PCA: Visual Intuition
 
-> [! Note] Maximizing Variance: A common point of confusion
+> [!Note] Maximizing Variance: A common point of confusion
 > In supervised learning, we often say that **minimizing variance** is a goal.
 > 
 > This is shorthand for minimizing the **variance of our predictions ($\hat{Y}$)**. We want similar predictions across models trained on different random samples of the same population.
@@ -262,7 +262,7 @@ PC2 is the direction of maximal variance that is **orthogonal** to PC1 (i.e., un
 ---
 ## PCA: Linear Algebra
 
-> [! QUESTION] Why perform PCA?
+> [!QUESTION] Why perform PCA?
 > Goal: Transform observations from high-dimensional data down to **low-dimensions** (often 2) through linear transformations.
 > Related Goal: Low-dimension representation should capture the **variability** of the original data.
 
@@ -274,7 +274,7 @@ PC2 is the direction of maximal variance that is **orthogonal** to PC1 (i.e., un
    - PCA **eliminates correlations** between features.
 <br>
 
-> [! NOTE] Matrix Multiplication View
+> [!NOTE] Matrix Multiplication View
 > There are two ways to **interpret** matrix multiplication:
 > 1. Linear operations per datapoint
 > 2. <u>Column transformation</u> (useful today)

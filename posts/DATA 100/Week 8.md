@@ -65,7 +65,7 @@ When we step left or right to move our point downhill, <u>how big of a step</u> 
 
 ![[Pasted image 20251014115234.png]]
 
-> [! Note]
+> [!Note]
 > The value of $\alpha$ is between (0, 1)
 > In Data 100, the learning rate is constant. $\alpha$ could also decrease over time, or *decay*.
 

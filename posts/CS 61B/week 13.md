@@ -79,7 +79,7 @@ Counting Sort:
 - Iterate through list, using count array to decide where to put everything. 
 Bottom line, we can use counting sort to sort N objects in $\theta(N)$ time.
 
-> [! Example] Counting Sort 
+> [!Example] Counting Sort 
 > ![[Pasted image 20251119163515.png]]
 > 
 > ![[Pasted image 20251119163523.png]]

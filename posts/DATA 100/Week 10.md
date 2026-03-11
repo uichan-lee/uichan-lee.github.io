@@ -1,6 +1,6 @@
 # Random Variables 
 
-> [! Question] An Investing Conundrum 
+> [!Question] An Investing Conundrum 
 > Imagine you are an analyst at a small-but-mighty venture capital firm.
 > You identify a hot new start-up and are considering an investment of $1 million.
 > Your analysis estimates a 90% chance that the start-up fails and you lose your $1 million.
@@ -115,7 +115,7 @@ If I flip 100 coins and 57 are heads, the average of this **sample** of 0/1 flip
 > Example: 
 > ![[image-15.png]]
 
-> [! question]
+> [!question]
 > Q: Suppose *X ~ Bernoulli(p)*. 
 > What is E(X)? 
 > A: E(X) = $1\cdot p + 0 \cdot (1-p) = p$
@@ -189,14 +189,14 @@ Example calculation:
 
 What if we don't know the structure of the population? (more common) 
 
-> [! Question]
+> [!Question]
 > Q. Randomly sampling with replacement from a warehouse with all **32,000 heights** of Berkeley undergrads on slips of paper (a **population** of heights)
 > - $E(X_i)$: What is the expected value ? 
 > 	  - We don't know!
 > - $Var(X_i)$: How spread out are the $X_i$'s around their average?
 > 	- We don't know!
 
-> [! Information] Central Limit Theorem (CLT)
+> [!Information] Central Limit Theorem (CLT)
 > ![[image-26.png]]
 > 
 > For i.i.d. samples of $X_i$'s of size n $(X_1, \dots, X_n)$,
@@ -205,7 +205,7 @@ What if we don't know the structure of the population? (more common)
 > the distribution of $\bar{X_n}$, the *sample mean* of $X_i$'s, 
 > is **roughly normal with mean $\mu$ and SD $\sigma/\sqrt{n}$**. 
 
-> [! NOTE] CLT Proof 
+> [!NOTE] CLT Proof 
 > This is the proof why the sample mean of $X_i$'s is roughly normal with mean $\mu$ and SD $\sigma / \sqrt{n}$.
 > 
 > ![[image-27.png]]

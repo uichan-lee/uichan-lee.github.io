@@ -60,7 +60,7 @@ If the sample mean of income in our data is $50,000 is it reasonable to think th
 
 > We never "prove" $H_0$ true, only fail to reject it ("not guilty")
 
-> [! NOTE] The Central Limit Theorem (CLT)
+> [!NOTE] The Central Limit Theorem (CLT)
 > **The CLT says**: No matter what distribution $Y_i$ comes from, the sample mean $\hat\mu$ is approximately normal for large $n$
 > $$ 
 > \hat\mu \approx N(\mu, \frac{\sigma^2}{n})
@@ -95,7 +95,7 @@ Why standardize?
 
 ![[image-104.png]]
 
-> [! NOTE] Why Absolute Value $|\hat{t}|$
+> [!NOTE] Why Absolute Value $|\hat{t}|$
 > - We care about being far from the null in <u>either direction</u>
 > - Example: Testing $H_0 : \mu = 55,000$ (average income)
 > 	- We observe $\hat\mu = 45,000 \rightarrow \hat{t} = -2 \rightarrow$ evidence against $H_0$

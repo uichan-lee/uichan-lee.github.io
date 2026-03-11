@@ -96,7 +96,7 @@ It looks like wealth is a potential **confounder**. So let's adjust for it in ou
 - $\hat{\theta_1}$: How much higher are predicted earnings for a degree-holder, relative to someone without a degree, **holding family wealth constant**?
 - $\hat{\theta_2}$: How much higher are predicted lifetime earnings for each additional dollar of family wealth, assuming we're **comparing two people with the same degree status**?
 
-> [! Question]
+> [!Question]
 > Do we now have strong evidence that getting college degree increases lifetime earnings? 
 > ![[Pasted image 20251104120850.png]]
 > 

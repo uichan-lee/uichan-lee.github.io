@@ -1,4 +1,4 @@
-> [! NOTE] Course Evaluations Research 
+> [!NOTE] Course Evaluations Research 
 > Four large classes, two male + two female instructors with lots of experience. 
 > Randomize students within each course:
 > 1. Standard Evaluation
@@ -49,7 +49,7 @@ We model **probabilities** of each class and transform them into a predicted **o
 
 #### Kinds of Classification
 ![[Pasted image 20251119143722.png]]
-> [! Warning] Confusing Language
+> [!Warning] Confusing Language
 > We use logistic **regression** to perform **classification**. Here, 'regression' refers to fitting a function mapping inputs to outputs, not the task being performed. 
 ## The Logistic Regression Model
 
@@ -151,7 +151,7 @@ Suppose you have a fitted logistic regression model with the following form:
 $$P(Y=1|x)=\sigma(1+2x_1+3x_2)$$
 You <u>decide</u> to classify all new data points with **P(Y=1 | x) ≥ 0.5** as Class 1, and all points with **P(Y=1 | x) ≤ 0.5** as Class 0. 
 
-> [! NOTE] Probability of 0.5 implies a log odds of 0
+> [!NOTE] Probability of 0.5 implies a log odds of 0
 > Recall:
 > ![[Pasted image 20251119160503.png|400]]
 > 

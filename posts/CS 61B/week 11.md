@@ -1,4 +1,4 @@
-> [! Note] **Abstract Data Type vs. Specific Implementations**
+> [!Note] **Abstract Data Type vs. Specific Implementations**
 > There are many ways to implement an abstract data type.
 > ![[image-17.png|530x257]]
 

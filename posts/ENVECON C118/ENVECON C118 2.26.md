@@ -5,7 +5,7 @@ An estimate by itself doesn't tell us much.
 
 Tools: *t-statistics*, *p-values*, and *confidence intervals*
 
-> [! question] Why Do We Need Inference?
+> [!question] Why Do We Need Inference?
 > - We can never observe the whole population only have a *sample*
 > - A different sample would give a different $\hat\beta$
 > - How do we know if our particular estimate reflects something real or is just due to sampling variation?
@@ -61,7 +61,7 @@ The p-value answers: **if** $H_0$ is true, what fraction of time would we get a 
 		- what is the probability we observe a test statistic (t-value, $\hat t$) as extreme or more extreme than the one calculated from our sample data assuming the null hypothesis is true
 
 
-> [! NOTE] Interpreting the p-value
+> [!NOTE] Interpreting the p-value
 > - **Key:** The p-value is *not* the probability that $H_0$ is true!
 > 	- it's the probability of <u>getting data this extreme</u> if $H_0$ were true
 > 	- those are VERY different things

@@ -1,5 +1,5 @@
 
-> [! QUIZ] Warm Up
+> [!QUIZ] Warm Up
 > ![[image-67.png]]
 > 
 > ---
@@ -9,7 +9,7 @@
 ### Parameter, Estimator, Estimand, Estimate
 ![[image-68.png]]
 
-> [! QUIZ] Terms in Practice
+> [!QUIZ] Terms in Practice
 > ![[image-69.png]]
 > 
 > ---
@@ -66,7 +66,7 @@ $$ATE = E[Y_i(1) - Y_i(0)] $$
 	- **representative**: the distribution of $Y_i$ is the same as the distribution from the population we care about
 
 
-> [! NOTE] iid in Practice
+> [!NOTE] iid in Practice
 > - *iid* and *representative data* is a useful baseline that's relatively easy to analyze
 > - **BUT** it's important to realize it might not hold in practice
 > 	- if we sample people in the same household, not independent!

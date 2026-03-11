@@ -1,6 +1,6 @@
 # Lecture
 
-> [! Quiz]
+> [!Quiz]
 > ![[image-30.png]]
 > **c. 0.99**
 > 
@@ -40,7 +40,7 @@ Update beliefs about $Y$ after observing $X$
 ## Independence
 ![[image-32.png]]
 
-> [! Quiz] Independence Quiz
+> [!Quiz] Independence Quiz
 > ![[image-33.png]]
 > ![[image-34.png]]
 > 
@@ -59,7 +59,7 @@ Update beliefs about $Y$ after observing $X$
 - What does this suggest about the relationship between $X$ and $Z$? 
 - When a third variable explains away an $X - Y$ relationship, $X$ and $Z$ are often correlated (hotter days tend to be sunnier).
 
-> [! Example] Netflix and Conditional Independence
+> [!Example] Netflix and Conditional Independence
 > ![[image-36.png]]
 > ![[image-37.png]] 
 > ![[image-38.png]]
@@ -78,7 +78,7 @@ Update beliefs about $Y$ after observing $X$
 - *Important fact*: The expectation operator is <u>linear</u>
   $$E[a+bX] = a+bE[X] $$for constants a, b
 
-> [! QUIZ]
+> [!QUIZ]
 > ![[image-41.png]]
 > If we take simple mean by $E[X] = \frac{5+10+150}{3}=55$
 > 

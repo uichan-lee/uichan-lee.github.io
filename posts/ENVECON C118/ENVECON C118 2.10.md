@@ -19,7 +19,7 @@
 ### Goodness of fit: $R^2$
 ![[image-86.png]]
 ![[image-87.png]]
-> [! EXAMPLE] Real Estate Example
+> [!EXAMPLE] Real Estate Example
 > ![[image-88.png]]
 >
 > **Interpreting the Slope**

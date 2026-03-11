@@ -9,7 +9,7 @@ A **random variable** is a numerical summary of a random process.
 - The **sample space** is the set of all possible outcomes
 - An **event** is a subset of the sample space (e.g. event = roll of a die will be less than 3, event = {roll = 1, roll = 2})
 
-> [! Example] Air Quality
+> [!Example] Air Quality
 > ![[image-6.png]]
 > - $X$ is continuous, $Y$ is discrete
 > - $X$ outcomes: 0, 10, 100, 305, etc.

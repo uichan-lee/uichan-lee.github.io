@@ -19,7 +19,7 @@ We are taking **n/b mini batches, each of size b**.
 
 ![[image-3.png]]
 
-> [! Facts]
+> [!Facts]
 > - One epoch of mini-batch gradient descent updates will get you <u>closer</u> to a minimum of a function than one epoch of gradient descent update.
 > - One parameter update of mini-batch is less computationally expensive than one parameter update of gradient descent. 
 > - One epoch of gradient descent updates (one update) is less computationally expensive than one epoch of mini-batch gradient descent updates (n/b updates) .
@@ -95,7 +95,7 @@ However, models that are too complex (e.g., high-degree polynomial) do not gener
 A **test set** is a portion of our dataset that we "hold out" from model training.
 - The test set is only used <u>once</u> to compute the performance (MSE, RMSE, etc) of the model after model fitting is finalized. 
 
-> [! Important] Problem
+> [!Important] Problem
 > What if we are dissatisfied with our **one-time** test set performance? We can't go back and adjust our model–that's cheating!
 > We'd be *factoring in information from the test set* to redesign our model. The test set would no longer fairly represent the performance on unseen data.
 
@@ -263,7 +263,7 @@ $$
 - $\mathbb{E}(I) = p(1) + (1-p)(0) = p$
 - $Var(I) = p(1-p)$
 
-> [! Important]
+> [!Important]
 > Bernoulli Distribution is different from Binomial Distribution. 
 
 ## Binomial Distribution

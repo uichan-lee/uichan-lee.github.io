@@ -1,5 +1,5 @@
 
-> [! NOTE] Final Thoughts on Omitted Variable Bias
+> [!NOTE] Final Thoughts on Omitted Variable Bias
 > We've seen how omitting variables can lead to biased estimates of $\beta$
 > - This is a very common problem
 > - We almost never have enough data to control for everything important
@@ -20,7 +20,7 @@ You don't always need the exact causal effect to make a good policy argument.
 
 An *upper bound* can be useful when you want to argue a policy isn't too <u>costly</u> (worth doing)
 
-> [! EXAMPLE] Example: Immigration and Wages
+> [!EXAMPLE] Example: Immigration and Wages
 > We think OVB is <u>positive</u>: immigrants move to booming cities where wages are already rising.
 > If we still find only a *small negative effect* on native wages:
 > - Even this overstates the wage decline
@@ -105,7 +105,7 @@ The critical value $t^*$ such that $P(-t^* \leq t_{n-1} \leq t^*) = 0.95$ <u>NOT
 ![[image-113.png]]
 
 
-> [! IMPORTANT] Why $\alpha / 2$?
+> [!IMPORTANT] Why $\alpha / 2$?
 > Useful for one-sided hypothesis testing
 > ![[image-114.png]]
 
@@ -169,7 +169,7 @@ Standardize it: $\hat{t} = \frac{(\hat\mu_1 - \hat\mu_2)-0}{SE(\hat\mu_1-\hat\mu
 
 where: $SE(\hat\mu_1 - \hat\mu_2) = \sqrt{\frac{\hat\sigma_1^2}{n_1} + \frac{\hat\sigma_2^2}{n_2}}$
 
-> [! EXAMPLE] Does Health Insurance Improve Mental Health? 
+> [!EXAMPLE] Does Health Insurance Improve Mental Health? 
 > ![[image-117.png]]
 > ![[image-118.png]]
 > ![[image-119.png]]

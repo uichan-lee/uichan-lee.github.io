@@ -65,7 +65,7 @@ The **causal inference** tools we'll learn are useful for avoiding blind spots.
 
 > Key difference between **Pooled Cross-Sectional Data** and **Panel Data** is in the **Unit Tracking**. Panel data is the data of a same entity over time, but pooled cross-sectional data is a random sample from the same population over time. 
 
-> [! Example] 
+> [!Example] 
 > **Time Series Data**
 > ![[image-3.png]]
 > 

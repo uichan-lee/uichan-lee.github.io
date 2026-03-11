@@ -99,7 +99,7 @@ Out **0/1 predictions** depend on our choice of probability threshold, so the co
 <br>
 <br>
 
-> [! Question] Effect of changing the probability threshold on TP
+> [!Question] Effect of changing the probability threshold on TP
 > I **increase** the probability threshold. What happens to the count of **true positives (TP)**?
 > ![[image-35.png]]
 > 

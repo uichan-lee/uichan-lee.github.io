@@ -7,7 +7,7 @@ A **minimum spanning tree** is a spanning tree of minimum total weight.
 ![[Pasted image 20251022151045.png]]
 
 
-> [! Question] MST vs. SPT
+> [!Question] MST vs. SPT
 > ![[Pasted image 20251022151001.png]]
 > 
 > Answer: **B**
@@ -83,7 +83,7 @@ What algorithm do we use to find a valid ordering for the vertices?
 ![[Pasted image 20251024162646.png]]
 The reason it's called **topological sort**: Can think of this process as sorting our nodes so they appear in an order consistent with edges, e.g. [C, F, G, A, D, B, E, H]
 
-> [! Important] Depth First Search
+> [!Important] Depth First Search
 > Be aware, that when people say "Depth First Search", they sometimes mean with restarts, and they sometimes mean without.
 > 
 > For example, when we did DepthFirstPaths for reachability, we did not restart.

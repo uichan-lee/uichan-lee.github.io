@@ -1,7 +1,7 @@
 # Ordinary Least Squares (OLS)
 ![[Pasted image 20251007112101.png]]
 
->[! Definition] 
+>[!Definition] 
 > **Ordinary Least Squares (OLS)** 
 > = Multiple Linear Regression + Mean Squared Error (MSE, L2 Loss) 
 
@@ -50,7 +50,7 @@ For the n-dimensional vector $\vec{x}$, the L2 vector norm is:
 ##### Mean Squared Error with L2 Norms
 ![[Pasted image 20251007121127.png]]
 
-> [! Question] How Should We Interpret the OLS Problem?
+> [!Question] How Should We Interpret the OLS Problem?
 > ![[Pasted image 20251007121541.png]]
 > 
 > Answer: D. **All of the above**

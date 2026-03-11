@@ -52,7 +52,7 @@ Height and average depth *determine runtimes* for BST operations.
 
 Although the height and average depth must be larger than the optimal value, **randomized trees** are bushy, not spindly. 
 
-> [! Summary]
+> [!Summary]
 > BSTs have:
 > - Worst case Θ(N) height.
 > - Best case Θ(log N) height.

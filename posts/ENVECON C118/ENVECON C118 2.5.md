@@ -21,7 +21,7 @@ where:
 > *Linearity Assumption*
 > - a one-unit change in $x$ has the same effect on $y$
 
-> [! NOTE] Assumptions about $u$
+> [!NOTE] Assumptions about $u$
 > 1. As long as we include intercept $\beta_0$ we can assume without loss of generality $E[u] = 0$.
 > 	- lose nothing by normalizing the unobserved factors
 > 	- redefine $\tilde{u} = u - E[u]$ and $\tilde{\beta_0} = \beta_0 + E[u]$

@@ -1,6 +1,6 @@
 # Trees and Traversals 
 
-> [! Definition]
+> [!Definition]
 > **Tree Definition (Reminder)**
 > A tree consists of
 > - A set of nodes.
@@ -68,7 +68,7 @@ Trees are fantastic for representing strict hierarchical relationship.
 - But not every relationship is hierarchical. 
 - Example: Metro map (contains cycles)
 
-> [! Definition] 
+> [!Definition] 
 > **Graph Definition**
 > A graph consists of:
 > - A set of nodes.
@@ -99,7 +99,7 @@ A simple graph is a graph with:
 
 ![[Pasted image 20251018141541.png]]
 
-> [! Summary]
+> [!Summary]
 > Graphs are a more general idea than a tree.
 > - A tree is a graph where there are no cycles and every vertex is connected.
 > - Key graph terms: Directed, Undirected, Cyclic, Acyclic, Path, Cycle
@@ -164,7 +164,7 @@ Total runtime to iterate over all neighbors of `v` is $\theta(V)$.
 ![[Pasted image 20251018145210.png]]
 
 
-> [! Quiz]
+> [!Quiz]
 > ![[Pasted image 20251018150252.png]]
 > ---
 > **A: $\theta(V + E)$** (All cases)

@@ -56,7 +56,7 @@ If we have N items that are <u>evenly distributed</u>, length of each list is ~N
 Now we figured out how to efficiently deal with integers, let's take a look at other types. 
 #### lowercase strings
 
-> [! Question] Storing the Word `cat`
+> [!Question] Storing the Word `cat`
 > Suppose we want to add ("cat") to our HashTable.
 > 
 > The key question:
@@ -153,7 +153,7 @@ public int hashCode(String s) {
 }
 ```
 
-> [! Question] Using a Negative HashCode
+> [!Question] Using a Negative HashCode
 > Suppose that 💀's hash code is -1.
 > Into which bucket is it more natural to place this item? Maybe the final index.
 > 

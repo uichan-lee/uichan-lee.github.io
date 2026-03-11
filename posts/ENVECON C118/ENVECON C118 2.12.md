@@ -1,4 +1,4 @@
-> [! QUIZ] Warm-Up
+> [!QUIZ] Warm-Up
 > ![[image-96.png]]
 > **Answer: 2. It becomes 8.0**
 > Original equation was saying that if height increases by *1cm*, weight increases by *0.08kg*. Since the unit of the dependent variable becomes 100 times larger, $\hat\beta_1$ must also become 100 times larger = *8.0kg*.
@@ -31,7 +31,7 @@ This approach will let us:
 ---
 # Multiple Regression
 
-> [! EXAMPLE] Example: Air Pollution and Infant Health
+> [!EXAMPLE] Example: Air Pollution and Infant Health
 > ![[image-98.png]]
 > Key concept: **dose response function**
 > Why infants? Because they are more fragile; easy to observe the effects. Possibility of longitudinal research. California has rich data at birth (not so much after birth).
@@ -62,7 +62,7 @@ where:
 - $\gamma _z$ = zip code fixed effects (control for all fixed characteristics of areas)
 - $\delta_t$ = time fixed effects
 
-> [! LIST] Currie & Neidell (2005)
+> [!LIST] Currie & Neidell (2005)
 > - "Our framework allows us to control for a wide array of potential **confounders** in an effort to identify causal effects".
 > - "In our richest specification, the effects of pollution are identified using only variation within cells defined at the zip code, month, and year level."
 
@@ -90,7 +90,7 @@ $$ \text{birth\_weight} = \beta_0 + \beta_1 \cdot \text{pollution} + \beta_2 \cd
 - $\beta_1$: Holding $income$ constant, a one-unit increase in pollution is associated with $\beta_1$ change in birth weight.
 - $\beta_2$: Holding $pollution$ constant, a one-unit increase in income is associated with a $\beta_2$ change in birth weight. 
 
-> [! EXAMPLE] Offsetting effects?
+> [!EXAMPLE] Offsetting effects?
 > ![[image-100.png]]
 >
 > ---
@@ -158,7 +158,7 @@ Adding assumption 5 can also show $Var(\hat\beta_j) = \frac{\sigma_u^2}{SST_j(1-
 - where $N - k - 1 =$ *degrees of freedom* for the OLS problem with $N$ observations and $k$ independent variables.
 
 
-> [! NOTE] Assumption 3: Multicollinearity
+> [!NOTE] Assumption 3: Multicollinearity
 > - **Definition**: Two variables are said to be perfectly multicollinear if one variable is a linear combination of the other variable (e.g. $x_2 = ax_1 + b$)
 > - **Intuition**: Think about including two variables in your regression (took `ENVECON C118` and didn't take `ENVECON C118`) and remember in the multiple linear regression framework we want to "hold all else constant".
 > - **Note**: some correlation between $X$ variables is normal

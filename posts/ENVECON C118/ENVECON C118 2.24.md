@@ -55,7 +55,7 @@ The ITT compares outcomes by **assignment** regardless of whether people actuall
 - ITT too small because of non-compliers: LATE = ITT / share who comply
 - But how to estimate compliance? 
 
-> [! Question] Who Are the Compliers? 
+> [!Question] Who Are the Compliers? 
 > The LATE tells us the effect on **compliers**... but who are they? 
 > 
 > We can't identify individual compliers — we only see what each person did under their *actual* assignment.
@@ -67,7 +67,7 @@ The ITT compares outcomes by **assignment** regardless of whether people actuall
 > We can't tell! The LATE is the effect on a group we *can characterize but can't identify*.
 
 
-> [! INFO] When Does This All Simplify? If Everyone Complies
+> [!INFO] When Does This All Simplify? If Everyone Complies
 > $$ ITT = ATT = LATE = ATE $$
 > *When does this happen?* When treatment is applied without choice by the subject
 > - Examples:

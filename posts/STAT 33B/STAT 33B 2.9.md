@@ -244,7 +244,7 @@ apply(Y, MARGIN = 1, FUN = summary)
 - Lists can contain any other data structure: vectors, matrices, data frames, functions, and even other lists
 - This flexibility makes lists ideal for storing complex, heterogeneous data
 
-> [! EXAMPLE] Creating a `list` of `vector`s
+> [!EXAMPLE] Creating a `list` of `vector`s
 > To create a list we use the function `list()`
 > ```r
 > # list of vectors (of equal length)
@@ -262,7 +262,7 @@ apply(Y, MARGIN = 1, FUN = summary)
 > )
 > ```
 
-> [! IMPORTANT] No vectorization with R lists
+> [!IMPORTANT] No vectorization with R lists
 > Lists are very convenient because they allow you to store multiple kinds of objects in a single place. This power of lists comes with a price: you lose *vectorization*.
 > ```r
 > vec = c(2, 4, 6, 8)

@@ -26,7 +26,7 @@ Like `pandas`, SQL has **aggregate functions**: `MAX`, `SUM`, `AVG`, `FIRST`, et
 [More Aggregation Functions](https://duckdb.org/docs/stable/sql/functions/aggregates)
 ![[Pasted image 20251113112008.png]]
 
-> [! NOTE] Declarative Programming Language
+> [!NOTE] Declarative Programming Language
 > ```SQL
 > SELECT type, SUM(cost)
 > FROM Dish

@@ -15,7 +15,7 @@ General Strategy:
 
 Two more examples: 
 ![[Pasted image 20251110162422.png]]
-> [! Note] Recall: Inversions
+> [!Note] Recall: Inversions
 > An **inversion** is a pair of elements that are out of order with respect to <. 
 > ![[Pasted image 20251110163053.png]]
 > 
@@ -62,7 +62,7 @@ How to decide what's big and what's small?
 
 We call this a **partition**; we separate the big items and the small items, and put remaining items in the middle. 
 
-> [! NOTE] Partitioning
+> [!NOTE] Partitioning
 > A **partition** of an array, given a **pivot** x, is a rearrangement of items so that:
 > - All entries to the left of x are <= x
 > - All entries to the right of x are >= x
