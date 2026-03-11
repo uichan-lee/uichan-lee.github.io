@@ -57,8 +57,8 @@ function parseDateFromFilename(filename, courseName) {
 
 function stripLatexFromTitle(text) {
   return text
-    .replace(/\$\$[\s\S]*?\$\$/g, '')
-    .replace(/\$[^$]*\$/g, '')
+    .replace(/\$\$([\s\S]*?)\$\$/g, '$1')
+    .replace(/\$([^$]*)\$/g, '$1')
     .replace(/\s+/g, ' ')
     .trim();
 }

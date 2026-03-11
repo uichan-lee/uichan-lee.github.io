@@ -193,6 +193,11 @@ A simple regression of house prices on pollution has a problem: *pollution is no
 - Polluted areas may also be poorer, have worse schools, or less investment all of which lower house prices independently
 - A naive OLS estimate of the pollution effect would be **biased**
 
+Their solution: **Clean Air Act of 1970** as a natural experiment
+- The Act set a federal ceiling for total suspended particulates (TSP)
+- Counties *above* the ceiling were designated "nonattainment" and faced strict regulations
+- Counties *just below* the ceiling faced no new regulations
+- This created sharp, *quasi-random* variation in pollution changes across otherwies similar counties. 
 
 # Adjusted $R^2$
 
