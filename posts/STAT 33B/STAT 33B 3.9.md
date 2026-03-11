@@ -1,8 +1,8 @@
 ---
-title: "STAT 33B - Week 8: Graphics with ggplot2"
+
+## title: "STAT 33B - Week 8: Graphics with ggplot2"
 date: Mar 9
 course: STAT 33B
----
 
 # Graphics with ggplot2
 
@@ -68,3 +68,4 @@ Use `ggsave()` to save the most recent plot you created:
 ```r
 ggsave("scatterplot.png")
 ```
+
