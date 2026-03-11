@@ -57,8 +57,17 @@ function parseDateFromFilename(filename, courseName) {
 
 function extractTitle(content) {
   const lines = content.split('\n');
+  const h1s = [];
   for (const line of lines) {
-    const m = line.match(/^#{1,3}\s+(.+)/);
+    const m = line.match(/^#\s+(.+)/);
+    if (m) {
+      const text = m[1].trim();
+      if (text.toLowerCase() !== 'lecture') h1s.push(text);
+    }
+  }
+  if (h1s.length > 0) return h1s.join(' | ');
+  for (const line of lines) {
+    const m = line.match(/^#{2,3}\s+(.+)/);
     if (m) {
       const title = m[1].trim();
       if (title.toLowerCase() !== 'lecture') return title;
