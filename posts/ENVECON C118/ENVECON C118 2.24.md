@@ -1,8 +1,3 @@
----
-title: "ENVECON C118 - RCTs, Sample Means, and Confidence Intervals"
-date: 2026-02-24
-course: ENVECON C118
----
 # RCT 
 
 ## Why does an RCT solve the OVB problem? 
@@ -23,11 +18,10 @@ $$ Y_i = \beta_0 + \beta_1 D_i + u_i $$
 	- $\beta_1 = E[Y_i|D_i = 1] - E[Y_i|D_i=0]$
 - $\beta_1$ equals the ATE only if $E[u_i|D_i] = 0$
 
-> **OVB Without Randomization:**
-> When treatment is not randomly assigned, treated individuals may differ systematically from untreated individuals in ways that affect outcomes. For example, wealthier individuals may be more likely to seek health insurance AND have better health outcomes due to their income, creating confounding. The regression coefficient picks up both the treatment effect and the effect of the omitted variable (wealth).
->
-> **With Randomization (RCT):**
-> Random assignment ensures that treatment groups are comparable on average. Treatment is independent of all pre-treatment characteristics, observed and unobserved. Since treatment assignment is random, $E[u_i|D_i] = 0$, the error term is uncorrelated with the treatment indicator, and OVB is eliminated. The regression coefficient $\beta_1$ identifies the true ATE without bias from confounding variables.
+> [!note] With vs. Without Randomization (OVB)
+> ![[image-120.png]]
+> 
+> ![[image-121.png]]
 
 
 ## A subtlety: Compliance
@@ -61,7 +55,7 @@ The ITT compares outcomes by **assignment** regardless of whether people actuall
 - ITT too small because of non-compliers: LATE = ITT / share who comply
 - But hwo to estimate compliance? 
 
-> **❓ Question:**
+> [! Question] Who Are the Compliers? 
 > The LATE tells us the effect on **compliers**... but who are they? 
 > 
 > We can't identify individual complier only see what each person did under their *actual* assigment.
@@ -73,7 +67,7 @@ The ITT compares outcomes by **assignment** regardless of whether people actuall
 > We can't tell! The LATE is the effect on a group we *can characterize but can't identify*.
 
 
-> **INFO:**
+> [! INFO] When Does This All Simplify? If Everyone Complies
 > $$ ITT = ATT = LATE = ATE $$
 > *When does this happen?* treatment applied without choice by subject
 > - Examples:
@@ -86,24 +80,14 @@ The ITT compares outcomes by **assignment** regardless of whether people actuall
 ---
 # Sample Means
 
-The sample mean $\bar{Y} = \frac{1}{n}\sum_{i=1}^{n} Y_i$ is an unbiased estimator of the population mean $\mu$: $E[\bar{Y}] = \mu$. Its variance is $Var(\bar{Y}) = \sigma^2/n$, decreasing with sample size. By the Central Limit Theorem, for large $n$, the sample mean is approximately normally distributed: $\bar{Y} \sim N(\mu, \sigma^2/n)$. This allows us to construct confidence intervals and perform hypothesis tests on the population mean.
+![[image-122.png]]
 
 ## Sample Means: Binary Variables
 
-When $Y_i$ is binary (0 or 1), the sample mean equals the sample proportion: $\bar{Y} = p$ (fraction of 1s). For a Bernoulli outcome, the population mean is $\mu = P(Y=1)$ and the variance is $\sigma^2 = p(1-p)$. The standard error of the sample proportion is $SE(\bar{p}) = \sqrt{p(1-p)/n}$.
-
+![[image-123.png]]
 ## Comparing Two Groups
-
-To test whether two groups have equal means:
-$$\hat{t} = \frac{(\bar{Y}_1 - \bar{Y}_2) - 0}{SE(\bar{Y}_1 - \bar{Y}_2)}$$
-
-where the standard error is:
-$$SE(\bar{Y}_1 - \bar{Y}_2) = \sqrt{\frac{\hat{\sigma}_1^2}{n_1} + \frac{\hat{\sigma}_2^2}{n_2}}$$
-
-A 95% confidence interval for the difference in means is:
-$$(\bar{Y}_1 - \bar{Y}_2) \pm t^* \cdot SE(\bar{Y}_1 - \bar{Y}_2)$$
-
-where $t^*$ is the critical value from the t-distribution with $n_1 + n_2 - 2$ degrees of freedom.
+![[image-124.png]]
+![[image-125.png]]
 ## Z-Distribution and t-Distribution
 
 Under the CLT, for large n (z-distribution):
@@ -125,23 +109,9 @@ $$
 
 ## 5 Steps
 
-1. **State the hypotheses**: Specify $H_0$ and $H_1$, and choose significance level $\alpha$ (usually 0.05).
-   - $H_0: \beta_j = \beta_{j0}$ (null hypothesis: coefficient equals some value)
-   - $H_1: \beta_j \neq \beta_{j0}$ (two-sided) or $\beta_j > \beta_{j0}$ or $\beta_j < \beta_{j0}$ (one-sided)
-
-2. **Calculate the test statistic**:
-   $$\hat{t} = \frac{\hat{\beta}_j - \beta_{j0}}{SE(\hat{\beta}_j)}$$
-   This follows a t-distribution with $n - k - 1$ degrees of freedom under the null hypothesis.
-
-3. **Find the critical value** $t^*$ from the t-table based on:
-   - Significance level $\alpha$ (or $\alpha/2$ for two-sided tests)
-   - Degrees of freedom $n - k - 1$
-
-4. **Make a decision**:
-   - **Reject $H_0$** if $|\hat{t}| > t^*$ (or $\hat{t} > t^*$ for right-tailed, $\hat{t} < -t^*$ for left-tailed)
-   - **Fail to reject $H_0$** if $|\hat{t}| \leq t^*$
-
-5. **Interpret the results**: State the conclusion in the context of the problem. Example: "At the 5% significance level, we reject the null hypothesis that education has no effect on earnings. The estimated return to one year of education is [amount] and is statistically significant."
+![[image-126.png]]
+![[image-127.png]]
+![[image-128.png|578x283]]
 
 # Sampling Distributions of $\hat\beta$
 
@@ -152,13 +122,7 @@ Good news: the same machinery applies!
 - already know mean and variance of $\hat\beta$
 - just need to know the *sampling distribution* of $\hat\beta$
 
-**OLS Assumptions for Unbiasedness:**
-1. Linear model: $Y_i = \beta_0 + \beta_1X_{1i} + \beta_2X_{2i} + \cdots + \beta_kX_{ki} + u_i$
-2. Random sample of observations from the population
-3. No perfect multicollinearity among regressors
-4. Zero conditional mean of errors: $E[u_i|X_1, X_2, \ldots, X_k] = 0$
-
-These assumptions ensure that OLS estimates are unbiased: $E[\hat{\beta}_j] = \beta_j$ for all coefficients.
+![[image-129.png]]
 
 Assumptions 1-4 guarantee that $E[\hat\beta_j] = \beta_j$ for all $j$
 OLS is **unbiased**: on average, across repeated samples, our estimate equals the truth
@@ -213,17 +177,7 @@ $$
 $$
 where $k$ is the number of regressors 
 
-**Example: Testing the Return to Education**
-
-Suppose we estimate $\log(Wage_i) = 2.5 + 0.08 \times Education_i + u_i$ with $SE(\hat{\beta}_1) = 0.01$ and $n = 500$.
-
-Test $H_0: \beta_1 = 0$ vs $H_1: \beta_1 \neq 0$ at $\alpha = 0.05$:
-- Test statistic: $\hat{t} = \frac{0.08 - 0}{0.01} = 8$
-- Degrees of freedom: $n - k - 1 = 500 - 1 - 1 = 498$
-- Critical value from t-table: $t^* \approx 1.96$ (with large df, approximately normal)
-- Decision: $|8| > 1.96$, so reject $H_0$
-
-**Conclusion:** One additional year of education is associated with an 8% increase in wages, and this effect is statistically significant at the 5% level.
+![[image-130.png]]
 
 ## Economic vs. Statistical Significance
 - **Statistical Significance** tells us: is there effect different from zero? 
@@ -238,51 +192,22 @@ Test $H_0: \beta_1 = 0$ vs $H_1: \beta_1 \neq 0$ at $\alpha = 0.05$:
 
 ## Testing a Single Linear Combination
 
-Sometimes we want to test whether a linear combination of coefficients equals a value. For example, if we have a model with interaction terms, we might test whether the sum of two coefficients is zero.
+![[image-131.png]]
 
-**General form:** Test $H_0: c_1\beta_1 + c_2\beta_2 + \cdots + c_k\beta_k = r$ where $c_j$ are weights and $r$ is the hypothesized value.
-
-**Test statistic:**
-$$\hat{t} = \frac{c_1\hat{\beta}_1 + c_2\hat{\beta}_2 + \cdots + c_k\hat{\beta}_k - r}{SE(c_1\hat{\beta}_1 + c_2\hat{\beta}_2 + \cdots + c_k\hat{\beta}_k)}$$
-
-**Example:** With $Y = \beta_0 + \beta_1X + \beta_2Z + u$, test whether the effect of $X$ conditional on $Z$ equals the unconditional effect.
-
-The t-statistic follows a t-distribution with $n - k - 1$ degrees of freedom.
+![[image-132.png]]
 
 
 ## Testing Multiple Linear Restrictions: The F Test
 
-The F test evaluates whether a group of variables jointly affects the outcome. For example, we might test whether demographics (age, gender, race) jointly matter for earnings.
-
-**Null hypothesis:** $H_0: \beta_1 = 0, \beta_2 = 0, \ldots, \beta_r = 0$ (the first $r$ coefficients are all zero)
-
-**Test procedure:**
-1. Estimate the restricted model (without those $r$ variables): $SSR_r$
-2. Estimate the unrestricted model (with all variables): $SSR_u$
-3. Calculate the F-statistic
+![[image-133.png]]
 
 ### The F-Statistic
-
-$$F = \frac{(SSR_r - SSR_u)/r}{SSR_u/(n-k-1)}$$
-
-where:
-- $SSR_r - SSR_u$ = sum of squared residuals from restricted minus unrestricted model
-- $r$ = number of restrictions (variables being tested)
-- $n - k - 1$ = degrees of freedom in unrestricted model
-
-**Decision rule:** Reject $H_0$ if $F > F^*$ where $F^*$ is the critical value from the F-distribution with $r$ and $n-k-1$ degrees of freedom.
-
-**The F-Distribution:** The F-distribution depends on two degrees of freedom: numerator df ($r$) and denominator df ($n-k-1$). It is always positive (right-tailed) and becomes more concentrated near 1 as degrees of freedom increase.
+![[image-134.png]]
+![[image-135.png]]
+**The F-Distribution**
+![[image-136.png]]
 
 #### F-Test Using $R^2$
+![[image-137.png]]
 
-An equivalent formula using the model's $R^2$ values:
-
-$$F = \frac{(R^2_u - R^2_r)/r}{(1-R^2_u)/(n-k-1)}$$
-
-where $R^2_u$ and $R^2_r$ are from the unrestricted and restricted models respectively.
-
-**Example:** Test whether a set of demographic variables (age, gender, education) jointly affect log wages.
-- Restricted model: $\log(Wage) = \beta_0 + u$
-- Unrestricted model: $\log(Wage) = \beta_0 + \beta_1Age + \beta_2Female + \beta_3Education + u$
-- If $F$ is large and exceeds the critical value, we conclude that these demographics jointly matter for wages.
+![[image-138.png]]

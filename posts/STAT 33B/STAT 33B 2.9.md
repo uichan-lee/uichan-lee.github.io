@@ -1,21 +1,7 @@
----
-title: "STAT 33B - Week 4: Matrices and Lists"
-date: Feb 9
-course: STAT 33B
----
-
 # Matrices
-
-R data structures overview showing atomic vs non-atomic structures across dimensions:
-
-| Dimensions | Single Data Type (Atomic) | Multiple Data Types (Non-Atomic) |
-|---|---|---|
-| 1D | Vector | List |
-| 2D | **Matrix** | Data Frame |
-| nD | Array | - |
+![[image-11.png]]
 
 We can transform a vector in an **n-dimensional array** by giving it a dimensions attribute `dim`.
-
 ```r
 # positive: from 1 to 8
 x <- 1:8
@@ -39,21 +25,21 @@ x
 dim(x) <- c(2, 2, 2)
 x
 
-## , , 1
-
-##      [,1]  [,2]
-## [1,]    1     3
-## [2,]    2     4
-
-## , , 2
-
-##      [,1]  [,2]
-## [1,]    5     7
+## , , 1 
+## 
+##      [,1]  [,2] 
+## [1,]    1     3 
+## [2,]    2     4 
+## 
+## , , 2 
+## 
+##      [,1]  [,2] 
+## [1,]    5     7 
 ## [2,]    6     8
 ```
 
-A `dim` attribute of length 2 will convert a vector into a **matrix**.
 
+A `dim` attribute of length 2 will convert a vector into a **matrix**.
 ```r
 A <- 1:8
 class(A)
@@ -64,7 +50,8 @@ class(A)
 ## [1] "matrix" "array"
 ```
 
-When using `dim()`, R always fills up each matrix by columns. To have more control about how a matrix is filled, (by rows or columns) we use the `matrix()` function:
+When using `dim()`, R always fills up each matrix by columns
+To have more control about how a matrix is filled, (by rows or columns) we use the `matrix()` function:
 
 ```r
 # vector to matrix
@@ -75,7 +62,6 @@ matrix(A, nrow = 2, ncol = 4)
 # [1,]    1    3    5    7
 # [2,]    2    4    6    8
 ```
-
 - An R matrix provides a *rectangular* data object; i.e. to handle data in a two-dimensional array
 - To create a matrix, give a vector to `matrix()` and specify number of rows and columns
 - You can also assign row and column names to a matrix
@@ -84,26 +70,24 @@ matrix(A, nrow = 2, ncol = 4)
 - Matrices in R are stored **column-major** (i.e. by columns).
 
 ## Creating a Matrix
-
 ```r
-hp <- c("Harry", "Ron", "Hermione", "Potter", "Weasley", "Granger")
-# matrix filled up by columns
+hp <- c("Harry", "Ron", "Hermione", "Potter", "Weasley", "Granger") 
+# matrix filled up by columns 
 matrix(hp, nrow = 3)
-#      [,1]       [,2]
-# [1,] "Harry"    "Potter"
+#      [,1]       [,2]     
+# [1,] "Harry"    "Potter" 
 # [2,] "Ron"      "Weasley"
 # [3,] "Hermione" "Granger"
 ```
 
 Here's another way to create the same matrix
-
 ```r
-# vector of names
-hp <- c("Harry", "Potter", "Ron", "Weasley", "Hermione", "Granger")
-# matrix filled up by rows
+# vector of names 
+hp <- c("Harry", "Potter", "Ron", "Weasley", "Hermione", "Granger") 
+# matrix filled up by rows 
 matrix(hp, nrow = 3, byrow = TRUE)
-#      [,1]       [,2]
-# [1,] "Harry"    "Potter"
+#      [,1]       [,2]     
+# [1,] "Harry"    "Potter" 
 # [2,] "Ron"      "Weasley"
 # [3,] "Hermione" "Granger"
 ```
@@ -155,18 +139,18 @@ D
 # row3 0.7012174 0.6134672 0.12402886 0.07455895
 ```
 
-## Recycling
+
+## Recycling 
 
 Recycling rules also apply to matrices
-
 ```r
 x <- letters[1:4]
 X <- matrix(x, nrow = 4, ncol = 3)
 X
 #      [,1] [,2] [,3]
-# [1,] "a"  "a"  "a"
-# [2,] "b"  "b"  "b"
-# [3,] "c"  "c"  "c"
+# [1,] "a"  "a"  "a" 
+# [2,] "b"  "b"  "b" 
+# [3,] "c"  "c"  "c" 
 # [4,] "d"  "d"  "d"
 ```
 
@@ -182,28 +166,12 @@ mat_lgl <- matrix(NA, nrow = 4, ncol = 3)
 ## Matrix Manipulation
 
 ### Subsetting Cells
+![[image-12.png]]
 
-Matrix indexing uses the format `mat[row_index, column_index]`:
-
-**Single Cell Access:**
-- `mat[2,2]` - Extract element at row 2, column 2
-
-**Row Slicing:**
-- `mat[2, ]` - Extract entire row 2 (all columns)
-- `mat[2:3, ]` - Extract rows 2-3 (all columns)
-- `mat[c(1,3,5), ]` - Extract rows 1, 3, 5 with specific indices
-- `mat[-2, ]` - Exclude row 2 (all other rows)
-- `mat[-c(2:3), ]` - Exclude rows 2-3
-
-**Column Slicing:**
-- `mat[ ,2]` - Extract entire column 2 (all rows)
-- `mat[ ,2:3]` - Extract columns 2-3 (all rows)
-- `mat[ ,c(1,3,5)]` - Extract columns 1, 3, 5 with specific indices
-- `mat[ ,-2]` - Exclude column 2 (all other columns)
-- `mat[ ,-(2:3)]` - Exclude columns 2-3
-
-**Combined Row and Column Selection:**
-- `mat[c(1,3,5), c(2,4)]` - Extract rows 1, 3, 5 AND columns 2, 4
+![[image-13.png]]
+![[image-14.png]]
+![[image-15.png]]
+![[image-16.png]]
 
 ### `apply()` function
 
@@ -219,14 +187,12 @@ X
 ```
 
 Sum of elements in each row `MARGIN = 1`
-
 ```r
 apply(X, MARGIN = 1, FUN = sum)
 # [1] 6 6 6 6 6
 ```
 
 Sum of elements in each column `MARGIN = 2`
-
 ```r
 apply(X, MARGIN = 2, FUN = sum)
 # [1]  5 10 15
@@ -256,51 +222,28 @@ apply(Y, MARGIN = 1, FUN = summary)
 # Max.    11.0 12.0 13.0 14.0 15.0
 ```
 
-## Matrix Algebra
 
+## Matrix Algebra
 ### Operators and Functions
 
-| Operator | Description | Example |
-|---|---|---|
-| `+` | Addition | A + B |
-| `-` | Subtraction | A - B |
-| `*` | Element-wise product | A * B |
-| `%*%` | Matrix product | A %*% B |
-| `t()` | Transpose | t(A) |
-| `det()` | Determinant | det(A) |
-| `diag()` | Extract diagonal | diag(A) |
-| `solve()` | Inverse | solve(A) |
+![[image-17.png]]
 
-Additional matrix functions for decompositions and advanced operations:
+> Make sure the dimensions of matrices are conformable when using an operator or some calculation on them. 
 
-| Function | Description |
-|---|---|
-| `upper.tri()` | Upper triangular part of a matrix |
-| `lower.tri()` | Lower triangular part of a matrix |
-| `eigen()` | Eigenvalue decomposition |
-| `svd()` | Singular value decomposition |
-| `lu()` | Triangular decomposition |
-| `qr()` | QR decomposition |
-| `chol()` | Cholesky decomposition |
-
-Make sure the dimensions of matrices are conformable when using an operator or some calculation on them.
+![[image-18.png]]
 
 ---
+# Lists 
 
-# Lists
+![[image-19.png]]
 
-A **list** is a generic container that can hold elements of different types, including other lists. Lists are the most general data structure in R.
-
-Structure of a list showing multiple containers with different types:
-- A list is the most general data structure in R
+- A `list` is the most general data structure in R
 - Recall that an R list is a generic (non-atomic) vector
-- Lists can contain any other type of data structure
-- Lists can even contain other lists
+- `List`s can contain any other type of data structure
+- `List`s can even contain other lists
 
-> **📝 Example: Creating a list of vectors**
->
+> [! EXAMPLE] Creating a `list` of `vector`s
 > To create a list we use the function `list()`
->
 > ```r
 > # list of vectors (of equal length)
 > list1 <- list(
@@ -308,7 +251,7 @@ Structure of a list showing multiple containers with different types:
 > 	c(TRUE, FALSE, TRUE),
 > 	c("a", "b", "c")
 > )
->
+> 
 > # list of vectors (of different length)
 > list2 <- list(
 > 	1:3,
@@ -317,44 +260,22 @@ Structure of a list showing multiple containers with different types:
 > )
 > ```
 
-> [!IMPORTANT]
-> No vectorization with R lists
->
+> [! IMPORTANT] No vectorization with R lists
 > Lists are very convenient because they allow you to store multiple kinds of objects in a single place. This power of lists comes with a price: you lose *vectorization*.
->
 > ```r
 > vec = c(2, 4, 6, 8)
 > sqrt(vec)
 > ## [1] 1.414214 2.000000 2.449490 2.828427
->
+> 
 > # no vectorization with lists
 > lst = list(2, 4, 6, 8)
 > sqrt(lst)
 > ## Error in sqrt(lst): non-numeric argument to mathematical function
 > ```
 
-## List Indexing
+## `List` indexing
 
-### Single Bracket Indexing
-
-Single bracket indexing `list[index]`:
-- First list element: Shown in an orange box labeled "1st list element (in its box)"
-- Double bracket unboxing: `lis[[1]]` - Unboxed 1st list element
-- Nested indexing: `lis[[1]][2]` - 2nd element of 1st list element
-
-With single brackets `list[index]`, you extract a sub-list containing the selected elements (still in a "box").
-
-### Double Bracket Indexing
-
-Double bracket indexing `list[[index]]`:
-- Unboxes the element and extracts it
-- Can use with names for named lists: `list[[name]]`
-- Returns a vector of the name and list: `list$name`
+![[image-20.png]]
 
 ### Dollar Operator
-
-The dollar operator `$` provides named access to list elements:
-- Format: `list_name$element_name`
-- For named lists with elements like "vec1", "vec2", "vec3"
-- Access with `list$vec1` - Unboxes vec1 object
-- Access with `list$vec1[2]` - 2nd element of vec1 object
+![[image-21.png]]

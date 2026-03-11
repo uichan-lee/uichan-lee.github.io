@@ -1,10 +1,5 @@
----
-title: "ENVECON C118 - t-Distribution and Hypothesis Testing"
-date: 2026-02-19
-course: ENVECON C118
----
 
-> [!NOTE]
+> [! NOTE] Final Thoughts on Omitted Variable Bias
 > We've seen how omitting variables can lead to biased estimates of $\beta$
 > - This is a very common problem
 > - We almost never have enough data to control for everything important
@@ -25,13 +20,13 @@ You don't always need the exact causal effect to make a good policy argument.
 
 An *upper bound* can be useful when you want to argue a policy isn't too <u>costly</u> (worth doing)
 
-> **📝 Example:**
+> [! EXAMPLE] Example: Immigration and Wages
 > We think OVB is <u>positive</u>: immigrants move to booming cities where wages are already rising.
 > If we still find only a *small negative effect* on native wages:
 > - Even this overstates the wage decline
 > - The true effect on immigration on wages is at most this small
 
-> **📝 Example:**
+> [!EXAMPLE] Example: Early Childhood Education
 > We think OVB is <u>negative</u>
 > - Kids in Head Start come from more disadvantaged backgrounds
 > - OVB makes the program look less effective
@@ -67,9 +62,9 @@ Building the 95% CI:
 - $P(|\frac{\hat\mu - \mu}{\sigma / \sqrt n}| < c) = 0.95$
 - just so happens for standard normal **c = 1.96**
 
-A 95% confidence interval for the mean is constructed by identifying the critical value where 2.5% of the distribution lies in each tail. For a standard normal distribution, this critical value is 1.96. The confidence interval extends from $\hat\mu - 1.96 \times SE$ to $\hat\mu + 1.96 \times SE$, creating a symmetric interval around the sample mean. This interval has the property that if we repeated our sampling procedure many times, approximately 95% of the resulting intervals would contain the true population mean $\mu$.
+![[image-109.png]]
 
-For example, if $\hat\mu = 100$, $SE = 5$, then the 95% CI is $[100 - 1.96(5), 100 + 1.96(5)] = [90.2, 109.8]$.
+![[image-110.png]]
 
 Recall we defined our 95% CI in terms of **population** standard deviation ($\sigma$).
 But we don't know $\sigma$! We only have the **sample** standard deviation $\hat\sigma$.
@@ -81,7 +76,7 @@ $$
 $$
 The **t-distribution** is like the normal but with **heavier tails** (more probability in the extremes)
 
-The t-distribution has a similar bell shape to the standard normal distribution but with heavier tails, meaning it has greater probability density in the extreme values. The thickness of the tails depends on the degrees of freedom (n-1): with fewer observations, the tails are heavier, reflecting greater uncertainty about the true population standard deviation. As the degrees of freedom increase, the t-distribution approaches the normal distribution.
+![[image-111.png]]
 
 
 ### Confidence Intervals with the t-Distribution
@@ -96,15 +91,7 @@ The $n-1$ is called the "degrees of freedom" this affects how wide the t-distrib
 The critical value $t^*$ such that $P(-t^* \leq t_{n-1} \leq t^*) = 0.95$ <u>NOT</u> 1.96. It is always **greater** than 1.96 for finite $n$, and depends on **degrees of freedom** (n - 1).
 
 > When $n$ is large, the t-distribution is **practically** indistinguishable from the normal distribution (roughly $n$ > 200)
->
-> | Degrees of Freedom | $t^*$ (95% CI) | $z^*$ (Normal) |
-> |---|---|---|
-> | 10 | 2.228 | 1.960 |
-> | 30 | 2.042 | 1.960 |
-> | 100 | 1.984 | 1.960 |
-> | 1000 | 1.962 | 1.960 |
->
-> As $n \to \infty$, the t-critical value converges to the normal critical value of 1.960.
+> ![[image-112.png]]
 
 
 
@@ -115,20 +102,12 @@ The critical value $t^*$ such that $P(-t^* \leq t_{n-1} \leq t^*) = 0.95$ <u>NOT
 3. Find the critical value $c$ from the **t-table**. $c$ will depend on sample size and confidence level.
 
 *t-table*
+![[image-113.png]]
 
-| Degrees of Freedom | 90% CI ($\alpha/2 = 0.05$) | 95% CI ($\alpha/2 = 0.025$) | 99% CI ($\alpha/2 = 0.005$) |
-|---|---|---|---|
-| 1 | 6.314 | 12.706 | 63.657 |
-| 5 | 2.015 | 2.571 | 4.032 |
-| 10 | 1.812 | 2.228 | 3.169 |
-| 20 | 1.725 | 2.086 | 2.845 |
-| 30 | 1.697 | 2.042 | 2.750 |
-| 60 | 1.671 | 2.000 | 2.660 |
-| $\infty$ (normal) | 1.645 | 1.960 | 2.576 |
 
-> [!IMPORTANT]
-> Why $\alpha / 2$?
-> For a two-sided test at significance level $\alpha = 0.05$, we place equal probability in both tails. We look up $\alpha/2 = 0.025$ in the t-table to find the critical value where 2.5% of the distribution lies above it (and 2.5% below). This ensures 95% of the distribution falls within $\pm t^*$.
+> [! IMPORTANT] Why $\alpha / 2$?
+> Useful for one-sided hypothesis testing
+> ![[image-114.png]]
 
 4. Plug everything into the confidence interval formula:
 $$
@@ -157,14 +136,9 @@ $H_0:\mu = \mu_0$ vs $H_1: \mu \neq \mu_0$
 We reject when $\hat\mu$ is too far from $\mu_0$ in **either** direction
 But sometimes theory tells us the effect can only go **one way**
 
-**Right-sided test:** $H_0: \mu \leq \mu_0 \quad \text{vs} \quad H_1: \mu > \mu_0$
+![[image-115.png]]
 
-**Left-sided test:** $H_0: \mu \geq \mu_0 \quad \text{vs} \quad H_1: \mu < \mu_0$
-
-**When to use:** When you have strong prior reason to believe the effect goes in a specific direction.
-
-For a one-sided right test at $\alpha = 0.05$: reject when $\hat{t} > 1.645$ (all 5% in right tail).
-For a two-sided test at $\alpha = 0.05$: reject when $|\hat{t}| > 1.96$ (2.5% in each tail).
+![[image-116.png]]
 
 
 When to Use Which?
@@ -195,28 +169,8 @@ Standardize it: $\hat{t} = \frac{(\hat\mu_1 - \hat\mu_2)-0}{SE(\hat\mu_1-\hat\mu
 
 where: $SE(\hat\mu_1 - \hat\mu_2) = \sqrt{\frac{\hat\sigma_1^2}{n_1} + \frac{\hat\sigma_2^2}{n_2}}$
 
-> **Example: Does Health Insurance Improve Mental Health?**
->
-> A study compares mental health outcomes between individuals who gained health insurance (treatment group) and a control group without insurance.
->
-> **Treatment Group (Medicaid Coverage):**
-> - Sample size: $n_1 = 125$
-> - Mean depression score: $\hat\mu_1 = 15.4$
-> - Standard deviation: $\hat\sigma_1 = 8.2$
->
-> **Control Group (No Insurance):**
-> - Sample size: $n_2 = 125$
-> - Mean depression score: $\hat\mu_2 = 17.8$
-> - Standard deviation: $\hat\sigma_2 = 9.1$
->
-> **Testing whether means are equal:**
->
-> Standard error of difference:
-> $$SE(\hat\mu_1 - \hat\mu_2) = \sqrt{\frac{8.2^2}{125} + \frac{9.1^2}{125}} = \sqrt{0.538 + 0.663} = \sqrt{1.201} = 1.095$$
->
-> Difference in means: $\hat\mu_1 - \hat\mu_2 = 15.4 - 17.8 = -2.4$
->
-> Test statistic: $\hat{t} = \frac{-2.4}{1.095} = -2.19$
->
-> With $n_1 + n_2 - 2 = 248$ degrees of freedom, the critical value for 95% confidence is approximately 1.96. Since $|-2.19| > 1.96$, we reject $H_0: \mu_1 = \mu_2$. Health insurance appears to improve mental health (lower depression scores), with the difference being statistically significant at the 5% level.
+> [! EXAMPLE] Does Health Insurance Improve Mental Health? 
+> ![[image-117.png]]
+> ![[image-118.png]]
+> ![[image-119.png]]
 

@@ -1,8 +1,3 @@
----
-title: "ENVECON C118 - Introduction to Econometrics"
-date: 2026-01-20
-course: ENVECON C118
----
 # Lecture
 ## What is Econometrics?
 
@@ -14,27 +9,14 @@ course: ENVECON C118
 - **forecasting q**: asks about predicting future values of a variable (y) based on current or past values of other variables (x)
 	- What will the price of lithium and cobalt be next year? 
 
-### Why is it hard to answer these questions?
-We often only observe a **sample** from the population we want to describe.
-
-- **Best case: random selection**
-  - e.g. to estimate the impact of a drought on farmers, we draw names out of a hat from a national registry of all farmers
-  - just need to account for the fact that the sample might have different characteristics from the population *by chance*
-- **Worst case: not representative/bias**
-  - air quality sensors placed near gov buildings — is it a problem to use these sensors to describe the *average* air quality of the country?
-  - if we survey people at a national park about their **willingness to pay** for conservation, will our results be biased?
+### Why is it hard to answer these questions? 
+We often only observe a **sample** from the population we want to describe. 
+![[image.png]]
 
 > **Selection bias** refers to settings where the sample is not drawn randomly from the population of interest.
 
-> **❓ Question:** Why are causal questions even harder to answer?
->
-> **Example — Effect of air pollution on infant health:**
->
-> - **Descriptive:** What is the average birth weight in highly polluted cities versus cleaner cities? (Currie and Neidell 2005)
->   - cleaner cities: **47.1** low birth weight per 1000 births
->   - higher polluted cities: **49.5** lbw per 1000 births
-> - **Counterfactual:** How much more would a baby born in a highly polluted city have weighed if *that city* had cleaner air?
-> - Counterfactuals can't be learned from seeing data alone — additional assumptions are needed
+> [!Question] Why are causal questions even harder to answer?
+> ![[image-2.png]]
 
 ## Forecasting
 Accurate prediction may be possible without knowing anything about the underlying model / causal relationships in the data.
@@ -52,7 +34,7 @@ The **causal inference** tools we'll learn are useful for avoiding blind spots.
 4. Estimate the model using econometric techniques
 5. Test hypotheses
 
-> **📝 Example:**
+> [!Example] Example Econometric Analysis
 > 1. What is the impact of tariffs on the price of consumer goods?
 > 2. Model: price$_i=f$ (production costs$_i$, tariff$_i$)
 > 	- econometric model: price$_i = \beta_0 + \beta_1$ tarrif$_i$ + $\epsilon_i$
@@ -83,18 +65,17 @@ The **causal inference** tools we'll learn are useful for avoiding blind spots.
 
 > Key difference between **Pooled Cross-Sectional Data** and **Panel Data** is in the **Unit Tracking**. Panel data is the data of a same entity over time, but pooled cross-sectional data is a random sample from the same population over time. 
 
-> **📝 Example:**
->
-> **Time Series Data** — "Time on social media peaked in 2022, with young people cutting back first"
-> Average hours/day on social media by age group (2014–2024): the 16–24 group peaked around 3 hrs/day before declining, while older groups (55–64) are still rising. This is *time series* data: the same variable (social media usage) tracked over time.
->
-> **Panel Data** — "Even when developers felt AI was speeding them up, it slowed them down"
-> Study tracking the same experienced developers completing coding tasks with/without AI tools. Developer forecasts predicted ~20% speedup, but observed result showed ~20% slowdown. This is *panel data*: the same individuals are observed under different conditions over time.
-> *(It can also be cross-sectional depending on the analysis.)*
->
-> **Pooled Cross-Sectional Data** — "Every governing party facing election in a developed country this year lost vote share"
-> Shows rise/fall in governing-party vote share across different countries in different years (1950–2024). Each point is a different country-election, not the same country tracked over time — this is *pooled cross-sectional* data.
-> It might look like Panel Data, but the *country* observed is not the same throughout time.
+> [! Example] 
+> **Time Series Data**
+> ![[image-3.png]]
+> 
+> **Panel Data**
+> ![[image-4.png]]
+> This is a data for same group of people, so it's Panel Data. (it can be cross-sectional also)
+> 
+> **Pooled Cross-Sectional Data**
+> ![[image-5.png]]
+> It might look Panel Data, but the *developed country* is not the same throughout time. 
 
 
 

@@ -1,8 +1,3 @@
----
-title: "ENVECON C118 - Omitted Variable Bias and Hypothesis Testing"
-date: 2026-02-17
-course: ENVECON C118
----
 # Lecture
 
 ## Adding Variables to Regression
@@ -39,29 +34,10 @@ The bias can go either direction.
 
 **Always include** variables that are correlated with $X_1$ and affect $Y$
 
-**Omitted Variable Bias - Technical Explanation:**
-
-Let's examine more technically what is happening "under the hood"
-
-Recall our assumption that $E[u|x_1, \ldots, x_k] = 0$
-- necessary to obtain an unbiased estimate of $\beta$ ($E[\hat{\beta}_1] = \beta_1$)
-
-As we have seen this assumption can fail:
-- one way it can fail is if we fail to include a relevant variable (i.e. that explains $y$) that is also correlated with the included $x$
-- consequence is biased estimates of regression coefficients $E[\hat{\beta}_1] \neq \beta_1$
-- referred to as **omitted variable bias**
+![[image-101.png]]
 
 ### Omitted Variable Bias: Summary
-
-$$\text{Bias} = E[\hat{\beta}_1] - \beta_1 = \beta_2 \times \rho_{1,2}$$
-
-- $\beta_2 \propto Cov(Y, X_{\text{omit}})$ = sign of relationship between $X_{\text{omitted}}$ and $Y$
-- $\rho_{1,2} \propto Cov(X_1, X_{\text{omit}})$ = sign of relationship between $X_1$ and $X_{\text{omitted}}$
-
-| | $Cov(Y, X_{\text{omit}}) > 0$ | $Cov(Y, X_{\text{omit}}) < 0$ |
-|---|---|---|
-| $Cov(X_1, X_{\text{omit}}) > 0$ | **Positive bias** (overestimate) | **Negative bias** (underestimate) |
-| $Cov(X_1, X_{\text{omit}}) < 0$ | **Negative bias** (underestimate) | **Positive bias** (overestimate) |
+![[image-102.png]]
 
 
 ## Hypothesis Testing
@@ -84,7 +60,7 @@ If the sample mean of income in our data is $50,000 is it reasonable to think th
 
 > We never "prove" $H_0$ true, only fail to reject it ("not guilty")
 
-> [!NOTE]
+> [! NOTE] The Central Limit Theorem (CLT)
 > **The CLT says**: No matter what distribution $Y_i$ comes from, the sample mean $\hat\mu$ is approximately normal for large $n$
 > $$ 
 > \hat\mu \approx N(\mu, \frac{\sigma^2}{n})
@@ -96,9 +72,7 @@ If the sample mean of income in our data is $50,000 is it reasonable to think th
 > - Subtract population mean and divide population variance then $~N(0,1)$
 > - Lets us do hypothesis tests even when errors aren't normal
 > 
-> **Central Limit Theorem - Distribution of Sample Means:**
->
-> Draw 200 samples of size $n$ from a Uniform(0,1) population and plot the distribution of sample means $\hat{\mu}$. As sample size increases (n=1 → n=10 → n=100), the distribution of sample means becomes increasingly concentrated and normal-shaped, even though the underlying population is uniform. This demonstrates that sample means are approximately normal for large $n$, regardless of the underlying distribution.
+> ![[image-103.png]]
 
 
 ### The Test Statistic
@@ -119,59 +93,36 @@ Why standardize?
 - We can use the same values for any problem
 - It measures "how many standard errors away from $\mu_0$"
 
-**Standardized Test Statistic:**
+![[image-104.png]]
 
-$$\hat{t} = \frac{\hat{\mu} - \mu_0}{\hat{\sigma}/\sqrt{n}} = \frac{\text{How far is our estimate from the null?}}{\text{How much variability do we expect?}}$$
-
-- $|\hat{t}| = 1$ → We're 1 standard error away (not unusual)
-- $|\hat{t}| = 2$ → We're 2 standard errors away (getting unlikely)
-- $|\hat{t}| = 3$ → We're 3 standard errors away (very unlikely if null is true!)
-
-> [!NOTE]
-> **Two-Tailed Test:**
-> We care about being far from the null in **either direction**
+> [! NOTE] Why Absolute Value $|\hat{t}|$
+> - We care about being far from the null in <u>either direction</u>
 > - Example: Testing $H_0 : \mu = 55,000$ (average income)
-> 	- We observe $\hat{\mu} = 45,000 \rightarrow \hat{t} = -2 \rightarrow$ evidence against $H_0$
-> 	- We observe $\hat{\mu} = 65,000 \rightarrow \hat{t} = +2 \rightarrow$ evidence against $H_0$
+> 	- We observe $\hat\mu = 45,000 \rightarrow \hat{t} = -2 \rightarrow$ evidence against $H_0$
+> 	- We observe $\hat\mu = 65,000 \rightarrow \hat{t} = +2 \rightarrow$ evidence against $H_0$
 > 	- Both are "2 standard errors away" – both are equally surprising under the null.
->
-> Standard normal distribution with shaded area in both tails beyond ±2, showing the regions of extreme values that would indicate evidence against the null hypothesis.
+> 
+> ![[image-105.png]]
 
 ### The P-Value
 
 *If the null were true, how often would I see results this extreme?*
 
-**We Observe $\hat{t} = 2$: How Extreme Is This?**
-
-Standard normal distribution showing a t-statistic of 2 on the horizontal axis. The shaded red areas represent the probability of observing a test statistic as extreme as $|\hat{t}| = 2$ in either tail (the p-value). This visualization helps understand how rare an observed result is under the null hypothesis.
-
-**P-Value Interpretation:**
+![[image-106.png]]
+Some intuition
 - p = 0.50, happens all the time, no evidence against $H_0$
 - p = 0.10, somewhat unusual, weak evidence against $H_0$
 - p = 0.01, very rare, stronger evidence against $H_0$
 
-Small p-value = surprising data = evidence against null
+> Small p-value = surprising data = evidence against null
 
 
 ### When do we Reject the Null?
 
-**P-Value Calculation:**
+- **P-value** = probability of observing a test statistic at least as extreme as ours, if the null is true
+![[image-107.png]]
 
-$$p = P(|\hat{t}| \geq |\hat{t}_{\text{obs}}|) = 2 \times (1 - \Phi(|\hat{t}_{\text{obs}}|))$$
-
-Where $\Phi$ is the CDF of the standard normal distribution.
-
-It turns out that $\Phi(1.96) - \Phi(-1.96) \approx 0.95$. Thus $p < 0.05$ if and only if $|\hat{t}| < 1.96$. We reject at the 5% level if $|\hat{t}| > 1.96$.
-
-**Confidence Interval (95%):**
-
-What does this imply about the value of $\mu_0$ we reject/don't reject?
-- we don't reject if $|\hat{\mu} - \mu_0| \leq 1.96\sigma/\sqrt{n}$
-- $\mu_0 \in [\hat{\mu} - 1.96\sigma/\sqrt{n}, \hat{\mu} + 1.96\sigma/\sqrt{n}]$
-
-The interval $\hat{\mu} \pm 1.96\sigma/\sqrt{n}$ is thus the **95% confidence interval (CI)**
-
-This means $P(\mu_0 \in CI) = 0.05$ when $H_0 : \mu = \mu_0$ true
+![[image-108.png]]
 
 The **significance** level of a test is a pre-specified probability of incorrectly rejecting the null when it is true (type-I error rate)
 - e.g. a 5% level test rejects when p < 0.05

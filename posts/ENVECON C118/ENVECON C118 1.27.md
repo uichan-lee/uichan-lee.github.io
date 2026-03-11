@@ -1,34 +1,11 @@
----
-title: "ENVECON C118 - Distributions, Means/Variances, Law of Iterated Expectations"
-date: 2026-01-27
-course: ENVECON C118
----
 # Lecture
 
-> **🧪 Quiz:**
->
-> **Warm-up 1:** Let $X$ be the daily AQI category where the support of $X$ is {Good, Moderate, Unhealthy} with ordering Good < Moderate < Unhealthy. Suppose also that:
-> - $P(X = \text{Good}) = 0.4, P(X = \text{Moderate}) = 0.59, P(X = \text{Unhealthy}) = 0.01$
->
-> What is $F(\text{Moderate})$?
-> a. 0.40
-> b. 0.59
-> c. 0.99
-> d. 1.00
->
-> **Answer: c. 0.99**
->
-> **Warm-up 2:** Let $S$: wildfire smoke day $E$: PM$_{2.5}$ > 35
->
-> Given: $P(S = 1) = 0.20, P(E = 1 \mid S = 1) = 0.60, P(E = 1 \mid S = 0) = 0.10$
->
-> What is $P(S = 1 \mid E = 1)$?
-> a. 0.20
-> b. 0.40
-> c. 0.60
-> d. 0.75
->
-> **Answer: c. 0.60**
+> [! Quiz]
+> ![[image-30.png]]
+> **c. 0.99**
+> 
+> ![[image-31.png]]
+> **c. 0.60**
 > $$
 > P(S = 1 | E = 1) = \frac{P(E=1|S=1)\cdot P(S=1)}{P(E=1)}
 > $$
@@ -61,31 +38,11 @@ The conditional distribution of $Y|X=x$ is the distribution of $Y$ within the su
 Update beliefs about $Y$ after observing $X$
 
 ## Independence
-- An important concept in this course will be **independence**
-- Intuitively, independence says that knowing the value of $X$ tells us nothing about the value of $Y$
-- Formally, $X, Y$ are independent if the **conditional PDF/PMF is the same as the unconditional one**:
-  - discrete: $P(Y = y|X = x) = P(Y = y)$ for all $x, y$
-  - continuous: $f(y|x) = f(y)$ for all $x, y$
+![[image-32.png]]
 
-> **🧪 Quiz:**
->
-> A recent study links wildfire smoke exposure during pregnancy to higher risk of preterm birth in California. Let:
-> - $S = 1$ {pregnancy had ≥ 5 "high smoke-days"}
-> - $E = 1$ {preterm birth (<37 weeks)}
->
-> Toy data (1,000 births):
->
-> | | Preterm (E=1) | Full-term (E=0) | Total |
-> |---|---|---|---|
-> | Smoke exposure (S=1) | 20 | 80 | 100 |
-> | No smoke (S=0) | 30 | 870 | 900 |
-> | Total | 50 | 950 | 1000 |
->
-> **Questions:**
-> 1. What is the independence condition for $S$ and $E$ ($S \perp E$)?
-> 2. Compute $P(E = 1 \mid S = 1)$ and $P(E = 1 \mid S = 0)$. Are $S$ and $E$ independent?
-> 3. Compute $P(S = 1 \mid E = 1)$. Interpret it in one sentence.
-> 4. If $S$ and $E$ are not independent, does that prove smoke causes preterm birth? Name one possible confounder $Z$
+> [! Quiz] Independence Quiz
+> ![[image-33.png]]
+> ![[image-34.png]]
 > 
 > 1. Exposure to wildfire smoke during pregnancy doesn't affect the risk of preterm birth. When $P(E|S) = P(E)$.
 > 2. $P(E=1|S=1)=\frac{20}{100}=0.2$, $P(E=1|S=0)=\frac{30}{900}=0.033$. They are <u>not</u> independent.
@@ -93,11 +50,7 @@ Update beliefs about $Y$ after observing $X$
 > 4. No. More wildfires would be from rural areas, and they might have less access to preterm medical care.
 
 ## Conditional Independence
-**Formally $X, Y$ are conditionally independent if:**
-- discrete: $P(Y = y|X = x, Z = z) = P(Y = y|Z = z)$ for all $x, y, z$
-- continuous: $f(y|x, z) = f(y|z)$ for all $x, y, z$
-
-**Intuitively:** $X$ tells us nothing about $Y$ once we know $Z$
+![[image-35.png]]
 - Let $X$ = temperature, $Y$ = ozone level, and $Z$ = solar radiation
 - Looking only at $X$, $Y$ we may see a relationship
 - ... but once we condition on sunlight we might find
@@ -106,41 +59,12 @@ Update beliefs about $Y$ after observing $X$
 - What does this suggest about the relationship between $X$ and $Z$? 
 - When a third variables explains away an $X - Y$ relationship, $X$ and $Z$ are often correlated (hotter days tend to be sunnier). 
 
-> **📝 Example: Netflix Recommendation System**
->
-> Netflix wants to predict whether a user will watch a title. Let:
-> - $E_1 = 1$ {user watched Stranger Things}
-> - $E_2 = 1$ {user watched Black Mirror}
->
-> What is $P(E_1)$?
-> $$P(E_1) \approx \frac{\text{\# people who have watched Stranger Things}}{\text{\# people on Netflix}}$$
->
-> **What to Recommend to Watch Next?**
-> What is the probability that a user watches Black Mirror given they watched Stranger Things?
-> $$P(E_2 = 1|E_1 = 1) = \frac{\text{\# people who have watched both}}{\text{\# people who have watched Stranger Things}}$$
->
-> How could we learn about independence just from $P(E_2 = 1|E_1 = 1)$ and $P(E_2 = 1)$?
-> - If $P(E_2 = 1|E_1 = 1) > P(E_2 = 1)$ then not independent
->
-> **Scaling Problem:**
-> Suppose you have watched Stranger Things, Star Trek, and 3 Body Problem. Will you watch Black Mirror?
-> $$P(E_4|E_1, E_2, E_3) = \frac{\text{\# people who have watched all 4}}{\text{\# people who have watched those 3}}$$
->
-> As the number of titles grows, the number of distinct conditioning sets becomes massive:
-> - conditioning on 3 titles is manageable ($2^3$)
-> - conditioning on 100 titles is not ($2^{100} = 1 \times 10^{30}$)
->
-> **A Fix: User Type**
-> Instead of conditioning on every show, suppose users have a latent "type":
-> - Let $K$ = a user's taste profile (e.g., "likes sci-fi")
-> - Netflix tries to infer $K$ from past viewing
-> - Watch events are conditionally independent given taste
-> - Then the prediction simplifies: $P(E_j|E_1, E_2, E_3, K) = P(E_j|K)$
->
-> **The New Challenge: Learning Types**
-> Instead of storing probabilities for every combination of watched titles, Netflix needs:
-> - $P(E_j = 1 \mid K)$ for each title $j$ and each taste group $K$
-> - plus a model for inferring $P(K|\text{watch history})$
+> [! Example] Netflix and Conditional Independence
+> ![[image-36.png]]
+> ![[image-37.png]] 
+> ![[image-38.png]]
+> ![[image-39.png]]
+> ![[image-40.png]]
 
 
 ## Means and Variances
@@ -154,11 +78,8 @@ Update beliefs about $Y$ after observing $X$
 - *Important fact*: The expectation operator is <u>linear</u>
   $$E[a+bX] = a+bE[X] $$for constants a, b
 
-> **🧪 Quiz:**
->
-> **Lying with statistics - Chat with a Neighbor**
->
-> A college has 3 classes with 5, 10, and 150 students. What is the average class size?
+> [! QUIZ]
+> ![[image-41.png]]
 > If we take simple mean by $E[X] = \frac{5+10+150}{3}=55$
 > 
 > Second interpretation:
@@ -167,33 +88,19 @@ Update beliefs about $Y$ after observing $X$
 > $E[X] = 5 \times \frac{5}{165} + 10 \times \frac{10}{165} + 150 \times \frac{150}{165}\approx137$
 
 
-## Variances
-Variances measure the squared spread of a distribution:
-$$Var(X) = E[(X - E[X])^2] = E[X^2] - (E[X])^2$$
-
-The standard deviation of $X$ is $Std(X) = \sqrt{Var(X)}$:
-- captures the "typical" deviation of $X$ from its mean
-- and is in the same units as $X$
-- this is typically what researchers report
-
+## Variances 
+![[image-42.png]]
 ## Covariances
-Covariance measures the linear association between two variables:
-$$Cov(X, Y) = E[(X - E[X])(Y - E[Y])] = E[XY] - E[X]E[Y]$$
-
-Note: $Cov(X, X) = Var(X)$
+![[image-43.png]]
 
 ## Correlation
-The correlation between $X$ and $Y$ is:
-$$\rho_{X,Y} = \frac{Cov(X, Y)}{\sqrt{Var(X)}\sqrt{Var(Y)}}$$
+![[image-44.png]]
 
-- $Cov(X, Y) > 0$ means $X$ tends to be above its mean when $Y$ is above its mean
-- $Corr(X, Y)$ is unit-free measure of linear association between -1 and 1
-- If $X$ and $Y$ are independent then $Cov(X, Y) = 0 = Corr(X, Y)$
-  - but not vice-versa!
+> Never trust summary statistics alone; always visualize your data. 
+> ![[image-47.png]]
 
-> Never trust summary statistics alone; always visualize your data.
->
-> **Anscombe's Quartet:** Four datasets that all have the same summary statistics (X Mean: 54.26, Y Mean: 47.83, X SD: 16.78, Y SD: 26.93, Correlation: -0.06) but very different scatter plot patterns, demonstrating why visualization is critical.
+## Means/Variances of Linear Combinations
+![[image-45.png]]
 
 ## Conditional Expectations
 - In economics we are especially interested in **conditional expectations**
@@ -211,21 +118,14 @@ $$\rho_{X,Y} = \frac{Cov(X, Y)}{\sqrt{Var(X)}\sqrt{Var(Y)}}$$
 	2. Compute the average MPG for SUVs/Trucks
 	3. Average the average MPGS (proportional to the fraction of vehicles)
 
-$$
+$$ 
 \begin{align}
 E[MPG] &= E[MPG | Car]P(Car) + E[MPG | SUV/Truck]P(SUV/Truck) \\
 &=E[E[MPG|Type]]
 \end{align}
 $$
 
-**The formal version of the Law of Iterated Expectations is:**
-$$E[Y] = E[E[Y|X]]$$
-
-Note that the expectation on the LHS uses $p(y)$ while the expectation on the RHS uses $p(y|x)$ and $p(x)$.
-
-**Intuition:** the overall average of $Y$, first average within groups defined by $X$, then average those group averages.
-
-**Very useful** when $X$ is discrete and $Y$ is continuous.
+![[image-46.png]]
 
 ## Mean Independence vs. Uncorrelatedness
 - Two random variables $A$ and $B$ are **mean-independent** if $E[A|B=b]=E[A]$ for all $b$.
@@ -436,7 +336,7 @@ flights |>
 #> # ℹ 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>, …
 ```
 
-> [!NOTE]
+> [!NOTE] `count()`
 > If you want to find the number of occurrences instead, you need to use `count()` function. With the `sort = TRUE`, you can arrange them in descending order of the number of occurrences. 
 > ```r
 > flights |>

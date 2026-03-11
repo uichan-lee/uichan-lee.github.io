@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "scripts": {
+    "sync": "node sync.js",
+    "deploy": "node sync.js && git add -A && git commit -m 'sync posts' && git push"
+  }
+}

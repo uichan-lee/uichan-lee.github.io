@@ -40,7 +40,8 @@
   }
 
   function onScroll() {
-    const headerHeight = document.querySelector('.header').offsetHeight;
+    var headerEl = document.querySelector('.header');
+    const headerHeight = headerEl ? headerEl.offsetHeight : 0;
     let current = 'home';
     sections.forEach(function (section) {
       const top = section.getBoundingClientRect().top;
@@ -99,7 +100,8 @@
 
   // --- Obsidian-compatible markdown helpers ---
 
-  function preprocessObsidian(md) {
+  function preprocessObsidian(md, baseDir) {
+    baseDir = baseDir || '';
     md = md.replace(/^---[\s\S]*?---\n?/, '');
 
     var codeStore = [];
@@ -168,12 +170,21 @@
 
     md = md.replace(/==(.*?)==/g, '%%MARK_START%%$1%%MARK_END%%');
 
+    md = md.replace(/!\[\[([^\]|]+?)(?:\|([^\]]*))?\]\]/g, function (m, file, dims) {
+      var src = baseDir + 'attachments/' + file.trim();
+      if (!dims) return '![' + file + '](' + src + ')';
+      var wh = dims.match(/^(\d+)x(\d+)$/);
+      if (wh) return '<img src="' + src + '" width="' + wh[1] + '" height="' + wh[2] + '" alt="' + file + '" />';
+      return '<img src="' + src + '" width="' + dims + '" alt="' + file + '" />';
+    });
+
     md = md.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, function (m, target, alias) {
       return alias || target;
     });
 
     md = md.replace(/%%CODE(\d+)%%/g, function (m, idx) {
       var stored = codeStore[parseInt(idx, 10)];
+      if (!stored) return m;
       if (!stored.prefix) return stored.text;
       var cl = stored.text.split('\n');
       return cl[0] + (cl.length > 1 ? '\n' + cl.slice(1).map(function (l) { return stored.prefix + l; }).join('\n') : '');
@@ -183,8 +194,10 @@
   }
 
   function restoreMathAndMarks(html, mathStore) {
+    if (!mathStore) return html;
     html = html.replace(/%%MATH(\d+)%%/g, function (m, idx) {
       var item = mathStore[parseInt(idx, 10)];
+      if (!item) return m;
       if (item.display) {
         return '<div class="math-display" data-math="' + encodeURIComponent(item.tex) + '"></div>';
       }
@@ -196,6 +209,7 @@
   }
 
   function transformCallouts(container) {
+    if (!container) return;
     container.querySelectorAll('blockquote').forEach(function (bq) {
       var firstP = bq.querySelector('p');
       if (!firstP) return;
@@ -251,19 +265,23 @@
   }
 
   function renderMath(container) {
-    if (typeof katex === 'undefined') return;
+    if (typeof katex === 'undefined' || !container) return;
 
     container.querySelectorAll('.math-display').forEach(function (el) {
+      var raw = el.getAttribute('data-math');
+      if (raw == null) return;
       try {
-        katex.render(decodeURIComponent(el.getAttribute('data-math')), el, {
+        katex.render(decodeURIComponent(raw), el, {
           displayMode: true, throwOnError: false
         });
       } catch (e) { /* fallback: raw tex stays visible */ }
     });
 
     container.querySelectorAll('.math-inline').forEach(function (el) {
+      var raw = el.getAttribute('data-math');
+      if (raw == null) return;
       try {
-        katex.render(decodeURIComponent(el.getAttribute('data-math')), el, {
+        katex.render(decodeURIComponent(raw), el, {
           displayMode: false, throwOnError: false
         });
       } catch (e) { /* fallback: raw tex stays visible */ }
@@ -340,22 +358,28 @@
     var writingBackBtn = document.getElementById('writing-back');
 
     function showWritingsList() {
-      writingsList.style.display = '';
-      writingDetail.style.display = 'none';
+      if (writingsList) writingsList.style.display = '';
+      if (writingDetail) writingDetail.style.display = 'none';
       clearTOC();
     }
 
     function showWritingDetail() {
-      writingsList.style.display = 'none';
-      writingDetail.style.display = '';
+      if (writingsList) writingsList.style.display = 'none';
+      if (writingDetail) writingDetail.style.display = '';
     }
 
     function formatDate(dateStr) {
+      if (dateStr == null || String(dateStr).trim() === '') return '';
       var d = new Date(dateStr + 'T00:00:00');
+      if (Number.isNaN(d.getTime())) return '';
       return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     }
 
     function loadPost(writing) {
+      if (!writing || !writing.file) {
+        if (writingContent) writingContent.innerHTML = '<p class="writing-error">Invalid post.</p>';
+        return;
+      }
       showWritingDetail();
       writingContent.innerHTML = '<p class="writing-loading">Loading…</p>';
       fetch(encodeURI(writing.file))
@@ -364,14 +388,16 @@
           return res.text();
         })
         .then(function (md) {
-          var result = preprocessObsidian(md);
+          var baseDir = writing.file.substring(0, writing.file.lastIndexOf('/') + 1);
+          var result = preprocessObsidian(md, baseDir);
           var html = marked.parse(result.md);
           html = restoreMathAndMarks(html, result.mathStore);
           writingContent.innerHTML =
-            '<time class="writing-date">' + escapeHtml(formatDate(writing.date)) + '</time>' +
+            '<time class="writing-date">' + escapeHtml(formatDate(writing.date || '')) + '</time>' +
             '<div class="writing-body">' + html + '</div>';
 
           var body = writingContent.querySelector('.writing-body');
+          if (!body) return;
           transformCallouts(body);
           renderMath(body);
           if (typeof hljs !== 'undefined') {

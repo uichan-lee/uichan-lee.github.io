@@ -1,30 +1,20 @@
----
-title: "STAT 33B - Week 3: Vectors and Factors"
-date: Feb 2
-course: STAT 33B
----
 
-## R Data Structures Overview
 
-R organizes data structures by dimensionality and type:
+![[image.png]]
 
-| Dimensions | Atomic | Non-Atomic |
-|---|---|---|
-| 1D | Vector | List |
-| 2D | Matrix | Data Frame |
-| nD | Array | - |
+There are many data structures in R:
+- `vector`s and `factor`s
+- `matrices` (2-D array)
+- `array`s (n-dim in general)
+- `list`s
+- `data frame`s
 
 ---
-
 # Vectors
-
-A **vector** is the most basic data structure in R. So we can say that R is a *vector-based* language.
-
+A **vector** is the most basic data structure in R.
+So we can say that R is a *vector-based* language.
 There are two flavors of vectors: **atomic** and **list**.
-
-### Vector Types Hierarchy
-
-Atomic vectors contain elements of a single type, while lists (non-atomic vectors) can contain elements of different types.
+![[image-1.png]]
 
 ```r
 # atomic vector
@@ -37,9 +27,7 @@ b
 ```
 
 ## Atomic Vectors
-
 The most simple type of atomic vectors are single values.
-
 ```r
 # logical
 a <- TRUE
@@ -55,7 +43,6 @@ b <- "yosemite"
 ```
 
 Atomic vector with more than one element can be created with function `c()`, short for **catenate** or **combine**:
-
 ```r
 x <- c(1, 2, 3, 4, 5)
 
@@ -64,17 +51,17 @@ y <- c("one", "two", "three")
 z <- c(TRUE, FALSE, TRUE)
 ```
 
-Other than the four types above (logical, integer, double, and character), there are two more (less used) data types: `complex` and `raw`.
+Other than the four types above (logical, integer, double, and character), there are two more (less used) data types: `complex` and `raw`. 
 
-> [!NOTE]
-> Data Types
->
+
+> [!NOTE] Data Types
 > - A **logical** vector holds `TRUE`, `FALSE` values.
 > - An **integer** vector holds integers (no decimal component)
 > - A **double** vector holds double precision ("real") numbers
 > - A **character** vector holds character strings
 > - A **complex** vector holds complex numbers (not in course material)
 > - A **raw** vector holds raw bytes (not in course material)
+
 
 Atomic vectors are contiguous cells containing data.
 It can be of any length (including zero): `length()`
@@ -83,7 +70,6 @@ Optionally, you can name their elements: `names()`
 Likewise, you can give them additional attributes with `attributes()`
 
 Use `typeof()` to find the data-type of an atomic vector:
-
 ```r
 a <- TRUE
 typeof(a) # logical
@@ -99,7 +85,6 @@ typeof(y) # character
 ```
 
 Both integer and double are grouped together under the numeric category:
-
 ```r
 x <- 1L
 is.numeric(x) # TRUE
@@ -112,47 +97,38 @@ is.numeric(z) # FALSE
 ```
 
 Among R users, it is common to refer to the **mode** of a vector, and to use the `mode()` function as a pseudo-equivalent of data-type:
+![[image-2.png]]
 
-| Data Type | Example | Mode | Class |
-|---|---|---|---|
-| logical | TRUE, FALSE | logical | logical |
-| integer | 1L | numeric | integer |
-| double | 1, -0.5 | numeric | numeric |
-| complex | 3+5i | complex | complex |
-| character | "hello" | character | character |
 
 ---
-
 ## Coercion
 
-> **❓ Question:**
+> [! Question] 
 > What happens if you mix different data types in a vector?
 > ```r
 > x <- c(1, 2, 3, "four", "five")
 > y <- c(TRUE, FALSE, 3, 4)
 > z <- c(TRUE, 1L, 2 + 3i, pi)
 > ```
->
 > ---
->
 > If you mix different data values, R will **implicitly coerce** them so they are all of the same type.
->
+> 
 > ```r
 > # mixing numbers and characters
 > x <- c(1, 2, 3, "four", "five")
 > x
 > # [1] "1" "2" "3" "four" "five"
->
+> 
 > # mixing numbers and logical values
 > y <- c(TRUE, FALSE, 3, 4)
 > y
 > # [1] 1 0 3 4
->
+> 
 > # mixing characters and logical values
 > z <- c(TRUE, FALSE, "TRUE", "FALSE")
 > z
 > # [1] "TRUE" "FALSE" "TRUE" "FALSE"
->
+> 
 > # mixing integer, real, and complex numbers
 > w <- c(1L, -0.5, 3 + 5i)
 > w
@@ -160,13 +136,11 @@ Among R users, it is common to refer to the **mode** of a vector, and to use the
 > ```
 
 There is a hierarchy of data-types used by R to apply its implicit coercion rules:
+$$logical<integer<double<character $$
 
-$$logical<integer<double<character$$
 
 ### Explicit Coercion Functions
-
 R provides a set of **explicit** coercion functions that allow us to "convert" one type of data into another
-
 - `as.character()`
 - `as.integer()`
 - `as.double()`
@@ -183,12 +157,11 @@ as.integer(x)
 # imaginary parts discarded in coercion
 ```
 
----
 
+---
 ## Vectorization and Recycling
 
 Example of a **vectorized code**:
-
 ```r
 vec1 <- c(1, 2, 3)
 vec2 <- c(2, 4, 6)
@@ -197,13 +170,8 @@ vec1 + vec2
 # [1] 3 6 9
 ```
 
-### Vectorization
-
+![[image-3.png]]
 Vectorized code refers to operations that are performed on the contents of `vec1` and `vec2`, **element-by-element** at the same time.
-
-Vector Addition (Element-by-Element):
-- Input: `c(1,2,3) + c(2,4,6)`
-- Result: `c(3,6,9)` (1+2, 2+4, 3+6)
 
 ```r
 # addition
@@ -220,7 +188,6 @@ c(1, 2, 3) ^ c(3, 2, 1)
 ```
 
 All arithmetic, trigonometric, math and other vector functions are vectorized:
-
 ```r
 log(c(1, 2, 3))
 # [1] 0.0000000 0.6931472 1.0986123
@@ -235,90 +202,80 @@ sqrt(1:3)
 ### Recycling
 
 What happens if you operate on two vectors of different length, in which one of them is a one element ("scalar") vector?
-
 ```r
 vec <- c(1, 2, 3, 4)
 vec + 3
 # [1] 4 5 6 7
 ```
 
-This is an example of **recycling** and vectorization. The value 3 gets recycled as many times as the length of longer vector `vec`, and then vectorization applies.
+This is an example of **recycling** and vectorization. The value 3 gets <u>recycled</u> as many times as the length of longer vector `vec`, and then vectorization applies. 
 
-Vector Recycling:
-- Input: `c(1,2,3,4) + 3`
-- Scalar 3 is recycled to: `c(3,3,3,3)`
-- Result: `c(4,5,6,7)` (element-by-element addition)
+![[image-4.png]]
 
-> **❓ Question: Recycling**
->
+
+> [! QUESTION] Recycling
 > What happens if you operate on two vectors (of length > 1) that have different lengths?
->
 > ```r
 > c(1, 3, 5, 7) + c(2, 4)
 > # [1] 3 7 7 11
 > ```
->
 > The same **recycling rule** applies: the shorter vector is replicated enough times so that the result has the length of the longer vector.
->
-> What if the length of the longer vector is **not** a multiple of the shorter vector?
->
+> 
+> What if the length of the longer vector is <u>not</u> a multiple of the shorter vector?
 > ```r
 > c(1, 3, 5, 7, 9) + c(2, 4)
 > # [1] 3 7 7 11 11
-> # Warning message:
+> # Warning mesage:
 > # In c(1, 3, 5, 7, 9) + c(2, 4) :
 > #    longer object length is not a multiple of shorter object length
 > ```
->
-> We can get the result as expected, but with a warning message.
+> We can get the result as expected, but with a warning message. 
 
 ## General Functions
-
-- `typeof(x)` - Get the data type
-- `str(x)` - Display structure
-- `class(x)` - Get the class
-- `length(x)` - Get the length
-- `head(x)` - Show first 6 elements
-- `tail(x)` - Show last 6 elements
-- `summary(x)` - Get summary statistics
+- `typeof(x)
+- `str(x)`
+- `class(x)`
+- `length(x)`
+- `head(x)`
+- `tail(x)`
+- `summary(x)`
 
 ```r
-# データ定義
+# 데이터 정의
 ages <- c(20, 15, 43, 22, 54, 92, 54, 33, 28)
 
-# 1. typeof(ages): データの物理的な保存タイプ (数値は基本的にdouble)
+# 1. typeof(ages): 데이터의 물리적 저장 타입 (숫자는 기본적으로 double)
 typeof(ages)
 # [1] "double"
 
-# 2. str(ages): 構造確認 (タイプ、インデックス範囲、値の要約)
+# 2. str(ages): 구조 확인 (타입, 인덱스 범위, 값 요약)
 str(ages)
 #  num [1:9] 20 15 43 22 54 92 54 33 28
 
-# 3. class(ages): オブジェクトの指向的なクラス (数値ベクトルはnumeric)
+# 3. class(ages): 객체의 지향적 클래스 (숫자 벡터는 numeric)
 class(ages)
 # [1] "numeric"
 
-# 4. length(ages): 要素の個数
+# 4. length(ages): 원소의 개수
 length(ages)
 # [1] 9
 
-# 5. head(ages): 前部分6個のデータ確認
+# 5. head(ages): 앞부분 6개 데이터 확인
 head(ages)
 # [1] 20 15 43 22 54 92
 
-# 6. tail(ages): 後部分6個のデータ確認
+# 6. tail(ages): 뒷부분 6개 데이터 확인
 tail(ages)
 # [1] 22 54 92 54 33 28
 
-# 7. summary(ages): 記述統計量 (最小値、四分位数、平均、最大値など)
+# 7. summary(ages): 기술 통계량 (최솟값, 사분위수, 평균, 최댓값 등)
 summary(ages)
-#    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+#    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #   15.00   22.00   33.00   44.56   54.00   92.00
 ```
 
 ---
-
-## Numeric Vectors
+## Numeric Vectors 
 
 ```r
 # positive integers: from 1 to 5
@@ -335,7 +292,6 @@ summary(ages)
 ```
 
 ### `seq()`
-
 More vectors of numeric sequences (not just one-unit step sequences) can be created with the function `seq()`
 
 ```r
@@ -347,7 +303,7 @@ seq(from = 1, to = 20, length.out = 5)
 ```
 
 - `seq_along()` returns a sequence of integers of the same length as its argument
-- `seq_len()` generates a sequence from 1 to the valid provided
+- `seq_len()` generates a sequence from 1 to the valid provided 
 
 ```r
 # some flavors
@@ -363,7 +319,6 @@ seq_len(5)
 ```
 
 ### `rep()`
-
 Another way to create vectors is with the replicating function `rep()` that allows you to create several repetition patterns.
 
 ```r
@@ -374,18 +329,12 @@ rep(c(2, 4, 6), length.out = 5)
 rep(c(2, 4, 6), each = 2, times = 2)
 ```
 
+
 ### Random Vectors
 
 R provides a series of random number generation functions:
 
-| Function | Distribution |
-|---|---|
-| `runif()` | Uniform |
-| `rnorm()` | Normal |
-| `rbinom()` | Binomial |
-| `rbeta()` | Beta |
-| `rgamma()` | Gamma |
-| `rgeom()` | Geometric |
+![[image-5.png]]
 
 ```r
 runif(n = 5, min = 0, max = 1)
@@ -395,9 +344,7 @@ rbeta(n = 5, shape1 = 0.5, shape2 = 0.5)
 ```
 
 ### Sampled Vectors
-
 There's also the function `sample()` that generates random samples (with and without replacement)
-
 ```r
 # shuffle
 sample(1:10, size = 10)
@@ -443,53 +390,15 @@ duplicated(num)
 # [1] FALSE FALSE FALSE FALSE TRUE TRUE TRUE FALSE
 
 num[duplicated(num)]
-# [1] 4 1 4
+# [1] 4 1 4 
 ```
 
 ---
-
 ## Math Operations
 
-### Arithmetic Operators
+![[image-6.png]]
 
-| Operator | Description | Example |
-|---|---|---|
-| `+` | Addition | A + B |
-| `-` | Subtraction | A - B |
-| `*` | Multiplication | A * B |
-| `/` | Division | A / B |
-| `^` | Power | A ^ B |
-| `%%` | Modulo | A %% B |
-| `%/%` | Integer Division | A %/% B |
-
-### Mathematical Functions
-
-Common mathematical functions available in R:
-
-- `abs()` - Absolute value
-- `sign()` - Sign of a number
-- `sqrt()` - Square root
-- `ceiling()` - Round up
-- `floor()` - Round down
-- `trunc()` - Truncate
-- `round()` - Round to nearest
-- `signif()` - Significant digits
-- `cummax()` - Cumulative maximum
-- `cummin()` - Cumulative minimum
-- `cumprod()` - Cumulative product
-- `cumsum()` - Cumulative sum
-- `log()` - Natural logarithm
-- `log10()` - Base 10 logarithm
-- `log2()` - Base 2 logarithm
-- `log1p()` - log(1 + x)
-- `sin()`, `cos()`, `tan()` - Trigonometric functions
-- `acos()`, `acosh()` - Arc cosine
-- `asin()`, `asinh()` - Arc sine
-- `atan()`, `atanh()` - Arc tangent
-- `exp()` - Exponential
-- `expm1()` - exp(x) - 1
-- `gamma()`, `lgamma()` - Gamma function and log-gamma
-- `digamma()`, `trigamma()` - Derivatives of log-gamma
+![[image-7.png]]
 
 ```r
 abs(c(-1, -0.5, 3, 0.5))
@@ -500,6 +409,7 @@ sign(c(-1, -0.5, 3, 0.5))
 
 round(3.141592, 2)
 # [1] 3.14
+
 ```
 
 ## Comparison Operator
@@ -529,7 +439,6 @@ c(1, 2, 3, 4, 5) < 2
 ```
 
 When comparing vectors of different types, one is coerced to the type of the other, the (decreasing) order of precedence being character, complex, numeric, integer, logical
-
 ```r
 '5' == 5
 # [1] TRUE
@@ -552,6 +461,7 @@ all(c(1, 2, 3, 4, 5) < 0)
 
 all(c(1, 2, 3, 4, 5) > 4)
 ```
+
 
 ## Summary Statistics
 
@@ -607,7 +517,7 @@ values[which(values > 0)]
 which.max(values)
 # [1] 7
 
-which(values == max(values))
+which(values = max(values))
 # [1] 7
 
 which.min(values)
@@ -627,18 +537,13 @@ which(values == min(values))
 - `%in%` operator
 
 ## Vector Manipulation
+![[image-8.png]]
 
-### Single Bracket Indexing
-
-Vector indexing uses single brackets with an index:
-- **atomic vector**: the vector being indexed
-- **indexing vector**: specifies which elements to extract
-
-```r
-vec[index]
-```
-
-To extract values from R objects use brackets: `[ ]`. Inside the brackets specify a vector of indices. Vector of indices can be of type numeric (integer or double), logical, and sometimes character.
+### Indexing
+`vec[index]`
+- To extract values from R objects use brackets: `[ ]`
+- Inside the brackets specify a vector of indices
+- Vector of indices can be of type numeric (integer or double), logical, and sometimes character
 
 ```r
 x <- c(2, 4, 6, 8)
@@ -674,12 +579,12 @@ x[c(1, 3)]
 # a c
 # 2 6
 
-x[c(3, 2, 4, 1)]
+x[c(3, 2, 4 1)]
 # c b d a
 # 6 4 8 2
 
 x[c(3, 2, 4, 1, 1, 1)]
-# c b d a a a
+# c b d a a a 
 # 6 4 8 2 2 2
 
 x[-2]
@@ -718,18 +623,14 @@ x[c("b", "d")]
 x[rep("a", 4)]
 # a a a a
 # 2 2 2 2
+
+
 ```
 
-### Double Bracket Indexing
+### Double Brackets
+![[image-9.png]]
 
-Double brackets extract a single element, not a subset. You can also use double brackets `[[]]` but in this case only extract a **single element**.
-
-With double brackets:
-- First bracket: opening bracket
-- Second bracket (in the middle): the index
-- Third bracket: closing bracket
-
-Example: `vec[[index]]` extracts the element at that position
+You can also use double brackets `[[]]` but in this case only extract a **single element**
 
 ```r
 x <- c(a = 2, b = 4, c = 6, d = 8)
@@ -745,13 +646,10 @@ x[["a"]]
 ```
 
 With double brackets, you **cannot** pass an index vector of length greater than one
-
 ```r
 x[[1:2]]
-# Error in x[[1:2]] : attempt to select more than one element in vectorIndex
 ```
-
----
+![[image-10.png]]
 
 # Factors
 
@@ -763,7 +661,7 @@ One of the nicest features about R is that it provides a data structure exclusiv
 - `length()`: gives the number of elements
 - `is.factor()`: tells if an object is of class "factor"
 - `as.factor()`: coerces an object into a factor
-- `is.ordered()`: checks if an object is an *ordered* factor
+- `is.oredered()`: checks if an object is an *ordered* factor
 
 ```r
 # numeric vector
@@ -787,8 +685,7 @@ second_factor
 # Levels: a b c d
 ```
 
-Under the hood, the way R stores factors is as vectors of integer values.
-
+Under the hood, the way R stores factors is as vectors of integer values. 
 ```r
 # storage of factor
 storage.mode(first_factor)
@@ -808,7 +705,7 @@ If you have a factor with named elements, you can also specify the names of the 
 ```r
 names(first_factor) <- letters[1:length(first_factor)]
 first_factor
-# a b c d e
+# a b c d e 
 # 1 2 3 7 9
 # Levels: 1 2 3 7 9
 
@@ -835,30 +732,28 @@ attributes(first_factor)
 # [1] "a" "b" "c" "d" "e"
 ```
 
-Factors can be used to encode **ordinal** variables. Qualitative data can be classified into nominal and ordinal variables. Nominal variables could be easily handled with character vectors. A different case is when we have **ordinal variables**, like sizes "small", "medium", "large" or college years "freshman", "sophomore", "junior", "senior". In these cases we are still using names of categories, but they can be arranged in increasing or decreasing order.
+
+Factors can be used to encode **ordinal** variables. Qualitative data can be classified into nominal and ordinal variables. Nominal variables could be easily handled with character vectors. A different case is when we have <u>ordinal variables</u>, like sizes "small", "medium", "large" or college years "freshman", "sophomore", "junior", "senior". In these cases we are still using names of categories, but they can be arranged in increasing or decreasing order.
 
 We can use a character vector to store the values. But a character vector doesn't allow us to store the ranking of categories. The solution in R comes via factors. We can use factors to define ordinal variables, like the following example:
-
 ```r
 sizes <- factor(
 	x = c('sm', 'md', 'lg', 'sm', 'md'),
 	levels = c('sm', 'md', 'lg'),
 	ordered = TRUE)
-
+	
 sizes
 # [1] sm md lg sm md
 # Levels: sm < md < lg
 ```
 
-> [!NOTE]
-> Function `factor()`
->
+> [! NOTE] Function `factor()`
 > The usage of the function `factor()` is:
 > ```r
 > factor(x, levels, labels = levels, exclude = NA,
 >     ordered = is.ordered(x), nmax = NA)
 > ```
->
+> 
 > - `x` a vector of data
 > - `levels` an optional vector for the categories
 > - `labels` an optional character vector of labels for the levels
@@ -866,25 +761,23 @@ sizes
 > - `ordered` logical value to indicate if the levels should be regarded as ordered
 > - `nmax` an upper bound on the number of levels
 
-> [!NOTE]
-> Merging Levels
->
+> [! NOTE] Merging Levels
 > Sometimes we may need to **merge** or collapse two or more different levels into one single level. We can achieve this with `levels()` by assigning a new vector of levels containing repeated values for those categories that we wish to merge.
->
+> 
 > ```r
 > first_factor_merged <- first_factor_copy
 > first_factor_merged
 > # [1] I II III I II III II
 > # Levels: I II III
->
+> 
 > levels(first_factor_merged) <- c("I+III", "II", "I+III")
-> first_factor_merged
+> first_fector_merged
 > # [1] I+III II I+III I+III II I+III II
 > # Levels: I+III II
 > ```
 
-### Ordinal Factors
 
+### Ordinal Factors
 ```r
 ordered(num_vector)
 # [1] 1 2 3 1 2 3 2

@@ -1,8 +1,3 @@
----
-title: "ENVECON C118 - Inference, p-value, and Confidence Intervals"
-date: 2026-02-26
-course: ENVECON C118
----
 # Inference
 
 Estimate itself doesn't tell us much. 
@@ -10,7 +5,7 @@ Estimate itself doesn't tell us much.
 
 Tools: *t-statistics*, *p-values*, and *confidence intervals*
 
-> **❓ Question:**
+> [! question] Why Do We Need Inference?
 > - We can never observe the whole population only have a *sample*
 > - A different sample would give a different $\hat\beta$
 > - How do we know if our particular estimate reflects something real or is just due to sampling variation?
@@ -23,13 +18,7 @@ $$
 
 ## z- and t- Statistics
 
-**z-statistic** (when population standard deviation $\sigma$ is known):
-$$z = \frac{\hat{\beta}_j - \beta_{j,0}}{\sigma / \sqrt{n}} \sim N(0,1)$$
-
-**t-statistic** (when we estimate standard deviation with $\hat{\sigma}$):
-$$\hat{t} = \frac{\hat{\beta}_j - \beta_{j,0}}{SE(\hat{\beta}_j)} \sim t_{n-k-1}$$
-
-The key difference is that the t-statistic accounts for uncertainty in estimating $\sigma$ by using the sample standard deviation instead. This introduces extra variability, resulting in a distribution with heavier tails than the standard normal.
+![[image-139.png]]
 
 - We lmost never know $\sigma$, so in practice we use the *t-statistic*
 - The t-distribution has <u>heavier tails</u> than $N(0,1)$
@@ -40,9 +29,7 @@ The key difference is that the t-statistic accounts for uncertainty in estimatin
 
 ### t-Statistic
 
-$$\hat{t} = \frac{\text{Estimated value} - \text{Hypothesized value}}{\text{Standard Error}} = \frac{\hat{\beta}_j - \beta_{j,0}}{SE(\hat{\beta}_j)}$$
-
-Interpretation: The t-statistic measures how many standard errors the estimated coefficient is away from the hypothesized value under $H_0$. It quantifies the distance between what we estimated and what we hypothesized, scaled by our measurement uncertainty.
+![[image-140.png]]
 
 $$ 
 \hat t = \frac{\text{what we measured - what we hypothesized}}{\text{how uncertain we are}}
@@ -62,7 +49,7 @@ You can think t-statistic as the <u>number of standard errors from the null</u>
 
 The p-value answers: **if** $H_0$ is true, what fraction of time would we get a $|\hat t|$ this large or larger?
 
-For a two-sided test, the p-value is the probability of observing a test statistic as extreme or more extreme than the one calculated, in either tail of the t-distribution. If $\hat{t} = 3.0$ with degrees of freedom $df = 100$, the p-value is $P(|T| > 3.0 | H_0 \text{ true})$. We find this by looking up the area in both tails beyond $\pm 3.0$ on a t-distribution with 100 degrees of freedom, which is very small (approximately p = 0.003).
+![[image-141.png]]
 
 - Shaded area is *tiny* (p < 0.001)
 	- would almost never happen by chance
@@ -74,7 +61,7 @@ For a two-sided test, the p-value is the probability of observing a test statist
 		- what is the probability we observe a test statistic (t-value, $\hat t$) as extreme or more extreme than the one calculated from our sample data assuming the null hypothesis is true
 
 
-> [!NOTE]
+> [! NOTE] Interpreting the p-value
 > - **Key:** The p-value is *not* the probability that $H_0$ is true!
 > 	- it's the probability of <u>getting data this extreme</u> if $H_0$ were true
 > 	- those are VERY different things
