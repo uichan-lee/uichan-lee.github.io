@@ -103,6 +103,7 @@
     md = md.replace(/^---[\s\S]*?---\n?/, '');
 
     var codeStore = [];
+    var mathStore = [];
 
     var lines = md.split('\n');
     var out = [];
@@ -144,13 +145,15 @@
     });
 
     md = md.replace(/\$\$([\s\S]+?)\$\$/g, function (m, tex) {
-      return '\n\n<div class="math-display" data-math="' + encodeURIComponent(tex.trim()) + '"></div>\n\n';
+      mathStore.push({ tex: tex.trim(), display: true });
+      return '\n\n%%MATH' + (mathStore.length - 1) + '%%\n\n';
     });
     md = md.replace(/\$([^\$\n]+?)\$/g, function (m, tex) {
-      return '<span class="math-inline" data-math="' + encodeURIComponent(tex) + '"></span>';
+      mathStore.push({ tex: tex, display: false });
+      return '%%MATH' + (mathStore.length - 1) + '%%';
     });
 
-    md = md.replace(/==(.*?)==/g, '<mark>$1</mark>');
+    md = md.replace(/==(.*?)==/g, '%%MARK_START%%$1%%MARK_END%%');
 
     md = md.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, function (m, target, alias) {
       return alias || target;
@@ -163,7 +166,20 @@
       return cl[0] + (cl.length > 1 ? '\n' + cl.slice(1).map(function (l) { return stored.prefix + l; }).join('\n') : '');
     });
 
-    return md;
+    return { md: md, mathStore: mathStore };
+  }
+
+  function restoreMathAndMarks(html, mathStore) {
+    html = html.replace(/%%MATH(\d+)%%/g, function (m, idx) {
+      var item = mathStore[parseInt(idx, 10)];
+      if (item.display) {
+        return '<div class="math-display" data-math="' + encodeURIComponent(item.tex) + '"></div>';
+      }
+      return '<span class="math-inline" data-math="' + encodeURIComponent(item.tex) + '"></span>';
+    });
+    html = html.replace(/%%MARK_START%%/g, '<mark>');
+    html = html.replace(/%%MARK_END%%/g, '</mark>');
+    return html;
   }
 
   function transformCallouts(container) {
@@ -335,8 +351,9 @@
           return res.text();
         })
         .then(function (md) {
-          var processed = preprocessObsidian(md);
-          var html = marked.parse(processed);
+          var result = preprocessObsidian(md);
+          var html = marked.parse(result.md);
+          html = restoreMathAndMarks(html, result.mathStore);
           writingContent.innerHTML =
             '<time class="writing-date">' + escapeHtml(formatDate(writing.date)) + '</time>' +
             '<div class="writing-body">' + html + '</div>';
