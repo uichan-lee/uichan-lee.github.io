@@ -85,7 +85,7 @@ ul, ol {
 }
 
 .section + .section {
-  margin-top: 6rem;
+  margin-top: 8rem;
 }
 
 .section-home {
@@ -381,6 +381,9 @@ ul, ol {
 }
 
 .writing-back-btn-bottom {
+  display: inline-flex;
+  position: relative;
+  z-index: 1;
   margin-top: 2rem;
   margin-bottom: 0;
 }
@@ -892,7 +895,7 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   }
 
   .section + .section {
-    margin-top: 4rem;
+    margin-top: 5rem;
   }
 
   .name {

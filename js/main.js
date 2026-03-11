@@ -510,6 +510,14 @@
     if (writingBackBottomBtn) {
       writingBackBottomBtn.addEventListener('click', goBackToWritingsList);
     }
+
+    if (writingDetail) {
+      writingDetail.addEventListener('click', function (e) {
+        var backBtn = e.target.closest('#writing-back, #writing-back-bottom');
+        if (!backBtn) return;
+        goBackToWritingsList();
+      });
+    }
   }
 
   // Render experiences timeline from experiences.js
