@@ -13,7 +13,7 @@ Now, we want to test whether a **group** of variables has no effect on the depen
 - More precisely, the *null hypothesis* is that a set of variables has no effect on $y$ once another set of variables has been controlled for
 	- $H_0: \beta_{educ}=0, \beta_{exp}=0$
 
-> [! EXAMPLE] WNBA Salary Model
+> [!EXAMPLE] WNBA Salary Model
 > Full Model:
 > $$
 > log(salary) = \beta_0 + \beta_1 years + \beta_2 gamesyr + \beta_3 ppg + \beta_4 rpg + \beta_5 apg + u
@@ -148,7 +148,7 @@ Rejecting $H_0$ tells us that performance stats *jointly add explanatory power* 
 If anything, the true relationship between performance and salary may be *stronger* than what OLS estimates. 
 
 
-> [! NOTE] Overall Significance of a Regression
+> [!NOTE] Overall Significance of a Regression
 > A special but very common case: test whether **any** of the independent variables help explain $y$:
 > $$
 > H_0: \beta_1 = 0, \beta_2 = 0, \dots, \beta_k = 0
@@ -248,7 +248,7 @@ $$
 - $k$: number of regressors (not counting the intercept)
 - $R^2 = 1 - SSR/SST$: the ordinary (unadjusted) R-squared
 
-> [! Question] What is Adjusted $R^2$?
+> [!Question] What is Adjusted $R^2$?
 > - The adjusted $R^2$ **penalizes** you for adding more regressors
 > 	- the factor $\frac{n-1}{n-k-1} > 1$ shrinks $R^2$ downward
 > 	- the penalty grows as $k$ increases
