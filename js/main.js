@@ -95,12 +95,42 @@
 
     var codeStore = [];
 
-    md = md.replace(/(```[\s\S]*?```)/g, function (m) {
-      codeStore.push(m);
-      return '\n%%CODE' + (codeStore.length - 1) + '%%\n';
-    });
+    var lines = md.split('\n');
+    var out = [];
+    var inFence = false;
+    var fenceBuf = [];
+    var fencePrefix = '';
+
+    for (var li = 0; li < lines.length; li++) {
+      var line = lines[li];
+      var pm = line.match(/^((?:>\s?)*)/);
+      var prefix = pm ? pm[1] : '';
+      var content = line.slice(prefix.length);
+
+      if (!inFence && /^```/.test(content)) {
+        inFence = true;
+        fencePrefix = prefix;
+        fenceBuf = [content];
+      } else if (inFence && /^```\s*$/.test(content)) {
+        fenceBuf.push(content);
+        inFence = false;
+        codeStore.push({ text: fenceBuf.join('\n'), prefix: fencePrefix });
+        out.push(fencePrefix + '%%CODE' + (codeStore.length - 1) + '%%');
+        fenceBuf = [];
+      } else if (inFence) {
+        fenceBuf.push(content);
+      } else {
+        out.push(line);
+      }
+    }
+    if (inFence) {
+      for (var fi = 0; fi < fenceBuf.length; fi++) out.push(fencePrefix + fenceBuf[fi]);
+    }
+
+    md = out.join('\n');
+
     md = md.replace(/`([^`\n]+?)`/g, function (m) {
-      codeStore.push(m);
+      codeStore.push({ text: m, prefix: '' });
       return '%%CODE' + (codeStore.length - 1) + '%%';
     });
 
@@ -117,8 +147,11 @@
       return alias || target;
     });
 
-    md = md.replace(/%%CODE(\d+)%%/g, function (m, i) {
-      return codeStore[parseInt(i, 10)];
+    md = md.replace(/%%CODE(\d+)%%/g, function (m, idx) {
+      var stored = codeStore[parseInt(idx, 10)];
+      if (!stored.prefix) return stored.text;
+      var cl = stored.text.split('\n');
+      return cl[0] + (cl.length > 1 ? '\n' + cl.slice(1).map(function (l) { return stored.prefix + l; }).join('\n') : '');
     });
 
     return md;
