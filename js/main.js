@@ -200,7 +200,7 @@
     function loadPost(writing) {
       showWritingDetail();
       writingContent.innerHTML = '<p class="writing-loading">Loading…</p>';
-      fetch(writing.file)
+      fetch(encodeURI(writing.file))
         .then(function (res) {
           if (!res.ok) throw new Error('Failed to load post');
           return res.text();
@@ -226,11 +226,30 @@
     }
 
     if (writingsList) {
+      var catLabels = (typeof writingCategories !== 'undefined') ? writingCategories : {};
+      var catCounts = {};
+      writings.forEach(function (w) {
+        if (w.category) catCounts[w.category] = (catCounts[w.category] || 0) + 1;
+      });
+
+      var filtersHtml = '<div class="writings-filters">' +
+        '<button class="filter-btn active" data-category="all">All (' + writings.length + ')</button>';
+      Object.keys(catCounts).forEach(function (cat) {
+        filtersHtml += '<button class="filter-btn" data-category="' + escapeAttr(cat) + '">' +
+          escapeHtml(catLabels[cat] || cat) + ' (' + catCounts[cat] + ')</button>';
+      });
+      filtersHtml += '</div>';
+      writingsList.insertAdjacentHTML('beforebegin', filtersHtml);
+
       writingsList.innerHTML = writings
         .map(function (w, i) {
+          var catTag = catLabels[w.category] || w.category || '';
           return (
-            '<article class="writing-card" data-index="' + i + '">' +
-            '<time class="writing-card-date">' + escapeHtml(formatDate(w.date)) + '</time>' +
+            '<article class="writing-card" data-index="' + i + '" data-category="' + escapeAttr(w.category || '') + '">' +
+            '<div class="writing-card-meta">' +
+              '<time class="writing-card-date">' + escapeHtml(formatDate(w.date)) + '</time>' +
+              (catTag ? '<span class="writing-card-tag">' + escapeHtml(catTag) + '</span>' : '') +
+            '</div>' +
             '<h3 class="writing-card-title">' + escapeHtml(w.title) + '</h3>' +
             '<p class="writing-card-summary">' + escapeHtml(w.summary) + '</p>' +
             '<span class="writing-card-read">Read more &rarr;</span>' +
@@ -238,6 +257,21 @@
           );
         })
         .join('');
+
+      var filtersEl = writingsList.parentElement.querySelector('.writings-filters');
+      if (filtersEl) {
+        filtersEl.addEventListener('click', function (e) {
+          var btn = e.target.closest('.filter-btn');
+          if (!btn) return;
+          var cat = btn.getAttribute('data-category');
+          filtersEl.querySelectorAll('.filter-btn').forEach(function (b) {
+            b.classList.toggle('active', b === btn);
+          });
+          writingsList.querySelectorAll('.writing-card').forEach(function (card) {
+            card.style.display = (cat === 'all' || card.getAttribute('data-category') === cat) ? '' : 'none';
+          });
+        });
+      }
 
       writingsList.addEventListener('click', function (e) {
         var card = e.target.closest('.writing-card');
