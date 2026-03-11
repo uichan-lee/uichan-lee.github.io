@@ -1,4 +1,23 @@
 (function () {
+  // --- Dark mode toggle ---
+  var HLJS_LIGHT = 'https://cdn.jsdelivr.net/npm/highlight.js@11/styles/github.min.css';
+  var HLJS_DARK  = 'https://cdn.jsdelivr.net/npm/highlight.js@11/styles/github-dark.min.css';
+
+  function applyTheme(dark) {
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    var link = document.getElementById('hljs-theme');
+    if (link) link.href = dark ? HLJS_DARK : HLJS_LIGHT;
+  }
+
+  var themeToggle = document.getElementById('theme-toggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function () {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      applyTheme(!isDark);
+      localStorage.setItem('theme', !isDark ? 'dark' : 'light');
+    });
+  }
+
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = document.querySelectorAll('.section');
 
@@ -221,6 +240,11 @@
           var body = writingContent.querySelector('.writing-body');
           transformCallouts(body);
           renderMath(body);
+          if (typeof hljs !== 'undefined') {
+            body.querySelectorAll('pre code').forEach(function (el) {
+              hljs.highlightElement(el);
+            });
+          }
         })
         .catch(function () {
           writingContent.innerHTML = '<p class="writing-error">Could not load this post.</p>';
