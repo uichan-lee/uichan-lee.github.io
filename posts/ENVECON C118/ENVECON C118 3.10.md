@@ -174,14 +174,25 @@ If anything, the true relationship between performance and salary may be *strong
 	- *physical house*: square footage, bedrooms, bathrooms, pool
 	- *neighborhood*: school quality, crime rate, distance to downtown
 	- *environment*: air quality, noise, proximity to parks...
-- The price reflects what buyers are willing to pay for each attribute
-
+- The price reflects what buyers are willing to pay for *each* attribute
+- We can use <u>regression</u> to attemp to "unbundle" these values
 
 $$
 Price_i = \beta_0 +\beta_1 \cdot Sqft_i + \beta_2 \cdot Bedrooms_i + \beta_3 \cdot Pollution_i + \dots + u_i
 $$
 
 - Each $\hat\beta_j$ estimated the *marginal willingness to pay* for one more unit of that attribute, holding else equal.
+- $\hat\beta_1 = 150$ means buyers pay $150 more per additional square foot, all else equal
+- $\hat\beta_3 < 0$ buyers pay *less* for homes in more polluted areas tells us the *cost of pollution* as revealed by market behavior
+
+![[image-145.png]]
+
+## The Identification Challange
+
+A simple regression of house prices on pollution has a problem: *pollution is not randomly assigned*
+- Polluted areas may also be poorer, have worse schools, or less investment all of which lower house prices independently
+- A naive OLS estimate of the pollution effect would be **biased**
+
 
 # Adjusted $R^2$
 

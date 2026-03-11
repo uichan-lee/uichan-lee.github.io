@@ -126,7 +126,7 @@ const writings = [
   },
   {
     "slug": "envecon-c118-2-24",
-    "title": "RCT | Sample Means | Hypothesis Testing | Sampling Distributions of $\\hat\\beta$",
+    "title": "RCT | Sample Means | Hypothesis Testing | Sampling Distributions of",
     "date": "2026-02-24",
     "summary": "Recall out potential outcomes framework:",
     "file": "posts/ENVECON C118/ENVECON C118 2.24.md",
@@ -158,7 +158,7 @@ const writings = [
   },
   {
     "slug": "envecon-c118-3-10",
-    "title": "F-Test | Hedonic Regression | Adjusted $R^2$",
+    "title": "F-Test | Hedonic Regression | Adjusted",
     "date": "2026-03-10",
     "summary": "We already know how to test whether a particular variable has no partial effect on the dependent variable.",
     "file": "posts/ENVECON C118/ENVECON C118 3.10.md",

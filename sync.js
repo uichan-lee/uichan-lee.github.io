@@ -55,6 +55,14 @@ function parseDateFromFilename(filename, courseName) {
   return null;
 }
 
+function stripLatexFromTitle(text) {
+  return text
+    .replace(/\$\$[\s\S]*?\$\$/g, '')
+    .replace(/\$[^$]*\$/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function extractTitle(content) {
   const lines = content.split('\n');
   const h1s = [];
@@ -67,8 +75,8 @@ function extractTitle(content) {
     if (inFence) continue;
     const m = line.match(/^#\s+(.+)/);
     if (m) {
-      const text = m[1].trim();
-      if (text.toLowerCase() !== 'lecture') h1s.push(text);
+      let text = stripLatexFromTitle(m[1].trim());
+      if (text && text.toLowerCase() !== 'lecture') h1s.push(text);
     }
   }
   if (h1s.length > 0) return h1s.join(' | ');
@@ -78,8 +86,8 @@ function extractTitle(content) {
     if (inFence) continue;
     const m = line.match(/^#{2,3}\s+(.+)/);
     if (m) {
-      const title = m[1].trim();
-      if (title.toLowerCase() !== 'lecture') return title;
+      let title = stripLatexFromTitle(m[1].trim());
+      if (title && title.toLowerCase() !== 'lecture') return title;
     }
   }
   return null;
