@@ -35,6 +35,9 @@ const COURSES = [
     category: 'data-structures-algorithms',
     label: 'Data Structures/Algorithms',
     include: /^week\s+\d+\.md$/i,
+    weekDates: {
+      semesterStart: '2025-09-01',
+    },
   },
   {
     name: 'DATA 100',
@@ -43,6 +46,9 @@ const COURSES = [
     category: 'data-science',
     label: 'Data Science',
     include: /^week\s+\d+\.md$/i,
+    weekDates: {
+      semesterStart: '2025-09-01',
+    },
   },
 ];
 
@@ -87,6 +93,55 @@ function parseDateFromFilename(filename, courseName, year) {
     return `${year}-${month}-${day}`;
   }
   return null;
+}
+
+function parseWeekNumber(filename) {
+  const base = path.basename(filename, '.md');
+  const m = base.match(/^week\s+(\d+)$/i);
+  return m ? parseInt(m[1], 10) : null;
+}
+
+function addDays(date, days) {
+  const copy = new Date(date);
+  copy.setDate(copy.getDate() + days);
+  return copy;
+}
+
+function formatDate(date) {
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+}
+
+function weekdayOffsetsForCount(count) {
+  if (count <= 1) return [0];
+  if (count === 2) return [1, 3];
+  if (count === 3) return [0, 2, 4];
+  return [0, 1, 2, 3, 4].slice(0, count);
+}
+
+function assignConfiguredDates(posts, config) {
+  if (!config.weekDates) return;
+
+  const semesterStart = new Date(config.weekDates.semesterStart + 'T00:00:00');
+  const byWeek = new Map();
+
+  posts.forEach(function (post) {
+    const week = parseWeekNumber(path.basename(post.file));
+    if (week == null) return;
+    if (!byWeek.has(week)) byWeek.set(week, []);
+    byWeek.get(week).push(post);
+  });
+
+  Array.from(byWeek.keys()).sort(function (a, b) { return a - b; }).forEach(function (week) {
+    const weekPosts = byWeek.get(week).slice().sort(function (a, b) {
+      return a.file.localeCompare(b.file);
+    });
+    const offsets = weekdayOffsetsForCount(weekPosts.length);
+    const monday = addDays(semesterStart, (week - 1) * 7);
+    weekPosts.forEach(function (post, index) {
+      const dayOffset = offsets[Math.min(index, offsets.length - 1)];
+      post.date = formatDate(addDays(monday, dayOffset));
+    });
+  });
 }
 
 function stripLatexFromTitle(text) {
@@ -172,6 +227,7 @@ function sync() {
 
   for (const config of COURSES) {
     const sourceDir = config.sourceDir;
+    const coursePosts = [];
     if (!fs.existsSync(sourceDir)) {
       console.log(`  skip: ${config.name} source not found`);
       continue;
@@ -212,7 +268,7 @@ function sync() {
       const summary = extractSummary(content);
       const filePath = `posts/${config.targetDir}/${mdFile}`;
 
-      allPosts.push({
+      coursePosts.push({
         slug: slugify(`${config.targetDir} ${base}`),
         title,
         date,
@@ -221,6 +277,8 @@ function sync() {
         category: config.category,
       });
     }
+    assignConfiguredDates(coursePosts, config);
+    allPosts.push.apply(allPosts, coursePosts);
     console.log(`  ${config.targetDir}: ${mdFiles.length} posts`);
   }
 
