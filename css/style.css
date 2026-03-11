@@ -545,6 +545,8 @@ ul, ol {
   font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
   font-size: 0.875rem;
   border-radius: 10px;
+  tab-size: 4;
+  -moz-tab-size: 4;
 }
 
 .writing-body a {
