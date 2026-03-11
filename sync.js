@@ -6,17 +6,45 @@ const os = require('os');
 
 // ─── Configuration ──────────────────────────────────────────────────────────
 
-const VAULT = path.join(
+const UC_BERKELEY_ROOT = path.join(
   os.homedir(),
-  "Documents/Documents - Uichan's MacBook Air/Main Vault/UC Berkeley/Spring 2026"
+  "Documents/Documents - Uichan's MacBook Air/Main Vault/UC Berkeley"
 );
 
-const YEAR = 2026;
-
-const COURSES = {
-  'ENVECON C118': { category: 'econometrics', label: 'Econometrics' },
-  'STAT 33B':     { category: 'r-programming', label: 'R Programming' },
-};
+const COURSES = [
+  {
+    name: 'ENVECON C118',
+    sourceDir: path.join(UC_BERKELEY_ROOT, 'Spring 2026', 'ENVECON C118', 'Notes'),
+    targetDir: 'ENVECON C118',
+    category: 'econometrics',
+    label: 'Econometrics',
+    year: 2026,
+  },
+  {
+    name: 'STAT 33B',
+    sourceDir: path.join(UC_BERKELEY_ROOT, 'Spring 2026', 'STAT 33B', 'Notes'),
+    targetDir: 'STAT 33B',
+    category: 'r-programming',
+    label: 'R Programming',
+    year: 2026,
+  },
+  {
+    name: 'CS 61B',
+    sourceDir: path.join(UC_BERKELEY_ROOT, 'Fall 2025', 'Courses', 'CS 61B', 'Notes'),
+    targetDir: 'CS 61B',
+    category: 'data-structures-algorithms',
+    label: 'Data Structures/Algorithms',
+    include: /^week\s+\d+\.md$/i,
+  },
+  {
+    name: 'DATA 100',
+    sourceDir: path.join(UC_BERKELEY_ROOT, 'Fall 2025', 'Courses', 'DATA 100', 'Notes'),
+    targetDir: 'DATA 100',
+    category: 'data-science',
+    label: 'Data Science',
+    include: /^week\s+\d+\.md$/i,
+  },
+];
 
 const POSTS_DIR = path.join(__dirname, 'posts');
 const WRITINGS_JS = path.join(__dirname, 'js', 'writings.js');
@@ -25,6 +53,11 @@ const WRITINGS_JS = path.join(__dirname, 'js', 'writings.js');
 
 function ensureDir(dir) {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+}
+
+function resetDir(dir) {
+  fs.rmSync(dir, { recursive: true, force: true });
+  ensureDir(dir);
 }
 
 function copyDirSync(src, dest) {
@@ -43,14 +76,15 @@ function copyDirSync(src, dest) {
   }
 }
 
-function parseDateFromFilename(filename, courseName) {
+function parseDateFromFilename(filename, courseName, year) {
+  if (!year) return null;
   const base = path.basename(filename, '.md');
   const suffix = base.replace(courseName, '').trim();
   const m = suffix.match(/^(\d{1,2})\.(\d{1,2})$/);
   if (m) {
     const month = m[1].padStart(2, '0');
     const day = m[2].padStart(2, '0');
-    return `${YEAR}-${month}-${day}`;
+    return `${year}-${month}-${day}`;
   }
   return null;
 }
@@ -125,41 +159,49 @@ function slugify(str) {
     .replace(/^-|-$/g, '');
 }
 
+function shouldIncludeFile(filename, config) {
+  if (!filename.endsWith('.md')) return false;
+  if (!config.include) return true;
+  return config.include.test(filename);
+}
+
 // ─── Main ───────────────────────────────────────────────────────────────────
 
 function sync() {
   const allPosts = [];
 
-  for (const [course, config] of Object.entries(COURSES)) {
-    const notesDir = path.join(VAULT, course, 'Notes');
-    if (!fs.existsSync(notesDir)) {
-      console.log(`  skip: ${course}/Notes/ not found`);
+  for (const config of COURSES) {
+    const sourceDir = config.sourceDir;
+    if (!fs.existsSync(sourceDir)) {
+      console.log(`  skip: ${config.name} source not found`);
       continue;
     }
 
-    const destCourse = path.join(POSTS_DIR, course);
-    ensureDir(destCourse);
+    const destCourse = path.join(POSTS_DIR, config.targetDir);
+    resetDir(destCourse);
 
     // Copy attachments
-    const attSrc = path.join(notesDir, 'attachments');
+    const attSrc = config.attachmentsDir || path.join(sourceDir, 'attachments');
     const attDest = path.join(destCourse, 'attachments');
     if (fs.existsSync(attSrc)) {
       copyDirSync(attSrc, attDest);
       const count = fs.readdirSync(attDest).length;
-      console.log(`  ${course}/attachments: ${count} files`);
+      console.log(`  ${config.targetDir}/attachments: ${count} files`);
     }
 
     // Copy md files and collect metadata
-    const mdFiles = fs.readdirSync(notesDir).filter(f => f.endsWith('.md'));
+    const mdFiles = fs.readdirSync(sourceDir).filter(function (f) {
+      return shouldIncludeFile(f, config);
+    });
     for (const mdFile of mdFiles) {
-      const src = path.join(notesDir, mdFile);
+      const src = path.join(sourceDir, mdFile);
       const dest = path.join(destCourse, mdFile);
       fs.copyFileSync(src, dest);
 
       const content = fs.readFileSync(src, 'utf-8');
       const base = path.basename(mdFile, '.md');
 
-      let date = parseDateFromFilename(mdFile, course);
+      let date = parseDateFromFilename(mdFile, config.name, config.year);
       if (!date) {
         const stat = fs.statSync(src);
         const d = stat.mtime;
@@ -168,10 +210,10 @@ function sync() {
 
       const title = extractTitle(content) || base;
       const summary = extractSummary(content);
-      const filePath = `posts/${course}/${mdFile}`;
+      const filePath = `posts/${config.targetDir}/${mdFile}`;
 
       allPosts.push({
-        slug: slugify(base),
+        slug: slugify(`${config.targetDir} ${base}`),
         title,
         date,
         summary,
@@ -179,14 +221,14 @@ function sync() {
         category: config.category,
       });
     }
-    console.log(`  ${course}: ${mdFiles.length} posts`);
+    console.log(`  ${config.targetDir}: ${mdFiles.length} posts`);
   }
 
   allPosts.sort((a, b) => a.date.localeCompare(b.date));
 
   // Build writingCategories
   const categories = {};
-  for (const [, config] of Object.entries(COURSES)) {
+  for (const config of COURSES) {
     categories[config.category] = config.label;
   }
 
