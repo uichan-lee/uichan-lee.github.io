@@ -157,14 +157,6 @@ const writings = [
     "category": "econometrics"
   },
   {
-    "slug": "envecon-c118-discussion-1",
-    "title": "Economic Model",
-    "date": "2026-03-11",
-    "summary": "An economic model is an equation that describes relationships. For example, we can try to model participation in crime:",
-    "file": "posts/ENVECON C118/ENVECON C118 Discussion 1.md",
-    "category": "econometrics"
-  },
-  {
     "slug": "stat33b-midterm",
     "title": "Atomic vs. Non-Atomic Objects",
     "date": "2026-03-11",
