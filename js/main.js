@@ -232,6 +232,62 @@
     });
   }
 
+  // --- Table of Contents ---
+
+  var tocEl = document.getElementById('writing-toc');
+  var tocScrollHandler = null;
+
+  function buildTOC(body) {
+    if (!tocEl || !body) return;
+    var headings = body.querySelectorAll('h1, h2, h3, h4');
+    if (headings.length < 2) { tocEl.innerHTML = ''; return; }
+
+    headings.forEach(function (h, i) {
+      if (!h.id) h.id = 'heading-' + i;
+    });
+
+    var html = '<div class="toc-title">Contents</div><ul class="toc-list">';
+    headings.forEach(function (h) {
+      var level = parseInt(h.tagName[1], 10);
+      html += '<li class="toc-item toc-level-' + level + '">' +
+        '<a class="toc-link" href="#' + h.id + '">' + h.textContent + '</a></li>';
+    });
+    html += '</ul>';
+    tocEl.innerHTML = html;
+
+    var links = tocEl.querySelectorAll('.toc-link');
+    links.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var target = document.getElementById(a.getAttribute('href').slice(1));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    if (tocScrollHandler) window.removeEventListener('scroll', tocScrollHandler);
+    tocScrollHandler = function () {
+      var scrollY = window.scrollY || window.pageYOffset;
+      var headerH = 80;
+      var activeIdx = 0;
+      for (var i = 0; i < headings.length; i++) {
+        if (headings[i].getBoundingClientRect().top <= headerH + 20) activeIdx = i;
+      }
+      links.forEach(function (a, j) {
+        a.classList.toggle('active', j === activeIdx);
+      });
+    };
+    window.addEventListener('scroll', tocScrollHandler, { passive: true });
+    tocScrollHandler();
+  }
+
+  function clearTOC() {
+    if (tocEl) tocEl.innerHTML = '';
+    if (tocScrollHandler) {
+      window.removeEventListener('scroll', tocScrollHandler);
+      tocScrollHandler = null;
+    }
+  }
+
   // --- Writings rendering ---
 
   if (typeof writings !== 'undefined') {
@@ -243,6 +299,7 @@
     function showWritingsList() {
       writingsList.style.display = '';
       writingDetail.style.display = 'none';
+      clearTOC();
     }
 
     function showWritingDetail() {
@@ -278,6 +335,7 @@
               hljs.highlightElement(el);
             });
           }
+          buildTOC(body);
         })
         .catch(function () {
           writingContent.innerHTML = '<p class="writing-error">Could not load this post.</p>';
