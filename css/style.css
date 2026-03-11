@@ -415,6 +415,65 @@ ul, ol {
   margin: 0;
 }
 
+/* Obsidian callouts */
+.callout {
+  --co: 68, 138, 255;
+  margin: 1.25rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid rgb(var(--co));
+  background: rgba(var(--co), 0.07);
+  border-radius: 0 8px 8px 0;
+  font-style: normal;
+}
+
+.callout-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: rgb(var(--co));
+  margin-bottom: 0.4rem;
+}
+
+.callout-content {
+  font-size: 0.93rem;
+  line-height: 1.65;
+  color: #475569;
+}
+
+.callout-content p:last-child {
+  margin-bottom: 0;
+}
+
+.callout-abstract, .callout-summary, .callout-tldr { --co: 0, 184, 212; }
+.callout-tip, .callout-hint, .callout-important { --co: 0, 191, 165; }
+.callout-success, .callout-check, .callout-done { --co: 0, 200, 83; }
+.callout-question, .callout-help, .callout-faq { --co: 255, 171, 0; }
+.callout-warning, .callout-caution, .callout-attention { --co: 255, 145, 0; }
+.callout-failure, .callout-fail, .callout-missing { --co: 255, 82, 82; }
+.callout-danger, .callout-error { --co: 255, 23, 68; }
+.callout-bug { --co: 245, 0, 87; }
+.callout-example { --co: 124, 77, 255; }
+.callout-quote, .callout-cite { --co: 158, 158, 158; }
+
+/* Highlight ==text== */
+.writing-body mark {
+  background: rgba(255, 213, 0, 0.35);
+  padding: 0.1em 0.25em;
+  border-radius: 3px;
+  color: inherit;
+}
+
+/* Math display */
+.math-display {
+  margin: 1.5rem 0;
+  text-align: center;
+  overflow-x: auto;
+  padding: 0.25rem 0;
+}
+
+.math-inline {
+  display: inline;
+}
+
 .writing-body code {
   font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
   font-size: 0.88em;
@@ -834,6 +893,19 @@ ul, ol {
     background: rgba(30, 41, 59, 0.5);
     border-left-color: #3b82f6;
     color: #94a3b8;
+  }
+
+  .callout {
+    background: rgba(var(--co), 0.12);
+  }
+
+  .callout-content {
+    color: #b0bec5;
+  }
+
+  .writing-body mark {
+    background: rgba(255, 213, 0, 0.22);
+    color: #f8fafc;
   }
 
   .writing-body code {

@@ -69,7 +69,113 @@
     }
   }
 
-  // Render writings from writings.js
+  // --- Obsidian-compatible markdown helpers ---
+
+  function preprocessObsidian(md) {
+    var codeStore = [];
+
+    md = md.replace(/(```[\s\S]*?```)/g, function (m) {
+      codeStore.push(m);
+      return '\n%%CODE' + (codeStore.length - 1) + '%%\n';
+    });
+    md = md.replace(/`([^`\n]+?)`/g, function (m) {
+      codeStore.push(m);
+      return '%%CODE' + (codeStore.length - 1) + '%%';
+    });
+
+    md = md.replace(/\$\$([\s\S]+?)\$\$/g, function (m, tex) {
+      return '\n\n<div class="math-display" data-math="' + encodeURIComponent(tex.trim()) + '"></div>\n\n';
+    });
+    md = md.replace(/\$([^\$\n]+?)\$/g, function (m, tex) {
+      return '<span class="math-inline" data-math="' + encodeURIComponent(tex) + '"></span>';
+    });
+
+    md = md.replace(/==(.*?)==/g, '<mark>$1</mark>');
+
+    md = md.replace(/%%CODE(\d+)%%/g, function (m, i) {
+      return codeStore[parseInt(i, 10)];
+    });
+
+    return md;
+  }
+
+  function transformCallouts(container) {
+    container.querySelectorAll('blockquote').forEach(function (bq) {
+      var firstP = bq.querySelector('p');
+      if (!firstP) return;
+
+      var html = firstP.innerHTML;
+      var match = html.match(/^\s*\[!([\w-]+)\]([+-]?)\s*/);
+      if (!match) return;
+
+      var type = match[1].toLowerCase();
+      var afterMatch = html.slice(match[0].length);
+      var breakIdx = afterMatch.search(/\n|<br\s*\/?>/i);
+      var title, remaining;
+
+      if (breakIdx >= 0) {
+        title = afterMatch.substring(0, breakIdx).trim();
+        remaining = afterMatch.substring(breakIdx).replace(/^(\n|<br\s*\/?>)/i, '').trim();
+      } else {
+        title = afterMatch.trim();
+        remaining = '';
+      }
+
+      if (!title) title = type.charAt(0).toUpperCase() + type.slice(1);
+
+      var callout = document.createElement('div');
+      callout.className = 'callout callout-' + type;
+
+      var titleDiv = document.createElement('div');
+      titleDiv.className = 'callout-title';
+      titleDiv.textContent = title;
+      callout.appendChild(titleDiv);
+
+      var contentDiv = document.createElement('div');
+      contentDiv.className = 'callout-content';
+      var hasContent = false;
+
+      if (remaining) {
+        var p = document.createElement('p');
+        p.innerHTML = remaining;
+        contentDiv.appendChild(p);
+        hasContent = true;
+      }
+
+      while (bq.children.length > 0) {
+        var child = bq.children[0];
+        if (child === firstP) { bq.removeChild(child); continue; }
+        contentDiv.appendChild(child);
+        hasContent = true;
+      }
+
+      if (hasContent) callout.appendChild(contentDiv);
+      bq.parentNode.replaceChild(callout, bq);
+    });
+  }
+
+  function renderMath(container) {
+    if (typeof katex === 'undefined') return;
+
+    container.querySelectorAll('.math-display').forEach(function (el) {
+      try {
+        katex.render(decodeURIComponent(el.getAttribute('data-math')), el, {
+          displayMode: true, throwOnError: false
+        });
+      } catch (e) { /* fallback: raw tex stays visible */ }
+    });
+
+    container.querySelectorAll('.math-inline').forEach(function (el) {
+      try {
+        katex.render(decodeURIComponent(el.getAttribute('data-math')), el, {
+          displayMode: false, throwOnError: false
+        });
+      } catch (e) { /* fallback: raw tex stays visible */ }
+    });
+  }
+
+  // --- Writings rendering ---
+
   if (typeof writings !== 'undefined') {
     var writingsList = document.getElementById('writings-list');
     var writingDetail = document.getElementById('writing-detail');
@@ -100,10 +206,15 @@
           return res.text();
         })
         .then(function (md) {
-          var html = marked.parse(md);
+          var processed = preprocessObsidian(md);
+          var html = marked.parse(processed);
           writingContent.innerHTML =
             '<time class="writing-date">' + escapeHtml(formatDate(writing.date)) + '</time>' +
             '<div class="writing-body">' + html + '</div>';
+
+          var body = writingContent.querySelector('.writing-body');
+          transformCallouts(body);
+          renderMath(body);
         })
         .catch(function () {
           writingContent.innerHTML = '<p class="writing-error">Could not load this post.</p>';
