@@ -94,6 +94,10 @@
 
     md = md.replace(/==(.*?)==/g, '<mark>$1</mark>');
 
+    md = md.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, function (m, target, alias) {
+      return alias || target;
+    });
+
     md = md.replace(/%%CODE(\d+)%%/g, function (m, i) {
       return codeStore[parseInt(i, 10)];
     });
@@ -229,13 +233,18 @@
 
     if (writingsList) {
       var catLabels = (typeof writingCategories !== 'undefined') ? writingCategories : {};
+
+      var sortedWritings = writings.slice().sort(function (a, b) {
+        return new Date(b.date) - new Date(a.date);
+      });
+
       var catCounts = {};
-      writings.forEach(function (w) {
+      sortedWritings.forEach(function (w) {
         if (w.category) catCounts[w.category] = (catCounts[w.category] || 0) + 1;
       });
 
       var filtersHtml = '<div class="writings-filters">' +
-        '<button class="filter-btn active" data-category="all">All (' + writings.length + ')</button>';
+        '<button class="filter-btn active" data-category="all">All (' + sortedWritings.length + ')</button>';
       Object.keys(catCounts).forEach(function (cat) {
         filtersHtml += '<button class="filter-btn" data-category="' + escapeAttr(cat) + '">' +
           escapeHtml(catLabels[cat] || cat) + ' (' + catCounts[cat] + ')</button>';
@@ -243,11 +252,11 @@
       filtersHtml += '</div>';
       writingsList.insertAdjacentHTML('beforebegin', filtersHtml);
 
-      writingsList.innerHTML = writings
+      writingsList.innerHTML = sortedWritings
         .map(function (w, i) {
           var catTag = catLabels[w.category] || w.category || '';
           return (
-            '<article class="writing-card" data-index="' + i + '" data-category="' + escapeAttr(w.category || '') + '">' +
+            '<article class="writing-card" data-index="' + i + '" data-category="' + escapeAttr(w.category || '') + '" tabindex="0" role="button">' +
             '<div class="writing-card-meta">' +
               '<time class="writing-card-date">' + escapeHtml(formatDate(w.date)) + '</time>' +
               (catTag ? '<span class="writing-card-tag">' + escapeHtml(catTag) + '</span>' : '') +
@@ -275,11 +284,22 @@
         });
       }
 
+      function openCardAt(index) {
+        if (sortedWritings[index]) loadPost(sortedWritings[index]);
+      }
+
       writingsList.addEventListener('click', function (e) {
         var card = e.target.closest('.writing-card');
         if (!card) return;
-        var index = parseInt(card.getAttribute('data-index'), 10);
-        if (writings[index]) loadPost(writings[index]);
+        openCardAt(parseInt(card.getAttribute('data-index'), 10));
+      });
+
+      writingsList.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        var card = e.target.closest('.writing-card');
+        if (!card) return;
+        e.preventDefault();
+        openCardAt(parseInt(card.getAttribute('data-index'), 10));
       });
     }
 
