@@ -199,9 +199,60 @@ Their solution: **Clean Air Act of 1970** as a natural experiment
 - Counties *just below* the ceiling faced no new regulations
 - This created sharp, *quasi-random* variation in pollution changes across otherwies similar counties. 
 
+They estimate a *hedonic regression* at the county level:
+$$
+ln(HousePrice)_c = \beta_0 +\beta_1 \cdot TSP_c + X'_c\gamma + u_c
+$$
+- where TSP = total suspended particualtes $(\micro g / m^3)$
+- $X_c$ includes county-level controls (income, population, taxes, etc.)
+- $\beta_1$ is the key parameter: the elasticity of house prices with respect to pollution
+- They use the nonattainment designation as an instrument for changes in TSP (*instrumental variable*) - so the variation in pollution they're using is driven by the regulation, not by other confounders. 
+
+> **The Core Strategy (2SLS + Quasi-Random)**
+> 
+> The authors want to know: _does cleaner air raise house prices?_
+> 
+> The problem is that polluted counties are also poorer, more industrial, and different in many other ways — so we can't just compare them directly.
+> 
+> **Here's how they solve it:**
+> 
+> **Step 1 (2SLS):** Instead of using actual TSP levels, they first predict TSP using only the regulation status (nonattainment designation) as the driver. This predicted TSP captures _only the pollution variation caused by regulation_ — stripping out all the confounders like poverty or industrial composition.
+> 
+> **Step 2 (Quasi-Random):** Why is this valid? Because counties just above and just below the regulatory threshold were essentially identical before the law. The only reason one got regulated and the other didn't was an arbitrary cutoff — almost like a coin flip. This makes it as close to a randomized experiment as you can get in the real world.
+> 
+> **Together:** The 2SLS removes the bias mathematically, and the near-threshold comparison makes that removal credible. Any difference in house prices between these nearly-identical counties must be coming from the pollution change driven by regulation — nothing else.
+
+> **핵심 전략 (2SLS + 준실험)**
+> 
+> 저자들의 질문: _공기가 깨끗해지면 집값이 오르나?_
+> 
+> 문제는 오염된 카운티는 더 가난하고 공장도 많아서, 단순 비교로는 오염의 순수한 효과를 알 수 없다는 것.
+> 
+> **해결 방법:**
+> 
+> **1단계 (2SLS):** 실제 TSP 대신, 규제 여부만을 이용해 TSP를 예측한다. 이 예측값 TSP은 _규제로 인해 발생한 오염 변동만_ 담고 있어, 빈곤·산업구조 같은 교란 요인이 제거된다.
+> 
+> **2단계 (준실험):** 왜 이게 유효한가? 규제 기준선 바로 위아래 카운티들은 사실상 동일한 조건에서 출발했기 때문이다. 규제를 받게 된 건 오직 임의적인 기준선 때문 — 사실상 동전 던지기나 다름없다. 이것이 현실에서 가능한 가장 무작위 실험에 가까운 상황이다.
+> 
+> **종합:** 2SLS는 수학적으로 편향을 제거하고, 기준선 근처 비교는 그 제거가 실제로 유효함을 보장한다. 사실상 동일한 두 카운티 사이의 집값 차이는 오직 규제로 인한 오염 변화에서 비롯된 것이다 — 다른 요인이 아니라.
+
+
 # Adjusted $R^2$
 
 $$
-\bar{R^2}=1-(1-R^2)\frac{n-1}{n-k-1}
+\bar{R^2}=1-\frac{SSR/(n-k-1)}{SST/(n-1)}=1-(1-R^2)\frac{n-1}{n-k-1}
 $$
+- $SSR = \sum_{i=1}^n \hat u_i^2$: sum of squared residuals (the unexplained variation in $y$)
+- $SST = \sum_{i=1}^n (y_i - \bar y)^2$: total sum of squares (the total variation in $y$)
+- $n$: number of observations
+- $k$: number of regressors (not counting the intercept)
+- $R^2 = 1 - SSR/SST$: the ordinary (unadjusted) R-squared
+
+> [! Question] What is Adjusted $R^2$?
+> - The adjusted $R^2$ **penalizes** you for adding more regressors
+> 	- the factor $\frac{n-1}{n-k-1} > 1$ shrinks $R^2$ downward
+> 	- the penalty grows as $k$ increases
+> - $\bar R^2$ *can decrease* when you add a variable that doesn't improve the fit enough to justify the lost degree of freedom
+> - **Rule of thumb**: if adding a variable raises $\bar R^2$, it's contributing meaningful explanatory power; if $\bar R^2$ falls, the variable probably isn't helping
+
 
