@@ -132,11 +132,41 @@ With a 5% significance level, q = 3 and n - k - 1 = 60, the critical value is c 
 
 ![[image-142.png]]
 
-p-value = $P(f > F)$
-$f \sim F_{q, n-k-1}$ and $F$ **is** our computed test statistic
+### p-Values for the F-Test
+
+Just as with t-tests, we can compute **p-values** for F-tests:
+$$\text{p-value} = P(\mathscr{F} > F)$$
+- where $\mathscr{F} \sim F_{q,\ n-k-1}$ and $F$ is our computed test statistic
+- p-value = probability of seeing an F-statistic *at least as large as ours* if $H_0$ were true
+- Small p-value ➡️ strong evidence against $H_0$
+- With $F$ = 3.8 and $F_{3,138}$ p-value $\approx .012$
+
+### Interpreting the Result
+
+Rejecting $H_0$ tells us that performance stats *jointly add explanatory power* beyond years and games alone.
+
+If anything, the true relationship between performance and salary may be *stronger* than what OLS estimates. 
+
+
+> [! NOTE] Overall Significance of a Regression
+> A special but very common case: test whether **any** of the independent variables help explain $y$:
+> $$
+> H_0: \beta_1 = 0, \beta_2 = 0, \dots, \beta_k = 0
+> $$
+> 
+> Here $q = k$ (we're dropping all $k$ variables), and the reduced model is just $y = \beta_0 + u$, which has $R^2=0$ by definition.
+> 
+> The F-statistic simplifies to:
+> $$
+> F = \frac{R^2/k}{(1-R^2)/(n-k-1)}
+> $$
+> 
+> This is the <u>F-statistic for overall significance</u> what R reports by default.
+> It tests whether the model as a whole explains anything at all.
 
 > Jointly Significant $\neq$ Individually Significant
-
+> The t-test is always the *best* test for a <u>single coefficient</u>
+> The F-test is desinged for testing multiple restrictions simultaneously
 
 # Hedonic Regression
 

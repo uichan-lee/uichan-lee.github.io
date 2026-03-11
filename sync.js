@@ -58,7 +58,13 @@ function parseDateFromFilename(filename, courseName) {
 function extractTitle(content) {
   const lines = content.split('\n');
   const h1s = [];
+  let inFence = false;
   for (const line of lines) {
+    if (/^```/.test(line.trim())) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
     const m = line.match(/^#\s+(.+)/);
     if (m) {
       const text = m[1].trim();
@@ -66,7 +72,10 @@ function extractTitle(content) {
     }
   }
   if (h1s.length > 0) return h1s.join(' | ');
+  inFence = false;
   for (const line of lines) {
+    if (/^```/.test(line.trim())) { inFence = !inFence; continue; }
+    if (inFence) continue;
     const m = line.match(/^#{2,3}\s+(.+)/);
     if (m) {
       const title = m[1].trim();
