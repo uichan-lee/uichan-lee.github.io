@@ -155,13 +155,5 @@ const writings = [
     "summary": "We already know how to test whether a particular variable has no partial effect on the dependent variable.",
     "file": "posts/ENVECON C118/ENVECON C118 3.10.md",
     "category": "econometrics"
-  },
-  {
-    "slug": "stat33b-midterm",
-    "title": "Atomic vs. Non-Atomic Objects",
-    "date": "2026-03-11",
-    "summary": "All elements are the same data type.",
-    "file": "posts/STAT 33B/STAT33B Midterm.md",
-    "category": "r-programming"
   }
 ];
