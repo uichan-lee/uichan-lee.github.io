@@ -72,6 +72,8 @@
   // --- Obsidian-compatible markdown helpers ---
 
   function preprocessObsidian(md) {
+    md = md.replace(/^---[\s\S]*?---\n?/, '');
+
     var codeStore = [];
 
     md = md.replace(/(```[\s\S]*?```)/g, function (m) {
