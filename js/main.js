@@ -107,7 +107,7 @@
 
     var lines = md.split('\n');
     var out = [];
-    var inFence = false;
+    var inFence = '';
     var fenceBuf = [];
     var fencePrefix = '';
 
@@ -118,23 +118,35 @@
       var content = line.slice(prefix.length);
 
       if (!inFence && /^```/.test(content)) {
-        inFence = true;
+        inFence = 'code';
         fencePrefix = prefix;
         fenceBuf = [content];
-      } else if (inFence && /^```\s*$/.test(content)) {
+      } else if (inFence === 'code' && /^```\s*$/.test(content)) {
         fenceBuf.push(content);
-        inFence = false;
+        inFence = '';
         codeStore.push({ text: fenceBuf.join('\n'), prefix: fencePrefix });
         out.push(fencePrefix + '%%CODE' + (codeStore.length - 1) + '%%');
         fenceBuf = [];
+      } else if (!inFence && /^\$\$\s*$/.test(content)) {
+        inFence = 'math';
+        fencePrefix = prefix;
+        fenceBuf = [];
+      } else if (inFence === 'math' && /^\$\$\s*$/.test(content)) {
+        inFence = '';
+        mathStore.push({ tex: fenceBuf.join('\n').trim(), display: true });
+        out.push(fencePrefix + '%%MATH' + (mathStore.length - 1) + '%%');
       } else if (inFence) {
         fenceBuf.push(content);
       } else {
         out.push(line);
       }
     }
-    if (inFence) {
+    if (inFence === 'code') {
       for (var fi = 0; fi < fenceBuf.length; fi++) out.push(fencePrefix + fenceBuf[fi]);
+    } else if (inFence === 'math') {
+      out.push(fencePrefix + '$$');
+      for (var mi = 0; mi < fenceBuf.length; mi++) out.push(fencePrefix + fenceBuf[mi]);
+      out.push(fencePrefix + '$$');
     }
 
     md = out.join('\n');
@@ -145,7 +157,8 @@
     });
 
     md = md.replace(/\$\$([\s\S]+?)\$\$/g, function (m, tex) {
-      mathStore.push({ tex: tex.trim(), display: true });
+      tex = tex.replace(/^>\s?/gm, '').trim();
+      mathStore.push({ tex: tex, display: true });
       return '\n\n%%MATH' + (mathStore.length - 1) + '%%\n\n';
     });
     md = md.replace(/\$([^\$\n]+?)\$/g, function (m, tex) {
@@ -211,7 +224,7 @@
 
       var titleDiv = document.createElement('div');
       titleDiv.className = 'callout-title';
-      titleDiv.textContent = title;
+      titleDiv.innerHTML = title;
       callout.appendChild(titleDiv);
 
       var contentDiv = document.createElement('div');
