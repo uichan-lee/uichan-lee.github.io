@@ -251,6 +251,245 @@ ul, ol {
   outline: none;
 }
 
+/* Writings section */
+.section-writings {
+  max-width: 800px;
+}
+
+.writings-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.writing-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  transition: box-shadow 0.25s, transform 0.25s, border-color 0.2s;
+}
+
+.writing-card:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  transform: translateY(-3px);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.writing-card-date {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #64748b;
+  margin-bottom: 0.4rem;
+}
+
+.writing-card-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+}
+
+.writing-card-summary {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.55;
+}
+
+.writing-card-read {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #2563eb;
+}
+
+.writing-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1.5rem;
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #475569;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.writing-back-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: rgba(0, 0, 0, 0.18);
+}
+
+.writing-date {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.writing-loading,
+.writing-error {
+  text-align: center;
+  color: #64748b;
+  padding: 3rem 0;
+}
+
+.writing-error {
+  color: #dc2626;
+}
+
+/* Markdown body typography */
+.writing-body {
+  line-height: 1.75;
+  color: #334155;
+}
+
+.writing-body h1 {
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  margin: 0 0 1rem;
+}
+
+.writing-body h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+  margin: 2rem 0 0.75rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.writing-body h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.writing-body p {
+  margin: 0 0 1rem;
+}
+
+.writing-body ul,
+.writing-body ol {
+  margin: 0 0 1rem;
+  padding-left: 1.5rem;
+}
+
+.writing-body ul {
+  list-style: disc;
+}
+
+.writing-body ol {
+  list-style: decimal;
+}
+
+.writing-body li {
+  margin-bottom: 0.35rem;
+}
+
+.writing-body blockquote {
+  margin: 1.25rem 0;
+  padding: 0.75rem 1.25rem;
+  border-left: 3px solid #2563eb;
+  background: #f8fafc;
+  border-radius: 0 8px 8px 0;
+  color: #475569;
+  font-style: italic;
+}
+
+.writing-body blockquote p {
+  margin: 0;
+}
+
+.writing-body code {
+  font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  padding: 0.15em 0.4em;
+  background: #f1f5f9;
+  border-radius: 4px;
+  color: #0f172a;
+}
+
+.writing-body pre {
+  margin: 1.25rem 0;
+  padding: 1.25rem;
+  background: #1e293b;
+  border-radius: 10px;
+  overflow-x: auto;
+  line-height: 1.55;
+}
+
+.writing-body pre code {
+  padding: 0;
+  background: none;
+  color: #e2e8f0;
+  font-size: 0.875rem;
+  border-radius: 0;
+}
+
+.writing-body a {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+
+.writing-body a:hover {
+  color: #1d4ed8;
+}
+
+.writing-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.writing-body hr {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin: 2rem 0;
+}
+
+.writing-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 0.92rem;
+}
+
+.writing-body th,
+.writing-body td {
+  padding: 0.6rem 0.85rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+
+.writing-body th {
+  background: #f1f5f9;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.writing-body strong {
+  font-weight: 600;
+  color: #0f172a;
+}
+
 /* Experiences section */
 .section-experiences {
   max-width: 720px;
@@ -426,6 +665,15 @@ ul, ol {
     grid-template-columns: 1fr;
   }
 
+  .writing-card {
+    padding: 1.35rem;
+  }
+
+  .writing-body pre {
+    padding: 1rem;
+    font-size: 0.82rem;
+  }
+
   .timeline-item {
     padding-left: 1.75rem;
   }
@@ -526,6 +774,105 @@ ul, ol {
   .card-link:focus-visible {
     color: #bfdbfe;
     border-bottom-color: #bfdbfe;
+  }
+
+  .writing-card {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .writing-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .writing-card-date,
+  .writing-date {
+    color: #94a3b8;
+  }
+
+  .writing-card-title {
+    color: #f8fafc;
+  }
+
+  .writing-card-summary {
+    color: #94a3b8;
+  }
+
+  .writing-card-read {
+    color: #93c5fd;
+  }
+
+  .writing-back-btn {
+    color: #cbd5e1;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .writing-back-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #f1f5f9;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .writing-body {
+    color: #cbd5e1;
+  }
+
+  .writing-body h1,
+  .writing-body h2,
+  .writing-body h3,
+  .writing-body strong {
+    color: #f8fafc;
+  }
+
+  .writing-body h2 {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .writing-body blockquote {
+    background: rgba(30, 41, 59, 0.5);
+    border-left-color: #3b82f6;
+    color: #94a3b8;
+  }
+
+  .writing-body code {
+    background: rgba(51, 65, 85, 0.8);
+    color: #e2e8f0;
+  }
+
+  .writing-body pre {
+    background: #0f172a;
+  }
+
+  .writing-body pre code {
+    color: #e2e8f0;
+  }
+
+  .writing-body a {
+    color: #93c5fd;
+  }
+
+  .writing-body a:hover {
+    color: #bfdbfe;
+  }
+
+  .writing-body hr {
+    border-top-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .writing-body th,
+  .writing-body td {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .writing-body th {
+    background: rgba(51, 65, 85, 0.5);
+    color: #f8fafc;
+  }
+
+  .writing-loading {
+    color: #94a3b8;
   }
 
   .footer {

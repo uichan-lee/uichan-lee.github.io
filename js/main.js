@@ -69,6 +69,84 @@
     }
   }
 
+  // Render writings from writings.js
+  if (typeof writings !== 'undefined') {
+    var writingsList = document.getElementById('writings-list');
+    var writingDetail = document.getElementById('writing-detail');
+    var writingContent = document.getElementById('writing-content');
+    var writingBackBtn = document.getElementById('writing-back');
+
+    function showWritingsList() {
+      writingsList.style.display = '';
+      writingDetail.style.display = 'none';
+    }
+
+    function showWritingDetail() {
+      writingsList.style.display = 'none';
+      writingDetail.style.display = '';
+    }
+
+    function formatDate(dateStr) {
+      var d = new Date(dateStr + 'T00:00:00');
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function loadPost(writing) {
+      showWritingDetail();
+      writingContent.innerHTML = '<p class="writing-loading">Loading…</p>';
+      fetch(writing.file)
+        .then(function (res) {
+          if (!res.ok) throw new Error('Failed to load post');
+          return res.text();
+        })
+        .then(function (md) {
+          var html = marked.parse(md);
+          writingContent.innerHTML =
+            '<time class="writing-date">' + escapeHtml(formatDate(writing.date)) + '</time>' +
+            '<div class="writing-body">' + html + '</div>';
+        })
+        .catch(function () {
+          writingContent.innerHTML = '<p class="writing-error">Could not load this post.</p>';
+        });
+      var writingsSection = document.getElementById('writings');
+      if (writingsSection) {
+        writingsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    if (writingsList) {
+      writingsList.innerHTML = writings
+        .map(function (w, i) {
+          return (
+            '<article class="writing-card" data-index="' + i + '">' +
+            '<time class="writing-card-date">' + escapeHtml(formatDate(w.date)) + '</time>' +
+            '<h3 class="writing-card-title">' + escapeHtml(w.title) + '</h3>' +
+            '<p class="writing-card-summary">' + escapeHtml(w.summary) + '</p>' +
+            '<span class="writing-card-read">Read more &rarr;</span>' +
+            '</article>'
+          );
+        })
+        .join('');
+
+      writingsList.addEventListener('click', function (e) {
+        var card = e.target.closest('.writing-card');
+        if (!card) return;
+        var index = parseInt(card.getAttribute('data-index'), 10);
+        if (writings[index]) loadPost(writings[index]);
+      });
+    }
+
+    if (writingBackBtn) {
+      writingBackBtn.addEventListener('click', function () {
+        showWritingsList();
+        var writingsSection = document.getElementById('writings');
+        if (writingsSection) {
+          writingsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+  }
+
   // Render experiences timeline from experiences.js
   if (typeof experiences !== 'undefined') {
     const timeline = document.getElementById('experiences-timeline');

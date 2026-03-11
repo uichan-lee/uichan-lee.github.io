@@ -15,6 +15,7 @@
     <nav class="nav">
       <a href="#home" class="nav-link active" data-section="home">Home</a>
       <a href="#projects" class="nav-link" data-section="projects">Projects</a>
+      <a href="#writings" class="nav-link" data-section="writings">Writings</a>
       <a href="#experiences" class="nav-link" data-section="experiences">Experiences</a>
     </nav>
   </header>
@@ -51,6 +52,15 @@
       <div id="projects-grid" class="projects-grid"></div>
     </section>
 
+    <section id="writings" class="section section-writings">
+      <h2 class="section-title">Writings</h2>
+      <div id="writings-list" class="writings-grid"></div>
+      <div id="writing-detail" class="writing-detail" style="display:none">
+        <button id="writing-back" class="writing-back-btn" type="button">&larr; Back to list</button>
+        <article id="writing-content" class="writing-content"></article>
+      </div>
+    </section>
+
     <section id="experiences" class="section section-experiences">
       <h2 class="section-title">Experiences</h2>
       <div class="experiences-cta">
@@ -65,8 +75,10 @@
     <p>© 2026 Uichan Lee</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="js/projects.js"></script>
   <script src="js/experiences.js"></script>
+  <script src="js/writings.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
