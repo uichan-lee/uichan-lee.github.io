@@ -78,22 +78,31 @@ If at least one dropped variable matters, $SSR_r$ should increase substantially 
 <br>
 - We **reject** $H_0$ when $F > c$, the critical value from the $F_{q,\ n-k-1}$ distribution
 
-
-*Unrestricted model*:
-$$
-score = \beta_0 + \beta_1 classize + \beta_2 expend + \beta_3 tchcomp + \beta_4 enroll + \beta_5 faminc + \beta_6 motheduc + \beta_7 fatheduc + \beta_8 siblings + u
-$$
-*Restriced Model*: $score = \beta_0 + \beta_1 classize + \beta_2 expend + \beta_3 tchcomp + \beta_4 enroll$
-
-$H_0: \beta_5, \beta_6, \beta_7, \beta_8 = 0$
-$q = 4, k = 8$
+> [!EXAMPLE] Example Model
+> 
+> *Unrestricted model*:
+> $$
+> score = \beta_0 + \beta_1 classize + \beta_2 expend + \beta_3 tchcomp + \beta_4 enroll + \beta_5 faminc + \beta_6 motheduc + \beta_7 fatheduc + \beta_8 siblings + u
+> $$
+> *Restriced Model*: 
+> $score = \beta_0 + \beta_1 classize + \beta_2 expend + \beta_3 tchcomp + \beta_4 enroll$
+> 
+> $H_0: \beta_5, \beta_6, \beta_7, \beta_8 = 0$
+> $q = 4, k = 8$
+> 
 
 <br>
 
-**F-stat $R^2$ version**:
+**F-stat $R^2$ form**:
 $$
 F = \frac{(R^2_{ur}-R^2_r)/q}{(1-R_{ur}^2)/(n-k-1)}
 $$
+- Often more convenient because $R^2$ is always between 0 and 1 (wherease SSR can be very large depending on units)
+- Both formulas give identical results
+	- *Numerator*: How much $R^2$ improves when we add the performance variables, per restriction
+	- *Denominator*: How much variation is still unexplained in the full model, per degree of freedom
+
+
 
 Under $H_0$, the F-statistic follows an **F-distribution**
 
@@ -102,14 +111,24 @@ Under $H_0$, the F-statistic follows an **F-distribution**
 $$
 F \sim F_{q, n-k-1}
 $$
+The F distribution has *two* degree-of-freedom parameters:
+- Numerator df = q (number of restrictions)
+- Denominator df = n - k - 1 (df in the full model)
 
-- More restrictions: distribution shifts right, tightens > easier to reject
-- More data: distribution tightens > easier to reject
+We **reject** $H_0$ when $F > c$, where $c$ is the critical value from the $F_{q, n-k-1}$ distribution at our chosen significance level. 
+![[image-144.png]]
+
+- More restrictions ➡️ distribution shifts right, tightens ➡️ easier to reject
+- More data ➡️ distribution tightens ➡️ easier to reject
+
+### Rejecting the Null
 
 The rejection rule is simple, we reject if $F > c$.
-If rejected, we say the variables are <u>jointly statistically significant</u>.
+- If rejected, we say that $x_{k-q+1}, \dots, x_k$ are <u>jointly statistically significant</u>.
+- If $H_0$ not rejected say that the varaibles are *jointly insignificant* which often justifies dropping them for the model.
 
-- With a 5% significance level, q = 3 and n - k - 1 = 60, the critical value is c = 2.76. We would reject $H_0$ at 5% level if the computed value of the F statistic exceeds 2.76. 
+
+With a 5% significance level, q = 3 and n - k - 1 = 60, the critical value is c = 2.76. We would reject $H_0$ at 5% level if the computed value of the F statistic exceeds 2.76. 
 
 ![[image-142.png]]
 

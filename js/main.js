@@ -172,10 +172,16 @@
 
     md = md.replace(/!\[\[([^\]|]+?)(?:\|([^\]]*))?\]\]/g, function (m, file, dims) {
       var src = baseDir + 'attachments/' + file.trim();
-      if (!dims) return '![' + file + '](' + src + ')';
+      var srcAttr = src.replace(/ /g, '%20');
+      if (!dims) return '![' + file + '](<' + src + '>)';
       var wh = dims.match(/^(\d+)x(\d+)$/);
-      if (wh) return '<img src="' + src + '" width="' + wh[1] + '" height="' + wh[2] + '" alt="' + file + '" />';
-      return '<img src="' + src + '" width="' + dims + '" alt="' + file + '" />';
+      if (wh) return '<img src="' + srcAttr + '" width="' + wh[1] + '" height="' + wh[2] + '" alt="' + file + '" />';
+      return '<img src="' + srcAttr + '" width="' + dims + '" alt="' + file + '" />';
+    });
+
+    md = md.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function (m, alt, url) {
+      if (url.indexOf(' ') === -1 || url.charAt(0) === '<') return m;
+      return '![' + alt + '](<' + url + '>)';
     });
 
     md = md.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, function (m, target, alias) {
