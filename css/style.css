@@ -84,6 +84,10 @@ ul, ol {
   margin: 0 auto;
 }
 
+.section + .section {
+  margin-top: 6rem;
+}
+
 .section-home {
   display: flex;
   align-items: center;
@@ -374,6 +378,11 @@ ul, ol {
   background: #f1f5f9;
   color: #0f172a;
   border-color: rgba(0, 0, 0, 0.18);
+}
+
+.writing-back-btn-bottom {
+  margin-top: 2rem;
+  margin-bottom: 0;
 }
 
 .writing-date {
@@ -880,6 +889,10 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 
   .section {
     padding: 5rem 1rem 2rem;
+  }
+
+  .section + .section {
+    margin-top: 4rem;
   }
 
   .name {

@@ -362,6 +362,7 @@
     var writingDetail = document.getElementById('writing-detail');
     var writingContent = document.getElementById('writing-content');
     var writingBackBtn = document.getElementById('writing-back');
+    var writingBackBottomBtn = document.getElementById('writing-back-bottom');
 
     function showWritingsList() {
       if (writingsList) writingsList.style.display = '';
@@ -494,14 +495,20 @@
       });
     }
 
-    if (writingBackBtn) {
-      writingBackBtn.addEventListener('click', function () {
+    function goBackToWritingsList() {
         showWritingsList();
         var writingsSection = document.getElementById('writings');
         if (writingsSection) {
           writingsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      });
+    }
+
+    if (writingBackBtn) {
+      writingBackBtn.addEventListener('click', goBackToWritingsList);
+    }
+
+    if (writingBackBottomBtn) {
+      writingBackBottomBtn.addEventListener('click', goBackToWritingsList);
     }
   }
 
