@@ -376,7 +376,7 @@ const writings = [
   },
   {
     "slug": "envecon-c118-envecon-c118-3-12",
-    "title": "From RCT to Natural Experiments",
+    "title": "Natural Experiments: Difference-in-Differences",
     "date": "2026-03-12",
     "summary": "The challange with observational data is that",
     "file": "posts/ENVECON C118/ENVECON C118 3.12.md",

@@ -27,7 +27,7 @@
 > Try calculating the F-statistic. You will notice that its proportional to $n$, so even a small drop in $R^2$ can be statistically significant when $n$ is large. 
 
 
-# From RCT to Natural Experiments
+# Natural Experiments: Difference-in-Differences
 
 The challange with observational data is that 
 - we can't always randomize
@@ -42,9 +42,7 @@ The key question is always: can we find a **control group** whose outcomes tell 
 > When we are doing an RCT, we make a key assumption that without the treatment, the treated group would look the same as control group.
 
 
-## Difference-in-Differences
-
-A startegy that constructs the counterfactual using *changes over time* in a control group. One of the most widely used tools in applied economics. 
+**Differnce-in-differences** is a startegy that constructs the counterfactual using *changes over time* in a control group. One of the most widely used tools in applied economics. 
 
 - Basic idea: even if groups differ in *levels*, if they share the same *trend*, we can difference out the selection bias
 
