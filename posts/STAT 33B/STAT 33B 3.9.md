@@ -52,6 +52,12 @@ ggplot(data = sw_dat,
 ```
 
 
+`geom_text`:
+![[image-32.png]]
+
+`geom_label`:
+![[image-33.png]]
+
 ## Saving Plots
 
 Use `ggsave()` to save the most recent plot to a file. The file format is inferred from the extension (e.g., `.png`, `.pdf`, `.svg`):

@@ -373,5 +373,13 @@ const writings = [
     "summary": "We already know how to test whether a particular variable has no partial effect on the dependent variable.",
     "file": "posts/ENVECON C118/ENVECON C118 3.10.md",
     "category": "econometrics"
+  },
+  {
+    "slug": "envecon-c118-envecon-c118-3-12",
+    "title": "From RCT to Natural Experiments",
+    "date": "2026-03-12",
+    "summary": "The challange with observational data is that",
+    "file": "posts/ENVECON C118/ENVECON C118 3.12.md",
+    "category": "econometrics"
   }
 ];
