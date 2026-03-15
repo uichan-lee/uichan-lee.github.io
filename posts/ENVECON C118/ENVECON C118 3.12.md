@@ -167,7 +167,7 @@ This is called the **parallel trands assumption**. In Snow's case: if Lambeth ha
 
 This is *not* the same as saying the two groups have the same levels; they can start at different places. It says they would have *changed* by the same amount. 
 
-> [! QUESTION] Is Parallel Trends Testable?
+> [!QUESTION] Is Parallel Trends Testable?
 > We can **never directly test** the parallel trends assumption since it's about what *would have happened* (a counterfactual)
 > 
 > But we can look for **supporting evidence**:

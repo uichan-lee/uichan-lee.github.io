@@ -8,7 +8,7 @@ const os = require('os');
 
 const UC_BERKELEY_ROOT = path.join(
   os.homedir(),
-  "Documents/Documents - Uichan's MacBook Air/Main Vault/UC Berkeley"
+  "Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/UC Berkeley"
 );
 
 const COURSES = [
