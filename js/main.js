@@ -302,10 +302,16 @@
   function showTOC() { if (tocEl) tocEl.classList.add('visible'); }
   function hideTOC() { if (tocEl) tocEl.classList.remove('visible'); }
 
+  var tocBackBtnHtml = '<button id="writing-back-toc" class="writing-back-btn writing-back-btn-toc" type="button">&larr; Back to list</button>';
+
   function buildTOC(body) {
     if (!tocEl || !body) return;
     var headings = body.querySelectorAll('h1, h2, h3, h4');
-    if (headings.length < 2) { tocEl.innerHTML = ''; return; }
+    if (headings.length < 2) {
+      tocEl.innerHTML = tocBackBtnHtml;
+      showTOC();
+      return;
+    }
 
     headings.forEach(function (h, i) {
       if (!h.id) h.id = 'heading-' + i;
@@ -317,7 +323,7 @@
       html += '<li class="toc-item toc-level-' + level + '">' +
         '<a class="toc-link" href="#' + h.id + '">' + h.textContent + '</a></li>';
     });
-    html += '</ul>';
+    html += '</ul>' + tocBackBtnHtml;
     tocEl.innerHTML = html;
 
     var links = tocEl.querySelectorAll('.toc-link');
@@ -367,12 +373,15 @@
     function showWritingsList() {
       if (writingsList) writingsList.style.display = '';
       if (writingDetail) writingDetail.style.display = 'none';
+      if (showMoreWrap) showMoreWrap.style.display = '';
       clearTOC();
+      applyFilters();
     }
 
     function showWritingDetail() {
       if (writingsList) writingsList.style.display = 'none';
       if (writingDetail) writingDetail.style.display = '';
+      if (showMoreWrap) showMoreWrap.style.display = 'none';
     }
 
     function formatDate(dateStr) {
