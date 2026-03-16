@@ -92,7 +92,7 @@ Households were assigned to clean vs. polluted water **not** by choice, income, 
 
 Snow called this "a grand experiment... on the grandest scale"
 
-Snow collected mortality data by water soource during the 1854 epidemic:
+Snow collected mortality data by water source during the 1854 epidemic:
 ![[image-154.png]]
 
 - S&V customers died at **8.5 times** the rate of Lambeth customers.

@@ -581,7 +581,7 @@
 
     if (writingDetail) {
       writingDetail.addEventListener('click', function (e) {
-        var backBtn = e.target.closest('#writing-back, #writing-back-bottom');
+        var backBtn = e.target.closest('#writing-back, #writing-back-bottom, #writing-back-toc');
         if (!backBtn) return;
         goBackToWritingsList();
       });
