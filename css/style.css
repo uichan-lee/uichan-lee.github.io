@@ -260,6 +260,41 @@ ul, ol {
   max-width: 800px;
 }
 
+.writings-search-wrap {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.writings-search-input {
+  width: 100%;
+  max-width: 320px;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: #334155;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.writings-search-input::placeholder {
+  color: #94a3b8;
+}
+
+.writings-search-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.writings-no-results {
+  margin: 1.5rem 0;
+  text-align: center;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
 .writings-filters {
   display: flex;
   gap: 0.5rem;
@@ -1034,6 +1069,25 @@ html[data-theme="dark"] .filter-btn.active {
   background: #2563eb;
   color: #fff;
   border-color: #2563eb;
+}
+
+html[data-theme="dark"] .writings-search-input {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #f1f5f9;
+}
+
+html[data-theme="dark"] .writings-search-input::placeholder {
+  color: #64748b;
+}
+
+html[data-theme="dark"] .writings-search-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+}
+
+html[data-theme="dark"] .writings-no-results {
+  color: #94a3b8;
 }
 
 html[data-theme="dark"] .writing-card {

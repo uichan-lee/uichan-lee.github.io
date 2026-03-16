@@ -54,6 +54,7 @@ const COURSES = [
 
 const POSTS_DIR = path.join(__dirname, 'posts');
 const WRITINGS_JS = path.join(__dirname, 'js', 'writings.js');
+const SEARCH_INDEX_JS = path.join(__dirname, 'js', 'search-index.js');
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -214,6 +215,25 @@ function slugify(str) {
     .replace(/^-|-$/g, '');
 }
 
+/** Strip markdown to plain text for search index (title + body). */
+function stripMarkdownToPlainText(content) {
+  let text = content
+    .replace(/^---[\s\S]*?^---\s*/m, '')
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/\*\*?|__?/g, '')
+    .replace(/^#{1,6}\s+/gm, ' ')
+    .replace(/^\s*[-*]\s+/gm, ' ')
+    .replace(/^\s*\d+\.\s+/gm, ' ')
+    .replace(/\$\$[\s\S]*?\$\$/g, ' ')
+    .replace(/\$[^$]+\$/g, ' ')
+    .replace(/\n+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return text.length > 30000 ? text.slice(0, 30000) : text;
+}
+
 function shouldIncludeFile(filename, config) {
   if (!filename.endsWith('.md')) return false;
   if (!config.include) return true;
@@ -224,6 +244,7 @@ function shouldIncludeFile(filename, config) {
 
 function sync() {
   const allPosts = [];
+  const allSearchEntries = [];
 
   for (const config of COURSES) {
     const sourceDir = config.sourceDir;
@@ -268,13 +289,19 @@ function sync() {
       const summary = extractSummary(content);
       const filePath = `posts/${config.targetDir}/${mdFile}`;
 
+      const slug = slugify(`${config.targetDir} ${base}`);
       coursePosts.push({
-        slug: slugify(`${config.targetDir} ${base}`),
+        slug,
         title,
         date,
         summary,
         file: filePath,
         category: config.category,
+      });
+      allSearchEntries.push({
+        slug,
+        title,
+        text: stripMarkdownToPlainText(content),
       });
     }
     assignConfiguredDates(coursePosts, config);
@@ -297,6 +324,14 @@ function sync() {
   const output = `const writingCategories = ${catJson};\n\nconst writings = ${postsJson};\n`;
   fs.writeFileSync(WRITINGS_JS, output, 'utf-8');
   console.log(`\n  writings.js: ${allPosts.length} posts written`);
+
+  const searchIndex = {};
+  allSearchEntries.forEach(function (e) {
+    searchIndex[e.slug] = { title: e.title, text: e.text };
+  });
+  const searchIndexOutput = 'const searchIndex = ' + JSON.stringify(searchIndex) + ';\n';
+  fs.writeFileSync(SEARCH_INDEX_JS, searchIndexOutput, 'utf-8');
+  console.log('  search-index.js: ' + Object.keys(searchIndex).length + ' entries');
 }
 
 console.log('Syncing vault -> posts/...\n');

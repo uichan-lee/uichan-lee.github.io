@@ -435,13 +435,18 @@
         if (w.category) catCounts[w.category] = (catCounts[w.category] || 0) + 1;
       });
 
-      var filtersHtml = '<div class="writings-filters">' +
+      var searchIndexData = (typeof searchIndex !== 'undefined') ? searchIndex : {};
+      var filtersHtml = '<div class="writings-search-wrap">' +
+        '<input type="search" id="writings-search" class="writings-search-input" placeholder="Search posts (title + content)…" aria-label="Search posts">' +
+        '</div>' +
+        '<div class="writings-filters">' +
         '<button class="filter-btn active" data-category="all">All (' + sortedWritings.length + ')</button>';
       Object.keys(catCounts).forEach(function (cat) {
         filtersHtml += '<button class="filter-btn" data-category="' + escapeAttr(cat) + '">' +
           escapeHtml(catLabels[cat] || cat) + ' (' + catCounts[cat] + ')</button>';
       });
       filtersHtml += '</div>';
+      filtersHtml += '<p id="writings-no-results" class="writings-no-results" style="display:none">No posts match your search.</p>';
       writingsList.insertAdjacentHTML('beforebegin', filtersHtml);
 
       writingsList.innerHTML = sortedWritings
@@ -461,19 +466,50 @@
         })
         .join('');
 
+      var searchInput = writingsList.parentElement.querySelector('#writings-search');
+      var noResultsEl = writingsList.parentElement.querySelector('#writings-no-results');
+
+      function getSearchQuery() {
+        return searchInput ? searchInput.value.trim().toLowerCase() : '';
+      }
+
+      function matchesSearch(w) {
+        var q = getSearchQuery();
+        if (!q) return true;
+        var indexEntry = searchIndexData[w.slug];
+        var text = (w.title + ' ' + (indexEntry ? indexEntry.text : (w.summary || ''))).toLowerCase();
+        return text.indexOf(q) !== -1;
+      }
+
+      function applyFilters() {
+        var filtersEl = writingsList.parentElement.querySelector('.writings-filters');
+        var activeBtn = filtersEl ? filtersEl.querySelector('.filter-btn.active') : null;
+        var cat = (activeBtn && activeBtn.getAttribute('data-category')) || 'all';
+        var visibleCount = 0;
+        writingsList.querySelectorAll('.writing-card').forEach(function (card) {
+          var idx = parseInt(card.getAttribute('data-index'), 10);
+          var w = sortedWritings[idx];
+          var show = w && matchesSearch(w) && (cat === 'all' || (w.category || '') === cat);
+          card.style.display = show ? '' : 'none';
+          if (show) visibleCount++;
+        });
+        if (noResultsEl) noResultsEl.style.display = visibleCount === 0 ? '' : 'none';
+      }
+
       var filtersEl = writingsList.parentElement.querySelector('.writings-filters');
       if (filtersEl) {
         filtersEl.addEventListener('click', function (e) {
           var btn = e.target.closest('.filter-btn');
           if (!btn) return;
-          var cat = btn.getAttribute('data-category');
           filtersEl.querySelectorAll('.filter-btn').forEach(function (b) {
             b.classList.toggle('active', b === btn);
           });
-          writingsList.querySelectorAll('.writing-card').forEach(function (card) {
-            card.style.display = (cat === 'all' || card.getAttribute('data-category') === cat) ? '' : 'none';
-          });
+          applyFilters();
         });
+      }
+      if (searchInput) {
+        searchInput.addEventListener('input', applyFilters);
+        searchInput.addEventListener('search', applyFilters);
       }
 
       function openCardAt(index) {
