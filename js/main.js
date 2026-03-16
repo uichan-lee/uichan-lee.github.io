@@ -449,6 +449,9 @@
       filtersHtml += '<p id="writings-no-results" class="writings-no-results" style="display:none">No posts match your search.</p>';
       writingsList.insertAdjacentHTML('beforebegin', filtersHtml);
 
+      var POSTS_VISIBLE_INITIAL = 5;
+      var expanded = false;
+
       writingsList.innerHTML = sortedWritings
         .map(function (w, i) {
           var catTag = catLabels[w.category] || w.category || '';
@@ -466,8 +469,15 @@
         })
         .join('');
 
+      writingsList.insertAdjacentHTML('afterend',
+        '<div id="writings-show-more-wrap" class="writings-show-more-wrap" style="display:none">' +
+        '<button type="button" id="writings-show-more-btn" class="writings-show-more-btn">Show more</button>' +
+        '</div>');
+
       var searchInput = writingsList.parentElement.querySelector('#writings-search');
       var noResultsEl = writingsList.parentElement.querySelector('#writings-no-results');
+      var showMoreWrap = writingsList.parentElement.querySelector('#writings-show-more-wrap');
+      var showMoreBtn = writingsList.parentElement.querySelector('#writings-show-more-btn');
 
       function getSearchQuery() {
         return searchInput ? searchInput.value.trim().toLowerCase() : '';
@@ -485,15 +495,29 @@
         var filtersEl = writingsList.parentElement.querySelector('.writings-filters');
         var activeBtn = filtersEl ? filtersEl.querySelector('.filter-btn.active') : null;
         var cat = (activeBtn && activeBtn.getAttribute('data-category')) || 'all';
-        var visibleCount = 0;
+        var matchingCards = [];
         writingsList.querySelectorAll('.writing-card').forEach(function (card) {
           var idx = parseInt(card.getAttribute('data-index'), 10);
           var w = sortedWritings[idx];
-          var show = w && matchesSearch(w) && (cat === 'all' || (w.category || '') === cat);
-          card.style.display = show ? '' : 'none';
-          if (show) visibleCount++;
+          var match = w && matchesSearch(w) && (cat === 'all' || (w.category || '') === cat);
+          if (match) matchingCards.push(card);
         });
-        if (noResultsEl) noResultsEl.style.display = visibleCount === 0 ? '' : 'none';
+        var limit = expanded ? matchingCards.length : POSTS_VISIBLE_INITIAL;
+        var visibleCards = matchingCards.slice(0, limit);
+        writingsList.querySelectorAll('.writing-card').forEach(function (card) {
+          card.style.display = visibleCards.indexOf(card) !== -1 ? '' : 'none';
+        });
+        if (noResultsEl) noResultsEl.style.display = matchingCards.length === 0 ? '' : 'none';
+        if (showMoreWrap && showMoreBtn) {
+          if (matchingCards.length > POSTS_VISIBLE_INITIAL) {
+            showMoreWrap.style.display = '';
+            showMoreBtn.textContent = expanded
+              ? 'Show less'
+              : 'Show more (' + (matchingCards.length - POSTS_VISIBLE_INITIAL) + ')';
+          } else {
+            showMoreWrap.style.display = 'none';
+          }
+        }
       }
 
       var filtersEl = writingsList.parentElement.querySelector('.writings-filters');
@@ -511,6 +535,14 @@
         searchInput.addEventListener('input', applyFilters);
         searchInput.addEventListener('search', applyFilters);
       }
+      if (showMoreBtn) {
+        showMoreBtn.addEventListener('click', function () {
+          expanded = !expanded;
+          applyFilters();
+        });
+      }
+
+      applyFilters();
 
       function openCardAt(index) {
         if (sortedWritings[index]) loadPost(sortedWritings[index]);
