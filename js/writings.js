@@ -381,5 +381,13 @@ const writings = [
     "summary": "The challange with observational data is that",
     "file": "posts/ENVECON C118/ENVECON C118 3.12.md",
     "category": "econometrics"
+  },
+  {
+    "slug": "envecon-c118-envecon-c118-3-17",
+    "title": "Difference-in-Differences",
+    "date": "2026-03-17",
+    "summary": "\\hat\\delta{DiD} = (\\bar Y{T, after}-\\bar Y{T, before}) - (\\bar Y{C, after} - \\bar Y(C, before))",
+    "file": "posts/ENVECON C118/ENVECON C118 3.17.md",
+    "category": "econometrics"
   }
 ];
