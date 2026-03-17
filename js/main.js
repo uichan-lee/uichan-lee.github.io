@@ -306,7 +306,10 @@
 
   function buildTOC(body) {
     if (!tocEl || !body) return;
-    var headings = body.querySelectorAll('h1, h2, h3, h4');
+    var allHeadings = body.querySelectorAll('h1, h2, h3, h4');
+    var headings = Array.prototype.filter.call(allHeadings, function (h) {
+      return !h.closest('.callout');
+    });
     if (headings.length < 2) {
       tocEl.innerHTML = tocBackBtnHtml;
       showTOC();
