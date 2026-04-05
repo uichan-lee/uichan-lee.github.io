@@ -389,5 +389,29 @@ const writings = [
     "summary": "\\hat\\delta{DiD} = (\\bar Y{T, after}-\\bar Y{T, before}) - (\\bar Y{C, after} - \\bar Y(C, before))",
     "file": "posts/ENVECON C118/ENVECON C118 3.17.md",
     "category": "econometrics"
+  },
+  {
+    "slug": "envecon-c118-envecon-c118-3-19",
+    "title": "DiD in Practice: Currie and Walker (2011)",
+    "date": "2026-03-19",
+    "summary": "",
+    "file": "posts/ENVECON C118/ENVECON C118 3.19.md",
+    "category": "econometrics"
+  },
+  {
+    "slug": "envecon-c118-envecon-c118-3-31",
+    "title": "DiD with Multiple Time Periods",
+    "date": "2026-03-31",
+    "summary": "So far simple before/after DiD",
+    "file": "posts/ENVECON C118/ENVECON C118 3.31.md",
+    "category": "econometrics"
+  },
+  {
+    "slug": "envecon-c118-envecon-c118-4-2",
+    "title": "The Parallel Trends Assumption (Revisited)",
+    "date": "2026-04-02",
+    "summary": "E[Yt(0)|D=1] - E[Y{t-1}(0)|D=1] = E[Yt(0)|D=0] - E[Yt(0)|D=0]",
+    "file": "posts/ENVECON C118/ENVECON C118 4.2.md",
+    "category": "econometrics"
   }
 ];
