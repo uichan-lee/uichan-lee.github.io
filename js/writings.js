@@ -57,7 +57,7 @@ const writings = [
   },
   {
     "slug": "data-100-week-4",
-    "title": "Discussion",
+    "title": "Regex (Regular Expression)",
     "date": "2025-09-22",
     "summary": "Ex.) Join tables with mismatched labels",
     "file": "posts/DATA 100/Week 4.md",
@@ -105,7 +105,7 @@ const writings = [
   },
   {
     "slug": "data-100-week-7",
-    "title": "Ordinary Least Squares (OLS) | Discussion",
+    "title": "Ordinary Least Squares (OLS)",
     "date": "2025-10-13",
     "summary": "The dot product is a vector operation that",
     "file": "posts/DATA 100/Week 7.md",

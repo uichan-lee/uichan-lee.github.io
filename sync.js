@@ -183,7 +183,7 @@ function extractTitle(content) {
     const m = line.match(/^#\s+(.+)/);
     if (m) {
       let text = stripLatexFromTitle(m[1].trim());
-      if (text && !/^lecture(\s+notes?)?$/i.test(text)) h1s.push(text);
+      if (text && !/^(lecture(\s+notes?)?|discussion)$/i.test(text)) h1s.push(text);
     }
   }
   if (h1s.length > 0) return h1s.join(' | ');
