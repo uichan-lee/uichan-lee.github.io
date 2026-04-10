@@ -57,7 +57,7 @@ const writings = [
   },
   {
     "slug": "data-100-week-4",
-    "title": "Lecture Notes | Discussion",
+    "title": "Discussion",
     "date": "2025-09-22",
     "summary": "Ex.) Join tables with mismatched labels",
     "file": "posts/DATA 100/Week 4.md",
