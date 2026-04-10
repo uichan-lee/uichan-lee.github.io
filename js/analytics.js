@@ -1,6 +1,5 @@
 (function () {
-  var API = 'https://uichan-portfolio.goatcounter.com/api/v0';
-  var TOKEN = 'ajcsfn2a1uru1iw6uy27icywfl19wsi90r6n1n0x2k70oxk7m';
+  var WORKER = 'https://goatcounter-proxy.rickylee7185.workers.dev';
 
   function pad(n) { return String(n).padStart(2, '0'); }
   function fmtDate(d) {
@@ -8,15 +7,10 @@
   }
 
   function fetchHits(start, end) {
-    return fetch(API + '/stats/hits?start=' + start + '&end=' + end, {
-      headers: { 'Authorization': 'Bearer ' + TOKEN }
-    }).then(function (res) {
-      if (!res.ok) return null;
-      return res.json();
-    }).then(function (data) {
-      if (!data) return null;
-      return data.total_unique != null ? data.total_unique : data.total;
-    }).catch(function () { return null; });
+    return fetch(WORKER + '?start=' + start + '&end=' + end)
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (data) { return data ? data.count : null; })
+      .catch(function () { return null; });
   }
 
   function fmt(n) {
