@@ -57,7 +57,7 @@ const writings = [
   },
   {
     "slug": "data-100-week-4",
-    "title": "Regex (Regular Expression)",
+    "title": "Regular Expressions (Regex)",
     "date": "2025-09-22",
     "summary": "Ex.) Join tables with mismatched labels",
     "file": "posts/DATA 100/Week 4.md",

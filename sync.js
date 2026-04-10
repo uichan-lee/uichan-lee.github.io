@@ -264,6 +264,11 @@ function sync() {
   const allPosts = [];
   const allSearchEntries = [];
 
+  const overridesPath = path.join(__dirname, 'title-overrides.json');
+  const titleOverrides = fs.existsSync(overridesPath)
+    ? JSON.parse(fs.readFileSync(overridesPath, 'utf-8'))
+    : {};
+
   for (const config of TOPICS) {
     const sourceDir = config.sourceDir;
     const coursePosts = [];
@@ -320,9 +325,10 @@ function sync() {
       const filePath = `posts/${config.targetDir}/${mdFile}`;
 
       const slug = slugify(`${config.targetDir} ${base}`);
+      const finalTitle = titleOverrides[slug] || title;
       coursePosts.push({
         slug,
-        title,
+        title: finalTitle,
         date,
         summary,
         file: filePath,
