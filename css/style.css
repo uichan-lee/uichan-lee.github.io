@@ -827,6 +827,13 @@ ul, ol {
   backdrop-filter: blur(8px);
 }
 
+.visitor-stats {
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #94a3b8;
+}
+
 /* Theme toggle button */
 .theme-toggle {
   display: inline-flex;
@@ -1271,6 +1278,10 @@ html[data-theme="dark"] .footer {
   background: rgba(15, 23, 42, 0.9);
   border-top-color: rgba(255, 255, 255, 0.08);
   color: #94a3b8;
+}
+
+html[data-theme="dark"] .visitor-stats {
+  color: #475569;
 }
 
 html[data-theme="dark"] .cta-btn {

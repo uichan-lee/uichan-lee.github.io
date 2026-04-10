@@ -2,7 +2,9 @@ const writingCategories = {
   "econometrics": "Econometrics",
   "r-programming": "R Programming",
   "data-structures-algorithms": "Data Structures/Algorithms",
-  "data-science": "Data Science"
+  "data-science": "Data Science",
+  "aws": "AWS",
+  "ml-ds": "ML/Data Science"
 };
 
 const writings = [
@@ -399,6 +401,30 @@ const writings = [
     "category": "econometrics"
   },
   {
+    "slug": "ml-ds-ensemble-regression",
+    "title": "Types of Ensemble Regression",
+    "date": "2026-03-21",
+    "summary": "Average the predictions of multiple trees:",
+    "file": "posts/ML DS/Ensemble Regression.md",
+    "category": "ml-ds"
+  },
+  {
+    "slug": "ml-ds-ml-fundamentals",
+    "title": "확률/통계 기본 개념 | Bias-Variance Tradeoff | Loss Functions & Evaluation Metrics | Gradient Descent | Linear Regression | Logistic Regression | Tree 계열 모델 | PCA (Principal Component Analysis)",
+    "date": "2026-03-21",
+    "summary": "\\text{Total Error} = \\text{Bias}^2 + \\text{Variance} + \\text{Irreducible Noise}",
+    "file": "posts/ML DS/ML Fundamentals.md",
+    "category": "ml-ds"
+  },
+  {
+    "slug": "stat-33b-stat-33b-3-30",
+    "title": "Expressions and Contitionals",
+    "date": "2026-03-30",
+    "summary": "R Code is composed of a series of expressions. So far, we've been using simple expressions like the following ones:",
+    "file": "posts/STAT 33B/STAT 33B 3.30.md",
+    "category": "r-programming"
+  },
+  {
     "slug": "envecon-c118-envecon-c118-3-31",
     "title": "DiD with Multiple Time Periods",
     "date": "2026-03-31",
@@ -413,5 +439,37 @@ const writings = [
     "summary": "E[Yt(0)|D=1] - E[Y{t-1}(0)|D=1] = E[Yt(0)|D=0] - E[Yt(0)|D=0]",
     "file": "posts/ENVECON C118/ENVECON C118 4.2.md",
     "category": "econometrics"
+  },
+  {
+    "slug": "envecon-c118-envecon-c118-4-7",
+    "title": "Instrumental Variables",
+    "date": "2026-04-07",
+    "summary": "So far we've estimated causal effects when \"treatment\" is as-good-as randomly assigned conditional on observable characteristics (experiments, natu...",
+    "file": "posts/ENVECON C118/ENVECON C118 4.7.md",
+    "category": "econometrics"
+  },
+  {
+    "slug": "envecon-c118-envecon-c118-4-9",
+    "title": "IV and Regression | From One Instrument to Many",
+    "date": "2026-04-09",
+    "summary": "We've shown the IV estimand (population quantity):",
+    "file": "posts/ENVECON C118/ENVECON C118 4.9.md",
+    "category": "econometrics"
+  },
+  {
+    "slug": "aws-1-setup",
+    "title": "1. Setup",
+    "date": "2026-04-10",
+    "summary": "In this post, I will be prepare for my study in Amazon Web Services.",
+    "file": "posts/AWS/1-Setup.md",
+    "category": "aws"
+  },
+  {
+    "slug": "aws-aws-study",
+    "title": "Notes",
+    "date": "2026-04-10",
+    "summary": "",
+    "file": "posts/AWS/AWS Study.md",
+    "category": "aws"
   }
 ];

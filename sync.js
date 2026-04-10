@@ -6,15 +6,16 @@ const os = require('os');
 
 // ─── Configuration ──────────────────────────────────────────────────────────
 
-const UC_BERKELEY_ROOT = path.join(
+const VAULT_ROOT = path.join(
   os.homedir(),
-  "Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault/UC Berkeley"
+  "Library/Mobile Documents/iCloud~md~obsidian/Documents/Main Vault"
 );
 
-const COURSES = [
+const TOPICS = [
+  // ── UC Berkeley Courses ──
   {
     name: 'ENVECON C118',
-    sourceDir: path.join(UC_BERKELEY_ROOT, 'Spring 2026', 'ENVECON C118', 'Notes'),
+    sourceDir: path.join(VAULT_ROOT, 'UC Berkeley', 'Spring 2026', 'ENVECON C118', 'Notes'),
     targetDir: 'ENVECON C118',
     category: 'econometrics',
     label: 'Econometrics',
@@ -22,7 +23,7 @@ const COURSES = [
   },
   {
     name: 'STAT 33B',
-    sourceDir: path.join(UC_BERKELEY_ROOT, 'Spring 2026', 'STAT 33B', 'Notes'),
+    sourceDir: path.join(VAULT_ROOT, 'UC Berkeley', 'Spring 2026', 'STAT 33B', 'Notes'),
     targetDir: 'STAT 33B',
     category: 'r-programming',
     label: 'R Programming',
@@ -30,7 +31,7 @@ const COURSES = [
   },
   {
     name: 'CS 61B',
-    sourceDir: path.join(UC_BERKELEY_ROOT, 'Fall 2025', 'Courses', 'CS 61B', 'Notes'),
+    sourceDir: path.join(VAULT_ROOT, 'UC Berkeley', 'Fall 2025', 'Courses', 'CS 61B', 'Notes'),
     targetDir: 'CS 61B',
     category: 'data-structures-algorithms',
     label: 'Data Structures/Algorithms',
@@ -41,7 +42,7 @@ const COURSES = [
   },
   {
     name: 'DATA 100',
-    sourceDir: path.join(UC_BERKELEY_ROOT, 'Fall 2025', 'Courses', 'DATA 100', 'Notes'),
+    sourceDir: path.join(VAULT_ROOT, 'UC Berkeley', 'Fall 2025', 'Courses', 'DATA 100', 'Notes'),
     targetDir: 'DATA 100',
     category: 'data-science',
     label: 'Data Science',
@@ -49,6 +50,22 @@ const COURSES = [
     weekDates: {
       semesterStart: '2025-09-01',
     },
+  },
+  // ── Independent Topics ──
+  {
+    name: 'AWS',
+    sourceDir: path.join(VAULT_ROOT, 'AWS'),
+    targetDir: 'AWS',
+    category: 'aws',
+    label: 'AWS',
+    numberedFiles: true,
+  },
+  {
+    name: 'ML DS',
+    sourceDir: path.join(VAULT_ROOT, 'ML DS'),
+    targetDir: 'ML DS',
+    category: 'ml-ds',
+    label: 'ML/Data Science',
   },
 ];
 
@@ -246,7 +263,7 @@ function sync() {
   const allPosts = [];
   const allSearchEntries = [];
 
-  for (const config of COURSES) {
+  for (const config of TOPICS) {
     const sourceDir = config.sourceDir;
     const coursePosts = [];
     if (!fs.existsSync(sourceDir)) {
@@ -285,7 +302,19 @@ function sync() {
         date = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
       }
 
-      const title = extractTitle(content) || base;
+      let title;
+      if (config.numberedFiles) {
+        const numMatch = base.match(/^(\d+)[-_](.+)$/);
+        if (numMatch) {
+          const num = numMatch[1];
+          const rest = numMatch[2].replace(/[-_]/g, ' ');
+          title = `${num}. ${extractTitle(content) || rest}`;
+        } else {
+          title = extractTitle(content) || base;
+        }
+      } else {
+        title = extractTitle(content) || base;
+      }
       const summary = extractSummary(content);
       const filePath = `posts/${config.targetDir}/${mdFile}`;
 
@@ -313,7 +342,7 @@ function sync() {
 
   // Build writingCategories
   const categories = {};
-  for (const config of COURSES) {
+  for (const config of TOPICS) {
     categories[config.category] = config.label;
   }
 

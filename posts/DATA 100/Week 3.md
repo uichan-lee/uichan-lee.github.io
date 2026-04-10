@@ -86,7 +86,7 @@ winners_only = (
 
 ##### Missing Data
 Approaches:
-**A. Keep as `NaN`
+**A. Keep as `NaN`**
 - A good default
 - If qualitative/categorical, consider creating a "Missing" category
 
