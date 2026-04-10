@@ -2,9 +2,8 @@ const writingCategories = {
   "econometrics": "Econometrics",
   "r-programming": "R Programming",
   "data-structures-algorithms": "Data Structures/Algorithms",
-  "data-science": "Data Science",
-  "aws": "AWS",
-  "ml-ds": "ML/Data Science"
+  "ml-ds": "ML/Data Science",
+  "aws": "AWS"
 };
 
 const writings = [
@@ -30,7 +29,7 @@ const writings = [
     "date": "2025-09-08",
     "summary": "A Series is a 1-D labeled array of Data. We can think of it as a columnar data.",
     "file": "posts/DATA 100/Week 2.md",
-    "category": "data-science"
+    "category": "ml-ds"
   },
   {
     "slug": "cs-61b-week-3",
@@ -46,7 +45,7 @@ const writings = [
     "date": "2025-09-15",
     "summary": "If there are 'Unnamed' column names after import, we can specify the header to skip first few rows.",
     "file": "posts/DATA 100/Week 3.md",
-    "category": "data-science"
+    "category": "ml-ds"
   },
   {
     "slug": "cs-61b-week-4",
@@ -62,7 +61,7 @@ const writings = [
     "date": "2025-09-22",
     "summary": "Ex.) Join tables with mismatched labels",
     "file": "posts/DATA 100/Week 4.md",
-    "category": "data-science"
+    "category": "ml-ds"
   },
   {
     "slug": "cs-61b-week-5",
@@ -78,7 +77,7 @@ const writings = [
     "date": "2025-09-29",
     "summary": "Last time, we focused on visualizing distributions of one variable (i.e., univariate distributions)",
     "file": "posts/DATA 100/Week 5.md",
-    "category": "data-science"
+    "category": "ml-ds"
   },
   {
     "slug": "cs-61b-week-6",
@@ -94,7 +93,7 @@ const writings = [
     "date": "2025-10-06",
     "summary": "The regression line is the unique straight line that minimizes the mean squared error of estimation among all straight lines.",
     "file": "posts/DATA 100/Week 6.md",
-    "category": "data-science"
+    "category": "ml-ds"
   },
   {
     "slug": "cs-61b-week-7",
@@ -110,7 +109,7 @@ const writings = [
     "date": "2025-10-13",
     "summary": "The dot product is a vector operation that",
     "file": "posts/DATA 100/Week 7.md",
-    "category": "data-science"
+    "category": "ml-ds"
   },
   {
     "slug": "cs-61b-week-8",
@@ -126,7 +125,7 @@ const writings = [
     "date": "2025-10-20",
     "summary": "1. Initialize a new model interface",
     "file": "posts/DATA 100/Week 8.md",
-    "category": "data-science"
+    "category": "ml-ds"
   },
   {
     "slug": "cs-61b-week-9",
@@ -142,7 +141,7 @@ const writings = [
     "date": "2025-10-27",
     "summary": "For example: we can calculate the exact gradient with all n data points (i.e., 1 epoch), as before:",
     "file": "posts/DATA 100/Week 9.md",
-    "category": "data-science"
+    "category": "ml-ds"
   },
   {
     "slug": "cs-61b-week-10",
@@ -158,7 +157,7 @@ const writings = [
     "date": "2025-11-03",
     "summary": "A random variable (RV or r.v.) represents the outcome of a random event.",
     "file": "posts/DATA 100/Week 10.md",
-    "category": "data-science"
+    "category": "ml-ds"
   },
   {
     "slug": "cs-61b-week-11",
@@ -174,7 +173,7 @@ const writings = [
     "date": "2025-11-10",
     "summary": "It's easy to get the best guess. (ex. taking average – average height)",
     "file": "posts/DATA 100/Week 11.md",
-    "category": "data-science"
+    "category": "ml-ds"
   },
   {
     "slug": "cs-61b-week-12",
@@ -190,7 +189,7 @@ const writings = [
     "date": "2025-11-17",
     "summary": "Notice the repeated dish types. What are the trends across each type?",
     "file": "posts/DATA 100/Week 12.md",
-    "category": "data-science"
+    "category": "ml-ds"
   },
   {
     "slug": "cs-61b-week-13",
@@ -206,7 +205,7 @@ const writings = [
     "date": "2025-11-24",
     "summary": "Up until this point, we have been working exclusively with linear regression.",
     "file": "posts/DATA 100/Week 13.md",
-    "category": "data-science"
+    "category": "ml-ds"
   },
   {
     "slug": "data-100-week-14",
@@ -214,7 +213,7 @@ const writings = [
     "date": "2025-12-01",
     "summary": "A decision boundary splits the data into predicted classes based on features.",
     "file": "posts/DATA 100/Week 14.md",
-    "category": "data-science"
+    "category": "ml-ds"
   },
   {
     "slug": "data-100-week-15",
@@ -222,7 +221,7 @@ const writings = [
     "date": "2025-12-08",
     "summary": "Most popular clustering approach. The algorithm:",
     "file": "posts/DATA 100/Week 15.md",
-    "category": "data-science"
+    "category": "ml-ds"
   },
   {
     "slug": "envecon-c118-envecon-c118-1-20",
@@ -462,14 +461,6 @@ const writings = [
     "date": "2026-04-10",
     "summary": "In this post, I will be prepare for my study in Amazon Web Services.",
     "file": "posts/AWS/1-Setup.md",
-    "category": "aws"
-  },
-  {
-    "slug": "aws-aws-study",
-    "title": "Notes",
-    "date": "2026-04-10",
-    "summary": "",
-    "file": "posts/AWS/AWS Study.md",
     "category": "aws"
   }
 ];

@@ -44,8 +44,8 @@ const TOPICS = [
     name: 'DATA 100',
     sourceDir: path.join(VAULT_ROOT, 'UC Berkeley', 'Fall 2025', 'Courses', 'DATA 100', 'Notes'),
     targetDir: 'DATA 100',
-    category: 'data-science',
-    label: 'Data Science',
+    category: 'ml-ds',
+    label: 'ML/Data Science',
     include: /^week\s+\d+\.md$/i,
     weekDates: {
       semesterStart: '2025-09-01',
@@ -253,6 +253,7 @@ function stripMarkdownToPlainText(content) {
 
 function shouldIncludeFile(filename, config) {
   if (!filename.endsWith('.md')) return false;
+  if (config.numberedFiles && !/^\d+[-_]/.test(filename)) return false;
   if (!config.include) return true;
   return config.include.test(filename);
 }
