@@ -440,6 +440,14 @@ const writings = [
     "category": "econometrics"
   },
   {
+    "slug": "stat-33b-stat-33b-4-6",
+    "title": "Iterations and Loops",
+    "date": "2026-04-06",
+    "summary": "Many times we need to perform a procedure several times. The main idea is that of iteration. For this purpose we use loops. R provides three basic ...",
+    "file": "posts/STAT 33B/STAT 33B 4.6.md",
+    "category": "r-programming"
+  },
+  {
     "slug": "envecon-c118-envecon-c118-4-7",
     "title": "Instrumental Variables",
     "date": "2026-04-07",
