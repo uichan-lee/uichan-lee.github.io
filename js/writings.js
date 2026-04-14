@@ -470,5 +470,13 @@ const writings = [
     "summary": "In this post, I will be prepare for my study in Amazon Web Services.",
     "file": "posts/AWS/1-Setup.md",
     "category": "aws"
+  },
+  {
+    "slug": "stat-33b-stat-33b-4-13",
+    "title": "Intro to Functions",
+    "date": "2026-04-13",
+    "summary": "In this part, we describe:",
+    "file": "posts/STAT 33B/STAT 33B 4.13.md",
+    "category": "r-programming"
   }
 ];
