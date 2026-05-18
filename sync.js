@@ -258,6 +258,30 @@ function shouldIncludeFile(filename, config) {
   return config.include.test(filename);
 }
 
+/**
+ * Parse the existing writings.js to preserve manual edits to title/summary.
+ * Returns a Map<slug, { title, summary }>.
+ */
+function loadExistingWritings() {
+  if (!fs.existsSync(WRITINGS_JS)) return new Map();
+  try {
+    const code = fs.readFileSync(WRITINGS_JS, 'utf-8');
+    const match = code.match(/const writings\s*=\s*(\[[\s\S]*?\]);\s*$/m);
+    if (!match) return new Map();
+    const arr = JSON.parse(match[1]);
+    const map = new Map();
+    for (const entry of arr) {
+      if (entry && entry.slug) {
+        map.set(entry.slug, { title: entry.title, summary: entry.summary });
+      }
+    }
+    return map;
+  } catch (e) {
+    console.warn(`  warning: could not parse existing writings.js (${e.message}); manual edits may be lost`);
+    return new Map();
+  }
+}
+
 // ─── Main ───────────────────────────────────────────────────────────────────
 
 function sync() {
@@ -268,6 +292,9 @@ function sync() {
   const titleOverrides = fs.existsSync(overridesPath)
     ? JSON.parse(fs.readFileSync(overridesPath, 'utf-8'))
     : {};
+
+  const existingWritings = loadExistingWritings();
+  let preservedCount = 0;
 
   for (const config of TOPICS) {
     const sourceDir = config.sourceDir;
@@ -321,22 +348,48 @@ function sync() {
       } else {
         title = extractTitle(content) || base;
       }
-      const summary = extractSummary(content);
+      const autoSummary = extractSummary(content);
       const filePath = `posts/${config.targetDir}/${mdFile}`;
 
       const slug = slugify(`${config.targetDir} ${base}`);
-      const finalTitle = titleOverrides[slug] || title;
+      const existing = existingWritings.get(slug);
+
+      // Priority for title:
+      //   1. title-overrides.json (most explicit)
+      //   2. existing writings.js (preserves manual edits)
+      //   3. auto-extracted from markdown
+      // Priority for summary:
+      //   1. existing writings.js (preserves manual edits)
+      //   2. auto-extracted from markdown
+      let finalTitle;
+      if (titleOverrides[slug]) {
+        finalTitle = titleOverrides[slug];
+      } else if (existing && existing.title) {
+        finalTitle = existing.title;
+        if (existing.title !== title) preservedCount++;
+      } else {
+        finalTitle = title;
+      }
+
+      let finalSummary;
+      if (existing && existing.summary !== undefined) {
+        finalSummary = existing.summary;
+        if (existing.summary !== autoSummary) preservedCount++;
+      } else {
+        finalSummary = autoSummary;
+      }
+
       coursePosts.push({
         slug,
         title: finalTitle,
         date,
-        summary,
+        summary: finalSummary,
         file: filePath,
         category: config.category,
       });
       allSearchEntries.push({
         slug,
-        title,
+        title: finalTitle,
         text: stripMarkdownToPlainText(content),
       });
     }
@@ -360,6 +413,9 @@ function sync() {
   const output = `const writingCategories = ${catJson};\n\nconst writings = ${postsJson};\n`;
   fs.writeFileSync(WRITINGS_JS, output, 'utf-8');
   console.log(`\n  writings.js: ${allPosts.length} posts written`);
+  if (preservedCount > 0) {
+    console.log(`    (preserved ${preservedCount} manual edit${preservedCount === 1 ? '' : 's'} from existing writings.js)`);
+  }
 
   const searchIndex = {};
   allSearchEntries.forEach(function (e) {
