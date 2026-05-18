@@ -478,5 +478,45 @@ const writings = [
     "summary": "In this part, we describe:",
     "file": "posts/STAT 33B/STAT 33B 4.13.md",
     "category": "r-programming"
+  },
+  {
+    "slug": "envecon-c118-envecon-c118-4-14",
+    "title": "LATE \\neq ATE",
+    "date": "2026-04-14",
+    "summary": "Three reminders when reading an IV paper:",
+    "file": "posts/ENVECON C118/ENVECON C118 4.14.md",
+    "category": "econometrics"
+  },
+  {
+    "slug": "envecon-c118-envecon-c118-4-16",
+    "title": "Regression Discontinuity",
+    "date": "2026-04-16",
+    "summary": "The key challange in causal inference is finding a control group that is comparable to the treated group in all ways except for treatment status.",
+    "file": "posts/ENVECON C118/ENVECON C118 4.16.md",
+    "category": "econometrics"
+  },
+  {
+    "slug": "envecon-c118-envecon-c118-4-23",
+    "title": "Estimating RD in Practice",
+    "date": "2026-04-23",
+    "summary": "Two Ways Continuity Fails:",
+    "file": "posts/ENVECON C118/ENVECON C118 4.23.md",
+    "category": "econometrics"
+  },
+  {
+    "slug": "envecon-c118-envecon-c118-4-28",
+    "title": "Fuzzy RD",
+    "date": "2026-04-28",
+    "summary": "The basic idea is very similar to Instrumental Variables",
+    "file": "posts/ENVECON C118/ENVECON C118 4.28.md",
+    "category": "econometrics"
+  },
+  {
+    "slug": "envecon-c118-final-exam",
+    "title": "Overview",
+    "date": "2026-05-05",
+    "summary": "In this class we focused on how we answer causal economic questions with data:",
+    "file": "posts/ENVECON C118/Final Exam.md",
+    "category": "econometrics"
   }
 ];
