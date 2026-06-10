@@ -581,10 +581,6 @@ ul, ol {
   margin-bottom: 0.5rem;
 }
 
-.writing-body .footnote-marker {
-  font-weight: 600;
-}
-
 .writing-body .footnote-backref {
   color: #2563eb;
   text-decoration: none;

@@ -272,8 +272,7 @@
       var fnId = 'fn-' + footnoteSlug(id);
       var refId = 'fnref-' + footnoteSlug(id);
       var body = marked.parse(footnotes.definitions[id] || '');
-      return '<li id="' + fnId + '">' +
-        '<span class="footnote-marker">' + num + '.</span> ' + body +
+      return '<li id="' + fnId + '">' + body +
         ' <a href="#' + refId + '" class="footnote-backref" aria-label="Back to reference ' + num + '">↩</a>' +
         '</li>';
     }).join('');
