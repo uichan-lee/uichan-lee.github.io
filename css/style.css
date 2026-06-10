@@ -542,6 +542,59 @@ ul, ol {
   margin: 0;
 }
 
+/* Footnotes (Obsidian / GFM [^n] syntax) */
+.writing-body .footnote-ref {
+  font-size: 0.75em;
+  line-height: 0;
+  margin-left: 0.1em;
+}
+
+.writing-body .footnote-ref a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.writing-body .footnote-ref a:hover {
+  text-decoration: underline;
+}
+
+.writing-body .footnotes {
+  margin-top: 2.5rem;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.writing-body .footnotes-sep {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin: 0 0 1rem;
+}
+
+.writing-body .footnotes-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style: decimal;
+}
+
+.writing-body .footnotes-list li {
+  margin-bottom: 0.5rem;
+}
+
+.writing-body .footnote-marker {
+  font-weight: 600;
+}
+
+.writing-body .footnote-backref {
+  color: #2563eb;
+  text-decoration: none;
+  margin-left: 0.15em;
+}
+
+.writing-body .footnote-backref:hover {
+  text-decoration: underline;
+}
+
 /* Obsidian callouts */
 .callout {
   --co: 68, 138, 255;
@@ -1256,8 +1309,18 @@ html[data-theme="dark"] .writing-body a:hover {
   color: #bfdbfe;
 }
 
-html[data-theme="dark"] .writing-body hr {
+html[data-theme="dark"] .writing-body hr,
+html[data-theme="dark"] .writing-body .footnotes-sep {
   border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme="dark"] .writing-body .footnotes {
+  color: #94a3b8;
+}
+
+html[data-theme="dark"] .writing-body .footnote-ref a,
+html[data-theme="dark"] .writing-body .footnote-backref {
+  color: #93c5fd;
 }
 
 html[data-theme="dark"] .writing-body th,

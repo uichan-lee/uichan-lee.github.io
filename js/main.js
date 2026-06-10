@@ -196,7 +196,91 @@
       return cl[0] + (cl.length > 1 ? '\n' + cl.slice(1).map(function (l) { return stored.prefix + l; }).join('\n') : '');
     });
 
-    return { md: md, mathStore: mathStore };
+    var footnoteResult = extractFootnotes(md);
+    return { md: footnoteResult.md, mathStore: mathStore, footnotes: footnoteResult.footnotes };
+  }
+
+  function footnoteSlug(id) {
+    return String(id).replace(/[^a-zA-Z0-9_-]/g, '-');
+  }
+
+  function extractFootnotes(md) {
+    var definitions = {};
+    var order = [];
+    var lines = md.split('\n');
+    var out = [];
+    var i = 0;
+
+    while (i < lines.length) {
+      var line = lines[i];
+      var prefixMatch = line.match(/^((?:>\s?)*)/);
+      var prefix = prefixMatch ? prefixMatch[1] : '';
+      var content = line.slice(prefix.length);
+      var defMatch = content.match(/^\[\^([^\]]+)\]:\s?(.*)$/);
+
+      if (defMatch) {
+        var id = defMatch[1];
+        var body = [defMatch[2]];
+        i++;
+        while (i < lines.length) {
+          var next = lines[i];
+          var nextPrefixMatch = next.match(/^((?:>\s?)*)/);
+          var nextPrefix = nextPrefixMatch ? nextPrefixMatch[1] : '';
+          var nextContent = next.slice(nextPrefix.length);
+          if (/^\[\^[^\]]+\]:/.test(nextContent)) break;
+          if (/^(?:\t| {4})/.test(nextContent)) {
+            body.push(nextContent.replace(/^(?:\t| {4})/, ''));
+            i++;
+          } else {
+            break;
+          }
+        }
+        if (!definitions[id]) order.push(id);
+        definitions[id] = body.join('\n').trim();
+        continue;
+      }
+
+      out.push(line);
+      i++;
+    }
+
+    if (order.length === 0) return { md: md, footnotes: null };
+
+    order.forEach(function (id) {
+      var escapedId = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      out = out.map(function (line) {
+        return line.replace(new RegExp('\\[\\^' + escapedId + '\\]', 'g'), '%%FNREF:' + id + '%%');
+      });
+    });
+
+    return { md: out.join('\n'), footnotes: { definitions: definitions, order: order } };
+  }
+
+  function restoreFootnotes(html, footnotes) {
+    if (!footnotes) return html;
+
+    footnotes.order.forEach(function (id, idx) {
+      var num = idx + 1;
+      var fnId = 'fn-' + footnoteSlug(id);
+      var refId = 'fnref-' + footnoteSlug(id);
+      var refHtml = '<sup class="footnote-ref"><a href="#' + fnId + '" id="' + refId + '">' + num + '</a></sup>';
+      html = html.split('%%FNREF:' + id + '%%').join(refHtml);
+    });
+
+    var items = footnotes.order.map(function (id, idx) {
+      var num = idx + 1;
+      var fnId = 'fn-' + footnoteSlug(id);
+      var refId = 'fnref-' + footnoteSlug(id);
+      var body = marked.parse(footnotes.definitions[id] || '');
+      return '<li id="' + fnId + '">' +
+        '<span class="footnote-marker">' + num + '.</span> ' + body +
+        ' <a href="#' + refId + '" class="footnote-backref" aria-label="Back to reference ' + num + '">↩</a>' +
+        '</li>';
+    }).join('');
+
+    html += '<section class="footnotes" aria-label="Footnotes"><hr class="footnotes-sep">' +
+      '<ol class="footnotes-list">' + items + '</ol></section>';
+    return html;
   }
 
   function restoreMathAndMarks(html, mathStore) {
@@ -410,6 +494,7 @@
           var baseDir = writing.file.substring(0, writing.file.lastIndexOf('/') + 1);
           var result = preprocessObsidian(md, baseDir);
           var html = marked.parse(result.md);
+          html = restoreFootnotes(html, result.footnotes);
           html = restoreMathAndMarks(html, result.mathStore);
           writingContent.innerHTML =
             '<time class="writing-date">' + escapeHtml(formatDate(writing.date || '')) + '</time>' +
