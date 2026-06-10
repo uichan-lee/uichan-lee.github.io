@@ -45,7 +45,7 @@ const TOPICS = [
     sourceDir: path.join(VAULT_ROOT, 'UC Berkeley', 'Fall 2025', 'Courses', 'DATA 100', 'Notes'),
     targetDir: 'DATA 100',
     category: 'ml-ds',
-    label: 'ML/Data Science',
+    label: 'Data Science',
     include: /^week\s+\d+\.md$/i,
     weekDates: {
       semesterStart: '2025-09-01',
@@ -61,13 +61,28 @@ const TOPICS = [
     numberedFiles: true,
   },
   {
-    name: 'ML DS',
-    sourceDir: path.join(VAULT_ROOT, 'ML DS'),
-    targetDir: 'ML DS',
+    name: 'Machine Learning',
+    sourceDir: path.join(VAULT_ROOT, 'Data Science', 'Machine Learning'),
+    targetDir: 'Data Science/Machine Learning',
     category: 'ml-ds',
-    label: 'ML/Data Science',
+    label: 'Data Science',
+  },
+  {
+    name: 'Deep Learning',
+    sourceDir: path.join(VAULT_ROOT, 'Data Science', 'Deep Learning'),
+    targetDir: 'Data Science/Deep Learning',
+    category: 'ml-ds',
+    label: 'Data Science',
   },
 ];
+
+// Old slug → new slug, so manual title/summary edits survive folder moves.
+const SLUG_ALIASES = {
+  'data-science-machine-learning-ml-fundamentals': 'ml-ds-ml-fundamentals',
+  'data-science-machine-learning-ensemble-regression': 'ml-ds-ensemble-regression',
+  'data-science-deep-learning-introduction-to-deep-learning-and-neural-networks':
+    'ml-ds-deep-learning-introduction-to-deep-learning-and-neural-networks',
+};
 
 const POSTS_DIR = path.join(__dirname, 'posts');
 const WRITINGS_JS = path.join(__dirname, 'js', 'writings.js');
@@ -282,6 +297,22 @@ function loadExistingWritings() {
   }
 }
 
+function getExistingEntry(existingWritings, slug) {
+  if (existingWritings.has(slug)) return existingWritings.get(slug);
+  const legacySlug = SLUG_ALIASES[slug];
+  if (legacySlug && existingWritings.has(legacySlug)) {
+    return existingWritings.get(legacySlug);
+  }
+  return undefined;
+}
+
+function getTitleOverride(titleOverrides, slug) {
+  if (titleOverrides[slug]) return titleOverrides[slug];
+  const legacySlug = SLUG_ALIASES[slug];
+  if (legacySlug && titleOverrides[legacySlug]) return titleOverrides[legacySlug];
+  return undefined;
+}
+
 // ─── Main ───────────────────────────────────────────────────────────────────
 
 function sync() {
@@ -352,7 +383,7 @@ function sync() {
       const filePath = `posts/${config.targetDir}/${mdFile}`;
 
       const slug = slugify(`${config.targetDir} ${base}`);
-      const existing = existingWritings.get(slug);
+      const existing = getExistingEntry(existingWritings, slug);
 
       // Priority for title:
       //   1. title-overrides.json (most explicit)
@@ -362,8 +393,9 @@ function sync() {
       //   1. existing writings.js (preserves manual edits)
       //   2. auto-extracted from markdown
       let finalTitle;
-      if (titleOverrides[slug]) {
-        finalTitle = titleOverrides[slug];
+      const titleOverride = getTitleOverride(titleOverrides, slug);
+      if (titleOverride) {
+        finalTitle = titleOverride;
       } else if (existing && existing.title) {
         finalTitle = existing.title;
         if (existing.title !== title) preservedCount++;
