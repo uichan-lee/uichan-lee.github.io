@@ -661,7 +661,9 @@
   // --- Table of Contents ---
 
   var tocEl = document.getElementById('writing-toc');
+  var tocInlineEl = document.getElementById('writing-toc-inline');
   var tocScrollHandler = null;
+  var tocInlineChevronSvg = '<svg class="toc-inline-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>';
 
   function showTOC() { if (tocEl) tocEl.classList.add('visible'); }
   function hideTOC() { if (tocEl) tocEl.classList.remove('visible'); }
@@ -720,6 +722,7 @@
     });
     if (headings.length < 2) {
       tocEl.innerHTML = tocBackBtnHtml;
+      if (tocInlineEl) tocInlineEl.innerHTML = '';
       showTOC();
       return;
     }
@@ -753,6 +756,46 @@
       });
     });
 
+    // Inline TOC for mobile (≤1200px)
+    var inlineLinks = [];
+    if (tocInlineEl) {
+      var inlineHtml = '<button type="button" class="toc-inline-toggle" aria-expanded="false">' +
+        '<span class="toc-inline-title">Contents</span>' + tocInlineChevronSvg + '</button>' +
+        '<div class="toc-inline-body" hidden>' + renderTOCNodes(tree) + '</div>';
+      tocInlineEl.innerHTML = inlineHtml;
+
+      var inlineToggleBtn = tocInlineEl.querySelector('.toc-inline-toggle');
+      var inlineBody = tocInlineEl.querySelector('.toc-inline-body');
+      inlineToggleBtn.addEventListener('click', function () {
+        var expanded = inlineToggleBtn.getAttribute('aria-expanded') === 'true';
+        inlineToggleBtn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        inlineBody.hidden = expanded;
+      });
+
+      tocInlineEl.querySelectorAll('.toc-toggle').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var item = btn.closest('.toc-item');
+          if (!item) return;
+          var expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+          item.classList.toggle('toc-collapsed', expanded);
+        });
+      });
+
+      inlineLinks = Array.prototype.slice.call(tocInlineEl.querySelectorAll('.toc-link'));
+      inlineLinks.forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          var target = document.getElementById(a.getAttribute('href').slice(1));
+          if (target) scrollToElement(target);
+          inlineToggleBtn.setAttribute('aria-expanded', 'false');
+          inlineBody.hidden = true;
+        });
+      });
+    }
+
     if (tocScrollHandler) window.removeEventListener('scroll', tocScrollHandler);
     tocScrollHandler = function () {
       var headerH = 80;
@@ -761,6 +804,9 @@
         if (headings[i].getBoundingClientRect().top <= headerH + 20) activeIdx = i;
       }
       links.forEach(function (a, j) {
+        a.classList.toggle('active', j === activeIdx);
+      });
+      inlineLinks.forEach(function (a, j) {
         a.classList.toggle('active', j === activeIdx);
       });
 
@@ -785,6 +831,7 @@
   function clearTOC() {
     hideTOC();
     if (tocEl) tocEl.innerHTML = '';
+    if (tocInlineEl) tocInlineEl.innerHTML = '';
     if (tocScrollHandler) {
       window.removeEventListener('scroll', tocScrollHandler);
       tocScrollHandler = null;
