@@ -3,6 +3,46 @@
   var HLJS_LIGHT = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css';
   var HLJS_DARK  = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css';
 
+  // --- On-demand loading of post-rendering libraries (marked / KaTeX / highlight.js) ---
+  // These are only needed when a post is opened, so we keep them off the initial page load.
+  var postLibsPromise = null;
+
+  function loadScriptOnce(src) {
+    return new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.async = true;
+      s.onload = resolve;
+      s.onerror = function () { reject(new Error('Failed to load ' + src)); };
+      document.head.appendChild(s);
+    });
+  }
+
+  function loadStyleOnce(href, id) {
+    return new Promise(function (resolve) {
+      var l = document.createElement('link');
+      l.rel = 'stylesheet';
+      l.href = href;
+      if (id) l.id = id;
+      l.onload = resolve;
+      l.onerror = resolve; // a missing stylesheet shouldn't block rendering
+      document.head.appendChild(l);
+    });
+  }
+
+  function ensurePostLibs() {
+    if (postLibsPromise) return postLibsPromise;
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    postLibsPromise = Promise.all([
+      loadScriptOnce('https://cdn.jsdelivr.net/npm/marked/marked.min.js'),
+      loadStyleOnce('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css'),
+      loadScriptOnce('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js'),
+      loadStyleOnce(isDark ? HLJS_DARK : HLJS_LIGHT, 'hljs-theme'),
+      loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js')
+    ]);
+    return postLibsPromise;
+  }
+
   function applyTheme(dark) {
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
     var link = document.getElementById('hljs-theme');
@@ -37,6 +77,41 @@
       setActiveNav(sectionId);
       hideTOC();
     }
+    closeMenu();
+  }
+
+  // --- Mobile hamburger menu ---
+  var navToggle = document.getElementById('nav-toggle');
+  var primaryNav = document.getElementById('primary-nav');
+
+  function closeMenu() {
+    if (!navToggle || !primaryNav) return;
+    primaryNav.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Open menu');
+  }
+
+  function openMenu() {
+    if (!navToggle || !primaryNav) return;
+    primaryNav.classList.add('open');
+    navToggle.setAttribute('aria-expanded', 'true');
+    navToggle.setAttribute('aria-label', 'Close menu');
+  }
+
+  if (navToggle && primaryNav) {
+    navToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (primaryNav.classList.contains('open')) closeMenu();
+      else openMenu();
+    });
+    document.addEventListener('click', function (e) {
+      if (!primaryNav.classList.contains('open')) return;
+      if (primaryNav.contains(e.target) || navToggle.contains(e.target)) return;
+      closeMenu();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMenu();
+    });
   }
 
   function onScroll() {
@@ -724,6 +799,7 @@
     var writingContent = document.getElementById('writing-content');
     var writingBackBtn = document.getElementById('writing-back');
     var writingBackBottomBtn = document.getElementById('writing-back-bottom');
+    var currentRouteSlug = null;
 
     function showWritingsList() {
       if (writingsList) writingsList.style.display = '';
@@ -755,12 +831,15 @@
       showWritingDetail();
       hideFootnotePreview();
       writingContent.innerHTML = '<p class="writing-loading">Loading…</p>';
-      fetch(encodeURI(writing.file))
-        .then(function (res) {
+      Promise.all([
+        ensurePostLibs(),
+        fetch(encodeURI(writing.file)).then(function (res) {
           if (!res.ok) throw new Error('Failed to load post');
           return res.text();
         })
-        .then(function (md) {
+      ])
+        .then(function (arr) {
+          var md = arr[1];
           var baseDir = writing.file.substring(0, writing.file.lastIndexOf('/') + 1);
           var result = preprocessObsidian(md, baseDir);
           var html = marked.parse(result.md);
@@ -915,8 +994,37 @@
       applyFilters();
 
       function openCardAt(index) {
-        if (sortedWritings[index]) loadPost(sortedWritings[index]);
+        var w = sortedWritings[index];
+        if (!w) return;
+        if (history.pushState) {
+          history.pushState(null, '', '#p/' + w.slug);
+          handleRoute();
+        } else {
+          loadPost(w);
+        }
       }
+
+      // Hash-based routing so individual posts are shareable and the
+      // browser back/forward buttons move in and out of a post.
+      function handleRoute() {
+        var m = location.hash.match(/^#p\/(.+)$/);
+        if (m) {
+          var slug = decodeURIComponent(m[1]);
+          if (slug === currentRouteSlug && writingDetail && writingDetail.style.display !== 'none') return;
+          for (var i = 0; i < sortedWritings.length; i++) {
+            if (sortedWritings[i].slug === slug) {
+              currentRouteSlug = slug;
+              loadPost(sortedWritings[i]);
+              return;
+            }
+          }
+        }
+        currentRouteSlug = null;
+        if (writingDetail && writingDetail.style.display !== 'none') showWritingsList();
+      }
+
+      window.addEventListener('hashchange', handleRoute);
+      window.addEventListener('popstate', handleRoute);
 
       writingsList.addEventListener('click', function (e) {
         var card = e.target.closest('.writing-card');
@@ -931,10 +1039,17 @@
         e.preventDefault();
         openCardAt(parseInt(card.getAttribute('data-index'), 10));
       });
+
+      // Honor a deep link (e.g. arriving at /#p/some-slug directly).
+      if (/^#p\//.test(location.hash)) handleRoute();
     }
 
     function goBackToWritingsList() {
+        currentRouteSlug = null;
         showWritingsList();
+        if (history.replaceState && location.hash.indexOf('#p/') === 0) {
+          history.replaceState(null, '', '#writings');
+        }
         var writingsSection = document.getElementById('writings');
         if (writingsSection) {
           writingsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });

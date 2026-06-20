@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Uichan Lee — Posts</title>
+    <link>https://uichan-lee.github.io/</link>
+    <atom:link href="https://uichan-lee.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Notes on data science, econometrics, machine learning, and programming by Uichan Lee.</description>
+    <language>en</language>
+    <lastBuildDate>Sat, 20 Jun 2026 08:10:52 GMT</lastBuildDate>
+    <item>
+      <title>반도체 산업 동향의 이해</title>
+      <link>https://uichan-lee.github.io/#p/others-반도체-산업-동향의-이해</link>
+      <guid isPermaLink="false">others-반도체-산업-동향의-이해</guid>
+      <pubDate>Sat, 20 Jun 2026 00:00:00 GMT</pubDate>
+      <category>Others</category>
+      <description>반도체의 정의, 제품의 종류와 특징, 반도체 산업의 구조와 글로벌 반도체 시장</description>
+    </item>
+    <item>
+      <title>DL 1 - Introduction</title>
+      <link>https://uichan-lee.github.io/#p/data-science-deep-learning-introduction-to-deep-learning-and-neural-networks</link>
+      <guid isPermaLink="false">data-science-deep-learning-introduction-to-deep-learning-and-neural-networks</guid>
+      <pubDate>Sat, 20 Jun 2026 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>What is Deep Learning? Layer, Activation Function, Loss Function</description>
+    </item>
+    <item>
+      <title>Econometrics Overview</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-final-exam</link>
+      <guid isPermaLink="false">envecon-c118-final-exam</guid>
+      <pubDate>Tue, 05 May 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>A capstone review of ENVECON C118: how causal economic questions are answered with potential outcomes, RCTs, OLS, DiD, IV, and RD — and the assumptions each design relies on.</description>
+    </item>
+    <item>
+      <title>Fuzzy RD</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-4-28</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-4-28</guid>
+      <pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>When crossing the cutoff only changes the probability of treatment rather than fully determining it, fuzzy RD combines the RD design with an IV-style adjustment.</description>
+    </item>
+    <item>
+      <title>Estimating RD in Practice</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-4-23</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-4-23</guid>
+      <pubDate>Thu, 23 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>How RD can fail (a second policy at the cutoff, or unit manipulation of the running variable), and how to estimate RD with local polynomial regression and bandwidth choice.</description>
+    </item>
+    <item>
+      <title>Regression Discontinuity</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-4-16</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-4-16</guid>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>Regression discontinuity exploits sharp cutoffs in a running variable to identify causal effects — units just above and below the threshold are comparable in everything except treatment.</description>
+    </item>
+    <item>
+      <title>LATE ≠ ATE</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-4-14</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-4-14</guid>
+      <pubDate>Tue, 14 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>Even with a valid instrument, IV recovers the LATE — the average effect for compliers — not the ATE for the whole population.</description>
+    </item>
+    <item>
+      <title>Intro to Functions</title>
+      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-4-13</link>
+      <guid isPermaLink="false">stat-33b-stat-33b-4-13</guid>
+      <pubDate>Mon, 13 Apr 2026 00:00:00 GMT</pubDate>
+      <category>R Programming</category>
+      <description>Writing functions in R — the function() syntax, the parts of a function, and how to work with their arguments.</description>
+    </item>
+    <item>
+      <title>IV and Regression | From One Instrument to Many</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-4-9</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-4-9</guid>
+      <pubDate>Thu, 09 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>Estimating the IV coefficient as the ratio of the reduced form to the first stage, and generalizing from a single instrument to multiple instruments via 2SLS.</description>
+    </item>
+    <item>
+      <title>Instrumental Variables</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-4-7</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-4-7</guid>
+      <pubDate>Tue, 07 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>When treatment isn&apos;t as-good-as random and DiD&apos;s parallel trends fails, instrumental variables offer another path: find a Z that exogenously shocks the confounded X.</description>
+    </item>
+    <item>
+      <title>Iterations and Loops</title>
+      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-4-6</link>
+      <guid isPermaLink="false">stat-33b-stat-33b-4-6</guid>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 GMT</pubDate>
+      <category>R Programming</category>
+      <description>Three iterative paradigms in R — for, while, and repeat — for performing a procedure multiple times.</description>
+    </item>
+    <item>
+      <title>The Parallel Trends Assumption (Revisited)</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-4-2</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-4-2</guid>
+      <pubDate>Thu, 02 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>Revisiting the parallel trends assumption that underpins DiD, how to test it with pre-trends, and why panel regressions need clustered standard errors.</description>
+    </item>
+    <item>
+      <title>DiD with Multiple Time Periods</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-3-31</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-3-31</guid>
+      <pubDate>Tue, 31 Mar 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>Extending DiD beyond simple before/after with longer panel data — testing pre-trends, estimating dynamic effects, and handling staggered treatment timing.</description>
+    </item>
+    <item>
+      <title>Expressions and Conditionals</title>
+      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-3-30</link>
+      <guid isPermaLink="false">stat-33b-stat-33b-3-30</guid>
+      <pubDate>Mon, 30 Mar 2026 00:00:00 GMT</pubDate>
+      <category>R Programming</category>
+      <description>R code is composed of a series of expressions, which can be grouped and controlled with conditionals like if/else.</description>
+    </item>
+    <item>
+      <title>Types of Ensemble Regression</title>
+      <link>https://uichan-lee.github.io/#p/data-science-machine-learning-ensemble-regression</link>
+      <guid isPermaLink="false">data-science-machine-learning-ensemble-regression</guid>
+      <pubDate>Sun, 22 Mar 2026 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>Ensemble methods combine multiple base learners — bagging, random forests, and boosting — to reduce variance or bias and improve predictive accuracy.</description>
+    </item>
+    <item>
+      <title>ML/DS Fundamentals</title>
+      <link>https://uichan-lee.github.io/#p/data-science-machine-learning-ml-fundamentals</link>
+      <guid isPermaLink="false">data-science-machine-learning-ml-fundamentals</guid>
+      <pubDate>Sun, 22 Mar 2026 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>ML/DS 면접 대비 핵심 개념 정리 — 확률·통계 기본, bias-variance tradeoff, 손실 함수와 평가 지표, gradient descent, 회귀 모델, 트리 계열 모델, PCA까지.</description>
+    </item>
+    <item>
+      <title>DiD in Practice: Currie and Walker (2011)</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-3-19</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-3-19</guid>
+      <pubDate>Thu, 19 Mar 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>Applying the DiD framework to study the effect of E-ZPass adoption on infant health near toll plazas, with fixed effects to control for unobserved confounders.</description>
+    </item>
+    <item>
+      <title>Difference-in-Differences</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-3-17</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-3-17</guid>
+      <pubDate>Tue, 17 Mar 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>The DiD estimator is the difference between the treatment group&apos;s pre/post change and the control group&apos;s pre/post change — valid under the parallel trends assumption.</description>
+    </item>
+    <item>
+      <title>Natural Experiments: Difference-in-Differences</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-3-12</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-3-12</guid>
+      <pubDate>Thu, 12 Mar 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>When randomization isn&apos;t possible, natural experiments exploit real-world events that assign treatment &apos;as if&apos; randomly. Difference-in-differences uses changes over time in a control group to construct the counterfactual.</description>
+    </item>
+    <item>
+      <title>F-Test | Hedonic Regression | Adjusted R^2</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-3-10</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-3-10</guid>
+      <pubDate>Tue, 10 Mar 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>F-tests check whether a group of variables jointly affects the outcome. We also cover hedonic regression and why adjusted R² is preferred for comparing models.</description>
+    </item>
+    <item>
+      <title>`ggplot2`</title>
+      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-3-9</link>
+      <guid isPermaLink="false">stat-33b-stat-33b-3-9</guid>
+      <pubDate>Mon, 09 Mar 2026 00:00:00 GMT</pubDate>
+      <category>R Programming</category>
+      <description>An introduction to ggplot2 in R: geoms, aesthetics, mappings, and scales for layered, declarative data visualization.</description>
+    </item>
+    <item>
+      <title>`tidyverse`</title>
+      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-3-3</link>
+      <guid isPermaLink="false">stat-33b-stat-33b-3-3</guid>
+      <pubDate>Tue, 03 Mar 2026 00:00:00 GMT</pubDate>
+      <category>R Programming</category>
+      <description>An overview of the tidyverse ecosystem (readr, dplyr, tidyr, ggplot2, etc.) and tibbles — an enhanced, safer version of the data frame.</description>
+    </item>
+    <item>
+      <title>Inference</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-2-26</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-2-26</guid>
+      <pubDate>Thu, 26 Feb 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>An estimate by itself doesn&apos;t tell us much. Statistical inference — t-statistics, p-values, and confidence intervals — lets us ask whether a result could have arisen by chance.</description>
+    </item>
+    <item>
+      <title>RCT | Sample Means | Hypothesis Testing | Sampling Distributions of beta hat</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-2-24</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-2-24</guid>
+      <pubDate>Tue, 24 Feb 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>Randomized controlled trials solve the omitted-variable bias problem. We also introduce hypothesis testing and the sampling distribution of β̂.</description>
+    </item>
+    <item>
+      <title>Importing Tables | Data Frames</title>
+      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-2-23</link>
+      <guid isPermaLink="false">stat-33b-stat-33b-2-23</guid>
+      <pubDate>Mon, 23 Feb 2026 00:00:00 GMT</pubDate>
+      <category>R Programming</category>
+      <description>Reading plain-text tables (delimited and fixed-width) into R, and working with the resulting data frames.</description>
+    </item>
+    <item>
+      <title>Confidence Intervals</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-2-19</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-2-19</guid>
+      <pubDate>Thu, 19 Feb 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>When omitted variable bias is unavoidable, signing the bias can still give useful upper or lower bounds. We also build confidence intervals around our coefficient estimates.</description>
+    </item>
+    <item>
+      <title>Adding Variables to Regression</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-2-17</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-2-17</guid>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>Three cases when adding a regressor: an irrelevant variable, a relevant but uncorrelated variable, and a relevant variable correlated with existing regressors — each with different implications for bias and variance.</description>
+    </item>
+    <item>
+      <title>The Limits of Simple Linear Regression | Multiple Regression | Choosing what goes into the regression</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-2-12</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-2-12</guid>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>Simple linear regression struggles to draw ceteris paribus conclusions. Multiple regression adds controls — but which variables should we include?</description>
+    </item>
+    <item>
+      <title>Regression Recap</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-2-10</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-2-10</guid>
+      <pubDate>Tue, 10 Feb 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>A recap of simple linear regression, goodness-of-fit (R²), log/linear transformations, and the assumptions underlying OLS.</description>
+    </item>
+    <item>
+      <title>Matrices | Lists</title>
+      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-2-9</link>
+      <guid isPermaLink="false">stat-33b-stat-33b-2-9</guid>
+      <pubDate>Mon, 09 Feb 2026 00:00:00 GMT</pubDate>
+      <category>R Programming</category>
+      <description>Matrices are vectors with a dim attribute, and lists can hold mixed types — two foundational containers in R.</description>
+    </item>
+    <item>
+      <title>Regression Model</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-2-5</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-2-5</guid>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>The simple linear regression model y = β₀ + β₁x + u — its components, assumptions, and what the coefficients mean.</description>
+    </item>
+    <item>
+      <title>Parameter, Estimator, Estimand, Estimate</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-2-3</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-2-3</guid>
+      <pubDate>Tue, 03 Feb 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>Defining the four key concepts — parameter, estimand, estimator, and estimate — and how identification differs from inference.</description>
+    </item>
+    <item>
+      <title>Vectors | Factors</title>
+      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-2-2</link>
+      <guid isPermaLink="false">stat-33b-stat-33b-2-2</guid>
+      <pubDate>Mon, 02 Feb 2026 00:00:00 GMT</pubDate>
+      <category>R Programming</category>
+      <description>Vectors are the most basic data structure in R — atomic and list flavors. Factors store categorical data with predefined levels.</description>
+    </item>
+    <item>
+      <title>Parameters, Estimands, and Estimators</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-1-29</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-1-29</guid>
+      <pubDate>Thu, 29 Jan 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>Distinguishing inference (learning estimands from estimators) from identification (learning parameters from estimands) — two separate steps in econometric reasoning.</description>
+    </item>
+    <item>
+      <title>Joint and Conditional Distributions</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-1-27</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-1-27</guid>
+      <pubDate>Tue, 27 Jan 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>Many interesting economic questions involve features of the joint distribution of two or more random variables, along with conditional distributions and independence.</description>
+    </item>
+    <item>
+      <title>Getting Started with R</title>
+      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-1-26</link>
+      <guid isPermaLink="false">stat-33b-stat-33b-1-26</guid>
+      <pubDate>Mon, 26 Jan 2026 00:00:00 GMT</pubDate>
+      <category>R Programming</category>
+      <description>Why R? An introduction to R for statistical computing and data analysis.</description>
+    </item>
+    <item>
+      <title>Random Variables and Distributions</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-1-22</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-1-22</guid>
+      <pubDate>Thu, 22 Jan 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>A random variable is a numerical summary of a random process. We define CDFs, PMFs, PDFs, and distinguish empirical from true distributions.</description>
+    </item>
+    <item>
+      <title>What is Econometrics?</title>
+      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-1-20</link>
+      <guid isPermaLink="false">envecon-c118-envecon-c118-1-20</guid>
+      <pubDate>Tue, 20 Jan 2026 00:00:00 GMT</pubDate>
+      <category>Econometrics</category>
+      <description>Econometric questions come in three flavors: descriptive, causal, and forecasting. The hardest are causal — because we only ever observe a sample, and selection bias can distort what we infer.</description>
+    </item>
+    <item>
+      <title>Clustering | Principal Component Analysis (PCA) | Singular Value Decomposition (SVD)</title>
+      <link>https://uichan-lee.github.io/#p/data-100-week-15</link>
+      <guid isPermaLink="false">data-100-week-15</guid>
+      <pubDate>Mon, 08 Dec 2025 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>K-Means is the most popular clustering approach. We also cover PCA and SVD for dimensionality reduction and uncovering structure in high-dimensional data.</description>
+    </item>
+    <item>
+      <title>Logistic Regression II</title>
+      <link>https://uichan-lee.github.io/#p/data-100-week-14</link>
+      <guid isPermaLink="false">data-100-week-14</guid>
+      <pubDate>Mon, 01 Dec 2025 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>Turning logistic regression&apos;s probabilities into class predictions via a decision boundary, and evaluating classifiers with accuracy, precision, recall, and ROC curves.</description>
+    </item>
+    <item>
+      <title>Radix Sort</title>
+      <link>https://uichan-lee.github.io/#p/cs-61b-week-13</link>
+      <guid isPermaLink="false">cs-61b-week-13</guid>
+      <pubDate>Mon, 24 Nov 2025 00:00:00 GMT</pubDate>
+      <category>Data Structures/Algorithms</category>
+      <description>Sorting stability preserves the order of equivalent items. Radix sort exploits this — sorting digit by digit with a stable subroutine — to beat the O(N log N) comparison lower bound.</description>
+    </item>
+    <item>
+      <title>Logistic Regression I</title>
+      <link>https://uichan-lee.github.io/#p/data-100-week-13</link>
+      <guid isPermaLink="false">data-100-week-13</guid>
+      <pubDate>Mon, 24 Nov 2025 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>Moving from linear regression to classification: logistic regression models the probability of a binary outcome with the sigmoid function.</description>
+    </item>
+    <item>
+      <title>Insertion Sort (In-place) | Quicksort</title>
+      <link>https://uichan-lee.github.io/#p/cs-61b-week-12</link>
+      <guid isPermaLink="false">cs-61b-week-12</guid>
+      <pubDate>Mon, 17 Nov 2025 00:00:00 GMT</pubDate>
+      <category>Data Structures/Algorithms</category>
+      <description>Insertion sort is extremely fast on nearly-sorted arrays (few inversions). Quicksort partitions around a pivot for an expected O(N log N) sort.</description>
+    </item>
+    <item>
+      <title>SQL II</title>
+      <link>https://uichan-lee.github.io/#p/data-100-week-12</link>
+      <guid isPermaLink="false">data-100-week-12</guid>
+      <pubDate>Mon, 17 Nov 2025 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>Continuing SQL with GROUP BY, aggregate functions, primary and foreign keys, and a deeper look at SQL&apos;s declarative style.</description>
+    </item>
+    <item>
+      <title>Tries | Basic Sorts (Sorting I)</title>
+      <link>https://uichan-lee.github.io/#p/cs-61b-week-11</link>
+      <guid isPermaLink="false">cs-61b-week-11</guid>
+      <pubDate>Mon, 10 Nov 2025 00:00:00 GMT</pubDate>
+      <category>Data Structures/Algorithms</category>
+      <description>When keys are strings, tries store each letter as a node in a tree for fast lookups. We also begin sorting with selection sort, heapsort, and merge sort.</description>
+    </item>
+    <item>
+      <title>Parameter Inference and the Bootstrap | SQL</title>
+      <link>https://uichan-lee.github.io/#p/data-100-week-11</link>
+      <guid isPermaLink="false">data-100-week-11</guid>
+      <pubDate>Mon, 10 Nov 2025 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>The bootstrap resamples our data with replacement to quantify uncertainty around an estimate, enabling confidence intervals and hypothesis testing. We also introduce SQL for working with databases.</description>
+    </item>
+    <item>
+      <title>Hash Tables</title>
+      <link>https://uichan-lee.github.io/#p/cs-61b-week-10</link>
+      <guid isPermaLink="false">cs-61b-week-10</guid>
+      <pubDate>Mon, 03 Nov 2025 00:00:00 GMT</pubDate>
+      <category>Data Structures/Algorithms</category>
+      <description>Hash tables convert data into a hash code, reduce it to an index, and store items in buckets — yielding θ(1) average-case lookups when items are well-spread.</description>
+    </item>
+    <item>
+      <title>Random Variables</title>
+      <link>https://uichan-lee.github.io/#p/data-100-week-10</link>
+      <guid isPermaLink="false">data-100-week-10</guid>
+      <pubDate>Mon, 03 Nov 2025 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>A random variable represents the outcome of a random event. We cover discrete vs. continuous RVs, expectation, variance, and how they connect to statistical inference.</description>
+    </item>
+    <item>
+      <title>Spanning Trees | Directed Acyclic Graphs</title>
+      <link>https://uichan-lee.github.io/#p/cs-61b-week-9</link>
+      <guid isPermaLink="false">cs-61b-week-9</guid>
+      <pubDate>Mon, 27 Oct 2025 00:00:00 GMT</pubDate>
+      <category>Data Structures/Algorithms</category>
+      <description>A spanning tree of an undirected graph connects all vertices with no cycles. We cover MSTs with Prim&apos;s algorithm and explore DAGs and topological sort.</description>
+    </item>
+    <item>
+      <title>Batch, mini-batch, and stochastic gradient descent | Feature Engineering | Defining Distributions</title>
+      <link>https://uichan-lee.github.io/#p/data-100-week-9</link>
+      <guid isPermaLink="false">data-100-week-9</guid>
+      <pubDate>Mon, 27 Oct 2025 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>Mini-batch and stochastic gradient descent approximate the full gradient using random samples, trading exactness for faster, cheaper updates per epoch.</description>
+    </item>
+    <item>
+      <title>Trees and Traversals | Graph Traversals and Implementations</title>
+      <link>https://uichan-lee.github.io/#p/cs-61b-week-8</link>
+      <guid isPermaLink="false">cs-61b-week-8</guid>
+      <pubDate>Mon, 20 Oct 2025 00:00:00 GMT</pubDate>
+      <category>Data Structures/Algorithms</category>
+      <description>Tree traversals (level, pre, in, post-order), then graph traversals (BFS, DFS) and common adjacency representations.</description>
+    </item>
+    <item>
+      <title>`sklearn` and Gradient Descent</title>
+      <link>https://uichan-lee.github.io/#p/data-100-week-8</link>
+      <guid isPermaLink="false">data-100-week-8</guid>
+      <pubDate>Mon, 20 Oct 2025 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>Fitting linear regression with sklearn, then learning gradient descent: from intuition (path of least resistance) to learning rates, convexity, and high-dimensional gradients.</description>
+    </item>
+    <item>
+      <title>Binary Search Tree | B-Trees | Left Leaning Red-Black Trees (LLRBs) | Priority Queues and Heaps</title>
+      <link>https://uichan-lee.github.io/#p/cs-61b-week-7</link>
+      <guid isPermaLink="false">cs-61b-week-7</guid>
+      <pubDate>Mon, 13 Oct 2025 00:00:00 GMT</pubDate>
+      <category>Data Structures/Algorithms</category>
+      <description>From BSTs to self-balancing B-trees and left-leaning red-black trees, plus priority queues backed by heaps.</description>
+    </item>
+    <item>
+      <title>Ordinary Least Squares (OLS)</title>
+      <link>https://uichan-lee.github.io/#p/data-100-week-7</link>
+      <guid isPermaLink="false">data-100-week-7</guid>
+      <pubDate>Mon, 13 Oct 2025 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>OLS combines multiple linear regression with mean squared error. We derive the closed-form solution by projecting Y onto the column space of the design matrix X.</description>
+    </item>
+    <item>
+      <title>Asymptotic II | Asymptotic III | Extends, Sets, Maps, and BSTs</title>
+      <link>https://uichan-lee.github.io/#p/cs-61b-week-6</link>
+      <guid isPermaLink="false">cs-61b-week-6</guid>
+      <pubDate>Mon, 06 Oct 2025 00:00:00 GMT</pubDate>
+      <category>Data Structures/Algorithms</category>
+      <description>Big-O as &apos;less than or equal&apos; (vs. Big-Theta&apos;s &apos;equals&apos;), recursive runtime analysis, and an introduction to inheritance, Sets, Maps, and BSTs.</description>
+    </item>
+    <item>
+      <title>Simple Linear Regression</title>
+      <link>https://uichan-lee.github.io/#p/data-100-week-6</link>
+      <guid isPermaLink="false">data-100-week-6</guid>
+      <pubDate>Mon, 06 Oct 2025 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>The regression line is the unique straight line that minimizes the mean squared error of estimation among all straight lines.</description>
+    </item>
+    <item>
+      <title>Asymptotic I</title>
+      <link>https://uichan-lee.github.io/#p/cs-61b-week-5</link>
+      <guid isPermaLink="false">cs-61b-week-5</guid>
+      <pubDate>Mon, 29 Sep 2025 00:00:00 GMT</pubDate>
+      <category>Data Structures/Algorithms</category>
+      <description>Characterizing the runtimes of functions with Big-Theta notation — a first look at asymptotic analysis.</description>
+    </item>
+    <item>
+      <title>Visualization II</title>
+      <link>https://uichan-lee.github.io/#p/data-100-week-5</link>
+      <guid isPermaLink="false">data-100-week-5</guid>
+      <pubDate>Mon, 29 Sep 2025 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>Moving from univariate to bivariate and multivariate visualizations: scatter plots, hex plots, and techniques for handling overplotting.</description>
+    </item>
+    <item>
+      <title>Method Overloading in Java</title>
+      <link>https://uichan-lee.github.io/#p/cs-61b-week-4</link>
+      <guid isPermaLink="false">cs-61b-week-4</guid>
+      <pubDate>Mon, 22 Sep 2025 00:00:00 GMT</pubDate>
+      <category>Data Structures/Algorithms</category>
+      <description>Java allows multiple methods with same name, but different parameters.</description>
+    </item>
+    <item>
+      <title>Regular Expressions (Regex)</title>
+      <link>https://uichan-lee.github.io/#p/data-100-week-4</link>
+      <guid isPermaLink="false">data-100-week-4</guid>
+      <pubDate>Mon, 22 Sep 2025 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>Canonicalization converts data into a standard form, often using regex (regular expressions) to match patterns within strings.</description>
+    </item>
+    <item>
+      <title>Doubly Linked List</title>
+      <link>https://uichan-lee.github.io/#p/cs-61b-week-3</link>
+      <guid isPermaLink="false">cs-61b-week-3</guid>
+      <pubDate>Mon, 15 Sep 2025 00:00:00 GMT</pubDate>
+      <category>Data Structures/Algorithms</category>
+      <description>Adding a .last pointer speeds up .addLast and .getLast, but not .removeLast. The doubly linked list with backward links solves this.</description>
+    </item>
+    <item>
+      <title>Grouping</title>
+      <link>https://uichan-lee.github.io/#p/data-100-week-3</link>
+      <guid isPermaLink="false">data-100-week-3</guid>
+      <pubDate>Mon, 15 Sep 2025 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>The split-apply-combine paradigm in pandas: groupby() splits a DataFrame into subframes, and agg() applies aggregations to each group.</description>
+    </item>
+    <item>
+      <title>Java Collections and Linked Lists</title>
+      <link>https://uichan-lee.github.io/#p/cs-61b-week-2</link>
+      <guid isPermaLink="false">cs-61b-week-2</guid>
+      <pubDate>Mon, 08 Sep 2025 00:00:00 GMT</pubDate>
+      <category>Data Structures/Algorithms</category>
+      <description>Java arrays are fixed-size, but Lists, Sets, and Maps are resizable. We also explore primitive vs. reference types and build a singly linked list with a sentinel node.</description>
+    </item>
+    <item>
+      <title>Pandas</title>
+      <link>https://uichan-lee.github.io/#p/data-100-week-2</link>
+      <guid isPermaLink="false">data-100-week-2</guid>
+      <pubDate>Mon, 08 Sep 2025 00:00:00 GMT</pubDate>
+      <category>Data Science</category>
+      <description>An introduction to pandas: Series as 1-D labeled arrays, DataFrames as 2-D tables, and the basics of indexing and selection.</description>
+    </item>
+    <item>
+      <title>Object Instantiation</title>
+      <link>https://uichan-lee.github.io/#p/cs-61b-week-1</link>
+      <guid isPermaLink="false">cs-61b-week-1</guid>
+      <pubDate>Mon, 01 Sep 2025 00:00:00 GMT</pubDate>
+      <category>Data Structures/Algorithms</category>
+      <description>Classes contain not just methods but also data. We instantiate them as objects, distinguish static from instance methods, and meet Java&apos;s Lists, Maps, and fixed-size Arrays.</description>
+    </item>
+  </channel>
+</rss>

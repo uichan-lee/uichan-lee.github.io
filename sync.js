@@ -3,6 +3,9 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const { writeFeeds } = require('./feeds');
+
+const SITE_URL = 'https://uichan-lee.github.io';
 
 // ─── Configuration ──────────────────────────────────────────────────────────
 
@@ -457,6 +460,15 @@ function sync() {
   const searchIndexOutput = 'const searchIndex = ' + JSON.stringify(searchIndex) + ';\n';
   fs.writeFileSync(SEARCH_INDEX_JS, searchIndexOutput, 'utf-8');
   console.log('  search-index.js: ' + Object.keys(searchIndex).length + ' entries');
+
+  // sitemap.xml + feed.xml (RSS) for SEO and post subscriptions.
+  // Guard against an empty run (e.g. vault unavailable) clobbering the feeds.
+  if (allPosts.length > 0) {
+    writeFeeds(__dirname, SITE_URL, allPosts, categories);
+    console.log('  sitemap.xml + feed.xml written');
+  } else {
+    console.log('  skip feeds: no posts collected');
+  }
 }
 
 console.log('Syncing vault -> posts/...\n');

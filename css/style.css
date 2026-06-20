@@ -7,13 +7,66 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Design tokens ────────────────────────────────────────────────
+   Single source of truth for the core palette. Light values live in
+   :root; the dark theme overrides the same token names. Note: a handful
+   of components keep bespoke dark overrides further down (their dark
+   shade intentionally differs from the shared token), so those rules
+   are left explicit on purpose. */
+:root {
+  --color-text: #334155;
+  --color-heading: #0f172a;
+  --color-muted: #64748b;
+  --color-soft: #475569;
+  --color-faint: #94a3b8;
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-surface: #ffffff;
+  --color-chip-bg: #f1f5f9;
+  --color-chip-text: #475569;
+  --color-border: rgba(0, 0, 0, 0.06);
+  --color-border-strong: rgba(0, 0, 0, 0.12);
+  --color-header-bg: rgba(255, 255, 255, 0.85);
+  --color-footer-bg: rgba(255, 255, 255, 0.8);
+  --gradient-page: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+}
+
+html[data-theme="dark"] {
+  --color-text: #e2e8f0;
+  --color-heading: #f8fafc;
+  --color-muted: #94a3b8;
+  --color-soft: #94a3b8;
+  --color-faint: #94a3b8;
+  --color-accent: #93c5fd;
+  --color-accent-hover: #bfdbfe;
+  --color-surface: rgba(30, 41, 59, 0.6);
+  --color-chip-bg: rgba(51, 65, 85, 0.8);
+  --color-chip-text: #cbd5e1;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.12);
+  --color-header-bg: rgba(15, 23, 42, 0.9);
+  --color-footer-bg: rgba(15, 23, 42, 0.9);
+  --gradient-page: linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+}
+
 body {
   margin: 0;
   font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  color: #334155;
-  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+  color: var(--color-text);
+  background: var(--gradient-page);
   background-attachment: fixed;
 }
 
@@ -114,14 +167,14 @@ ul, ol {
   font-size: 2.25rem;
   font-weight: 700;
   letter-spacing: -0.03em;
-  color: #0f172a;
+  color: var(--color-heading);
 }
 
 .tagline {
   margin: 0 0 1rem;
   font-size: 1.1rem;
   font-weight: 500;
-  color: #64748b;
+  color: var(--color-muted);
   letter-spacing: 0.01em;
 }
 
@@ -130,7 +183,7 @@ ul, ol {
   max-width: 480px;
   margin-left: auto;
   margin-right: auto;
-  color: #475569;
+  color: var(--color-soft);
   font-size: 1.05rem;
 }
 
@@ -174,7 +227,7 @@ ul, ol {
   font-size: 1.75rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: #0f172a;
+  color: var(--color-heading);
   text-align: center;
 }
 
@@ -189,11 +242,11 @@ ul, ol {
 }
 
 .card {
-  background: #fff;
+  background: var(--color-surface);
   border-radius: 12px;
   padding: 1.75rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--color-border);
   transition: box-shadow 0.25s, transform 0.25s, border-color 0.2s;
 }
 
@@ -208,13 +261,13 @@ ul, ol {
   font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  color: #0f172a;
+  color: var(--color-heading);
 }
 
 .card-desc {
   margin: 0 0 1rem;
   font-size: 0.95rem;
-  color: #64748b;
+  color: var(--color-muted);
   line-height: 1.55;
 }
 
@@ -229,8 +282,8 @@ ul, ol {
   font-size: 0.78rem;
   font-weight: 500;
   padding: 0.3rem 0.65rem;
-  background: #f1f5f9;
-  color: #475569;
+  background: var(--color-chip-bg);
+  color: var(--color-chip-text);
   border-radius: 6px;
 }
 
@@ -964,6 +1017,57 @@ button.callout-title:hover {
   color: #94a3b8;
 }
 
+/* Header right cluster: nav + theme toggle + hamburger */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Hamburger button — hidden on desktop, shown on narrow screens */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  color: #555;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.nav-toggle:hover {
+  background: #eee;
+  color: #1a1a1a;
+}
+
+.nav-toggle .icon-close {
+  display: none;
+}
+
+.nav-toggle[aria-expanded="true"] .icon-menu {
+  display: none;
+}
+
+.nav-toggle[aria-expanded="true"] .icon-close {
+  display: block;
+}
+
+html[data-theme="dark"] .nav-toggle {
+  color: #94a3b8;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+html[data-theme="dark"] .nav-toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f1f5f9;
+}
+
 /* Theme toggle button */
 .theme-toggle {
   display: inline-flex;
@@ -1207,12 +1311,53 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   }
 }
 
-/* Dark mode */
-html[data-theme="dark"] body {
-  background: linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-  color: #e2e8f0;
+/* Narrow phones: the logo + 4 nav links + toggle overflow a single row,
+   so collapse the nav links into a hamburger dropdown. */
+@media (max-width: 600px) {
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.25rem;
+    padding: 0.5rem 1rem 0.75rem;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  }
+
+  .nav.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-link {
+    padding: 0.65rem 0.5rem;
+    border-radius: 6px;
+  }
+
+  html[data-theme="dark"] .nav {
+    background: rgba(15, 23, 42, 0.97);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
 }
 
+/* Dark mode — most surface/text colors come from the design tokens above;
+   only bespoke shades (where dark differs from the shared token) remain here. */
 html[data-theme="dark"] .header {
   background: rgba(15, 23, 42, 0.9);
   border-bottom-color: rgba(255, 255, 255, 0.08);
@@ -1237,15 +1382,6 @@ html[data-theme="dark"] .logo {
   color: #f1f5f9;
 }
 
-html[data-theme="dark"] .name {
-  color: #f8fafc;
-}
-
-html[data-theme="dark"] .tagline,
-html[data-theme="dark"] .intro {
-  color: #94a3b8;
-}
-
 html[data-theme="dark"] .profile-img {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 3px rgba(30, 41, 59, 0.8);
 }
@@ -1261,10 +1397,6 @@ html[data-theme="dark"] .link-btn:focus-visible {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-html[data-theme="dark"] .section-title {
-  color: #f8fafc;
-}
-
 html[data-theme="dark"] .card {
   background: rgba(30, 41, 59, 0.6);
   border-color: rgba(255, 255, 255, 0.08);
@@ -1274,19 +1406,6 @@ html[data-theme="dark"] .card {
 html[data-theme="dark"] .card:hover {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
   border-color: rgba(255, 255, 255, 0.12);
-}
-
-html[data-theme="dark"] .card-title {
-  color: #f8fafc;
-}
-
-html[data-theme="dark"] .card-desc {
-  color: #94a3b8;
-}
-
-html[data-theme="dark"] .tag {
-  background: rgba(51, 65, 85, 0.8);
-  color: #cbd5e1;
 }
 
 html[data-theme="dark"] .card-link {
