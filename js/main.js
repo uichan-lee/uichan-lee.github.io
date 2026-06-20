@@ -1088,7 +1088,25 @@
       });
 
       // Honor a deep link (e.g. arriving at /#p/some-slug directly).
-      if (/^#p\//.test(location.hash)) handleRoute();
+      // Skip on back/forward navigation so mobile browsers don't restore stale post state.
+      if (/^#p\//.test(location.hash)) {
+        var _navEntry = window.performance &&
+          typeof performance.getEntriesByType === 'function' &&
+          performance.getEntriesByType('navigation')[0];
+        if (!_navEntry || _navEntry.type !== 'back_forward') {
+          handleRoute();
+        } else {
+          history.replaceState(null, '', location.pathname);
+        }
+      }
+
+      // If page is restored from bfcache (mobile browser back), reset to list view.
+      window.addEventListener('pageshow', function (e) {
+        if (e.persisted && writingDetail && writingDetail.style.display !== 'none') {
+          showWritingsList();
+          history.replaceState(null, '', location.pathname);
+        }
+      });
     }
 
     function goBackToWritingsList() {
