@@ -1257,8 +1257,9 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   font-weight: 600;
 }
 
-@media (max-width: 1200px) {
-  .writing-toc {
+@media (max-width: 1300px) {
+  .writing-toc,
+  .writing-toc.visible {
     display: none;
   }
 }
@@ -1273,7 +1274,7 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   background: var(--color-surface);
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1300px) {
   .writing-toc-inline {
     display: block;
   }
