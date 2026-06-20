@@ -14,7 +14,7 @@
 - **직관:** 1층 = 직선으로 자르기, 2층 이상 = 여러 직선을 조합해 곡선으로 자르기.
 
 ---
-### What is Layer (층)?
+## What is Layer (층)?
 
 신경망은 **뉴런 (Neuron)** 이 모여 만든 **층(Layer)** 들이 쌓여 있습니다. 
 
@@ -29,7 +29,7 @@
 > 4. **출력 (Output):** 다음 층으로 전달될 데이터 (`A`)
 
 ---
-### Conceptual Diagram of Neural Network
+## Conceptual Diagram of Neural Network
 
 
 ```
@@ -70,12 +70,12 @@
 Now let's take a look into what *activation function* is. 
 
 ---
-### Activation Functions (활성화 함수)
+## Activation Functions (활성화 함수)
 
 For a neural network to learn non-linear relationship, it needs a *non-linear function.* In this post, we compare the most popular 3 functions. 
 
 ---
-#### Sigmoid Function
+### Sigmoid Function
 
 - **Formula**: $\sigma(z) = \frac{1}{1 + e^{-z}}$ 
 - **Range**: $\sigma(z) \in (0, 1)$
@@ -87,7 +87,7 @@ For a neural network to learn non-linear relationship, it needs a *non-linear fu
 		- $\rightarrow$ usually not used for *Hidden Layer* (은닉층)
 
 ---
-#### Tanh (Hyperbolic Tangent) Function
+### Tanh (Hyperbolic Tangent) Function
 
 - **Formula**: $\tanh(z) = \frac{e^z-e^{-z}}{e^z + e^{-z}}$ 
 - **Range**: $\tanh(z) \in (-1, 1)$
@@ -98,7 +98,7 @@ For a neural network to learn non-linear relationship, it needs a *non-linear fu
 		- When $z$ is large or small, the gradient approaches 0.
 
 ---
-#### ReLU (Rectrified Linear Unit) Function - Standard
+### ReLU (Rectrified Linear Unit) Function - Standard
 
 - **Formula**: $f(z) = \max(0, z)$ 
 - **Range**: $f(z) \in [0, \infty)$
@@ -121,7 +121,7 @@ For a neural network to learn non-linear relationship, it needs a *non-linear fu
 |**ReLU**|[0,∞)|$z>0$이면 1, $z\le0$이면 0|✅ **Standard**|**Hidden Layer (Mostly)**|
 
 ---
-#### Softmax Function (mostly for output layer)
+### Softmax Function (mostly for output layer)
 
 **Softmax Function** is type of activation function, but mostly used for the *output layer* (출력층), and in*Multi-class Classification* (다중 클래스 분류) problem, used to get the probability of each class.
 
@@ -154,7 +154,7 @@ Intuitive Understanding:
 
 ---
 
-### Loss Functions (손실 함수) 
+## Loss Functions (손실 함수) 
 
 > [!QUESTION] Why do we need it? 
 > Model gave us probability $(P)$, so we need to express how much it differ from the answer $(Y_true)$.
@@ -163,7 +163,7 @@ Intuitive Understanding:
 > - **Important**: Loss function should be *differentiable* (for Gradient Descent slope calculation)
 
 ---
-#### A. Binary Cross-Entropy (for Binary Classification)
+### A. Binary Cross-Entropy (for Binary Classification)
 
 **Binary Classification** is when there are only two classes (Human vs Dog, Yes vs No)
 - Activation function: **Sigmoid**
@@ -182,7 +182,7 @@ Intuition:
 
 ---
 
-#### Categorical Cross-Entropy (CCE) (for Multi-class Classification)
+### Categorical Cross-Entropy (CCE) (for Multi-class Classification)
 
 **Multi-class Classification** is when there are multiple classes (ex. cat, dog, rabbit probability)
 - Activation function: **Softmax**

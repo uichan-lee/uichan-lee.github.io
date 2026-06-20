@@ -512,19 +512,19 @@ const writings = [
     "category": "econometrics"
   },
   {
-    "slug": "data-science-deep-learning-introduction-to-deep-learning-and-neural-networks",
-    "title": "DL 1 - Introduction",
-    "date": "2026-05-19",
-    "summary": "신경망은 뉴런 (Neuron) 이 모여 만든 층(Layer) 들이 쌓여 있습니다.",
-    "file": "posts/Data Science/Deep Learning/Introduction to Deep Learning and Neural Networks.md",
-    "category": "ml-ds"
-  },
-  {
     "slug": "others-반도체-산업-동향의-이해",
     "title": "반도체 산업 동향의 이해",
     "date": "2026-06-20",
     "summary": "반도체의 정의, 제품의 종류와 특징, 반도체 산업의 구조와 글로벌 반도체 시장",
     "file": "posts/Others/반도체 산업 동향의 이해.md",
     "category": "others"
+  },
+  {
+    "slug": "data-science-deep-learning-introduction-to-deep-learning-and-neural-networks",
+    "title": "DL 1 - Introduction",
+    "date": "2026-06-20",
+    "summary": "What is Deep Learning? Layer, Activation Function, Loss Function",
+    "file": "posts/Data Science/Deep Learning/Introduction to Deep Learning and Neural Networks.md",
+    "category": "ml-ds"
   }
 ];
