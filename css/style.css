@@ -1006,21 +1006,76 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.writing-toc > .toc-list {
   border-left: 2px solid rgba(0, 0, 0, 0.06);
+}
+
+.writing-toc > .toc-list > .toc-item > .toc-row {
+  padding-left: 0.35rem;
 }
 
 .toc-item {
   margin: 0;
 }
 
-.toc-level-1 { padding-left: 0.75rem; }
-.toc-level-2 { padding-left: 0.75rem; }
-.toc-level-3 { padding-left: 1.5rem; }
-.toc-level-4 { padding-left: 2.25rem; }
+.toc-children-wrap > .toc-list {
+  margin-left: 0.35rem;
+  padding-left: 0.55rem;
+  border-left: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.toc-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.toc-toggle,
+.toc-toggle-spacer {
+  flex: 0 0 1.1rem;
+  width: 1.1rem;
+  height: 1.35rem;
+  margin-top: 0.05rem;
+}
+
+.toc-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.toc-toggle:hover {
+  color: #475569;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.toc-chevron {
+  transition: transform 0.15s ease;
+}
+
+.toc-collapsed > .toc-row .toc-chevron {
+  transform: rotate(-90deg);
+}
+
+.toc-collapsed > .toc-children-wrap {
+  display: none;
+}
 
 .toc-link {
   display: block;
-  padding: 0.25rem 0.75rem 0.25rem 0;
+  flex: 1;
+  min-width: 0;
+  padding: 0.2rem 0.5rem 0.2rem 0;
   font-size: 0.78rem;
   line-height: 1.4;
   color: #64748b;
@@ -1031,6 +1086,25 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.toc-level-1 > .toc-row > .toc-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.toc-level-2 > .toc-row > .toc-link {
+  font-weight: 500;
+}
+
+.toc-level-3 > .toc-row > .toc-link {
+  font-size: 0.75rem;
+}
+
+.toc-level-4 > .toc-row > .toc-link {
+  font-size: 0.72rem;
+  color: #94a3b8;
 }
 
 .toc-link:hover {
@@ -1325,8 +1399,22 @@ html[data-theme="dark"] .writing-body pre {
   border-color: rgba(255, 255, 255, 0.08);
 }
 
-html[data-theme="dark"] .toc-list {
+html[data-theme="dark"] .writing-toc > .toc-list,
+html[data-theme="dark"] .toc-children-wrap > .toc-list {
   border-left-color: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme="dark"] .toc-toggle {
+  color: #64748b;
+}
+
+html[data-theme="dark"] .toc-toggle:hover {
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+html[data-theme="dark"] .toc-level-1 > .toc-row > .toc-link {
+  color: #cbd5e1;
 }
 
 html[data-theme="dark"] .toc-link {

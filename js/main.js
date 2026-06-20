@@ -577,6 +577,50 @@
   function hideTOC() { if (tocEl) tocEl.classList.remove('visible'); }
 
   var tocBackBtnHtml = '<button id="writing-back-toc" class="writing-back-btn writing-back-btn-toc" type="button">&larr; Back to list</button>';
+  var tocChevronSvg = '<svg class="toc-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>';
+
+  function buildTOCTree(headings) {
+    var root = { level: 0, children: [] };
+    var stack = [root];
+
+    headings.forEach(function (h) {
+      var level = parseInt(h.tagName[1], 10);
+      var node = { heading: h, level: level, children: [] };
+
+      while (stack.length > 1 && stack[stack.length - 1].level >= level) {
+        stack.pop();
+      }
+      stack[stack.length - 1].children.push(node);
+      stack.push(node);
+    });
+
+    return root.children;
+  }
+
+  function renderTOCNodes(nodes) {
+    if (!nodes.length) return '';
+    var html = '<ul class="toc-list">';
+    nodes.forEach(function (node) {
+      var hasChildren = node.children.length > 0;
+      html += '<li class="toc-item toc-level-' + node.level + (hasChildren ? ' toc-has-children' : '') + '">';
+      html += '<div class="toc-row">';
+      if (hasChildren) {
+        html += '<button type="button" class="toc-toggle" aria-expanded="true" aria-label="Toggle section">' +
+          tocChevronSvg + '</button>';
+      } else {
+        html += '<span class="toc-toggle-spacer" aria-hidden="true"></span>';
+      }
+      html += '<a class="toc-link" href="#' + escapeAttr(node.heading.id) + '">' +
+        escapeHtml(node.heading.textContent) + '</a>';
+      html += '</div>';
+      if (hasChildren) {
+        html += '<div class="toc-children-wrap">' + renderTOCNodes(node.children) + '</div>';
+      }
+      html += '</li>';
+    });
+    html += '</ul>';
+    return html;
+  }
 
   function buildTOC(body) {
     if (!tocEl || !body) return;
@@ -594,14 +638,21 @@
       if (!h.id) h.id = 'heading-' + i;
     });
 
-    var html = '<div class="toc-title">Contents</div><ul class="toc-list">';
-    headings.forEach(function (h) {
-      var level = parseInt(h.tagName[1], 10);
-      html += '<li class="toc-item toc-level-' + level + '">' +
-        '<a class="toc-link" href="#' + escapeAttr(h.id) + '">' + h.textContent + '</a></li>';
-    });
-    html += '</ul>' + tocBackBtnHtml;
+    var tree = buildTOCTree(headings);
+    var html = '<div class="toc-title">Contents</div>' + renderTOCNodes(tree) + tocBackBtnHtml;
     tocEl.innerHTML = html;
+
+    tocEl.querySelectorAll('.toc-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var item = btn.closest('.toc-item');
+        if (!item) return;
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        item.classList.toggle('toc-collapsed', expanded);
+      });
+    });
 
     var links = tocEl.querySelectorAll('.toc-link');
     links.forEach(function (a) {
@@ -614,7 +665,6 @@
 
     if (tocScrollHandler) window.removeEventListener('scroll', tocScrollHandler);
     tocScrollHandler = function () {
-      var scrollY = window.scrollY || window.pageYOffset;
       var headerH = 80;
       var activeIdx = 0;
       for (var i = 0; i < headings.length; i++) {
@@ -623,6 +673,19 @@
       links.forEach(function (a, j) {
         a.classList.toggle('active', j === activeIdx);
       });
+
+      var activeLink = links[activeIdx];
+      if (activeLink) {
+        var ancestor = activeLink.closest('.toc-item');
+        while (ancestor) {
+          if (ancestor.classList.contains('toc-collapsed')) {
+            ancestor.classList.remove('toc-collapsed');
+            var ancestorToggle = ancestor.querySelector(':scope > .toc-row > .toc-toggle');
+            if (ancestorToggle) ancestorToggle.setAttribute('aria-expanded', 'true');
+          }
+          ancestor = ancestor.parentElement ? ancestor.parentElement.closest('.toc-item') : null;
+        }
+      }
     };
     window.addEventListener('scroll', tocScrollHandler, { passive: true });
     tocScrollHandler();
