@@ -51,15 +51,15 @@ const TOPICS = [
       semesterStart: '2025-09-01',
     },
   },
-  // ── Independent Topics ──
+  // ── Others (miscellaneous topics; add new entries here with category: 'others') ──
   {
-    name: 'AWS',
-    sourceDir: path.join(VAULT_ROOT, 'AWS'),
-    targetDir: 'AWS',
-    category: 'aws',
-    label: 'AWS',
-    numberedFiles: true,
+    name: '반도체',
+    sourceDir: path.join(VAULT_ROOT, '반도체'),
+    targetDir: 'Others',
+    category: 'others',
+    label: 'Others',
   },
+  // ── Data Science ──
   {
     name: 'Machine Learning',
     sourceDir: path.join(VAULT_ROOT, 'Data Science', 'Machine Learning'),
@@ -242,8 +242,9 @@ function extractSummary(content) {
 
 function slugify(str) {
   return str
+    .normalize('NFKC')
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/[^\p{L}\p{N}]+/gu, '-')
     .replace(/^-|-$/g, '');
 }
 

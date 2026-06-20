@@ -3,7 +3,7 @@ const writingCategories = {
   "r-programming": "R Programming",
   "data-structures-algorithms": "Data Structures/Algorithms",
   "ml-ds": "Data Science",
-  "aws": "AWS"
+  "others": "Others"
 };
 
 const writings = [
@@ -464,14 +464,6 @@ const writings = [
     "category": "econometrics"
   },
   {
-    "slug": "aws-1-setup",
-    "title": "1. Setup",
-    "date": "2026-04-10",
-    "summary": "Preparing for AWS by creating a free account and configuring basic safeguards like billing alerts and multi-factor authentication.",
-    "file": "posts/AWS/1-Setup.md",
-    "category": "aws"
-  },
-  {
     "slug": "stat-33b-stat-33b-4-13",
     "title": "Intro to Functions",
     "date": "2026-04-13",
@@ -526,5 +518,13 @@ const writings = [
     "summary": "신경망은 뉴런 (Neuron) 이 모여 만든 층(Layer) 들이 쌓여 있습니다.",
     "file": "posts/Data Science/Deep Learning/Introduction to Deep Learning and Neural Networks.md",
     "category": "ml-ds"
+  },
+  {
+    "slug": "others-반도체-산업-동향의-이해",
+    "title": "반도체 산업 동향의 이해",
+    "date": "2026-06-20",
+    "summary": "반도체의 정의, 제품의 종류와 특징, 반도체 산업의 구조와 글로벌 반도체 시장",
+    "file": "posts/Others/반도체 산업 동향의 이해.md",
+    "category": "others"
   }
 ];
