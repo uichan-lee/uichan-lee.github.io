@@ -513,14 +513,6 @@
 
       if (!title) title = type.charAt(0).toUpperCase() + type.slice(1);
 
-      var callout = document.createElement('div');
-      callout.className = 'callout callout-' + type;
-
-      var titleDiv = document.createElement('div');
-      titleDiv.className = 'callout-title';
-      titleDiv.innerHTML = title;
-      callout.appendChild(titleDiv);
-
       var contentDiv = document.createElement('div');
       contentDiv.className = 'callout-content';
       var hasContent = false;
@@ -538,6 +530,29 @@
         contentDiv.appendChild(child);
         hasContent = true;
       }
+
+      var callout = document.createElement('div');
+      callout.className = 'callout callout-' + type;
+
+      var startCollapsed = match[2] === '-';
+      if (hasContent && startCollapsed) callout.classList.add('callout-collapsed');
+
+      var titleEl = document.createElement(hasContent ? 'button' : 'div');
+      titleEl.className = 'callout-title';
+      if (hasContent) {
+        titleEl.type = 'button';
+        titleEl.setAttribute('aria-expanded', startCollapsed ? 'false' : 'true');
+        titleEl.innerHTML =
+          '<svg class="callout-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>' +
+          '<span class="callout-title-text">' + title + '</span>';
+        titleEl.addEventListener('click', function () {
+          var collapsed = callout.classList.toggle('callout-collapsed');
+          titleEl.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+        });
+      } else {
+        titleEl.innerHTML = title;
+      }
+      callout.appendChild(titleEl);
 
       if (hasContent) callout.appendChild(contentDiv);
       bq.parentNode.replaceChild(callout, bq);

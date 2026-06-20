@@ -648,10 +648,46 @@ ul, ol {
 }
 
 .callout-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+  width: 100%;
   font-weight: 600;
   font-size: 0.95rem;
   color: rgb(var(--co));
   margin-bottom: 0.4rem;
+  text-align: left;
+}
+
+button.callout-title {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: inherit;
+}
+
+button.callout-title:hover {
+  opacity: 0.85;
+}
+
+.callout-chevron {
+  flex-shrink: 0;
+  margin-top: 0.15em;
+  transition: transform 0.15s ease;
+}
+
+.callout-collapsed .callout-chevron {
+  transform: rotate(-90deg);
+}
+
+.callout-collapsed .callout-title {
+  margin-bottom: 0;
+}
+
+.callout-collapsed .callout-content {
+  display: none;
 }
 
 .callout-content {
