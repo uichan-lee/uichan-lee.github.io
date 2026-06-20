@@ -13,7 +13,7 @@ const experiences = [
   },
   {
     type: "education",
-    title: "Bachelor of Arts, Statistics",
+    title: "Bachelor of Arts, Data Science",
     org: "University of California, Berkeley",
     period: "Expected May 2027",
     location: "Berkeley, CA",
