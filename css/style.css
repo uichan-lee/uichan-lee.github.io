@@ -557,6 +557,17 @@ ul, ol {
 
 .writing-body .footnote-ref a:hover {
   text-decoration: underline;
+  cursor: help;
+}
+
+.writing-body a.internal-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.writing-body a.internal-link:hover {
+  text-decoration: underline;
 }
 
 .writing-body .footnotes {
@@ -589,6 +600,40 @@ ul, ol {
 
 .writing-body .footnote-backref:hover {
   text-decoration: underline;
+}
+
+.footnote-preview {
+  position: fixed;
+  z-index: 200;
+  max-width: min(22rem, calc(100vw - 1.5rem));
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: #334155;
+  pointer-events: auto;
+}
+
+.footnote-preview[hidden] {
+  display: none !important;
+}
+
+.footnote-preview-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 0.35rem;
+}
+
+.footnote-preview-body p {
+  margin: 0;
+}
+
+.footnote-preview-body p + p {
+  margin-top: 0.5rem;
 }
 
 /* Obsidian callouts */
@@ -1315,7 +1360,19 @@ html[data-theme="dark"] .writing-body .footnotes {
 }
 
 html[data-theme="dark"] .writing-body .footnote-ref a,
-html[data-theme="dark"] .writing-body .footnote-backref {
+html[data-theme="dark"] .writing-body .footnote-backref,
+html[data-theme="dark"] .writing-body a.internal-link {
+  color: #93c5fd;
+}
+
+html[data-theme="dark"] .footnote-preview {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  color: #e2e8f0;
+}
+
+html[data-theme="dark"] .footnote-preview-label {
   color: #93c5fd;
 }
 

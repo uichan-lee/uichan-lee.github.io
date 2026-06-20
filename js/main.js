@@ -100,6 +100,15 @@
 
   // --- Obsidian-compatible markdown helpers ---
 
+  function headingToSlug(text) {
+    return String(text)
+      .trim()
+      .normalize('NFKC')
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\p{L}\p{N}\-_]/gu, '');
+  }
+
   function preprocessObsidian(md, baseDir) {
     baseDir = baseDir || '';
     md = md.replace(/^---[\s\S]*?---\n?/, '');
@@ -185,6 +194,14 @@
     });
 
     md = md.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, function (m, target, alias) {
+      target = target.trim();
+      if (target.charAt(0) === '#') {
+        var headingText = target.slice(1).trim();
+        if (headingText.charAt(0) === '^') return alias || target;
+        var label = alias || headingText;
+        var slug = headingToSlug(headingText);
+        return '[' + label + '](#' + slug + ')';
+      }
       return alias || target;
     });
 
@@ -282,6 +299,132 @@
     return html;
   }
 
+  var footnotePreviewEl = null;
+  var footnotePreviewHideTimer = null;
+  var footnotePreviewScrollBound = false;
+
+  function hideFootnotePreview() {
+    if (footnotePreviewHideTimer) {
+      clearTimeout(footnotePreviewHideTimer);
+      footnotePreviewHideTimer = null;
+    }
+    if (!footnotePreviewEl) return;
+    footnotePreviewEl.hidden = true;
+    footnotePreviewEl.innerHTML = '';
+    footnotePreviewEl.removeAttribute('data-anchor-id');
+  }
+
+  function ensureFootnotePreviewElement() {
+    if (footnotePreviewEl) return footnotePreviewEl;
+    footnotePreviewEl = document.createElement('div');
+    footnotePreviewEl.id = 'footnote-preview';
+    footnotePreviewEl.className = 'footnote-preview';
+    footnotePreviewEl.setAttribute('role', 'tooltip');
+    footnotePreviewEl.hidden = true;
+    document.body.appendChild(footnotePreviewEl);
+
+    footnotePreviewEl.addEventListener('mouseenter', function () {
+      if (footnotePreviewHideTimer) {
+        clearTimeout(footnotePreviewHideTimer);
+        footnotePreviewHideTimer = null;
+      }
+    });
+    footnotePreviewEl.addEventListener('mouseleave', function () {
+      footnotePreviewHideTimer = setTimeout(hideFootnotePreview, 120);
+    });
+
+    if (!footnotePreviewScrollBound) {
+      footnotePreviewScrollBound = true;
+      window.addEventListener('scroll', hideFootnotePreview, { passive: true, capture: true });
+      window.addEventListener('resize', hideFootnotePreview, { passive: true });
+    }
+    return footnotePreviewEl;
+  }
+
+  function positionFootnotePreview(anchor, popover) {
+    var rect = anchor.getBoundingClientRect();
+    var popRect = popover.getBoundingClientRect();
+    var gap = 8;
+    var margin = 12;
+    var top = rect.bottom + gap;
+    var left = rect.left + rect.width / 2 - popRect.width / 2;
+
+    left = Math.max(margin, Math.min(left, window.innerWidth - popRect.width - margin));
+
+    if (top + popRect.height > window.innerHeight - margin) {
+      top = rect.top - popRect.height - gap;
+    }
+    if (top < margin) {
+      top = margin;
+    }
+
+    popover.style.top = top + 'px';
+    popover.style.left = left + 'px';
+  }
+
+  function showFootnotePreview(anchor, body) {
+    if (!anchor || !body) return;
+    var href = anchor.getAttribute('href') || '';
+    if (href.charAt(0) !== '#') return;
+    var fnId = href.slice(1);
+    var fnEl = body.querySelector('#' + CSS.escape(fnId));
+    if (!fnEl) return;
+
+    var popover = ensureFootnotePreviewElement();
+    var num = anchor.textContent.trim();
+    var content = fnEl.cloneNode(true);
+    var backref = content.querySelector('.footnote-backref');
+    if (backref) backref.remove();
+
+    popover.innerHTML =
+      '<div class="footnote-preview-label">' + escapeHtml(num) + '</div>' +
+      '<div class="footnote-preview-body">' + content.innerHTML + '</div>';
+
+    popover.hidden = false;
+    popover.style.visibility = 'hidden';
+    positionFootnotePreview(anchor, popover);
+    popover.style.visibility = '';
+    popover.setAttribute('data-anchor-id', fnId);
+  }
+
+  function setupFootnotePreviews(body) {
+    if (!body) return;
+    var refs = body.querySelectorAll('.footnote-ref a[href^="#fn-"]');
+    if (!refs.length) return;
+
+    var supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    refs.forEach(function (anchor) {
+      anchor.setAttribute('aria-describedby', 'footnote-preview');
+
+      if (supportsHover) {
+        anchor.addEventListener('mouseenter', function () {
+          if (footnotePreviewHideTimer) {
+            clearTimeout(footnotePreviewHideTimer);
+            footnotePreviewHideTimer = null;
+          }
+          showFootnotePreview(anchor, body);
+        });
+        anchor.addEventListener('mouseleave', function (e) {
+          var related = e.relatedTarget;
+          if (related && footnotePreviewEl && footnotePreviewEl.contains(related)) return;
+          footnotePreviewHideTimer = setTimeout(hideFootnotePreview, 120);
+        });
+      }
+
+      anchor.addEventListener('focus', function () {
+        if (footnotePreviewHideTimer) {
+          clearTimeout(footnotePreviewHideTimer);
+          footnotePreviewHideTimer = null;
+        }
+        showFootnotePreview(anchor, body);
+      });
+      anchor.addEventListener('blur', function () {
+        footnotePreviewHideTimer = setTimeout(hideFootnotePreview, 120);
+      });
+    });
+  }
+
   function restoreMathAndMarks(html, mathStore) {
     if (!mathStore) return html;
     html = html.replace(/%%MATH(\d+)%%/g, function (m, idx) {
@@ -295,6 +438,54 @@
     html = html.replace(/%%MARK_START%%/g, '<mark>');
     html = html.replace(/%%MARK_END%%/g, '</mark>');
     return html;
+  }
+
+  function assignHeadingIds(container) {
+    if (!container) return;
+    var used = {};
+    container.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(function (h) {
+      if (h.closest('.footnotes')) return;
+      var base = headingToSlug(h.textContent);
+      if (!base) return;
+      var slug = base;
+      if (used[base]) {
+        slug = base + '-' + used[base];
+        used[base]++;
+      } else {
+        used[base] = 1;
+      }
+      h.id = slug;
+    });
+  }
+
+  function scrollToElement(el) {
+    if (!el) return;
+    var headerH = 80;
+    var top = el.getBoundingClientRect().top + window.scrollY - headerH - 12;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }
+
+  function setupInternalLinks(body) {
+    if (!body) return;
+    body.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.classList.add('internal-link');
+      a.addEventListener('click', function (e) {
+        var raw = a.getAttribute('href').slice(1);
+        if (!raw) return;
+        var id = decodeURIComponent(raw);
+        var target = document.getElementById(id);
+        if (!target && body.querySelector) {
+          target = body.querySelector('[id="' + id.replace(/"/g, '\\"') + '"]');
+        }
+        if (target) {
+          e.preventDefault();
+          scrollToElement(target);
+          if (history.replaceState) {
+            history.replaceState(null, '', '#' + encodeURIComponent(id));
+          }
+        }
+      });
+    });
   }
 
   function transformCallouts(container) {
@@ -407,7 +598,7 @@
     headings.forEach(function (h) {
       var level = parseInt(h.tagName[1], 10);
       html += '<li class="toc-item toc-level-' + level + '">' +
-        '<a class="toc-link" href="#' + h.id + '">' + h.textContent + '</a></li>';
+        '<a class="toc-link" href="#' + escapeAttr(h.id) + '">' + h.textContent + '</a></li>';
     });
     html += '</ul>' + tocBackBtnHtml;
     tocEl.innerHTML = html;
@@ -417,7 +608,7 @@
       a.addEventListener('click', function (e) {
         e.preventDefault();
         var target = document.getElementById(a.getAttribute('href').slice(1));
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (target) scrollToElement(target);
       });
     });
 
@@ -460,6 +651,7 @@
       if (writingsList) writingsList.style.display = '';
       if (writingDetail) writingDetail.style.display = 'none';
       if (showMoreWrap) showMoreWrap.style.display = '';
+      hideFootnotePreview();
       clearTOC();
       applyFilters();
     }
@@ -483,6 +675,7 @@
         return;
       }
       showWritingDetail();
+      hideFootnotePreview();
       writingContent.innerHTML = '<p class="writing-loading">Loading…</p>';
       fetch(encodeURI(writing.file))
         .then(function (res) {
@@ -501,6 +694,7 @@
 
           var body = writingContent.querySelector('.writing-body');
           if (!body) return;
+          assignHeadingIds(body);
           transformCallouts(body);
           renderMath(body);
           if (typeof hljs !== 'undefined') {
@@ -509,6 +703,8 @@
             });
           }
           buildTOC(body);
+          setupInternalLinks(body);
+          setupFootnotePreviews(body);
         })
         .catch(function () {
           writingContent.innerHTML = '<p class="writing-error">Could not load this post.</p>';
