@@ -1,6 +1,16 @@
 const experiences = [
   {
     type: "work",
+    title: "NAND Flash Memory Product Engineer Intern",
+    org: "Samsung Electronics DS Division",
+    period: "Jun 2026 – Jul 2026",
+    location: "South Korea",
+    bullets: [
+      "Details to be updated.",
+    ],
+  },
+  {
+    type: "work",
     title: "Student Researcher",
     org: "UC Berkeley Data Discovery × Ten Strands",
     period: "Sep 2025 – Dec 2025",
