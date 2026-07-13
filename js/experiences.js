@@ -4,7 +4,7 @@ const experiences = [
     title: "NAND Flash Memory Product Engineer Intern",
     org: "Samsung Electronics DS Division",
     period: "Jun 2026 – Jul 2026",
-    location: "South Korea",
+    location: "Hwaseong, South Korea",
     bullets: [
       "Details to be updated.",
     ],
@@ -25,10 +25,10 @@ const experiences = [
     type: "education",
     title: "Bachelor of Arts, Data Science",
     org: "University of California, Berkeley",
-    period: "Expected May 2027",
+    period: "Expected Dec 2026 (early grduation)",
     location: "Berkeley, CA",
     bullets: [
-      "College of Computing, Data Science & Society. Cumulative GPA: 4.00 / 4.00.",
+      "College of Computing, Data Science & Society.",
       "Dean's List, College of CDSS.",
     ],
   },
