@@ -25,7 +25,7 @@ const experiences = [
     type: "education",
     title: "Bachelor of Arts, Data Science",
     org: "University of California, Berkeley",
-    period: "Expected Dec 2026 (early grduation)",
+    period: "Expected Dec 2026 (early graduation)",
     location: "Berkeley, CA",
     bullets: [
       "College of Computing, Data Science & Society.",
@@ -46,9 +46,9 @@ const experiences = [
   },
   {
     type: "education",
-    title: "Associates of Arts, Statistics",
+    title: "Associate of Arts, Statistics",
     org: "Pasadena City College",
-    period: "Feb 2024 – June 2025",
+    period: "Feb 2024 – Jun 2025",
     location: "Pasadena, CA",
     bullets: [
       "Cumulative GPA: 4.00 / 4.00.",

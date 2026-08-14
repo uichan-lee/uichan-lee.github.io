@@ -16,13 +16,27 @@ function xmlEscape(s) {
 function buildSitemap(siteUrl, posts) {
   const dates = posts.map(function (p) { return p.date; }).filter(Boolean).sort();
   const lastmod = dates.length ? dates[dates.length - 1] : new Date().toISOString().slice(0, 10);
+  // Two locales share the same post content (see js/main.js LOCALE), so both
+  // URLs get the same lastmod and reciprocal hreflang alternates rather than
+  // separate per-post entries.
+  const altLinks =
+    '    <xhtml:link rel="alternate" hreflang="en" href="' + siteUrl + '/" />\n' +
+    '    <xhtml:link rel="alternate" hreflang="ko" href="' + siteUrl + '/ko/" />\n';
   return '<?xml version="1.0" encoding="UTF-8"?>\n' +
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' +
     '  <url>\n' +
     '    <loc>' + siteUrl + '/</loc>\n' +
     '    <lastmod>' + lastmod + '</lastmod>\n' +
     '    <changefreq>weekly</changefreq>\n' +
     '    <priority>1.0</priority>\n' +
+    altLinks +
+    '  </url>\n' +
+    '  <url>\n' +
+    '    <loc>' + siteUrl + '/ko/</loc>\n' +
+    '    <lastmod>' + lastmod + '</lastmod>\n' +
+    '    <changefreq>weekly</changefreq>\n' +
+    '    <priority>0.9</priority>\n' +
+    altLinks +
     '  </url>\n' +
     '</urlset>\n';
 }

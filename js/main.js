@@ -1,4 +1,34 @@
 (function () {
+  // --- i18n ---
+  // The Korean page (ko/index.html) sets <html lang="ko">; everything else
+  // sets lang="en" (or omits it). Chrome strings this file writes into the
+  // DOM look themselves up here instead of being hardcoded, so main.js stays
+  // a single shared file across both pages.
+  var LOCALE = document.documentElement.lang === 'ko' ? 'ko' : 'en';
+  // Deliberately narrow: only generic UI verbs/microcopy (search, filters,
+  // loading/error states, pagination) are localized. Names, titles, and body
+  // copy stay in their original language on both pages — see the ko/index.html
+  // and projects.js/experiences.js comments for the reasoning.
+  var STRINGS = {
+    en: {
+      viewDemo: 'View Demo', viewCode: 'View Code',
+      searchPlaceholder: 'Search posts (title + content)…', searchAria: 'Search posts',
+      all: 'All', noResults: 'No posts match your search.', readMore: 'Read more →',
+      showMore: 'Show more',
+      loading: 'Loading…', invalidPost: 'Invalid post.', loadError: 'Could not load this post.',
+      openMenu: 'Open menu', closeMenu: 'Close menu',
+    },
+    ko: {
+      viewDemo: '데모 보기', viewCode: '코드 보기',
+      searchPlaceholder: '글 검색 (제목 + 본문)…', searchAria: '글 검색',
+      all: '전체', noResults: '검색 결과와 일치하는 글이 없습니다.', readMore: '더 읽기 →',
+      showMore: '더 보기',
+      loading: '불러오는 중…', invalidPost: '잘못된 글입니다.', loadError: '글을 불러올 수 없습니다.',
+      openMenu: '메뉴 열기', closeMenu: '메뉴 닫기',
+    },
+  };
+  function t(key) { return STRINGS[LOCALE][key]; }
+
   // --- Dark mode toggle ---
   var HLJS_LIGHT = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css';
   var HLJS_DARK  = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css';
@@ -88,14 +118,14 @@
     if (!navToggle || !primaryNav) return;
     primaryNav.classList.remove('open');
     navToggle.setAttribute('aria-expanded', 'false');
-    navToggle.setAttribute('aria-label', 'Open menu');
+    navToggle.setAttribute('aria-label', t('openMenu'));
   }
 
   function openMenu() {
     if (!navToggle || !primaryNav) return;
     primaryNav.classList.add('open');
     navToggle.setAttribute('aria-expanded', 'true');
-    navToggle.setAttribute('aria-label', 'Close menu');
+    navToggle.setAttribute('aria-label', t('closeMenu'));
   }
 
   if (navToggle && primaryNav) {
@@ -116,6 +146,7 @@
 
   function onScroll() {
     var headerEl = document.querySelector('.header');
+    if (headerEl) headerEl.classList.toggle('scrolled', window.scrollY > 8);
     const headerHeight = headerEl ? headerEl.offsetHeight : 0;
     let current = 'home';
     sections.forEach(function (section) {
@@ -149,17 +180,18 @@
       grid.innerHTML = projects
         .map(function (p) {
           var tagsHtml = (p.tags || [])
-            .map(function (t) {
-              return '<span class="tag">' + escapeHtml(t) + '</span>';
+            .map(function (tag) {
+              return '<span class="tag">' + escapeHtml(tag) + '</span>';
             })
             .join('');
+          // Project titles/descriptions are not translated — see projects.js.
           var hasDemo = p.link && p.link !== '#';
-          var demoLabel = (p.linkLabel && p.linkLabel.trim()) ? p.linkLabel.trim() : 'View Demo';
+          var demoLabel = (p.linkLabel && p.linkLabel.trim()) ? p.linkLabel.trim() : t('viewDemo');
           var linksHtml =
             (hasDemo
               ? '<a href="' + escapeAttr(p.link) + '" class="card-link" target="_blank" rel="noopener noreferrer">' + escapeHtml(demoLabel) + '</a>'
               : '') +
-            '<a href="' + escapeAttr(p.codeLink || '#') + '" class="card-link" target="_blank" rel="noopener noreferrer">View Code</a>';
+            '<a href="' + escapeAttr(p.codeLink || '#') + '" class="card-link" target="_blank" rel="noopener noreferrer">' + escapeHtml(t('viewCode')) + '</a>';
           return (
             '<article class="card">' +
             '<h3 class="card-title">' + escapeHtml(p.title) + '</h3>' +
@@ -255,12 +287,20 @@
     md = md.replace(/==(.*?)==/g, '%%MARK_START%%$1%%MARK_END%%');
 
     md = md.replace(/!\[\[([^\]|]+?)(?:\|([^\]]*))?\]\]/g, function (m, file, dims) {
-      var src = baseDir + 'attachments/' + file.trim();
+      // Obsidian normally writes embed targets as a bare filename, but falls
+      // back to a full vault-relative path when a filename collides with
+      // another attachment elsewhere in the vault (e.g. "week 10.md" has
+      // "🐻 UC Berkeley/.../attachments/image-4.png" instead of just
+      // "image-4.png"). attachments/ here only ever holds files by their
+      // bare name (see sync.js copyDirSync), so resolve on the basename
+      // regardless of which form Obsidian wrote.
+      var name = file.trim().split('/').pop();
+      var src = baseDir + 'attachments/' + name;
       var srcAttr = src.replace(/ /g, '%20');
-      if (!dims) return '![' + file + '](<' + src + '>)';
+      if (!dims) return '![' + name + '](<' + src + '>)';
       var wh = dims.match(/^(\d+)x(\d+)$/);
-      if (wh) return '<img src="' + srcAttr + '" width="' + wh[1] + '" height="' + wh[2] + '" alt="' + file + '" />';
-      return '<img src="' + srcAttr + '" width="' + dims + '" alt="' + file + '" />';
+      if (wh) return '<img src="' + srcAttr + '" width="' + wh[1] + '" height="' + wh[2] + '" alt="' + name + '" />';
+      return '<img src="' + srcAttr + '" width="' + dims + '" alt="' + name + '" />';
     });
 
     md = md.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function (m, alt, url) {
@@ -867,27 +907,33 @@
       if (dateStr == null || String(dateStr).trim() === '') return '';
       var d = new Date(dateStr + 'T00:00:00');
       if (Number.isNaN(d.getTime())) return '';
-      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      return d.toLocaleDateString(LOCALE === 'ko' ? 'ko-KR' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     }
 
     function loadPost(writing) {
       if (!writing || !writing.file) {
-        if (writingContent) writingContent.innerHTML = '<p class="writing-error">Invalid post.</p>';
+        if (writingContent) writingContent.innerHTML = '<p class="writing-error">' + escapeHtml(t('invalidPost')) + '</p>';
         return;
       }
       showWritingDetail();
       hideFootnotePreview();
-      writingContent.innerHTML = '<p class="writing-loading">Loading…</p>';
+      writingContent.innerHTML = '<p class="writing-loading">' + escapeHtml(t('loading')) + '</p>';
       Promise.all([
         ensurePostLibs(),
-        fetch(encodeURI(writing.file)).then(function (res) {
+        // Leading '/' makes this resolve from the site root regardless of
+        // which page (/, /ko/) is currently loading the post — writing.file
+        // is stored as a repo-relative path like "posts/CS 61B/week 1.md".
+        fetch(encodeURI('/' + writing.file)).then(function (res) {
           if (!res.ok) throw new Error('Failed to load post');
           return res.text();
         })
       ])
         .then(function (arr) {
           var md = arr[1];
-          var baseDir = writing.file.substring(0, writing.file.lastIndexOf('/') + 1);
+          // Same root-relative reasoning as the fetch above: embeds (![[...]])
+          // resolve against this baseDir, so it needs the leading '/' too or
+          // attachment images 404 from /ko/.
+          var baseDir = '/' + writing.file.substring(0, writing.file.lastIndexOf('/') + 1);
           var result = preprocessObsidian(md, baseDir);
           var html = marked.parse(result.md);
           html = restoreFootnotes(html, result.footnotes);
@@ -911,7 +957,7 @@
           setupFootnotePreviews(body);
         })
         .catch(function () {
-          writingContent.innerHTML = '<p class="writing-error">Could not load this post.</p>';
+          writingContent.innerHTML = '<p class="writing-error">' + escapeHtml(t('loadError')) + '</p>';
         });
       var writingsSection = document.getElementById('writings');
       if (writingsSection) {
@@ -933,20 +979,21 @@
 
       var searchIndexData = (typeof searchIndex !== 'undefined') ? searchIndex : {};
       var filtersHtml = '<div class="writings-search-wrap">' +
-        '<input type="search" id="writings-search" class="writings-search-input" placeholder="Search posts (title + content)…" aria-label="Search posts">' +
+        '<input type="search" id="writings-search" class="writings-search-input" placeholder="' + escapeAttr(t('searchPlaceholder')) + '" aria-label="' + escapeAttr(t('searchAria')) + '">' +
         '</div>' +
         '<div class="writings-filters">' +
-        '<button class="filter-btn active" data-category="all">All (' + sortedWritings.length + ')</button>';
+        '<button class="filter-btn active" data-category="all">' + escapeHtml(t('all')) + ' (' + sortedWritings.length + ')</button>';
       Object.keys(catCounts).forEach(function (cat) {
         filtersHtml += '<button class="filter-btn" data-category="' + escapeAttr(cat) + '">' +
           escapeHtml(catLabels[cat] || cat) + ' (' + catCounts[cat] + ')</button>';
       });
       filtersHtml += '</div>';
-      filtersHtml += '<p id="writings-no-results" class="writings-no-results" style="display:none">No posts match your search.</p>';
+      filtersHtml += '<p id="writings-no-results" class="writings-no-results" style="display:none">' + escapeHtml(t('noResults')) + '</p>';
       writingsList.insertAdjacentHTML('beforebegin', filtersHtml);
 
       var POSTS_VISIBLE_INITIAL = 5;
-      var expanded = false;
+      var POSTS_VISIBLE_STEP = 5;
+      var visibleCount = POSTS_VISIBLE_INITIAL;
 
       writingsList.innerHTML = sortedWritings
         .map(function (w, i) {
@@ -959,7 +1006,7 @@
             '</div>' +
             '<h3 class="writing-card-title">' + escapeHtml(w.title) + '</h3>' +
             '<p class="writing-card-summary">' + escapeHtml(w.summary) + '</p>' +
-            '<span class="writing-card-read">Read more &rarr;</span>' +
+            '<span class="writing-card-read">' + escapeHtml(t('readMore')) + '</span>' +
             '</article>'
           );
         })
@@ -967,7 +1014,7 @@
 
       writingsList.insertAdjacentHTML('afterend',
         '<div id="writings-show-more-wrap" class="writings-show-more-wrap" style="display:none">' +
-        '<button type="button" id="writings-show-more-btn" class="writings-show-more-btn">Show more</button>' +
+        '<button type="button" id="writings-show-more-btn" class="writings-show-more-btn">' + escapeHtml(t('showMore')) + '</button>' +
         '</div>');
 
       var searchInput = writingsList.parentElement.querySelector('#writings-search');
@@ -998,18 +1045,17 @@
           var match = w && matchesSearch(w) && (cat === 'all' || (w.category || '') === cat);
           if (match) matchingCards.push(card);
         });
-        var limit = expanded ? matchingCards.length : POSTS_VISIBLE_INITIAL;
+        var limit = Math.min(visibleCount, matchingCards.length);
         var visibleCards = matchingCards.slice(0, limit);
         writingsList.querySelectorAll('.writing-card').forEach(function (card) {
           card.style.display = visibleCards.indexOf(card) !== -1 ? '' : 'none';
         });
         if (noResultsEl) noResultsEl.style.display = matchingCards.length === 0 ? '' : 'none';
         if (showMoreWrap && showMoreBtn) {
-          if (matchingCards.length > POSTS_VISIBLE_INITIAL) {
+          var remaining = matchingCards.length - limit;
+          if (remaining > 0) {
             showMoreWrap.style.display = '';
-            showMoreBtn.textContent = expanded
-              ? 'Show less'
-              : 'Show more (' + (matchingCards.length - POSTS_VISIBLE_INITIAL) + ')';
+            showMoreBtn.textContent = t('showMore') + ' (' + remaining + ')';
           } else {
             showMoreWrap.style.display = 'none';
           }
@@ -1033,7 +1079,7 @@
       }
       if (showMoreBtn) {
         showMoreBtn.addEventListener('click', function () {
-          expanded = !expanded;
+          visibleCount += POSTS_VISIBLE_STEP;
           applyFilters();
         });
       }
@@ -1142,6 +1188,7 @@
   if (typeof experiences !== 'undefined') {
     const timeline = document.getElementById('experiences-timeline');
     if (timeline) {
+      // Experience entries are not translated — see experiences.js.
       timeline.innerHTML = experiences
         .map(function (exp) {
           var bulletsHtml = (exp.bullets || [])
@@ -1180,5 +1227,42 @@
       .replace(/'/g, '&#39;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
+  }
+
+  // --- Footer year ---
+  // Computed instead of hardcoded so it never silently goes stale on Jan 1.
+  var footerP = document.querySelector('.footer p');
+  if (footerP) {
+    footerP.textContent = footerP.textContent.replace(/©\s*\d{4}/, '© ' + new Date().getFullYear());
+  }
+
+  // --- Scroll-reveal entrance animation ---
+  // Cards/timeline items/section titles fade + rise in the first time they
+  // cross into the viewport. The .reveal class (which starts elements at
+  // opacity:0) is only ever added here, in JS, after confirming
+  // IntersectionObserver exists and the user hasn't asked for reduced
+  // motion — so with JS disabled, or on that media query, everything is
+  // simply visible immediately. Never hides content behind a JS dependency.
+  if (
+    typeof IntersectionObserver !== 'undefined' &&
+    !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  ) {
+    var revealTargets = document.querySelectorAll(
+      '.card, .writing-card, .timeline-item, .section-title'
+    );
+    var revealObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    revealTargets.forEach(function (el) {
+      el.classList.add('reveal');
+      revealObserver.observe(el);
+    });
   }
 })();

@@ -1,5 +1,12 @@
 const projects = [
   {
+    title: "Market Briefing",
+    description: "Daily Korean/US equity briefing pipeline that computes a reproducible directional rating from weighted feature z-scores — LLMs only classify individual news articles, never the rating itself. Runs unattended twice daily via GitHub Actions, backed by 719 automated tests and a pre-registered 3-month evaluation against KODEX 200 buy-and-hold.",
+    link: "#",
+    codeLink: "https://github.com/uichan-lee/market-briefing",
+    tags: ["Python", "LLM", "pykrx", "litellm", "GitHub Actions", "Pandas"],
+  },
+  {
     title: "AI Career-to-Project Orchestrator",
     description: "Multi-Agent System that acts as an automated career consultant. Architected a stateful LangGraph workflow with distinct Resume Analysis and Project Ideation agents. Implemented Pydantic v2 schemas for structured output validation. Full-stack: Dockerized FastAPI backend + React (TypeScript) frontend.",
     link: "#",
@@ -15,7 +22,7 @@ const projects = [
   },
   {
     title: "Data Discovery — Staffing Impact Analysis",
-    description: "UC Berkeley Data Discovery × Ten Strands research. Quantified the impact of staffing on environmental literacy using Average Marginal Effects (AME) in Python. Discovered Whole-System Coordinators increase superior performance probability by 59.5%. Built preprocessing pipeline for 938 CA school districts.",
+    description: "UC Berkeley Data Discovery × Ten Strands research. Quantified the impact of staffing on environmental literacy using Average Marginal Effects (AME) in Python. Discovered Whole-System Coordinators increase superior performance probability by 59.5 percentage points. Built preprocessing pipeline for 938 CA school districts.",
     link: "#",
     codeLink: "https://github.com/uichan-lee/dd-staffing",
     tags: ["Python", "Pandas", "statsmodels", "Scikit-learn", "Matplotlib"],

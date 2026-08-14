@@ -81,6 +81,32 @@ ul, ol {
   padding: 0;
 }
 
+/* ── Motion ──────────────────────────────────────────────────────
+   .reveal/.in-view are added by main.js (only when IntersectionObserver
+   exists and prefers-reduced-motion isn't set), so nothing here ever hides
+   content from a no-JS visitor — see the comment at the bottom of main.js. */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Header */
 .header {
   position: fixed;
@@ -95,7 +121,13 @@ ul, ol {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0);
+  transition: box-shadow 0.25s ease;
   z-index: 100;
+}
+
+.header.scrolled {
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
 }
 
 .logo {
@@ -150,6 +182,7 @@ ul, ol {
 
 .home-content {
   width: 100%;
+  animation: fadeInUp 0.6s ease both;
 }
 
 .profile-img {
@@ -279,7 +312,7 @@ ul, ol {
 }
 
 .tag {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 500;
   padding: 0.3rem 0.65rem;
   background: var(--color-chip-bg);
@@ -293,7 +326,7 @@ ul, ol {
 }
 
 .card-link {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: #2563eb;
   padding: 0.25rem 0;
@@ -359,7 +392,7 @@ ul, ol {
   border: 1px solid rgba(0, 0, 0, 0.12);
   background: #f8fafc;
   font-family: inherit;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: #0f172a;
   cursor: pointer;
@@ -389,16 +422,19 @@ ul, ol {
   border: 1px solid rgba(0, 0, 0, 0.12);
   background: none;
   font-family: inherit;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: #475569;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
 .filter-btn:hover {
   background: #f1f5f9;
   border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
 }
 
 .filter-btn.active {
@@ -436,13 +472,13 @@ ul, ol {
 }
 
 .writing-card-date {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: #64748b;
 }
 
 .writing-card-tag {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 600;
   padding: 0.15rem 0.55rem;
   border-radius: 10px;
@@ -467,7 +503,7 @@ ul, ol {
 }
 
 .writing-card-read {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: #2563eb;
 }
@@ -482,17 +518,20 @@ ul, ol {
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 8px;
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: #475569;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
 .writing-back-btn:hover {
   background: #f1f5f9;
   color: #0f172a;
   border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
 }
 
 .writing-back-btn-bottom {
@@ -881,7 +920,7 @@ button.callout-title:hover {
   border-radius: 8px;
   font-weight: 500;
   font-size: 0.95rem;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
   background: #0f172a;
   color: #fff;
   border: none;
@@ -891,6 +930,7 @@ button.callout-title:hover {
 .cta-btn:focus-visible {
   background: #1e293b;
   outline: none;
+  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
 }
 
@@ -944,11 +984,12 @@ button.callout-title:hover {
   padding: 1.5rem 1.75rem;
   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  transition: box-shadow 0.2s;
+  transition: box-shadow 0.25s, transform 0.25s;
 }
 
 .timeline-content:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+  transform: translateY(-2px);
 }
 
 .timeline-type {
@@ -985,7 +1026,7 @@ button.callout-title:hover {
 .timeline-bullets {
   margin: 0;
   padding-left: 1.25rem;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #475569;
   line-height: 1.6;
 }
@@ -1037,13 +1078,16 @@ button.callout-title:hover {
   border-radius: 8px;
   color: #555;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
   flex-shrink: 0;
 }
 
 .nav-toggle:hover {
   background: #eee;
   color: #1a1a1a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
 }
 
 .nav-toggle .icon-close {
@@ -1070,6 +1114,7 @@ html[data-theme="dark"] .nav-toggle:hover {
 
 /* Theme toggle button */
 .theme-toggle {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1081,21 +1126,34 @@ html[data-theme="dark"] .nav-toggle:hover {
   border-radius: 8px;
   color: #555;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
   flex-shrink: 0;
 }
 
 .theme-toggle:hover {
   background: #eee;
   color: #1a1a1a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+/* Sun/moon cross-fade instead of a hard display swap — both icons are
+   stacked (absolute) so opacity+rotate can transition between them. */
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  position: absolute;
+  transition: opacity 0.3s ease, transform 0.4s ease;
 }
 
 .theme-toggle .icon-sun {
-  display: none;
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
 }
 
 .theme-toggle .icon-moon {
-  display: block;
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
 }
 
 html[data-theme="dark"] .theme-toggle {
@@ -1109,11 +1167,50 @@ html[data-theme="dark"] .theme-toggle:hover {
 }
 
 html[data-theme="dark"] .theme-toggle .icon-sun {
-  display: block;
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
 }
 
 html[data-theme="dark"] .theme-toggle .icon-moon {
-  display: none;
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+/* Language switch link (/ <-> /ko/) */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 0.6rem;
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  color: #555;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+
+.lang-switch:hover {
+  background: #eee;
+  color: #1a1a1a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+html[data-theme="dark"] .lang-switch {
+  color: #94a3b8;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+html[data-theme="dark"] .lang-switch:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f1f5f9;
 }
 
 /* Table of Contents sidebar */
@@ -1257,13 +1354,6 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   font-weight: 600;
 }
 
-@media (max-width: 1300px) {
-  .writing-toc,
-  .writing-toc.visible {
-    display: none;
-  }
-}
-
 /* Inline TOC (mobile / narrow viewport ≤1200px) */
 .writing-toc-inline {
   display: none;
@@ -1275,6 +1365,11 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 }
 
 @media (max-width: 1300px) {
+  .writing-toc,
+  .writing-toc.visible {
+    display: none;
+  }
+
   .writing-toc-inline {
     display: block;
   }
