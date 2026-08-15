@@ -1,3 +1,17 @@
+// Optional fields, both used only by the card renderer in js/main.js:
+//
+//   featured  boolean         Renders the card full-width at the top of the
+//                             grid, with `metric` pulled out at display size.
+//                             Keep this to two or three entries — the point is
+//                             that a featured card stands out from the rest.
+//   metric    {value, label}  One number worth reading from across the page.
+//                             `value` stays short (it is set at ~2.4rem);
+//                             `label` says what it measures. A non-featured
+//                             project may still carry one — it renders as a
+//                             small inline chip rather than at display size.
+//
+// Neither field is derived from anything, so both are safe to hand-edit — see
+// CLAUDE.md for why post fields in js/writings.js are not.
 const projects = [
   {
     title: "Market Briefing",
@@ -5,6 +19,8 @@ const projects = [
     link: "#",
     codeLink: "https://github.com/uichan-lee/market-briefing",
     tags: ["Python", "LLM", "pykrx", "litellm", "GitHub Actions", "Pandas"],
+    featured: true,
+    metric: { value: "719", label: "automated tests" },
   },
   {
     title: "AI Career-to-Project Orchestrator",
@@ -26,6 +42,8 @@ const projects = [
     link: "#",
     codeLink: "https://github.com/uichan-lee/dd-staffing",
     tags: ["Python", "Pandas", "statsmodels", "Scikit-learn", "Matplotlib"],
+    featured: true,
+    metric: { value: "+59.5pp", label: "effect on superior performance" },
   },
   {
     title: "Housing Price Predictor — Cook County",
@@ -40,6 +58,7 @@ const projects = [
     link: "#",
     codeLink: "https://github.com/uichan-lee/spam-mail-classifier",
     tags: ["Python", "Pandas", "Scikit-learn", "Logistic Regression", "Regex", "GridSearchCV"],
+    metric: { value: "91.2%", label: "cross-validation accuracy" },
   },
   {
     title: "Dungeon Escape with Chaser AI",
