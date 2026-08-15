@@ -13,15 +13,32 @@ function xmlEscape(s) {
     .replace(/'/g, '&apos;');
 }
 
+/** Slugs may contain Hangul, so every emitted URL has to be percent-encoded. */
+function postUrl(siteUrl, slug) {
+  return siteUrl + '/p/' + encodeURIComponent(slug) + '/';
+}
+
 function buildSitemap(siteUrl, posts) {
   const dates = posts.map(function (p) { return p.date; }).filter(Boolean).sort();
   const lastmod = dates.length ? dates[dates.length - 1] : new Date().toISOString().slice(0, 10);
-  // Two locales share the same post content (see js/main.js LOCALE), so both
-  // URLs get the same lastmod and reciprocal hreflang alternates rather than
-  // separate per-post entries.
+  // The two landing pages share the same content in two locales, so they get
+  // reciprocal hreflang alternates. Post pages exist once (English chrome, see
+  // build.js) and carry their own publication date as lastmod.
   const altLinks =
     '    <xhtml:link rel="alternate" hreflang="en" href="' + siteUrl + '/" />\n' +
     '    <xhtml:link rel="alternate" hreflang="ko" href="' + siteUrl + '/ko/" />\n';
+
+  const postEntries = posts.slice().sort(function (a, b) {
+    return String(b.date).localeCompare(String(a.date));
+  }).map(function (p) {
+    return '  <url>\n' +
+      '    <loc>' + xmlEscape(postUrl(siteUrl, p.slug)) + '</loc>\n' +
+      '    <lastmod>' + xmlEscape(p.date || lastmod) + '</lastmod>\n' +
+      '    <changefreq>monthly</changefreq>\n' +
+      '    <priority>0.7</priority>\n' +
+      '  </url>\n';
+  }).join('');
+
   return '<?xml version="1.0" encoding="UTF-8"?>\n' +
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' +
     '  <url>\n' +
@@ -38,6 +55,7 @@ function buildSitemap(siteUrl, posts) {
     '    <priority>0.9</priority>\n' +
     altLinks +
     '  </url>\n' +
+    postEntries +
     '</urlset>\n';
 }
 
@@ -47,7 +65,7 @@ function buildRss(siteUrl, posts, categories) {
   });
   const build = new Date().toUTCString();
   const items = sorted.map(function (p) {
-    const link = siteUrl + '/#p/' + p.slug;
+    const link = postUrl(siteUrl, p.slug);
     const pub = p.date ? new Date(p.date + 'T00:00:00Z').toUTCString() : build;
     const cat = (categories && categories[p.category]) || p.category || '';
     return '    <item>\n' +
@@ -78,4 +96,4 @@ function writeFeeds(outDir, siteUrl, posts, categories) {
   fs.writeFileSync(path.join(outDir, 'feed.xml'), buildRss(siteUrl, posts, categories), 'utf-8');
 }
 
-module.exports = { buildSitemap, buildRss, writeFeeds, xmlEscape };
+module.exports = { buildSitemap, buildRss, writeFeeds, xmlEscape, postUrl };

@@ -3,9 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
-const { writeFeeds } = require('./feeds');
-
-const SITE_URL = 'https://uichan-lee.github.io';
+const { build } = require('./build');
 
 // ─── Configuration ──────────────────────────────────────────────────────────
 
@@ -89,7 +87,6 @@ const SLUG_ALIASES = {
 
 const POSTS_DIR = path.join(__dirname, 'posts');
 const WRITINGS_JS = path.join(__dirname, 'js', 'writings.js');
-const SEARCH_INDEX_JS = path.join(__dirname, 'js', 'search-index.js');
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -251,25 +248,6 @@ function slugify(str) {
     .replace(/^-|-$/g, '');
 }
 
-/** Strip markdown to plain text for search index (title + body). */
-function stripMarkdownToPlainText(content) {
-  let text = content
-    .replace(/^---[\s\S]*?^---\s*/m, '')
-    .replace(/```[\s\S]*?```/g, ' ')
-    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/\*\*?|__?/g, '')
-    .replace(/^#{1,6}\s+/gm, ' ')
-    .replace(/^\s*[-*]\s+/gm, ' ')
-    .replace(/^\s*\d+\.\s+/gm, ' ')
-    .replace(/\$\$[\s\S]*?\$\$/g, ' ')
-    .replace(/\$[^$]+\$/g, ' ')
-    .replace(/\n+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-  return text.length > 30000 ? text.slice(0, 30000) : text;
-}
-
 function shouldIncludeFile(filename, config) {
   if (!filename.endsWith('.md')) return false;
   if (config.numberedFiles && !/^\d+[-_]/.test(filename)) return false;
@@ -321,7 +299,6 @@ function getTitleOverride(titleOverrides, slug) {
 
 function sync() {
   const allPosts = [];
-  const allSearchEntries = [];
 
   const overridesPath = path.join(__dirname, 'title-overrides.json');
   const titleOverrides = fs.existsSync(overridesPath)
@@ -423,11 +400,6 @@ function sync() {
         file: filePath,
         category: config.category,
       });
-      allSearchEntries.push({
-        slug,
-        title: finalTitle,
-        text: stripMarkdownToPlainText(content),
-      });
     }
     assignConfiguredDates(coursePosts, config);
     allPosts.push.apply(allPosts, coursePosts);
@@ -453,22 +425,11 @@ function sync() {
     console.log(`    (preserved ${preservedCount} manual edit${preservedCount === 1 ? '' : 's'} from existing writings.js)`);
   }
 
-  const searchIndex = {};
-  allSearchEntries.forEach(function (e) {
-    searchIndex[e.slug] = { title: e.title, text: e.text };
-  });
-  const searchIndexOutput = 'const searchIndex = ' + JSON.stringify(searchIndex) + ';\n';
-  fs.writeFileSync(SEARCH_INDEX_JS, searchIndexOutput, 'utf-8');
-  console.log('  search-index.js: ' + Object.keys(searchIndex).length + ' entries');
-
-  // sitemap.xml + feed.xml (RSS) for SEO and post subscriptions.
-  // Guard against an empty run (e.g. vault unavailable) clobbering the feeds.
-  if (allPosts.length > 0) {
-    writeFeeds(__dirname, SITE_URL, allPosts, categories);
-    console.log('  sitemap.xml + feed.xml written');
-  } else {
-    console.log('  skip feeds: no posts collected');
-  }
+  // Everything downstream of the post list — the per-post pages, the search
+  // index, sitemap.xml and feed.xml — is produced by build.js from the files
+  // this function just wrote. build() carries its own empty-list guard, so a
+  // run with the vault unavailable cannot clobber the published output.
+  build();
 }
 
 console.log('Syncing vault -> posts/...\n');

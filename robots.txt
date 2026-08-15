@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://uichan-lee.github.io/sitemap.xml
+Sitemap: https://uichan-lee.github.io/feed.xml

@@ -6,10 +6,10 @@
     <atom:link href="https://uichan-lee.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <description>Notes on data science, econometrics, machine learning, and programming by Uichan Lee.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 14 Aug 2026 07:59:53 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 15 Aug 2026 06:55:21 GMT</lastBuildDate>
     <item>
       <title>반도체 산업 동향의 이해</title>
-      <link>https://uichan-lee.github.io/#p/others-반도체-산업-동향의-이해</link>
+      <link>https://uichan-lee.github.io/p/others-%EB%B0%98%EB%8F%84%EC%B2%B4-%EC%82%B0%EC%97%85-%EB%8F%99%ED%96%A5%EC%9D%98-%EC%9D%B4%ED%95%B4/</link>
       <guid isPermaLink="false">others-반도체-산업-동향의-이해</guid>
       <pubDate>Sat, 20 Jun 2026 00:00:00 GMT</pubDate>
       <category>Others</category>
@@ -17,7 +17,7 @@
     </item>
     <item>
       <title>DL 1 - Introduction</title>
-      <link>https://uichan-lee.github.io/#p/data-science-deep-learning-introduction-to-deep-learning-and-neural-networks</link>
+      <link>https://uichan-lee.github.io/p/data-science-deep-learning-introduction-to-deep-learning-and-neural-networks/</link>
       <guid isPermaLink="false">data-science-deep-learning-introduction-to-deep-learning-and-neural-networks</guid>
       <pubDate>Sat, 20 Jun 2026 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -25,7 +25,7 @@
     </item>
     <item>
       <title>Econometrics Overview</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-final-exam</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-final-exam/</link>
       <guid isPermaLink="false">envecon-c118-final-exam</guid>
       <pubDate>Tue, 05 May 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -33,7 +33,7 @@
     </item>
     <item>
       <title>Fuzzy RD</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-4-28</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-4-28/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-4-28</guid>
       <pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -41,7 +41,7 @@
     </item>
     <item>
       <title>Estimating RD in Practice</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-4-23</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-4-23/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-4-23</guid>
       <pubDate>Thu, 23 Apr 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -49,7 +49,7 @@
     </item>
     <item>
       <title>Regression Discontinuity</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-4-16</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-4-16/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-4-16</guid>
       <pubDate>Thu, 16 Apr 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -57,7 +57,7 @@
     </item>
     <item>
       <title>LATE ≠ ATE</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-4-14</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-4-14/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-4-14</guid>
       <pubDate>Tue, 14 Apr 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -65,7 +65,7 @@
     </item>
     <item>
       <title>Intro to Functions</title>
-      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-4-13</link>
+      <link>https://uichan-lee.github.io/p/stat-33b-stat-33b-4-13/</link>
       <guid isPermaLink="false">stat-33b-stat-33b-4-13</guid>
       <pubDate>Mon, 13 Apr 2026 00:00:00 GMT</pubDate>
       <category>R Programming</category>
@@ -73,7 +73,7 @@
     </item>
     <item>
       <title>IV and Regression | From One Instrument to Many</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-4-9</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-4-9/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-4-9</guid>
       <pubDate>Thu, 09 Apr 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -81,7 +81,7 @@
     </item>
     <item>
       <title>Instrumental Variables</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-4-7</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-4-7/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-4-7</guid>
       <pubDate>Tue, 07 Apr 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -89,7 +89,7 @@
     </item>
     <item>
       <title>Iterations and Loops</title>
-      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-4-6</link>
+      <link>https://uichan-lee.github.io/p/stat-33b-stat-33b-4-6/</link>
       <guid isPermaLink="false">stat-33b-stat-33b-4-6</guid>
       <pubDate>Mon, 06 Apr 2026 00:00:00 GMT</pubDate>
       <category>R Programming</category>
@@ -97,7 +97,7 @@
     </item>
     <item>
       <title>The Parallel Trends Assumption (Revisited)</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-4-2</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-4-2/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-4-2</guid>
       <pubDate>Thu, 02 Apr 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -105,7 +105,7 @@
     </item>
     <item>
       <title>DiD with Multiple Time Periods</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-3-31</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-3-31/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-3-31</guid>
       <pubDate>Tue, 31 Mar 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -113,7 +113,7 @@
     </item>
     <item>
       <title>Expressions and Conditionals</title>
-      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-3-30</link>
+      <link>https://uichan-lee.github.io/p/stat-33b-stat-33b-3-30/</link>
       <guid isPermaLink="false">stat-33b-stat-33b-3-30</guid>
       <pubDate>Mon, 30 Mar 2026 00:00:00 GMT</pubDate>
       <category>R Programming</category>
@@ -121,7 +121,7 @@
     </item>
     <item>
       <title>Types of Ensemble Regression</title>
-      <link>https://uichan-lee.github.io/#p/data-science-machine-learning-ensemble-regression</link>
+      <link>https://uichan-lee.github.io/p/data-science-machine-learning-ensemble-regression/</link>
       <guid isPermaLink="false">data-science-machine-learning-ensemble-regression</guid>
       <pubDate>Sun, 22 Mar 2026 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -129,7 +129,7 @@
     </item>
     <item>
       <title>ML/DS Fundamentals</title>
-      <link>https://uichan-lee.github.io/#p/data-science-machine-learning-ml-fundamentals</link>
+      <link>https://uichan-lee.github.io/p/data-science-machine-learning-ml-fundamentals/</link>
       <guid isPermaLink="false">data-science-machine-learning-ml-fundamentals</guid>
       <pubDate>Sun, 22 Mar 2026 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -137,7 +137,7 @@
     </item>
     <item>
       <title>DiD in Practice: Currie and Walker (2011)</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-3-19</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-3-19/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-3-19</guid>
       <pubDate>Thu, 19 Mar 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -145,7 +145,7 @@
     </item>
     <item>
       <title>Difference-in-Differences</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-3-17</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-3-17/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-3-17</guid>
       <pubDate>Tue, 17 Mar 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -153,7 +153,7 @@
     </item>
     <item>
       <title>Natural Experiments: Difference-in-Differences</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-3-12</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-3-12/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-3-12</guid>
       <pubDate>Thu, 12 Mar 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -161,7 +161,7 @@
     </item>
     <item>
       <title>F-Test | Hedonic Regression | Adjusted R^2</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-3-10</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-3-10/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-3-10</guid>
       <pubDate>Tue, 10 Mar 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -169,7 +169,7 @@
     </item>
     <item>
       <title>`ggplot2`</title>
-      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-3-9</link>
+      <link>https://uichan-lee.github.io/p/stat-33b-stat-33b-3-9/</link>
       <guid isPermaLink="false">stat-33b-stat-33b-3-9</guid>
       <pubDate>Mon, 09 Mar 2026 00:00:00 GMT</pubDate>
       <category>R Programming</category>
@@ -177,7 +177,7 @@
     </item>
     <item>
       <title>`tidyverse`</title>
-      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-3-3</link>
+      <link>https://uichan-lee.github.io/p/stat-33b-stat-33b-3-3/</link>
       <guid isPermaLink="false">stat-33b-stat-33b-3-3</guid>
       <pubDate>Tue, 03 Mar 2026 00:00:00 GMT</pubDate>
       <category>R Programming</category>
@@ -185,7 +185,7 @@
     </item>
     <item>
       <title>Inference</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-2-26</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-2-26/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-2-26</guid>
       <pubDate>Thu, 26 Feb 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -193,7 +193,7 @@
     </item>
     <item>
       <title>RCT | Sample Means | Hypothesis Testing | Sampling Distributions of beta hat</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-2-24</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-2-24/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-2-24</guid>
       <pubDate>Tue, 24 Feb 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -201,7 +201,7 @@
     </item>
     <item>
       <title>Importing Tables | Data Frames</title>
-      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-2-23</link>
+      <link>https://uichan-lee.github.io/p/stat-33b-stat-33b-2-23/</link>
       <guid isPermaLink="false">stat-33b-stat-33b-2-23</guid>
       <pubDate>Mon, 23 Feb 2026 00:00:00 GMT</pubDate>
       <category>R Programming</category>
@@ -209,7 +209,7 @@
     </item>
     <item>
       <title>Confidence Intervals</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-2-19</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-2-19/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-2-19</guid>
       <pubDate>Thu, 19 Feb 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -217,7 +217,7 @@
     </item>
     <item>
       <title>Adding Variables to Regression</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-2-17</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-2-17/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-2-17</guid>
       <pubDate>Tue, 17 Feb 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -225,7 +225,7 @@
     </item>
     <item>
       <title>The Limits of Simple Linear Regression | Multiple Regression | Choosing what goes into the regression</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-2-12</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-2-12/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-2-12</guid>
       <pubDate>Thu, 12 Feb 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -233,7 +233,7 @@
     </item>
     <item>
       <title>Regression Recap</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-2-10</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-2-10/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-2-10</guid>
       <pubDate>Tue, 10 Feb 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -241,7 +241,7 @@
     </item>
     <item>
       <title>Matrices | Lists</title>
-      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-2-9</link>
+      <link>https://uichan-lee.github.io/p/stat-33b-stat-33b-2-9/</link>
       <guid isPermaLink="false">stat-33b-stat-33b-2-9</guid>
       <pubDate>Mon, 09 Feb 2026 00:00:00 GMT</pubDate>
       <category>R Programming</category>
@@ -249,7 +249,7 @@
     </item>
     <item>
       <title>Regression Model</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-2-5</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-2-5/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-2-5</guid>
       <pubDate>Thu, 05 Feb 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -257,7 +257,7 @@
     </item>
     <item>
       <title>Parameter, Estimator, Estimand, Estimate</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-2-3</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-2-3/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-2-3</guid>
       <pubDate>Tue, 03 Feb 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -265,7 +265,7 @@
     </item>
     <item>
       <title>Vectors | Factors</title>
-      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-2-2</link>
+      <link>https://uichan-lee.github.io/p/stat-33b-stat-33b-2-2/</link>
       <guid isPermaLink="false">stat-33b-stat-33b-2-2</guid>
       <pubDate>Mon, 02 Feb 2026 00:00:00 GMT</pubDate>
       <category>R Programming</category>
@@ -273,7 +273,7 @@
     </item>
     <item>
       <title>Parameters, Estimands, and Estimators</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-1-29</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-1-29/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-1-29</guid>
       <pubDate>Thu, 29 Jan 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -281,7 +281,7 @@
     </item>
     <item>
       <title>Joint and Conditional Distributions</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-1-27</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-1-27/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-1-27</guid>
       <pubDate>Tue, 27 Jan 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -289,7 +289,7 @@
     </item>
     <item>
       <title>Getting Started with R</title>
-      <link>https://uichan-lee.github.io/#p/stat-33b-stat-33b-1-26</link>
+      <link>https://uichan-lee.github.io/p/stat-33b-stat-33b-1-26/</link>
       <guid isPermaLink="false">stat-33b-stat-33b-1-26</guid>
       <pubDate>Mon, 26 Jan 2026 00:00:00 GMT</pubDate>
       <category>R Programming</category>
@@ -297,7 +297,7 @@
     </item>
     <item>
       <title>Random Variables and Distributions</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-1-22</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-1-22/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-1-22</guid>
       <pubDate>Thu, 22 Jan 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -305,7 +305,7 @@
     </item>
     <item>
       <title>What is Econometrics?</title>
-      <link>https://uichan-lee.github.io/#p/envecon-c118-envecon-c118-1-20</link>
+      <link>https://uichan-lee.github.io/p/envecon-c118-envecon-c118-1-20/</link>
       <guid isPermaLink="false">envecon-c118-envecon-c118-1-20</guid>
       <pubDate>Tue, 20 Jan 2026 00:00:00 GMT</pubDate>
       <category>Econometrics</category>
@@ -313,7 +313,7 @@
     </item>
     <item>
       <title>Clustering | Principal Component Analysis (PCA) | Singular Value Decomposition (SVD)</title>
-      <link>https://uichan-lee.github.io/#p/data-100-week-15</link>
+      <link>https://uichan-lee.github.io/p/data-100-week-15/</link>
       <guid isPermaLink="false">data-100-week-15</guid>
       <pubDate>Mon, 08 Dec 2025 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -321,7 +321,7 @@
     </item>
     <item>
       <title>Logistic Regression II</title>
-      <link>https://uichan-lee.github.io/#p/data-100-week-14</link>
+      <link>https://uichan-lee.github.io/p/data-100-week-14/</link>
       <guid isPermaLink="false">data-100-week-14</guid>
       <pubDate>Mon, 01 Dec 2025 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -329,7 +329,7 @@
     </item>
     <item>
       <title>Radix Sort</title>
-      <link>https://uichan-lee.github.io/#p/cs-61b-week-13</link>
+      <link>https://uichan-lee.github.io/p/cs-61b-week-13/</link>
       <guid isPermaLink="false">cs-61b-week-13</guid>
       <pubDate>Mon, 24 Nov 2025 00:00:00 GMT</pubDate>
       <category>Data Structures/Algorithms</category>
@@ -337,7 +337,7 @@
     </item>
     <item>
       <title>Logistic Regression I</title>
-      <link>https://uichan-lee.github.io/#p/data-100-week-13</link>
+      <link>https://uichan-lee.github.io/p/data-100-week-13/</link>
       <guid isPermaLink="false">data-100-week-13</guid>
       <pubDate>Mon, 24 Nov 2025 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -345,7 +345,7 @@
     </item>
     <item>
       <title>Insertion Sort (In-place) | Quicksort</title>
-      <link>https://uichan-lee.github.io/#p/cs-61b-week-12</link>
+      <link>https://uichan-lee.github.io/p/cs-61b-week-12/</link>
       <guid isPermaLink="false">cs-61b-week-12</guid>
       <pubDate>Mon, 17 Nov 2025 00:00:00 GMT</pubDate>
       <category>Data Structures/Algorithms</category>
@@ -353,7 +353,7 @@
     </item>
     <item>
       <title>SQL II</title>
-      <link>https://uichan-lee.github.io/#p/data-100-week-12</link>
+      <link>https://uichan-lee.github.io/p/data-100-week-12/</link>
       <guid isPermaLink="false">data-100-week-12</guid>
       <pubDate>Mon, 17 Nov 2025 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -361,7 +361,7 @@
     </item>
     <item>
       <title>Tries | Basic Sorts (Sorting I)</title>
-      <link>https://uichan-lee.github.io/#p/cs-61b-week-11</link>
+      <link>https://uichan-lee.github.io/p/cs-61b-week-11/</link>
       <guid isPermaLink="false">cs-61b-week-11</guid>
       <pubDate>Mon, 10 Nov 2025 00:00:00 GMT</pubDate>
       <category>Data Structures/Algorithms</category>
@@ -369,7 +369,7 @@
     </item>
     <item>
       <title>Parameter Inference and the Bootstrap | SQL</title>
-      <link>https://uichan-lee.github.io/#p/data-100-week-11</link>
+      <link>https://uichan-lee.github.io/p/data-100-week-11/</link>
       <guid isPermaLink="false">data-100-week-11</guid>
       <pubDate>Mon, 10 Nov 2025 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -377,7 +377,7 @@
     </item>
     <item>
       <title>Hash Tables</title>
-      <link>https://uichan-lee.github.io/#p/cs-61b-week-10</link>
+      <link>https://uichan-lee.github.io/p/cs-61b-week-10/</link>
       <guid isPermaLink="false">cs-61b-week-10</guid>
       <pubDate>Mon, 03 Nov 2025 00:00:00 GMT</pubDate>
       <category>Data Structures/Algorithms</category>
@@ -385,7 +385,7 @@
     </item>
     <item>
       <title>Random Variables</title>
-      <link>https://uichan-lee.github.io/#p/data-100-week-10</link>
+      <link>https://uichan-lee.github.io/p/data-100-week-10/</link>
       <guid isPermaLink="false">data-100-week-10</guid>
       <pubDate>Mon, 03 Nov 2025 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -393,7 +393,7 @@
     </item>
     <item>
       <title>Spanning Trees | Directed Acyclic Graphs</title>
-      <link>https://uichan-lee.github.io/#p/cs-61b-week-9</link>
+      <link>https://uichan-lee.github.io/p/cs-61b-week-9/</link>
       <guid isPermaLink="false">cs-61b-week-9</guid>
       <pubDate>Mon, 27 Oct 2025 00:00:00 GMT</pubDate>
       <category>Data Structures/Algorithms</category>
@@ -401,7 +401,7 @@
     </item>
     <item>
       <title>Batch, mini-batch, and stochastic gradient descent | Feature Engineering | Defining Distributions</title>
-      <link>https://uichan-lee.github.io/#p/data-100-week-9</link>
+      <link>https://uichan-lee.github.io/p/data-100-week-9/</link>
       <guid isPermaLink="false">data-100-week-9</guid>
       <pubDate>Mon, 27 Oct 2025 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -409,7 +409,7 @@
     </item>
     <item>
       <title>Trees and Traversals | Graph Traversals and Implementations</title>
-      <link>https://uichan-lee.github.io/#p/cs-61b-week-8</link>
+      <link>https://uichan-lee.github.io/p/cs-61b-week-8/</link>
       <guid isPermaLink="false">cs-61b-week-8</guid>
       <pubDate>Mon, 20 Oct 2025 00:00:00 GMT</pubDate>
       <category>Data Structures/Algorithms</category>
@@ -417,7 +417,7 @@
     </item>
     <item>
       <title>`sklearn` and Gradient Descent</title>
-      <link>https://uichan-lee.github.io/#p/data-100-week-8</link>
+      <link>https://uichan-lee.github.io/p/data-100-week-8/</link>
       <guid isPermaLink="false">data-100-week-8</guid>
       <pubDate>Mon, 20 Oct 2025 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -425,7 +425,7 @@
     </item>
     <item>
       <title>Binary Search Tree | B-Trees | Left Leaning Red-Black Trees (LLRBs) | Priority Queues and Heaps</title>
-      <link>https://uichan-lee.github.io/#p/cs-61b-week-7</link>
+      <link>https://uichan-lee.github.io/p/cs-61b-week-7/</link>
       <guid isPermaLink="false">cs-61b-week-7</guid>
       <pubDate>Mon, 13 Oct 2025 00:00:00 GMT</pubDate>
       <category>Data Structures/Algorithms</category>
@@ -433,7 +433,7 @@
     </item>
     <item>
       <title>Ordinary Least Squares (OLS)</title>
-      <link>https://uichan-lee.github.io/#p/data-100-week-7</link>
+      <link>https://uichan-lee.github.io/p/data-100-week-7/</link>
       <guid isPermaLink="false">data-100-week-7</guid>
       <pubDate>Mon, 13 Oct 2025 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -441,7 +441,7 @@
     </item>
     <item>
       <title>Asymptotic II | Asymptotic III | Extends, Sets, Maps, and BSTs</title>
-      <link>https://uichan-lee.github.io/#p/cs-61b-week-6</link>
+      <link>https://uichan-lee.github.io/p/cs-61b-week-6/</link>
       <guid isPermaLink="false">cs-61b-week-6</guid>
       <pubDate>Mon, 06 Oct 2025 00:00:00 GMT</pubDate>
       <category>Data Structures/Algorithms</category>
@@ -449,7 +449,7 @@
     </item>
     <item>
       <title>Simple Linear Regression</title>
-      <link>https://uichan-lee.github.io/#p/data-100-week-6</link>
+      <link>https://uichan-lee.github.io/p/data-100-week-6/</link>
       <guid isPermaLink="false">data-100-week-6</guid>
       <pubDate>Mon, 06 Oct 2025 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -457,7 +457,7 @@
     </item>
     <item>
       <title>Asymptotic I</title>
-      <link>https://uichan-lee.github.io/#p/cs-61b-week-5</link>
+      <link>https://uichan-lee.github.io/p/cs-61b-week-5/</link>
       <guid isPermaLink="false">cs-61b-week-5</guid>
       <pubDate>Mon, 29 Sep 2025 00:00:00 GMT</pubDate>
       <category>Data Structures/Algorithms</category>
@@ -465,7 +465,7 @@
     </item>
     <item>
       <title>Visualization II</title>
-      <link>https://uichan-lee.github.io/#p/data-100-week-5</link>
+      <link>https://uichan-lee.github.io/p/data-100-week-5/</link>
       <guid isPermaLink="false">data-100-week-5</guid>
       <pubDate>Mon, 29 Sep 2025 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -473,7 +473,7 @@
     </item>
     <item>
       <title>Method Overloading in Java</title>
-      <link>https://uichan-lee.github.io/#p/cs-61b-week-4</link>
+      <link>https://uichan-lee.github.io/p/cs-61b-week-4/</link>
       <guid isPermaLink="false">cs-61b-week-4</guid>
       <pubDate>Mon, 22 Sep 2025 00:00:00 GMT</pubDate>
       <category>Data Structures/Algorithms</category>
@@ -481,7 +481,7 @@
     </item>
     <item>
       <title>Regular Expressions (Regex)</title>
-      <link>https://uichan-lee.github.io/#p/data-100-week-4</link>
+      <link>https://uichan-lee.github.io/p/data-100-week-4/</link>
       <guid isPermaLink="false">data-100-week-4</guid>
       <pubDate>Mon, 22 Sep 2025 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -489,7 +489,7 @@
     </item>
     <item>
       <title>Doubly Linked List</title>
-      <link>https://uichan-lee.github.io/#p/cs-61b-week-3</link>
+      <link>https://uichan-lee.github.io/p/cs-61b-week-3/</link>
       <guid isPermaLink="false">cs-61b-week-3</guid>
       <pubDate>Mon, 15 Sep 2025 00:00:00 GMT</pubDate>
       <category>Data Structures/Algorithms</category>
@@ -497,7 +497,7 @@
     </item>
     <item>
       <title>Grouping</title>
-      <link>https://uichan-lee.github.io/#p/data-100-week-3</link>
+      <link>https://uichan-lee.github.io/p/data-100-week-3/</link>
       <guid isPermaLink="false">data-100-week-3</guid>
       <pubDate>Mon, 15 Sep 2025 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -505,7 +505,7 @@
     </item>
     <item>
       <title>Java Collections and Linked Lists</title>
-      <link>https://uichan-lee.github.io/#p/cs-61b-week-2</link>
+      <link>https://uichan-lee.github.io/p/cs-61b-week-2/</link>
       <guid isPermaLink="false">cs-61b-week-2</guid>
       <pubDate>Mon, 08 Sep 2025 00:00:00 GMT</pubDate>
       <category>Data Structures/Algorithms</category>
@@ -513,7 +513,7 @@
     </item>
     <item>
       <title>Pandas</title>
-      <link>https://uichan-lee.github.io/#p/data-100-week-2</link>
+      <link>https://uichan-lee.github.io/p/data-100-week-2/</link>
       <guid isPermaLink="false">data-100-week-2</guid>
       <pubDate>Mon, 08 Sep 2025 00:00:00 GMT</pubDate>
       <category>Data Science</category>
@@ -521,7 +521,7 @@
     </item>
     <item>
       <title>Object Instantiation</title>
-      <link>https://uichan-lee.github.io/#p/cs-61b-week-1</link>
+      <link>https://uichan-lee.github.io/p/cs-61b-week-1/</link>
       <guid isPermaLink="false">cs-61b-week-1</guid>
       <pubDate>Mon, 01 Sep 2025 00:00:00 GMT</pubDate>
       <category>Data Structures/Algorithms</category>
