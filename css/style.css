@@ -5,6 +5,14 @@
 
 html {
   scroll-behavior: smooth;
+  /* Tells the browser to render native scrollbars, form controls and the
+     canvas behind the page in the matching theme. Without it a dark page
+     keeps light scrollbars. */
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -29,7 +37,11 @@ html {
   --color-heading: #0f172a;
   --color-muted: #64748b;
   --color-soft: #475569;
-  --color-faint: #94a3b8;
+  /* #94a3b8 measures ~2.6:1 on white and failed WCAG AA everywhere it was
+     used as a foreground. #64748b is ~4.8:1 and still reads as the quietest
+     step in the light palette. The dark theme keeps #94a3b8, where it is
+     correct against a near-black background. */
+  --color-faint: #64748b;
   --color-accent: #2563eb;
   --color-accent-hover: #1d4ed8;
   --color-surface: #ffffff;
@@ -289,6 +301,63 @@ ul, ol {
   border-color: rgba(0, 0, 0, 0.08);
 }
 
+/* Featured project — spans the whole grid row and puts its headline number
+   next to the copy instead of burying it mid-paragraph. Falls back to a
+   single stacked column under 720px (see the responsive block). */
+.card-featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: center;
+  padding: 2rem;
+  border-color: var(--color-border-strong);
+}
+
+.card-featured .card-title {
+  font-size: 1.35rem;
+}
+
+.card-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 9rem;
+  max-width: 13rem;
+  padding-left: 2rem;
+  border-left: 1px solid var(--color-border);
+  text-align: right;
+}
+
+.card-metric-value {
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--color-accent);
+}
+
+.card-metric-label {
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  color: var(--color-muted);
+}
+
+/* A metric on a non-featured card is a one-line chip, not a display number —
+   eight cards all shouting a statistic would leave nothing emphasised. */
+.card-metric-inline {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.card-metric-inline strong {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
 .card-title {
   margin: 0 0 0.5rem;
   font-size: 1.2rem;
@@ -365,7 +434,7 @@ ul, ol {
 }
 
 .writings-search-input::placeholder {
-  color: #94a3b8;
+  color: var(--color-faint);
 }
 
 .writings-search-input:focus {
@@ -449,6 +518,9 @@ ul, ol {
 }
 
 .writing-card {
+  /* An <a> since each card navigates to /p/<slug>/, so it needs an explicit
+     block display; color/underline are already reset by the base `a` rule. */
+  display: block;
   background: #fff;
   border-radius: 12px;
   padding: 1.75rem;
@@ -456,6 +528,11 @@ ul, ol {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.04);
   cursor: pointer;
   transition: box-shadow 0.25s, transform 0.25s, border-color 0.2s;
+}
+
+.writing-card:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
 }
 
 .writing-card:hover {
@@ -534,26 +611,114 @@ ul, ol {
   transform: translateY(-1px);
 }
 
-.writing-back-btn-bottom {
-  display: inline-flex;
-  position: relative;
-  z-index: 1;
-  margin-top: 2rem;
-  margin-bottom: 0;
-}
-
 .writing-back-btn-toc {
   width: 100%;
   justify-content: center;
   margin-top: 1.25rem;
 }
 
-.writing-date {
-  display: block;
+/* Post pages (/p/<slug>/) — the header, meta line and prev/next navigation are
+   served as real HTML by build.js; only the body below them is client-rendered
+   into #writing-content by js/main.js. */
+
+.post-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
   font-size: 0.85rem;
-  font-weight: 500;
   color: #64748b;
-  margin-bottom: 0.25rem;
+}
+
+.post-reading-time {
+  color: #64748b;
+}
+
+.post-reading-time::before {
+  content: "·";
+  margin-right: 0.6rem;
+}
+
+.post-title {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  margin: 0 0 0.75rem;
+}
+
+.post-summary {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #475569;
+  margin: 0;
+}
+
+.post-nav {
+  display: flex;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.post-nav-link {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.post-nav-link:hover {
+  background: #f8fafc;
+  border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+.post-nav-link:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+}
+
+/* Only one neighbour exists at each end of the archive; keep the survivor on
+   its own side rather than letting it stretch across the full row. */
+.post-nav-next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.post-nav-prev:only-child,
+.post-nav-next:only-child {
+  flex: 0 1 60%;
+}
+
+.post-nav-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.post-nav-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #0f172a;
 }
 
 .writing-loading,
@@ -565,6 +730,51 @@ ul, ol {
 
 .writing-error {
   color: #dc2626;
+}
+
+/* 404 page */
+
+.section-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.error-content {
+  max-width: 480px;
+}
+
+.error-code {
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-faint);
+  margin: 0 0 0.5rem;
+}
+
+.error-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  margin: 0 0 0.75rem;
+}
+
+.error-message {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #475569;
+  margin: 0 0 2rem;
+}
+
+.error-message code {
+  font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  padding: 0.15em 0.4em;
+  background: #f1f5f9;
+  border-radius: 4px;
+  color: #0f172a;
 }
 
 /* Markdown body typography */
@@ -1049,13 +1259,16 @@ button.callout-title:hover {
   border-top: 1px solid rgba(0, 0, 0, 0.06);
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(8px);
+  /* .header and .nav carry the prefixed property; the footer was missed, so
+     its blur silently did nothing in Safari. */
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .visitor-stats {
   margin: 0.25rem 0 0;
   font-size: 0.75rem;
   font-weight: 400;
-  color: #94a3b8;
+  color: var(--color-faint);
 }
 
 /* Header right cluster: nav + theme toggle + hamburger */
@@ -1235,7 +1448,7 @@ html[data-theme="dark"] .lang-switch:hover {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #94a3b8;
+  color: var(--color-faint);
   padding: 0 0.75rem 0.5rem;
 }
 
@@ -1285,7 +1498,7 @@ html[data-theme="dark"] .lang-switch:hover {
   padding: 0;
   border: none;
   background: transparent;
-  color: #94a3b8;
+  color: var(--color-faint);
   cursor: pointer;
   border-radius: 4px;
   transition: color 0.15s, background 0.15s;
@@ -1341,7 +1554,7 @@ html[data-theme="dark"] .lang-switch:hover {
 
 .toc-level-4 > .toc-row > .toc-link {
   font-size: 0.72rem;
-  color: #94a3b8;
+  color: var(--color-faint);
 }
 
 .toc-link:hover {
@@ -1426,6 +1639,251 @@ html[data-theme="dark"] .lang-switch:hover {
   text-overflow: clip;
 }
 
+/* ── Reading affordances (post pages) ──────────────────────────────────── */
+
+/* Landing-page nav uses scrollIntoView(), which has no idea the header is
+   fixed; TOC and footnote jumps go through scrollToElement() in main.js and
+   already compensate. These declarations cover the paths JS never sees —
+   nav clicks, and any fragment the browser resolves on its own. */
+.section {
+  scroll-margin-top: 5rem;
+}
+
+.writing-body h1,
+.writing-body h2,
+.writing-body h3,
+.writing-body h4,
+.writing-body h5,
+.writing-body h6,
+.writing-body .footnotes li {
+  scroll-margin-top: 5.5rem;
+}
+
+/* Landing after a jump used to give zero confirmation you had arrived —
+   footnotes especially, where the target is one line in a dense list. */
+.writing-body h1:target,
+.writing-body h2:target,
+.writing-body h3:target,
+.writing-body h4:target,
+.writing-body h5:target,
+.writing-body h6:target,
+.writing-body .footnotes li:target {
+  animation: target-flash 1.6s ease-out 1;
+  border-radius: 4px;
+}
+
+@keyframes target-flash {
+  0%, 35% { background: rgba(37, 99, 235, 0.14); box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.14); }
+  100% { background: transparent; box-shadow: 0 0 0 6px transparent; }
+}
+
+/* Heading permalinks — hidden until the heading is hovered or the anchor
+   itself is focused, so the reading column stays clean. Deliberately left
+   hover-only: on a touch device the inline TOC covers navigation, and a
+   permanent "#" beside every heading is noise on a narrow column. */
+.heading-anchor {
+  margin-left: 0.4rem;
+  font-weight: 400;
+  color: var(--color-faint);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s;
+}
+
+.writing-body h1:hover .heading-anchor,
+.writing-body h2:hover .heading-anchor,
+.writing-body h3:hover .heading-anchor,
+.writing-body h4:hover .heading-anchor,
+.writing-body h5:hover .heading-anchor,
+.writing-body h6:hover .heading-anchor,
+.heading-anchor:focus-visible {
+  opacity: 1;
+}
+
+.heading-anchor:hover {
+  color: #2563eb;
+}
+
+/* Code block copy button. .has-copy-btn is added by main.js only when
+   navigator.clipboard exists, so nothing shifts on insecure origins. */
+.writing-body pre.has-copy-btn {
+  position: relative;
+}
+
+.code-copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.55rem;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #475569;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.writing-body pre:hover .code-copy-btn,
+.code-copy-btn:focus-visible {
+  opacity: 1;
+}
+
+.code-copy-btn:hover {
+  color: #0f172a;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.code-copy-btn.copied {
+  color: #15803d;
+  border-color: rgba(21, 128, 61, 0.4);
+}
+
+/* Wide tables scroll inside their own box instead of pushing the page
+   sideways. tabindex on the wrapper is what makes it scrollable by keyboard. */
+.table-scroll {
+  overflow-x: auto;
+  margin: 1.25rem 0;
+}
+
+.table-scroll table {
+  margin: 0;
+}
+
+.table-scroll:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Reading progress — sits directly under the fixed header. */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 1100;
+  pointer-events: none;
+  background: transparent;
+}
+
+.reading-progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+  transition: width 0.1s linear;
+}
+
+.back-to-top {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: #475569;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s, color 0.2s;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  color: #0f172a;
+}
+
+/* ── Accessibility ─────────────────────────────────────────────────────── */
+
+/* Skip link — the first thing a keyboard user reaches, and invisible to
+   everyone else until it takes focus. Positioned rather than display:none so
+   it stays in the tab order. */
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 1200;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  background: #2563eb;
+  border-radius: 8px;
+  text-decoration: none;
+  transform: translateY(-150%);
+  transition: transform 0.15s;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* One focus ring for every control that had a :hover state but no designed
+   focus state. These all fell back to the UA default, which clashes with the
+   ring used by .nav-link, .link-btn, .card-link, .writing-card and friends.
+   :focus-visible (not :focus) so a mouse click never shows it. */
+.logo:focus-visible,
+.skip-link:focus-visible,
+.filter-btn:focus-visible,
+.writing-back-btn:focus-visible,
+.theme-toggle:focus-visible,
+.nav-toggle:focus-visible,
+.lang-switch:focus-visible,
+.toc-toggle:focus-visible,
+.toc-link:focus-visible,
+.toc-inline-toggle:focus-visible,
+button.callout-title:focus-visible,
+.code-copy-btn:focus-visible,
+.heading-anchor:focus-visible,
+.back-to-top:focus-visible,
+.writing-body a:focus-visible,
+.writing-body a.internal-link:focus-visible,
+.writing-body .footnote-ref a:focus-visible,
+.writing-body .footnote-backref:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Press feedback. The stylesheet defined :active exactly zero times, so every
+   button felt inert on the way down and only responded on release. */
+.link-btn:active,
+.cta-btn:active,
+.filter-btn:active,
+.writings-show-more-btn:active,
+.writing-back-btn:active,
+.theme-toggle:active,
+.nav-toggle:active,
+.lang-switch:active,
+.code-copy-btn:active,
+.back-to-top:active {
+  transform: translateY(1px);
+}
+
+.card:active,
+.writing-card:active,
+.post-nav-link:active {
+  transform: translateY(-1px);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .header {
@@ -1471,6 +1929,60 @@ html[data-theme="dark"] .lang-switch:hover {
 
   .timeline-content {
     padding: 1.25rem 1.35rem;
+  }
+
+  .post-title {
+    font-size: 1.6rem;
+  }
+
+  .post-nav {
+    flex-direction: column;
+  }
+
+  /* Stacked, both neighbours read left-to-right. */
+  .post-nav-next {
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .post-nav-prev:only-child,
+  .post-nav-next:only-child {
+    flex: 1 1 auto;
+  }
+
+  /* The metric column has nowhere to go on a narrow screen, so it stacks
+     under the copy and switches from right- to left-aligned. */
+  .card-featured {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+    padding: 1.75rem;
+  }
+
+  .card-metric {
+    align-items: flex-start;
+    text-align: left;
+    padding-left: 0;
+    padding-top: 1.25rem;
+    max-width: none;
+    border-left: none;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .card-metric-value {
+    font-size: 2rem;
+  }
+
+  .back-to-top {
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  /* Touch devices have no hover, so the copy button would be unreachable if
+     it only appeared on :hover. Show it permanently and shrink it instead. */
+  .code-copy-btn {
+    opacity: 1;
+    padding: 0.2rem 0.45rem;
+    font-size: 0.68rem;
   }
 }
 
@@ -1641,8 +2153,7 @@ html[data-theme="dark"] .writing-card:hover {
   border-color: rgba(255, 255, 255, 0.12);
 }
 
-html[data-theme="dark"] .writing-card-date,
-html[data-theme="dark"] .writing-date {
+html[data-theme="dark"] .writing-card-date {
   color: #94a3b8;
 }
 
@@ -1859,4 +2370,226 @@ html[data-theme="dark"] .timeline-meta {
 
 html[data-theme="dark"] .timeline-bullets {
   color: #94a3b8;
+}
+
+/* Post pages */
+
+html[data-theme="dark"] .post-header,
+html[data-theme="dark"] .post-nav {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme="dark"] .post-title {
+  color: #f8fafc;
+}
+
+html[data-theme="dark"] .post-meta,
+html[data-theme="dark"] .post-reading-time,
+html[data-theme="dark"] .post-nav-label {
+  color: #94a3b8;
+}
+
+html[data-theme="dark"] .post-summary {
+  color: #cbd5e1;
+}
+
+html[data-theme="dark"] .post-nav-link {
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+html[data-theme="dark"] .post-nav-link:hover {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+html[data-theme="dark"] .post-nav-title {
+  color: #f8fafc;
+}
+
+/* 404 page */
+
+html[data-theme="dark"] .error-code {
+  color: #475569;
+}
+
+html[data-theme="dark"] .error-title {
+  color: #f8fafc;
+}
+
+html[data-theme="dark"] .error-message {
+  color: #cbd5e1;
+}
+
+html[data-theme="dark"] .error-message code {
+  background: rgba(51, 65, 85, 0.8);
+  color: #e2e8f0;
+}
+
+/* Chrome shadows.
+   Cards and buttons were re-tuned for dark mode in an earlier pass, but the
+   header and the six small chrome controls kept their light-mode shadows —
+   rgba(0,0,0,0.03) and rgba(0,0,0,0.06) — which are black on a near-black
+   background and therefore render as nothing at all.
+
+   .post-nav-link is deliberately absent: it already got dark-tuned shadows
+   when the post pages were built, and folding it in here would flatten them. */
+html[data-theme="dark"] .header.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+html[data-theme="dark"] .filter-btn,
+html[data-theme="dark"] .writing-back-btn,
+html[data-theme="dark"] .nav-toggle,
+html[data-theme="dark"] .theme-toggle,
+html[data-theme="dark"] .lang-switch {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .filter-btn:hover,
+html[data-theme="dark"] .writing-back-btn:hover,
+html[data-theme="dark"] .nav-toggle:hover,
+html[data-theme="dark"] .theme-toggle:hover,
+html[data-theme="dark"] .lang-switch:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+/* Reading affordances */
+
+html[data-theme="dark"] .code-copy-btn {
+  color: #cbd5e1;
+  background: rgba(30, 41, 59, 0.92);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+html[data-theme="dark"] .code-copy-btn:hover {
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+html[data-theme="dark"] .code-copy-btn.copied {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+html[data-theme="dark"] .heading-anchor:hover {
+  color: #93c5fd;
+}
+
+html[data-theme="dark"] .back-to-top {
+  color: #cbd5e1;
+  background: rgba(30, 41, 59, 0.9);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .back-to-top:hover {
+  color: #f8fafc;
+}
+
+html[data-theme="dark"] .reading-progress-fill {
+  background: linear-gradient(90deg, #3b82f6, #93c5fd);
+}
+
+/* The target flash is tuned for a white page; on the dark gradient the same
+   alpha reads as almost nothing. */
+html[data-theme="dark"] .writing-body h1:target,
+html[data-theme="dark"] .writing-body h2:target,
+html[data-theme="dark"] .writing-body h3:target,
+html[data-theme="dark"] .writing-body h4:target,
+html[data-theme="dark"] .writing-body h5:target,
+html[data-theme="dark"] .writing-body h6:target,
+html[data-theme="dark"] .writing-body .footnotes li:target {
+  animation-name: target-flash-dark;
+}
+
+@keyframes target-flash-dark {
+  0%, 35% { background: rgba(96, 165, 250, 0.22); box-shadow: 0 0 0 6px rgba(96, 165, 250, 0.22); }
+  100% { background: transparent; box-shadow: 0 0 0 6px transparent; }
+}
+
+/* ── Print ─────────────────────────────────────────────────────────────
+   A post printed without this gets the fixed header stamped over the first
+   paragraph, a 100vh-tall empty first screen, and the page gradient soaked
+   into every sheet. Everything interactive is dropped; link targets are
+   spelled out because a printed underline conveys nothing. */
+@media print {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    background: #fff !important;
+    color: #000;
+  }
+
+  .header,
+  .footer,
+  .writing-toc,
+  .writing-toc-inline,
+  .writing-back-btn,
+  .post-nav,
+  .reading-progress,
+  .back-to-top,
+  .code-copy-btn,
+  .heading-anchor,
+  .skip-link,
+  .writings-search-wrap,
+  .writings-filters,
+  .writings-show-more-wrap {
+    display: none !important;
+  }
+
+  .section {
+    min-height: 0 !important;
+    padding: 0 !important;
+    max-width: none;
+    animation: none !important;
+  }
+
+  .post-header {
+    border-bottom: 1px solid #ccc;
+  }
+
+  .writing-body {
+    color: #000;
+    font-size: 11pt;
+  }
+
+  .writing-body h1,
+  .writing-body h2,
+  .writing-body h3,
+  .writing-body h4 {
+    page-break-after: avoid;
+    break-after: avoid;
+    color: #000;
+  }
+
+  .writing-body pre,
+  .writing-body blockquote,
+  .writing-body table,
+  .writing-body img,
+  .callout {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .writing-body pre {
+    border: 1px solid #ccc;
+    background: #f7f7f7;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .table-scroll {
+    overflow-x: visible;
+  }
+
+  /* Internal links resolve to a fragment that means nothing on paper, so
+     only external destinations are worth spelling out. */
+  .writing-body a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    word-break: break-all;
+  }
 }
