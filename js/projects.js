@@ -15,7 +15,8 @@
 const projects = [
   {
     title: "Market Briefing",
-    description: "Daily Korean/US equity briefing pipeline that computes a reproducible directional rating from weighted feature z-scores — LLMs only classify individual news articles, never the rating itself. Runs unattended twice daily via GitHub Actions, backed by 719 automated tests and a pre-registered 3-month evaluation against KODEX 200 buy-and-hold.",
+    description:
+      "Daily Korean/US equity briefing pipeline that computes a reproducible directional rating from weighted feature z-scores — LLMs only classify individual news articles, never the rating itself. Runs unattended twice daily via GitHub Actions, backed by 719 automated tests and a pre-registered 3-month evaluation against KODEX 200 buy-and-hold.",
     link: "#",
     codeLink: "https://github.com/uichan-lee/market-briefing",
     tags: ["Python", "LLM", "pykrx", "litellm", "GitHub Actions", "Pandas"],
@@ -24,52 +25,57 @@ const projects = [
   },
   {
     title: "AI Career-to-Project Orchestrator",
-    description: "Multi-Agent System that acts as an automated career consultant. Architected a stateful LangGraph workflow with distinct Resume Analysis and Project Ideation agents. Implemented Pydantic v2 schemas for structured output validation. Full-stack: Dockerized FastAPI backend + React (TypeScript) frontend.",
+    description:
+      "Multi-Agent System that acts as an automated career consultant. Architected a stateful LangGraph workflow with distinct Resume Analysis and Project Ideation agents. Implemented Pydantic v2 schemas for structured output validation. Full-stack: Dockerized FastAPI backend + React (TypeScript) frontend.",
     link: "#",
-    codeLink: "https://github.com/crunchy-child/AI-Career-to-Project-Orchestrator",
+    codeLink:
+      "https://github.com/crunchy-child/AI-Career-to-Project-Orchestrator",
     tags: ["LangGraph", "LangChain", "FastAPI", "React", "Docker", "Pydantic"],
   },
   {
     title: "Agent-to-Agent (A2A) Communication Framework",
-    description: "Distributed protocol enabling autonomous agents to discover and collaborate. Integrated Google ADK and LangGraph in a hybrid ecosystem. Designed JSON-RPC 2.0 communication layer over HTTP for microservices-style orchestration. Implemented Agent Card JSON endpoints for dynamic tool discovery.",
+    description:
+      "Distributed protocol enabling autonomous agents to discover and collaborate. Integrated Google ADK and LangGraph in a hybrid ecosystem. Designed JSON-RPC 2.0 communication layer over HTTP for microservices-style orchestration. Implemented Agent Card JSON endpoints for dynamic tool discovery.",
     link: "#",
     codeLink: "https://github.com/uichan-lee/agent-to-agent",
     tags: ["Google ADK", "LangGraph", "JSON-RPC 2.0", "FastAPI", "A2A"],
   },
   {
     title: "Data Discovery — Staffing Impact Analysis",
-    description: "UC Berkeley Data Discovery × Ten Strands research. Quantified the impact of staffing on environmental literacy using Average Marginal Effects (AME) in Python. Discovered Whole-System Coordinators increase superior performance probability by 59.5 percentage points. Built preprocessing pipeline for 938 CA school districts.",
+    description:
+      "UC Berkeley Data Discovery × Ten Strands research. Quantified the impact of staffing on environmental literacy using Average Marginal Effects (AME) in Python. Discovered Whole-System Coordinators increase superior performance probability by 59.5 percentage points. Built preprocessing pipeline for 938 CA school districts.",
     link: "#",
     codeLink: "https://github.com/uichan-lee/dd-staffing",
     tags: ["Python", "Pandas", "statsmodels", "Scikit-learn", "Matplotlib"],
     featured: true,
     metric: { value: "+59.5pp", label: "effect on superior performance" },
   },
-  {
-    title: "Housing Price Predictor — Cook County",
-    description: "Linear regression model for property valuation on 200K+ Cook County records. Pipeline-based feature engineering (log transforms, one-hot encoding, interaction terms), k-fold cross-validation, and residual analysis. Delivers RMSE on log sale price with interpretable coefficients.",
-    link: "#",
-    codeLink: "https://github.com/uichan-lee/housing-price-predictor",
-    tags: ["Python", "Pandas", "Scikit-learn", "Linear Regression", "Feature Engineering"],
-  },
-  {
-    title: "Spam Mail Classifier",
-    description: "Logistic regression classifier for spam/ham email categorization on 8K+ labeled emails. Regex-based feature extraction (HTML ratio, punctuation, reply/forward flags), word-presence features, and GridSearchCV (5-fold) for L1/L2 regularization tuning. Achieved 91.2% cross-validation accuracy.",
-    link: "#",
-    codeLink: "https://github.com/uichan-lee/spam-mail-classifier",
-    tags: ["Python", "Pandas", "Scikit-learn", "Logistic Regression", "Regex", "GridSearchCV"],
-    metric: { value: "91.2%", label: "cross-validation accuracy" },
-  },
-  {
-    title: "Dungeon Escape with Chaser AI",
-    description: "Java-based roguelike dungeon game built for UC Berkeley CS61B BYOW. Implements procedural room-and-corridor dungeon generation, a BFS pathfinding chaser enemy, interactive HUD, and a text-based save/load system.",
-    link: "#",
-    codeLink: "https://github.com/uichan-lee/chaser-dungeon",
-    tags: ["Java", "BFS", "Procedural Generation", "Game Dev"],
-  },
+  // {
+  //   title: "Housing Price Predictor — Cook County",
+  //   description: "Linear regression model for property valuation on 200K+ Cook County records. Pipeline-based feature engineering (log transforms, one-hot encoding, interaction terms), k-fold cross-validation, and residual analysis. Delivers RMSE on log sale price with interpretable coefficients.",
+  //   link: "#",
+  //   codeLink: "https://github.com/uichan-lee/housing-price-predictor",
+  //   tags: ["Python", "Pandas", "Scikit-learn", "Linear Regression", "Feature Engineering"],
+  // },
+  // {
+  //   title: "Spam Mail Classifier",
+  //   description: "Logistic regression classifier for spam/ham email categorization on 8K+ labeled emails. Regex-based feature extraction (HTML ratio, punctuation, reply/forward flags), word-presence features, and GridSearchCV (5-fold) for L1/L2 regularization tuning. Achieved 91.2% cross-validation accuracy.",
+  //   link: "#",
+  //   codeLink: "https://github.com/uichan-lee/spam-mail-classifier",
+  //   tags: ["Python", "Pandas", "Scikit-learn", "Logistic Regression", "Regex", "GridSearchCV"],
+  //   metric: { value: "91.2%", label: "cross-validation accuracy" },
+  // },
+  // {
+  //   title: "Dungeon Escape with Chaser AI",
+  //   description: "Java-based roguelike dungeon game built for UC Berkeley CS61B BYOW. Implements procedural room-and-corridor dungeon generation, a BFS pathfinding chaser enemy, interactive HUD, and a text-based save/load system.",
+  //   link: "#",
+  //   codeLink: "https://github.com/uichan-lee/chaser-dungeon",
+  //   tags: ["Java", "BFS", "Procedural Generation", "Game Dev"],
+  // },
   {
     title: "Gradient Calendar",
-    description: "Collaborative scheduling platform with real-time synchronization. Engineered using Firebase Realtime Database for instant event syncing across clients. Designed a color-gradient overlap algorithm to visualize group availability. Integrated Firebase Auth (OAuth) for secure session management.",
+    description:
+      "Collaborative scheduling platform with real-time synchronization. Engineered using Firebase Realtime Database for instant event syncing across clients. Designed a color-gradient overlap algorithm to visualize group availability. Integrated Firebase Auth (OAuth) for secure session management.",
     link: "https://ricky-calendar.web.app",
     linkLabel: "Visit Website",
     codeLink: "https://github.com/uichan-lee/gradient-calendar",
